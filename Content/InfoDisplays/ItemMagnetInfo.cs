@@ -13,8 +13,9 @@ namespace ImproveGame.Content.InfoDisplays
         public static string ItemActionKey = InfoKey + "ItemActions.";
 
         public override void SetStaticDefaults()
-        {            _ = MagSelection;
-            base.SetStaticDefaults();
+        {
+            _ = MagSelection;
+            base.SetStaticDefaults();
         }
 
         public override bool Active()

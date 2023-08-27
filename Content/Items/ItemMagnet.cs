@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
+using ImproveGame.Common.ModPlayers;
 
-namespace ItemMagnetPro.Items
+namespace ImproveGame.Content.Items
 {
 	public class ItemMagnet : ModItem //TODO port to 1.4.4
     {
