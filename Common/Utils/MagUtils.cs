@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent.NetModules;
 
-namespace ItemMagnetPro
+namespace ImproveGame.Common.Utils
 {
     public static class Num
     {

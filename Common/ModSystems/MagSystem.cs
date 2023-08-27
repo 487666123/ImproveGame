@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
+﻿using ImproveGame.Common.ModItems;
 
-namespace ItemMagnetPro
+namespace ImproveGame.Common.ModSystems
 {
     internal class MagSystem : ModSystem
     {
@@ -15,7 +10,7 @@ namespace ItemMagnetPro
         {
             if (Timely)
             {
-                foreach(Item item in Main.item)
+                foreach (Item item in Main.item)
                 {
                     if (!item.TryGetGlobalItem(out MagItem mag))
                     {

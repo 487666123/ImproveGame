@@ -1,14 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
-using Terraria.Audio;
-using Terraria.ID;
+﻿using ImproveGame.Common.ModPlayers;
+using ImproveGame.Common.ModSystems;
 
-namespace ItemMagnetPro
+namespace ImproveGame.Common.ModItems
 {
     internal class MagItem : GlobalItem
     {

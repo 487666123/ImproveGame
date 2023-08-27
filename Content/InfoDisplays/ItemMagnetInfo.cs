@@ -1,13 +1,6 @@
-﻿using Terraria;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.Localization;
-using Microsoft.Xna.Framework;
+﻿using ImproveGame.Common.ModPlayers;
 
-namespace ItemMagnetPro.InfoDisplays
+namespace ImproveGame.Content.InfoDisplays
 {
     public class AttractionInfo : InfoDisplay
     {
@@ -19,8 +12,8 @@ namespace ItemMagnetPro.InfoDisplays
         public static string SelectionKey = InfoKey + "Selections.";
         public static string ItemActionKey = InfoKey + "ItemActions.";
 
-        public override void SetStaticDefaults()
-        {
+        public override void SetStaticDefaults()
+        {            _ = MagSelection;
             base.SetStaticDefaults();
         }
 
@@ -40,6 +33,7 @@ namespace ItemMagnetPro.InfoDisplays
             {
                 displayColor = Exhaust;
             }
+            //TODO use 1.4.4 standards
             return Language.GetTextValue(DiKey, Language.GetTextValue(SelectionKey + mp.Selection.Value), Language.GetTextValue(ItemActionKey + mp.ItemAction.Value));
         }
     }

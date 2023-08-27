@@ -1,22 +1,14 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader.Config;
-using Terraria.ModLoader.IO;
+﻿using Terraria.ModLoader.IO;
+using ImproveGame.Common.ModItems;
+using ImproveGame.Common.ModSystems;
 
-namespace ItemMagnetPro
+namespace ImproveGame.Common.ModPlayers
 {
     public class MagPlayer : ModPlayer
     {
-        public static int RangeSQ;
-        public static int Delay;
-        public static bool SuperVault;
+        public static int RangeSQ => Config.RangeInTile;
+        public static int Delay => Config.DelayInSecond;
+        public static bool SuperVault => Config.SuperVault;
         public EnumNum<Select> Selection = new EnumNum<Select>();
         public EnumNum<ItemAction> ItemAction = new EnumNum<ItemAction>();
         public EnumNum<Approach> Approach = new EnumNum<Approach>();
@@ -38,7 +30,7 @@ namespace ItemMagnetPro
             var status = Player.ItemSpace(item);
             if (status.CanTakeItem)
             {
-                return ignoreVanillaEncumber || (Player.preventAllItemPickups && ItemID.Sets.IgnoresEncumberingStone[item.type]);
+                return ignoreVanillaEncumber || Player.preventAllItemPickups && ItemID.Sets.IgnoresEncumberingStone[item.type];
             }
             return false;
         }
@@ -94,7 +86,7 @@ namespace ItemMagnetPro
             {
                 return false;
             }
-            if (!item.TryGetGlobalItem(out MagItem magItem) || (item.playerIndexTheItemIsReservedFor == Player.whoAmI && magItem.ReserveCD > 0))
+            if (!item.TryGetGlobalItem(out MagItem magItem) || item.playerIndexTheItemIsReservedFor == Player.whoAmI && magItem.ReserveCD > 0)
             {
                 return false;
             }

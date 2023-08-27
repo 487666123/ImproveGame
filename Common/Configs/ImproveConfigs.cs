@@ -52,10 +52,31 @@ namespace ImproveGame.Common.Configs
         [DefaultValue(false)]
         public bool SmartVoidVault;
 
+        /*
         [DefaultValue(0)]
         [Slider]
         [Range(0, 75)]
         public int GrabDistance;
+        */
+        #region Item magnets
+        [DefaultValue(64)]
+        public int RangeInTile;
+
+        [DefaultValue(2)]
+        public int DelayInSecond;
+
+        [DefaultValue(false)]
+        public bool SuperVaultCompact;
+
+        /*
+        private void UpdateConfig()
+        {
+            MagPlayer.RangeSQ = (int)Math.Pow(RangeInTile * 16, 2);
+            MagPlayer.Delay = DelayInSecond * 60;
+            MagPlayer.SuperVault = SuperVaultCompact;
+        }
+        */
+        #endregion
 
         [DefaultValue(9999)]
         [Range(1, int.MaxValue)]
