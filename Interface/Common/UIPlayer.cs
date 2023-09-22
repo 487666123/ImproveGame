@@ -4,6 +4,7 @@ using ImproveGame.Core;
 using ImproveGame.Interface.GUI.BannerChest;
 using ImproveGame.Interface.ExtremeStorage;
 using ImproveGame.Interface.GUI;
+using ImproveGame.Interface.GUI.Architecture;
 using ImproveGame.Interface.PlayerInfo;
 using ImproveGame.Interface.GUI.AutoTrash;
 using ImproveGame.Interface.GUI.WorldFeature;

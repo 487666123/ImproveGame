@@ -4,6 +4,7 @@ using ImproveGame.Common.Packets.NetStorager;
 using ImproveGame.Interface.Common;
 using ImproveGame.Interface.ExtremeStorage;
 using ImproveGame.Interface.GUI;
+using ImproveGame.Interface.GUI.Architecture;
 using ImproveGame.Interface.GUI.BannerChest;
 using ItemSlot = Terraria.UI.ItemSlot;
 
@@ -28,15 +29,6 @@ namespace ImproveGame.Common.ModPlayers
                 // 至尊储存
                 if (ExtremeStorageGUI.Visible && ExtremeStorageGUI.AllItemsCached
                         .Any(s => CanPlaceInSlot(s, item) is 2 or 3))
-                {
-                    Main.cursorOverride = CursorOverrideID.InventoryToChest;
-                    return true;
-                }
-                // 建筑法杖
-                if (ArchitectureGUI.Visible &&
-                    UISystem.Instance.ArchitectureGUI.ItemSlot.Any(s =>
-                                                 s.Value.CanPlaceItem(item) &&
-                                                 CanPlaceInSlot(s.Value.Item, item) is 2 or 3))
                 {
                     Main.cursorOverride = CursorOverrideID.InventoryToChest;
                     return true;
@@ -132,44 +124,6 @@ namespace ImproveGame.Common.ModPlayers
                     Recipe.FindRecipes();
                     SoundEngine.PlaySound(SoundID.Grab);
                     return true; // 阻止原版代码运行
-                }
-
-                if (!inventory[slot].IsAir && ArchitectureGUI.Visible)
-                {
-                    foreach (var itemSlot in from s in UISystem.Instance.ArchitectureGUI.ItemSlot
-                                             where s.Value.CanPlaceItem(inventory[slot])
-                                             select s)
-                    {
-                        // 放到建筑GUI里面
-                        ref Item slotItem = ref itemSlot.Value.Item;
-                        ref Item placeItem = ref inventory[slot];
-
-                        byte placeMode = CanPlaceInSlot(slotItem, placeItem);
-
-                        // type不同直接切换吧
-                        if (placeMode is 1 or 3)
-                        {
-                            itemSlot.Value.SwapItem(ref placeItem);
-                            SoundEngine.PlaySound(SoundID.Grab);
-                            Recipe.FindRecipes();
-                            // 和魔杖实例同步
-                            itemSlot.Value.ItemChange();
-                            return true; // 阻止原版代码运行
-                        }
-                        // type相同，里面的能堆叠，放进去
-                        if (placeMode is 2)
-                        {
-                            int stackAvailable = slotItem.maxStack - slotItem.stack;
-                            int stackAddition = Math.Min(placeItem.stack, stackAvailable);
-                            placeItem.stack -= stackAddition;
-                            slotItem.stack += stackAddition;
-                            SoundEngine.PlaySound(SoundID.Grab);
-                            Recipe.FindRecipes();
-                            // 和魔杖实例同步
-                            itemSlot.Value.ItemChange();
-                            return true; // 阻止原版代码运行
-                        }
-                    }
                 }
             }
             return false;

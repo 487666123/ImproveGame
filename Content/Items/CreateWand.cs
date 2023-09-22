@@ -4,6 +4,7 @@ using ImproveGame.Common.ModSystems;
 using ImproveGame.Entitys;
 using ImproveGame.Interface.Common;
 using ImproveGame.Interface.GUI;
+using ImproveGame.Interface.GUI.Architecture;
 using Microsoft.Xna.Framework.Input;
 using Terraria.GameInput;
 using Terraria.ModLoader.IO;
@@ -83,6 +84,8 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
     }
 
     [CloneByReference]
+    public Item Wood = new Item();
+    [CloneByReference]
     public Item Block = new Item();
     [CloneByReference]
     public Item Wall = new Item();
@@ -99,6 +102,7 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
 
     public override void SaveData(TagCompound tag)
     {
+        tag[nameof(Wood)] = Wood;
         tag[nameof(Block)] = Block;
         tag[nameof(Wall)] = Wall;
         tag[nameof(Platform)] = Platform;
@@ -110,13 +114,14 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
 
     public override void LoadData(TagCompound tag)
     {
-        tag.TryGet(nameof(Block), out Block);
-        tag.TryGet(nameof(Wall), out Wall);
-        tag.TryGet(nameof(Platform), out Platform);
-        tag.TryGet(nameof(Torch), out Torch);
-        tag.TryGet(nameof(Chair), out Chair);
-        tag.TryGet(nameof(Workbench), out Workbench);
-        tag.TryGet(nameof(Bed), out Bed);
+        Wood = tag.Get<Item>(nameof(Wood)) ?? new Item();
+        Block = tag.Get<Item>(nameof(Block)) ?? new Item();
+        Wall = tag.Get<Item>(nameof(Wall)) ?? new Item();
+        Platform = tag.Get<Item>(nameof(Platform)) ?? new Item();
+        Torch = tag.Get<Item>(nameof(Torch)) ?? new Item();
+        Chair = tag.Get<Item>(nameof(Chair)) ?? new Item();
+        Workbench = tag.Get<Item>(nameof(Workbench)) ?? new Item();
+        Bed = tag.Get<Item>(nameof(Bed)) ?? new Item();
     }
 
     public override void SetStaticDefaults()
@@ -180,6 +185,9 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
         item = new Item(ItemID.None);
         switch (itemType)
         {
+            case nameof(Wood):
+                item = Wood;
+                return;
             case nameof(Block):
                 item = Block;
                 return;
@@ -201,39 +209,6 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
             case nameof(Bed):
                 item = Bed;
                 return;
-        }
-    }
-
-    /// <summary>
-    /// 设置物品，用于UI和物品存储数据间的同步
-    /// </summary>
-    /// <param name="itemType">物品存储类型</param>
-    /// <param name="item">物品实例</param>
-    internal void SetItem(string itemType, Item item)
-    {
-        switch (itemType)
-        {
-            case nameof(Block):
-                Block = item;
-                break;
-            case nameof(Platform):
-                Platform = item;
-                break;
-            case nameof(Wall):
-                Wall = item;
-                break;
-            case nameof(Torch):
-                Torch = item;
-                break;
-            case nameof(Workbench):
-                Workbench = item;
-                break;
-            case nameof(Chair):
-                Chair = item;
-                break;
-            case nameof(Bed):
-                Bed = item;
-                break;
         }
     }
 
@@ -333,8 +308,6 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
 
             // 重新刷新合成配方，这样如果一个物品没了就可以把它的合成配方刷新掉
             Recipe.FindRecipes();
-            // 同步UI物品
-            UISystem.Instance.ArchitectureGUI.RefreshSlots(this);
         }
 
         if (!_playedSound && player.altFunctionUse == 0)
@@ -441,6 +414,7 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
 
     public override void NetSend(BinaryWriter writer)
     {
+        ItemIO.Send(Wood, writer, true, true);
         ItemIO.Send(Block, writer, true, true);
         ItemIO.Send(Wall, writer, true, true);
         ItemIO.Send(Platform, writer, true, true);
@@ -452,6 +426,7 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
 
     public override void NetReceive(BinaryReader reader)
     {
+        Wood = ItemIO.Receive(reader, true, true);
         Block = ItemIO.Receive(reader, true, true);
         Wall = ItemIO.Receive(reader, true, true);
         Platform = ItemIO.Receive(reader, true, true);

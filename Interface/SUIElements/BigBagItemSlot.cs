@@ -287,36 +287,9 @@ namespace ImproveGame.Interface.SUIElements
                     // 同种物品
                     if (Main.mouseItem.type == Item.type)
                     {
-                        if (Item.stack < Item.maxStack)
-                        {
-                            if (Item.stack + Main.mouseItem.stack <= Item.maxStack)
-                            {
-                                Item.stack += Main.mouseItem.stack;
-                                Main.mouseItem.SetDefaults();
-                            }
-                            else
-                            {
-                                Main.mouseItem.stack -= Item.maxStack - Item.stack;
-                                Item.stack = Item.maxStack;
-                            }
-                        }
-                        else if (Main.mouseItem.stack < Main.mouseItem.maxStack)
-                        {
-                            if (Main.mouseItem.stack + Item.stack <= Main.mouseItem.maxStack)
-                            {
-                                Main.mouseItem.stack += Item.stack;
-                                Item.SetDefaults();
-                            }
-                            else
-                            {
-                                Item.stack -= Main.mouseItem.maxStack - Main.mouseItem.stack;
-                                Main.mouseItem.stack = Main.mouseItem.maxStack;
-                            }
-                        }
-                        else
-                        {
-                            (Main.mouseItem, Item) = (Item, Main.mouseItem);
-                        }
+                        ItemLoader.StackItems(Item, Main.mouseItem, out _);
+                        if (Item.stack <= 0)
+                            Item.SetDefaults();
                     }
                     else
                     {
