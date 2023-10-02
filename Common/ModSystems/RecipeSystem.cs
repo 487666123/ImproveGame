@@ -17,6 +17,7 @@ public class RecipeSystem : ModSystem
     internal static RecipeGroup AnyCobaltBar;
     internal static RecipeGroup AnyMythrilBar;
     internal static RecipeGroup AnyAdamantiteBar;
+    internal static RecipeGroup AnyGem;
 
     public override void Unload()
     {
@@ -40,15 +41,17 @@ public class RecipeSystem : ModSystem
         AnyCobaltBar = new(() => GetText($"RecipeGroup.{nameof(AnyCobaltBar)}"), 381, 1184);
         AnyMythrilBar = new(() => GetText($"RecipeGroup.{nameof(AnyMythrilBar)}"), 382, 1191);
         AnyAdamantiteBar = new(() => GetText($"RecipeGroup.{nameof(AnyAdamantiteBar)}"), 391, 1198);
+        AnyGem = new(() => GetText($"RecipeGroup.{nameof(AnyGem)}"), ItemID.Sapphire, ItemID.Ruby, ItemID.Emerald,
+            ItemID.Topaz, ItemID.Amethyst, ItemID.Diamond, ItemID.Amber);
 
-        RecipeGroup.RegisterGroup("ImproveGame:AnyGoldBar", AnyGoldBar);
-        RecipeGroup.RegisterGroup("ImproveGame:AnySilverBar", AnySilverBar);
-        RecipeGroup.RegisterGroup("ImproveGame:AnyCopperBar", AnyCopperBar);
-        RecipeGroup.RegisterGroup("ImproveGame:AnyShadowScale", AnyShadowScale);
-        RecipeGroup.RegisterGroup("ImproveGame:AnyDemoniteBar", AnyDemoniteBar);
-        RecipeGroup.RegisterGroup("ImproveGame:AnyCobaltBar", AnyCobaltBar);
-        RecipeGroup.RegisterGroup("ImproveGame:AnyMythrilBar", AnyMythrilBar);
-        RecipeGroup.RegisterGroup("ImproveGame:AnyAdamantiteBar", AnyAdamantiteBar);
+        RecipeGroup.RegisterGroup("GoldBar", AnyGoldBar);
+        RecipeGroup.RegisterGroup("SilverBar", AnySilverBar);
+        RecipeGroup.RegisterGroup("CopperBar", AnyCopperBar);
+        RecipeGroup.RegisterGroup("ShadowScale", AnyShadowScale);
+        RecipeGroup.RegisterGroup("DemoniteBar", AnyDemoniteBar);
+        RecipeGroup.RegisterGroup("CobaltBar", AnyCobaltBar);
+        RecipeGroup.RegisterGroup("MythrilBar", AnyMythrilBar);
+        RecipeGroup.RegisterGroup("Gem", AnyGem);
     }
 
     public override void AddRecipes()
@@ -66,7 +69,7 @@ public class RecipeSystem : ModSystem
             () => Config.InfiniteRedPotion);
         var ftwCondition = new Condition("Mods.ImproveGame.Configs.ImproveConfigs.RedPotionEverywhere.Condition",
             () => Config.RedPotionEverywhere || Condition.ForTheWorthyWorld.IsMet());
-        
+
         Recipe.Create(ItemID.RedPotion)
             .AddTile(TileID.Bottles)
             .AddCondition(ftwCondition)

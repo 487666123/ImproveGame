@@ -1,6 +1,6 @@
 displayName = Quality of Life 更好的体验
 author = 局长, Cyril, 夜谷紫幽, delete, Lacewing, Lastprismer
-version = 1.6.5.3
+version = 1.6.5.5
 homepage = https://github.com/487666123/ImproveGame
 buildIgnore = *.gif, *.aseprite
 includeSource = true

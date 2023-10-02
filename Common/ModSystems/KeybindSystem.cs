@@ -11,6 +11,9 @@ public class KeybindSystem : ModSystem
 {
     internal static bool UseKeybindTranslation = true;
 
+    public static ModKeybind ConfigKeybind { get; private set; }
+    public static ModKeybind OpenBagGUIKeybind { get; private set; }
+    public static ModKeybind ItemSearcherKeybind { get; private set; }
     public static ModKeybind SuperVaultKeybind { get; private set; }
     public static ModKeybind BuffTrackerKeybind { get; private set; }
     public static ModKeybind WorldFeatureKeybind { get; private set; }
@@ -41,12 +44,15 @@ public class KeybindSystem : ModSystem
         DrawSelf += DrawHoverText;
         GenInput += TranslatedInput;
         CreateBindingGroup += AddModifyTip;
-        SuperVaultKeybind = KeybindLoader.RegisterKeybind(Mod, "HugeInventory", "F");
-        BuffTrackerKeybind = KeybindLoader.RegisterKeybind(Mod, "BuffTracker", "NumPad3");
         WorldFeatureKeybind = KeybindLoader.RegisterKeybind(Mod, "WorldFeature", "NumPad1");
+        AutoTrashKeybind = KeybindLoader.RegisterKeybind(Mod, "AutoTrashKeybind", "NumPad2");
+        BuffTrackerKeybind = KeybindLoader.RegisterKeybind(Mod, "BuffTracker", "NumPad3");
+        ItemSearcherKeybind = KeybindLoader.RegisterKeybind(Mod, "ItemSearcher", "NumPad4");
+        OpenBagGUIKeybind = KeybindLoader.RegisterKeybind(Mod, "OpenBagGUI", "NumPad5");
+        ConfigKeybind = KeybindLoader.RegisterKeybind(Mod, "ConfigMenu", "NumPad6");
+        SuperVaultKeybind = KeybindLoader.RegisterKeybind(Mod, "HugeInventory", "F");
         GrabBagKeybind = KeybindLoader.RegisterKeybind(Mod, "GrabBagLoot", "OemQuotes");
         HotbarSwitchKeybind = KeybindLoader.RegisterKeybind(Mod, "HotbarSwitch", "OemQuestion");
-        AutoTrashKeybind = KeybindLoader.RegisterKeybind(Mod, "AutoTrashKeybind", "NumPad2");
         DiscordRodKeybind = KeybindLoader.RegisterKeybind(Mod, "DiscordRodKeybind", "U");
         HomeKeybind = KeybindLoader.RegisterKeybind(Mod, "HomeKeybind", "Home");
     }

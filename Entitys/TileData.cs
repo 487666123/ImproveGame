@@ -19,6 +19,6 @@
         /// 平台或实体块位置不放置
         /// </summary>
         public static bool ShouldPlaceWall(TileSort tileSort) =>
-            tileSort != TileSort.Block && tileSort != TileSort.Platform && tileSort != TileSort.NoWall;
+            tileSort is not TileSort.Block and not TileSort.Platform and not TileSort.NoWall and not TileSort.Bed;
     }
 }

@@ -54,7 +54,7 @@ public class SUISearchBar : View
         if (Language.ActiveCulture.Name is "zh-Hans" && _allowPinyinSearch)
         {
             // 由于在这不能直接访问 new LocalizedText，我们借助 Language.GetText 来获取
-            searchBarText = Language.GetText("搜索名称(支持拼音及首字母搜索): ");
+            searchBarText = Language.GetText("搜索名称(支持拼音或首字母): ");
         }
         _searchBar = new UISearchBar(searchBarText, 0.8f)
         {
@@ -124,7 +124,7 @@ public class SUISearchBar : View
 
     private void OnEndTakingInput()
     {
-        _searchBoxPanel.BgColor = new Color(35, 40, 83);
+        _searchBoxPanel.BorderColor = new Color(35, 40, 83);
     }
 
     public void AttemptStoppingUsingSearchbar()

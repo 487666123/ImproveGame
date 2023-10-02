@@ -14,7 +14,7 @@ v1.6.5.0 is the mod's first release on 1.4.4 (v1.6.4 is a beta)
 - v1.6.5.2
 - v1.6.5.3
 - v1.6.5.4
-- v1.6.5.5
+- v1.6.5.5 (Not yet)
 ## Additions
 - Increased using speed of and enabled auto-reuse for Life Crystal, Mana Crystal and Life Fruit
 - Enabled configuring chest detection range of Storage Manager
@@ -35,6 +35,8 @@ v1.6.5.0 is the mod's first release on 1.4.4 (v1.6.4 is a beta)
 - **[v1.6.5.3]** Added "Expert Debuff Duration".
 - **[v1.6.5.4]** Added "World Feature Panel".
 - **[v1.6.5.4]** Added "Unlimited Bed Respawn".
+- **[v1.6.5.5]** 新增定位球，用于在小地图上显示生态/结构位置
+- **[v1.6.5.5]** 新增物品搜索功能，以在箱子和便携储存中快捷搜索物品
 ## BUG Fixes
 - Shadow Candle and War Table are now considered as buff stations
 - Fixed no tile drop of left-facing Fishing Machine
@@ -63,6 +65,10 @@ v1.6.5.0 is the mod's first release on 1.4.4 (v1.6.4 is a beta)
 - **[v1.6.5.4]** Corrected some descriptions.
 - **[v1.6.5.4]** Fixed the Wand of Space not slopping correctly in some cases.
 - **[v1.6.5.5]** 修复了放置在桌子上的钓鱼机在桌子被破坏时导致游戏闪退的BUG
+- **[v1.6.5.5]** 修复了无法正常禁用幸运金币的BUG
+- **[v1.6.5.5]** 修复了爆破类魔杖无法直接破坏部分带草皮物块的BUG
+- **[v1.6.5.5]** 修复了死亡后可以通过快捷回程快捷键瞬间复活的BUG
+- **[v1.6.5.5]** 修复了关闭液体控制面板时无法使用液体魔杖的BUG
 ## Adjustments
 - Optimized Pinying searching, now supports polyphones
 - Adjusted mod config UI
@@ -80,6 +86,10 @@ v1.6.5.0 is the mod's first release on 1.4.4 (v1.6.4 is a beta)
 - **[v1.6.5.3]** Improved how "Other Features" is displayed.
 - **[v1.6.5.3]** Improved speed of taking items from this mod's storages via right clicking.
 - **[v1.6.5.5]** 现在可以挖掘钓鱼机下的物块了
+- **[v1.6.5.5]** 添加了快捷打开模组配置的快捷键
+- **[v1.6.5.5]** 爆破类法杖现在不耗蓝了
+- **[v1.6.5.5]** 建造魔杖的重生点结构更改为无墙版本
+- **[v1.6.5.5]** 更改自动存钱功能的运作方式，且现在会自动存护卫奖章了
 
 # v1.6.4
 This mod has been updated to tModLoader 1.4.4 since v1.6.4.0

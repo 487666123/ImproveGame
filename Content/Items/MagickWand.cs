@@ -26,30 +26,11 @@ namespace ImproveGame.Content.Items
                 WorldGen.KillWall(i, j);
                 if (Main.netMode == NetmodeID.MultiplayerClient)
                     NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 2, i, j);
-                player.statMana -= 1;
-                if (player.statMana < 1)
-                {
-                    player.QuickMana();
-                    if (player.statMana < 1)
-                    {
-                        return false;
-                    }
-                }
             }
 
-            if (player.statMana < 2)
-                player.QuickMana();
-            if (player.statMana >= 2)
-            {
-                if (WandSystem.TileMode && Main.tile[i, j].HasTile && TryKillTile(i, j, player))
-                {
-                    player.statMana -= 2;
-                }
-
-                return true;
-            }
-
-            return false;
+            if (WandSystem.TileMode && Main.tile[i, j].HasTile)
+                TryKillTile(i, j, player);
+            return true;
         }
 
         public override void PostModifyTiles(Player player, int minI, int minJ, int maxI, int maxJ)

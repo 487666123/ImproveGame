@@ -9,7 +9,6 @@ MagickWand: {
 		Mana cost depends on the number of tiles destroyed
 		<right> while holding to edit destruction settings
 		<right> while selecting area to cancel
-		Automatically uses mana potion if necessary
 		'''
 }
 
@@ -39,7 +38,6 @@ StarburstWand: {
 		Mana cost depends on the number of tiles destroyed
 		<right> while holding to edit destruction settings
 		<right> while selecting area to cancel
-		Automatically uses mana potion if necessary
 		'''
 }
 
@@ -182,6 +180,27 @@ ExtremeStorage: {
 		'''
 }
 
+GlobeBase: {
+	DisplayName: "{0}定位球"
+	Tooltip: 在地图上标记{0}
+	AlreadyRevealed: 这个世界已经标记过{0}了
+	Reveal: "{1}在地图上标记了{0}"
+	NotFound: 本世界没有{0}的数据，原因可能是生成世界时没有添加更好的体验或未更新到v1.6.6+版本
+}
+
+AetherGlobe.BiomeName: 以太
+DungeonGlobe.BiomeName: 地牢
+FloatingIslandGlobe.BiomeName: 空岛
+
+PyramidGlobe: {
+	BiomeName: 金字塔
+	NotFound: 本世界没有金字塔
+}
+
+TempleGlobe.BiomeName: 丛林神庙
+# 在世界上没有花苞或花苞全部标记完了的情况下显示
+PlanteraGlobe.NotFound: 未能找到更多的{$MapObject.PlanterasBulb}
+
 DevMark: {
 	DisplayName: Developer's Mark
 	Tooltip: "[c/ff0000:Developer's item, do not use]"
@@ -195,4 +214,9 @@ Expelliarmus: {
 		Loot NPCs
 		Can be used to test the NPC loot
 		'''
+}
+
+DetectorDrone: {
+	Tooltip: ""
+	DisplayName: Detector Drone
 }

@@ -248,6 +248,8 @@ namespace ImproveGame.Content.Patches
             // 床随地设置重生点
             On_Player.CheckSpawn += (orig, i, j) =>
                 Config.BedEverywhere || orig.Invoke(i, j);
+            // 固定 NPC 快乐度为指定数值
+            IL_ShopHelper.GetShoppingSettings += ModifyNPCHappiness;
         }
 
         private void LiveInCorrupt(ILContext il)
@@ -662,6 +664,40 @@ namespace ImproveGame.Content.Patches
             if (!Config.BanTombstone)
             {
                 orig(self, coinsOwned, deathText, hitDirection);
+            }
+        }
+
+        /// <summary>
+        /// 修改 NPC 快乐度
+        /// </summary>
+        private void ModifyNPCHappiness(ILContext il)
+        {
+            FieldInfo fShoppingSettingsPriceAdjustment = typeof(ShoppingSettings).GetField(nameof(ShoppingSettings.PriceAdjustment), BindingFlags.Instance | BindingFlags.Public);
+            FieldInfo fMyUtilsConfig = typeof(MyUtils).GetField(nameof(Config), BindingFlags.Static | BindingFlags.Public);
+            FieldInfo fImproveConfigsModifyNPCHappiness = typeof(ImproveConfigs).GetField(nameof(ImproveConfigs.ModifyNPCHappiness), BindingFlags.Instance | BindingFlags.Public);
+            FieldInfo fImproveConfigsNPCHappiness = typeof(ImproveConfigs).GetField(nameof(ImproveConfigs.NPCHappiness), BindingFlags.Instance | BindingFlags.Public);
+
+            ILCursor c = new(il);
+            if (c.TryGotoNext(MoveType.Before, x => x.MatchLdloc1(), x => x.MatchRet()))
+            {
+                ILLabel target = c.DefineLabel();
+                c.EmitLdsfld(fMyUtilsConfig);
+                c.EmitLdfld(fImproveConfigsModifyNPCHappiness);
+                c.EmitLdcI4(0);
+                c.EmitCeq();
+                c.EmitBrtrue(target);
+                c.EmitLdloca(1);
+                c.EmitLdsfld(fMyUtilsConfig);
+                c.EmitLdfld(fImproveConfigsNPCHappiness);
+                c.EmitConvR8();
+                c.EmitLdcR8(100.0);
+                c.EmitDiv();
+                c.EmitStfld(fShoppingSettingsPriceAdjustment);
+                c.MarkLabel(target);
+            }
+            else
+            {
+                MonoModHooks.DumpIL(ImproveGame.Instance, il);
             }
         }
     }

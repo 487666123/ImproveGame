@@ -1,6 +1,7 @@
 ﻿using ImproveGame.Common.Animations;
 using ImproveGame.Common.Configs;
 using ImproveGame.Interface.Common;
+using Terraria.DataStructures;
 using Terraria.ModLoader.UI;
 
 namespace ImproveGame.Interface.ExtremeStorage
@@ -23,6 +24,8 @@ namespace ImproveGame.Interface.ExtremeStorage
         private readonly Color _textBorderColor = Color.Black;
         private readonly AnimationTimer _timer = new (4);
         private readonly bool _hasTooltip;
+        private Asset<Texture2D> _icon;
+        private SpriteFrame _iconFrame;
 
         public LongSwitch(Func<bool> getState, Action<bool> setState, string text, bool hasTooltip = true)
         {
@@ -36,6 +39,12 @@ namespace ImproveGame.Interface.ExtremeStorage
 
             Width.Set(0f, 1f);
             Height.Set(40f, 0f);
+        }
+        
+        public void SetIcon(Asset<Texture2D> icon, SpriteFrame frame)
+        {
+            _icon = icon;
+            _iconFrame = frame;
         }
 
         public override void Update(GameTime gameTime)
@@ -86,9 +95,21 @@ namespace ImproveGame.Interface.ExtremeStorage
                 new Vector2(boxSize.X - 3 - 2 - boxSize2.X, size.Y / 2 - boxSize2.Y / 2), _timer.Schedule);
             SDFGraphic.NoBorderRound(position2, boxSize2.X, color3);
 
+            var textOffsetX = 0;
+            if (_icon is not null)
+            {
+                var icon = _icon.Value;
+                var drawPosition = new Vector2(position.X + 6, center.Y - 2);
+                var alignment = Alignment.Left;
+                Rectangle sourceRectangle = _iconFrame.GetSourceRectangle(icon);
+                Vector2 origin = sourceRectangle.Size() * alignment.OffsetMultiplier;
+                sb.Draw(icon, drawPosition, sourceRectangle, Color.White, 0f, origin, 1f, SpriteEffects.None, 0f);
+                textOffsetX += sourceRectangle.Width;
+            }
+
             // 文字
             string text = GetText(!_hasTooltip ? _text : $"{_text}.Label");
-            var textCenter = new Vector2(position.X + 12, center.Y - _textSize.Y / 2f + UIConfigs.Instance.GeneralFontOffsetY);
+            var textCenter = new Vector2(position.X + 10 + textOffsetX, center.Y - _textSize.Y / 2f + UIConfigs.Instance.GeneralFontOffsetY);
             textCenter.Y -= 4f;
             DrawString(textCenter, text, _textColor, _textBorderColor);
 

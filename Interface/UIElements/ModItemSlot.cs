@@ -142,6 +142,7 @@ namespace ImproveGame.Interface.UIElements
             {
                 ItemChange(true);
                 RightClickItemChange(Item.stack - lastStack, lastType != Item.type);
+                Main.playerInventory = true;
             }
 
             Vector2 origin = GetDimensions().Position();
@@ -245,15 +246,13 @@ namespace ImproveGame.Interface.UIElements
                 {
                     SwapItem(ref placeItem);
                     SoundEngine.PlaySound(SoundID.Grab);
+                    Main.playerInventory = true;
                     return;
                 }
                 // type相同，里面的能堆叠，放进去
                 if (placeMode is 2)
                 {
-                    int stackAvailable = Item.maxStack - Item.stack;
-                    int stackAddition = Math.Min(placeItem.stack, stackAvailable);
-                    placeItem.stack -= stackAddition;
-                    Item.stack += stackAddition;
+                    ItemLoader.TryStackItems(Item, placeItem, out _);
                     SoundEngine.PlaySound(SoundID.Grab);
                 }
             }
@@ -289,7 +288,7 @@ namespace ImproveGame.Interface.UIElements
         }
 
         /// <summary>
-        /// 可以在这里写额外的物品放置判定，第一个Item是当前槽位存储物品，第二个Item是<see cref="Main.mouseItem">
+        /// 可以在这里写额外的物品放置判定，第一个Item是当前槽位存储物品，第二个Item是<see cref="Main.mouseItem"/>
         /// </summary>
         public Func<Item, Item, bool> OnCanPlaceItem;
         public bool CanPlaceItem(Item item)

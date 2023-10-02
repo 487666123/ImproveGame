@@ -100,9 +100,8 @@ Tips: {
 		NonHided: 如果想要隐藏无限续杯增益图标，请在模组配置中修改
 		AutoCollect:
 			'''
-			已开启自动存钱，在你的任意储存有该物品时，
 			钱币会自动存入存钱罐
-			如果想要关闭请在模组配置中修改
+			此功能可在物品栏最左侧工具栏中开关
 			商人的生成条件会同时计算存钱罐内的钱币
 			'''
 		CombinedBuff.Battle:
@@ -341,10 +340,21 @@ Keybinds: {
 	DiscordRodKeybind.DisplayName: 传送法杖快捷键
 	HomeKeybind.DisplayName: 回程快捷键
 	WorldFeature.DisplayName: 世界特性
+	ConfigMenu.DisplayName: 打开模组配置
+	ItemSearcher.DisplayName: 查找物品
+	OpenBagGUI.DisplayName: 快速开袋
 }
 
 Projectiles: {
 	// KillProj.DisplayName: Kill Proj
 	WallRobot.DisplayName: 铺墙机器
 	ExpelliarmusProj.DisplayName: 给我爆金币！
+	DetectorDroneProj.DisplayName: 勘测无人机
+}
+
+BuilderToggles: {
+	PiggyToggle: {
+		OffText: 自动存钱：关
+		OnText: 自动存钱：开
+	}
 }

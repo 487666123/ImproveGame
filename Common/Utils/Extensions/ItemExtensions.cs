@@ -1,10 +1,45 @@
-﻿namespace ImproveGame.Common.Utils.Extensions;
+﻿using PinyinNet;
+
+namespace ImproveGame.Common.Utils.Extensions;
 
 /// <summary>
 /// <see cref="Item"/> 拓展
 /// </summary>
 public static class ItemExtensions
 {
+    /// <summary>
+    /// 搜索匹配，支持拼音
+    /// </summary>
+    public static bool AnyMatchWithString(this IEnumerable<Item> items, string searchString)
+    {
+        if (string.IsNullOrEmpty(searchString))
+            return false;
+
+        string searchContent = RemoveSpaces(searchString.ToLower());
+        return items.Any(item => MatchWithString(item, searchContent));
+    }
+    
+    /// <summary>
+    /// 搜索匹配，支持拼音
+    /// </summary>
+    public static bool MatchWithString(this Item item, string searchString, bool stringLowered = true)
+    {
+        if (string.IsNullOrEmpty(searchString))
+            return false;
+
+        string searchContent = stringLowered ? searchString : RemoveSpaces(searchString.ToLower());
+        string currentLanguageName = RemoveSpaces(Lang.GetItemNameValue(item.type).ToLower());
+        if (currentLanguageName.Contains(searchContent))
+            return true;
+
+        if (Language.ActiveCulture.Name is not "zh-Hans") return false;
+
+        string pinyin = RemoveSpaces(PinyinConvert.GetPinyinForAutoComplete(currentLanguageName));
+        return pinyin.Contains(searchContent);
+    }
+    
+    private static string RemoveSpaces(string s) => s.Replace(" ", "", StringComparison.Ordinal);
+    
     /// <summary>
     /// 有其中一个
     /// </summary>

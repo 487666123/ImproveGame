@@ -110,15 +110,12 @@ Tips: {
 			'''
 		AutoCollect:
 			'''
-			Automatically save money is enabled.
-			If there is any Piggy Bank, Money Trough or
-			Eye Bone inside your Piggy Bank, Safe,
-			Defender's Forge or Void Vault, your coins
-			in coin slots will be automatically saved
-			into the Piggy Bank.
-			The Merchant's spawning condition counts coins
-			in the Piggy Bank.
-			You may disable this function in Mod Configuration.
+			Your coins in coin slots will be automatically
+			saved into the Piggy Bank.
+			This feature can be toggled in the upper-left
+			of the inventory.
+			The Merchant's spawning condition counts
+			coins in the Piggy Bank.
 			'''
 		CombinedBuff.Battle:
 			'''
@@ -355,12 +352,23 @@ Keybinds: {
 	HotbarSwitch.DisplayName: Swap Hotbar
 	AutoTrashKeybind.DisplayName: Hide/Show the Auto-Trash Bin
 	DiscordRodKeybind.DisplayName: Use Teleportation Rods
-	HomeKeybind.DisplayName: Use Homing Items
+	HomeKeybind.DisplayName: Use Recall Items
 	WorldFeature.DisplayName: Hide/Show the World Feature Panel
+	ConfigMenu.DisplayName: Open Mod Config
+	ItemSearcher.DisplayName: 查找物品
+	OpenBagGUI.DisplayName: 快速开袋
 }
 
 Projectiles: {
 	KillProj.DisplayName: Kill Proj
 	WallRobot.DisplayName: Wall Robot
 	ExpelliarmusProj.DisplayName: Expelliarmus!
+	DetectorDroneProj.DisplayName: 勘测无人机
+}
+
+BuilderToggles: {
+	PiggyToggle: {
+		OffText: 自动存钱：关
+		OnText: 自动存钱：开
+	}
 }

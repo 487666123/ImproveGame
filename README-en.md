@@ -42,6 +42,7 @@ The above copyright notice and this permission notice shall be included in all c
 Hence there is no copyright voilation in this mod.
 ChevyRay's coroutine class is under MIT License as well, same as above. 
 The code of TextureGIF.cs is partly from ProjectStarlight.Interchange which is under MIT License as well, same as above.
+The code of the 'auto save money' function is mostly from mod 'Auto Piggy Bank' which is under MIT License as well, same as above.
 
 p.s.
 Source code of:
@@ -49,6 +50,7 @@ This mod: https://gitee.com/MyGoold/improve-game (The original repo, the github 
 WMITF: https://github.com/gardenappl/WMITF
 ChevyRay's coroutine class: https://github.com/ChevyRay/Coroutines
 ProjectStarlight.Interchange: https://github.com/ProjectStarlight/ProjectStarlight.Interchange
+Auto Piggy Bank: https://github.com/diniamo/auto-piggy-bank
 
 ## 🤝 Cross-mod Support (Mod.Call)
 ### IgnoreInfItem

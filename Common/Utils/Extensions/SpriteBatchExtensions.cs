@@ -3,6 +3,19 @@
 internal static class SpriteBatchExtensions
 {
     /// <summary>
+    /// 仅改变SpriteSortMode
+    /// </summary>
+    public static void ReBegin(this SpriteBatch sb, SpriteSortMode mode)
+    {
+        var matrix = sb.transformMatrix;
+        var effect = sb.customEffect;
+        
+        sb.End();
+        sb.Begin(mode, sb.GraphicsDevice.BlendState, sb.GraphicsDevice.SamplerStates[0],
+            sb.GraphicsDevice.DepthStencilState, sb.GraphicsDevice.RasterizerState, effect, matrix);
+    }
+
+    /// <summary>
     /// 不会改变原有的所有参数, 但是只能使用只有一个 PixelShader 的 Shader.
     /// </summary>
     public static void ReBegin(this SpriteBatch sb, Effect effect, Matrix matrix)

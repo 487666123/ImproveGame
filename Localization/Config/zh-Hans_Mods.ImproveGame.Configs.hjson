@@ -183,16 +183,6 @@ ImproveConfigs: {
 			'''
 	}
 
-	AutoSaveMoney: {
-		Label: "[centeritem:MoneyTrough] 有钱币槽时自动存钱"
-		Tooltip:
-			'''
-			如果存钱罐，保险箱，护卫熔炉，虚空仓库中有任何猪猪存钱罐、钱币槽、眼骨
-			则会自动存放你放在钱币栏中的钱币到猪猪存钱罐中
-			商人的生成条件会同时计算存钱罐内的钱币
-			'''
-	}
-
 	BanTombstone: {
 		Label: "[centeritem:3230] 禁止生成墓碑"
 		// Tooltip: ""
@@ -606,6 +596,25 @@ ImproveConfigs: {
 		Label: "[centeritem:Bed] 移除设置重生点限制"
 		Tooltip: 使得床在任何情况下均可设置重生点，不需要房间
 	}
+
+	MinimapMark: {
+		/* Tooltip:
+			'''
+			开启后，使用“定位球”系列物品可在小地图上标记以下结构：
+			以太、地牢、神庙、空岛、金字塔、世纪之花球茎
+			''' */
+		// Label: "[centeritem:WorldGlobe] 结构标记"
+	}
+
+	ModifyNPCHappiness: {
+		Label: "[centeritem:LifeCrystal] 固定 NPC 快乐度"
+		// Tooltip: ""
+	}
+
+	NPCHappiness: {
+		Label: "[centeritem:LifeCrystal] NPC 快乐度"
+		Tooltip: 设置的值越小从 NPC 购买物品价格越便宜，卖给 NPC 物品价格越高
+	}
 }
 
 ModItemLoadPage: {
@@ -741,6 +750,43 @@ UIConfigs: {
 	ExplosionEffect: {
 		Label: "[centeritem:TNTBarrel] 爆炸效果"
 		Tooltip: 关闭后，使用本模组魔杖时不再有爆炸效果
+	}
+
+	Headers.MinimapHeader: "[centeritem:WorldGlobe] 小地图标记设置"
+
+	MarkFloatingIsland: {
+		Tooltip: 开启后，将会在小地图上显示已标记的空岛位置
+		Label: "[centeritem:ImproveGame/FloatingIslandGlobe] 标记空岛"
+	}
+
+	MarkAether: {
+		Tooltip: 开启后，将会在小地图上显示已标记的以太位置
+		Label: "[centeritem:ImproveGame/AetherGlobe] 标记以太"
+	}
+
+	MarkTemple: {
+		Tooltip: 开启后，将会在小地图上显示已标记的神庙位置
+		Label: "[centeritem:ImproveGame/TempleGlobe] 标记神庙"
+	}
+
+	MarkDungeon: {
+		Tooltip: 开启后，将会在小地图上显示已标记的地牢位置
+		Label: "[centeritem:ImproveGame/DungeonGlobe] 标记地牢"
+	}
+
+	MarkPyramid: {
+		Label: "[centeritem:ImproveGame/PyramidGlobe] 标记金字塔"
+		Tooltip: 开启后，将会在小地图上显示已标记的金字塔位置
+	}
+
+	MarkPlantera: {
+		Label: "[centeritem:ImproveGame/PlanteraGlobe] 标记世纪之花"
+		Tooltip: 开启后，将会在小地图上显示已标记的{$MapObject.PlanterasBulb}位置
+	}
+
+	SuicideButton: {
+		Label: 自杀
+		Tooltip: 按下此按钮将使你的人物当场暴毙，[c/FF4444:点击前请三思]
 	}
 }
 

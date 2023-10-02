@@ -96,7 +96,7 @@ namespace ImproveGame.Common.GlobalItems
         {
             ((IItemMiddleClickable)this).HandleTooltips(item, tooltips);
 
-            if (Lookups.Bank2Items.Contains(item.type) && Config.AutoSaveMoney)
+            if (Lookups.Bank2Items.Contains(item.type))
             {
                 tooltips.Add(new TooltipLine(Mod, "TagDetailed.AutoCollect", GetText("Tips.TagDetailed.AutoCollect"))
                     {OverrideColor = Color.SkyBlue});
@@ -106,7 +106,7 @@ namespace ImproveGame.Common.GlobalItems
 
         public override bool PreDrawTooltip(Item item, ReadOnlyCollection<TooltipLine> lines, ref int x, ref int y)
         {
-            if (ItemSlot.ShiftInUse && Lookups.Bank2Items.Contains(item.type) && Config.AutoSaveMoney)
+            if (ItemSlot.ShiftInUse && Lookups.Bank2Items.Contains(item.type))
                 TagItem.DrawTagTooltips(lines, TagItem.GenerateDetailedTags(Mod, lines), x, y);
             return base.PreDrawTooltip(item, lines, ref x, ref y);
         }

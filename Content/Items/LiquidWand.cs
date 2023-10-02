@@ -52,6 +52,7 @@ namespace ImproveGame.Content.Items
             {
                 if (t.LiquidAmount > 0)
                 {
+                    UISystem.Instance.LiquidWandGUI.CurrentItem = Item;
                     UISystem.Instance.LiquidWandGUI.TryChangeLiquidAmount((byte)t.LiquidType, ref t.LiquidAmount, true);
                 }
             }
@@ -63,6 +64,7 @@ namespace ImproveGame.Content.Items
                 {
                     int oldType = t.LiquidType;
                     t.LiquidType = WandSystem.LiquidMode; // 设置成相应的液体
+                    UISystem.Instance.LiquidWandGUI.CurrentItem = Item;
                     UISystem.Instance.LiquidWandGUI.TryChangeLiquidAmount((byte)t.LiquidType, ref t.LiquidAmount,
                         false);
                     // 还是没有液体，设置回来（虽然我不知道有啥用）
@@ -74,6 +76,7 @@ namespace ImproveGame.Content.Items
                 }
                 else
                 {
+                    UISystem.Instance.LiquidWandGUI.CurrentItem = Item;
                     UISystem.Instance.LiquidWandGUI.TryChangeLiquidAmount((byte)t.LiquidType, ref t.LiquidAmount,
                         false);
                 }
@@ -127,7 +130,7 @@ namespace ImproveGame.Content.Items
         {
             Item.rare = ItemRarityID.Red;
             Item.value = Item.sellPrice(0, 1);
-            Item.mana = 20;
+            // Item.mana = 20;
 
             SelectRange = new(30, 30);
         }

@@ -3,6 +3,7 @@ using ImproveGame.Content.Patches;
 using ImproveGame.Interface.Common;
 using ImproveGame.Interface.ExtremeStorage;
 using ImproveGame.Interface.SUIElements;
+using Terraria.DataStructures;
 using Terraria.GameInput;
 
 namespace ImproveGame.Interface.GUI.WorldFeature;
@@ -103,6 +104,8 @@ public class WorldFeatureGUI : ViewBody
 
     private void SetupFestivalButtons(UIElement parent)
     {
+        var icon = Main.Assets.Request<Texture2D>("Images/UI/Bestiary/Icon_Tags_Shadow");
+
         var halloweenSwitch = new LongSwitch(
             () => ForceFestivalSystem.ForceHalloween,
             FestivalPacket.SetHalloween,
@@ -112,6 +115,7 @@ public class WorldFeatureGUI : ViewBody
             Relative = RelativeMode.Vertical,
             Spacing = new Vector2(0f, 4f)
         };
+        halloweenSwitch.SetIcon(icon, new SpriteFrame(16, 5, 13, 2));
         halloweenSwitch.Join(parent);
 
         var xMasSwitch = new LongSwitch(
@@ -121,6 +125,7 @@ public class WorldFeatureGUI : ViewBody
         {
             Relative = RelativeMode.Vertical
         };
+        xMasSwitch.SetIcon(icon, new SpriteFrame(16, 5, 14, 2));
         xMasSwitch.Join(parent);
     }
 

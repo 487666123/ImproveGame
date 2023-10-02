@@ -6,6 +6,8 @@ using ImproveGame.Interface.ExtremeStorage;
 using ImproveGame.Interface.GUI;
 using ImproveGame.Interface.PlayerInfo;
 using ImproveGame.Interface.GUI.AutoTrash;
+using ImproveGame.Interface.GUI.ItemSearcher;
+using ImproveGame.Interface.GUI.OpenBag;
 using ImproveGame.Interface.GUI.WorldFeature;
 using System.Collections;
 
@@ -59,23 +61,31 @@ public class UIPlayer : ModPlayer
         if (HugeInventoryUIPosition.Y <= 0 && HugeInventoryUIPosition.Y >= Main.screenHeight)
             HugeInventoryUIPosition.Y = 340;
         uiSystem.BigBagGUI.MainPanel.SetPos(HugeInventoryUIPosition).Recalculate();
-            
+
         // 液体法杖
         uiSystem.LiquidWandGUI = new LiquidWandGUI();
         uiSystem.LiquidWandTrigger.SetCarrier(uiSystem.LiquidWandGUI);
-        
+
         // 建筑法杖
         uiSystem.ArchitectureGUI = new ArchitectureGUI();
         uiSystem.ArchitectureTrigger.SetCarrier(uiSystem.ArchitectureGUI);
-        
+
         // 构造法杖
         uiSystem.StructureGUI = new StructureGUI();
         uiSystem.StructureTrigger.SetCarrier(uiSystem.StructureGUI);
-        
+
         // 世界特性
         uiSystem.WorldFeatureGUI = new WorldFeatureGUI();
         uiSystem.WorldFeatureTrigger.SetCarrier(uiSystem.WorldFeatureGUI);
-        
+
+        // 物品搜索
+        uiSystem.ItemSearcherGUI = new ItemSearcherGUI();
+        uiSystem.ItemSearcherTrigger.SetCarrier(uiSystem.ItemSearcherGUI);
+
+        // 快速开袋
+        uiSystem.OpenBagGUI = new OpenBagGUI();
+        uiSystem.OpenBagTrigger.SetCarrier(uiSystem.OpenBagGUI);
+
         // 生命体检测仪筛选
         uiSystem.LifeformAnalyzerGUI = new LifeformAnalyzerGUI();
         uiSystem.LifeformAnalyzerTrigger.SetCarrier(uiSystem.LifeformAnalyzerGUI);

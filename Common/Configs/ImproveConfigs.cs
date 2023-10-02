@@ -80,6 +80,7 @@ namespace ImproveGame.Common.Configs
 
         [DefaultValue(9999)]
         [Range(1, int.MaxValue)]
+        [ReloadRequired]
         public int ItemMaxStack;
 
         [DefaultValue(0d)]
@@ -112,9 +113,6 @@ namespace ImproveGame.Common.Configs
 
         [DefaultValue(true)]
         public bool MiddleEnableBank;
-
-        [DefaultValue(true)]
-        public bool AutoSaveMoney;
 
         [DefaultValue(true)]
         public bool FasterExtractinator;
@@ -182,6 +180,14 @@ namespace ImproveGame.Common.Configs
         [DefaultValue(1)]
         [Slider]
         public int NPCCoinDropRate;
+
+        [DefaultValue(false)]
+        public bool ModifyNPCHappiness;
+
+        [DefaultValue(75)]
+        [Range(75, 150)]
+        [Slider]
+        public int NPCHappiness;
 
         [DefaultValue(false)]
         public bool LavalessLavaSlime;
@@ -347,7 +353,12 @@ namespace ImproveGame.Common.Configs
         [DefaultValue(true)]
         public bool WorldFeaturePanel;
 
-        // 
+        [DefaultValue(true)]
+        public bool MinimapMark;
+
+        // [DefaultValue(true)]
+        // public bool WandManaConsumption;
+
         [ReloadRequired]
         public ModItemLoadPage LoadModItems = new();
 

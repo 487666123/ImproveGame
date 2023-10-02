@@ -1,5 +1,7 @@
 ﻿using ImproveGame.Common.Configs;
 using ImproveGame.Interface.Common;
+using ReLogic.Graphics;
+using Terraria.UI.Chat;
 
 namespace ImproveGame.Interface.SUIElements;
 
@@ -9,6 +11,7 @@ namespace ImproveGame.Interface.SUIElements;
 public class SUIButton : TimerView
 {
     public bool IconMode;
+    public bool TextHasBorder = true;
     public Vector2 TextAlign;
 
     private static readonly float iconAndTextSpacing = 6f;
@@ -29,6 +32,7 @@ public class SUIButton : TimerView
     public Color EndBorderColor = UIColor.ItemSlotBorderFav;
     public Color BeginBgColor = UIColor.ButtonBg;
     public Color EndBgColor = UIColor.ButtonBgHover;
+    public Color TextColor = Color.White;
 
     public SUIButton(string text)
     {
@@ -80,7 +84,15 @@ public class SUIButton : TimerView
             textPos += (innerSize - TextSize) * TextAlign;
         }
 
+        textPos.Y -= 2f;
         textPos.Y += UIConfigs.Instance.GeneralFontOffsetY;
-        TrUtils.DrawBorderString(spriteBatch, _text, textPos, Color.White);
+        DynamicSpriteFont font = FontAssets.MouseText.Value;
+        TextSnippet[] array = ChatManager.ParseMessage(_text, TextColor).ToArray();
+        ChatManager.ConvertNormalSnippets(array);
+        if (TextHasBorder)
+            ChatManager.DrawColorCodedStringShadow(spriteBatch, font, array, textPos, new Color(0, 0, 0, TextColor.A),
+                0f, Vector2.Zero, Vector2.One, spread: 1f);
+        ChatManager.DrawColorCodedString(spriteBatch, font, array, textPos, Color.White, 0f, Vector2.Zero, Vector2.One, out int _, -1f);
+        // TrUtils.DrawBorderString(spriteBatch, _text, textPos, TextColor);
     }
 }

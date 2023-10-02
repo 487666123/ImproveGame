@@ -33,26 +33,24 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
         if (!Main.dedServ)
         {
             _colorsLoaded = false;
+
             // 把读取放到主线程上
             Main.QueueMainThreadAction(() =>
                 {
                     if (_colorsLoaded)
-                    {
                         return;
-                    }
 
                     _prisons = new[]
                     {
-                        GetTexture("prison").Value, GetTexture("prison2").Value, GetTexture("prison3").Value
+                        ModAsset.Prison1.Value, ModAsset.Prison2.Value, ModAsset.Prison3.Value
                     };
 
                     _prisonsPreView = new[]
                     {
-                        GetTexture("prisonPreView").Value, GetTexture("prisonPreView2").Value,
-                        GetTexture("prisonPreView3").Value
+                        ModAsset.PrisonPreview1.Value, ModAsset.PrisonPreview2.Value, ModAsset.PrisonPreview3.Value
                     };
 
-                    _colors = new[] { GetColors(_prisons[0]), GetColors(_prisons[1]), GetColors(_prisons[2]) };
+                    _colors = new[] {GetColors(_prisons[0]), GetColors(_prisons[1]), GetColors(_prisons[2])};
                     _colorsLoaded = true;
                 }
             );
@@ -82,20 +80,13 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
         _styleIndex %= _prisons.Length;
     }
 
-    [CloneByReference]
-    public Item Block = new Item();
-    [CloneByReference]
-    public Item Wall = new Item();
-    [CloneByReference]
-    public Item Platform = new Item();
-    [CloneByReference]
-    public Item Torch = new Item();
-    [CloneByReference]
-    public Item Chair = new Item();
-    [CloneByReference]
-    public Item Workbench = new Item();
-    [CloneByReference]
-    public Item Bed = new Item();
+    [CloneByReference] public Item Block = new Item();
+    [CloneByReference] public Item Wall = new Item();
+    [CloneByReference] public Item Platform = new Item();
+    [CloneByReference] public Item Torch = new Item();
+    [CloneByReference] public Item Chair = new Item();
+    [CloneByReference] public Item Workbench = new Item();
+    [CloneByReference] public Item Bed = new Item();
 
     public override void SaveData(TagCompound tag)
     {
@@ -128,7 +119,7 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
     public override void SetDefaults()
     {
         Item.SetBaseValues(42, 42, ItemRarityID.Red, Item.sellPrice(0, 1));
-        Item.SetUseValues(ItemUseStyleID.Swing, SoundID.Item1, 16, 16, mana: 20);
+        Item.SetUseValues(ItemUseStyleID.Swing, SoundID.Item1, 16, 16);
     }
 
     public override void HoldItem(Player player)
@@ -138,7 +129,8 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
         if (!Main.dedServ && Main.myPlayer == player.whoAmI)
         {
             Point point = Main.MouseWorld.ToTileCoordinates() - (Prison.Size() / 2f).ToPoint(); // 鼠标位置
-            int boxIndex = GameRectangle.Create(this, () => false, new Rectangle(point.X, point.Y, Prison.Width, Prison.Height), Color.Yellow * 0f, Color.Yellow * 0f);
+            int boxIndex = GameRectangle.Create(this, () => false,
+                new Rectangle(point.X, point.Y, Prison.Width, Prison.Height), Color.Yellow * 0f, Color.Yellow * 0f);
             if (GameRectangleSystem.GameRectangles.IndexInRange(boxIndex))
             {
                 GameRectangle box = GameRectangleSystem.GameRectangles[boxIndex];
@@ -167,6 +159,7 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
                 UISystem.Instance.ArchitectureGUI.Close();
             return false;
         }
+
         return true;
     }
 
@@ -241,6 +234,7 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
     /// 就为了实现一个“如果不放东西就没爆炸声音”的功能
     /// </summary>
     private static bool _playedSound = false;
+
     public override bool? UseItem(Player player)
     {
         if (!_colorsLoaded || _colors is null)
@@ -309,7 +303,8 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
                 switch (tileDatas[i].tileSort)
                 {
                     case TileSort.Torch:
-                        TryPlace(ref Torch, player, x, y, (Item item) => item.createTile >= TileID.Dirt && TileID.Sets.Torch[item.createTile]);
+                        TryPlace(ref Torch, player, x, y,
+                            (Item item) => item.createTile >= TileID.Dirt && TileID.Sets.Torch[item.createTile]);
                         break;
                     case TileSort.Workbench:
                         TryPlace(ref Workbench, player, x, y, (Item item) => item.createTile == TileID.WorkBenches);
@@ -328,6 +323,7 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
                         break;
                 }
             }
+
             if (Main.netMode == NetmodeID.MultiplayerClient)
                 NetMessage.SendTileSquare(player.whoAmI, position.X, position.Y, Prison.Width, Prison.Height);
 
@@ -338,7 +334,8 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
         }
 
         if (!_playedSound && player.altFunctionUse == 0)
-            CombatText.NewText(player.getRect(), new Color(225, 0, 0), GetText("CombatText.Item.CreateWand_NotEnough"), true);
+            CombatText.NewText(player.getRect(), new Color(225, 0, 0), GetText("CombatText.Item.CreateWand_NotEnough"),
+                true);
 
         _playedSound = false;
         return true;
@@ -358,8 +355,8 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
         if (storedItem.IsAir || storedItem.createTile < TileID.Dirt)
         {
             PickItemInInventory(player, item =>
-                item is not null && tryMethod(item) &&
-                BongBongPlace(x, y, item, player, true, true, !_playedSound),
+                    item is not null && tryMethod(item) &&
+                    BongBongPlace(x, y, item, player, true, true, !_playedSound),
                 true, out int index);
             if (index != -1)
             {
@@ -367,7 +364,8 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
             }
         }
         // 进行存储物品的放置尝试
-        else if (storedItem is not null && tryMethod(storedItem) && BongBongPlace(x, y, storedItem, player, true, true, !_playedSound))
+        else if (storedItem is not null && tryMethod(storedItem) &&
+                 BongBongPlace(x, y, storedItem, player, true, true, !_playedSound))
         {
             TryConsumeItem(ref storedItem, player);
             _playedSound = true;
@@ -397,22 +395,23 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
                 return true;
             }
         }
+
         return false;
     }
 
     private readonly Dictionary<TileSort, int> MaterialConsume = new()
-            {
-                { TileSort.None, 0 },
-                { TileSort.Block, 0 },
-                { TileSort.Wall, 0 },
-                { TileSort.Platform, 0 },
-                { TileSort.Torch, 0 },
-                { TileSort.Chair, 0 },
-                { TileSort.Table, 0 },
-                { TileSort.Workbench, 0 },
-                { TileSort.Bed, 0 },
-                { TileSort.NoWall, 0 }
-            };
+    {
+        {TileSort.None, 0},
+        {TileSort.Block, 0},
+        {TileSort.Wall, 0},
+        {TileSort.Platform, 0},
+        {TileSort.Torch, 0},
+        {TileSort.Chair, 0},
+        {TileSort.Table, 0},
+        {TileSort.Workbench, 0},
+        {TileSort.Bed, 0},
+        {TileSort.NoWall, 0}
+    };
 
     // 计算消耗
     private void CalculateConsume()
@@ -421,6 +420,7 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
         {
             MaterialConsume[item.Key] = 0;
         }
+
         if (!_colorsLoaded || _colors is null)
         {
             ImproveGame.Instance.Logger.Error("Create Wand Colors didn't load. Please report to mod developers.");
@@ -480,7 +480,8 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
     {
         // 决定文本显示的是“开启”还是“关闭”
         string text = ArchitectureGUI.Visible ? "Off" : "On";
-        tooltips.Add(new TooltipLine(Mod, "CreateWand", GetText($"Tips.CreateWand{text}")) { OverrideColor = Color.LightGreen });
+        tooltips.Add(new TooltipLine(Mod, "CreateWand", GetText($"Tips.CreateWand{text}"))
+            {OverrideColor = Color.LightGreen});
     }
 
     public override void ModifyTooltips(List<TooltipLine> tooltips)
@@ -501,7 +502,8 @@ public class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClickable
                 }
 
                 string neededText = $"[c/ffff00:{GetText($"Architecture.{item.Key}")}: {MaterialConsume[item.Key]}]";
-                string hasText = $"[c/00a7df:{GetTextWith($"Architecture.StoredMaterials", new { MaterialCount = stack })}]";
+                string hasText =
+                    $"[c/00a7df:{GetTextWith($"Architecture.StoredMaterials", new {MaterialCount = stack})}]";
 
                 tooltips.Add(new(Mod, $"MaterialConsume.{item.Key}", $"{neededText}   {hasText}"));
             }

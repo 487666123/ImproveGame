@@ -246,7 +246,7 @@ namespace ImproveGame
             {
                 if (player.HasEnoughPickPowerToHurtTile(x, y))
                 {
-                    if (tile.TileType is 2 or 477 or 492 or 23 or 60 or 70 or 109 or 199 || Main.tileMoss[tile.TileType] || TileID.Sets.tileMossBrick[tile.TileType])
+                    if (TileID.Sets.Grass[tile.TileType] || TileID.Sets.GrassSpecial[tile.TileType] || Main.tileMoss[tile.TileType] || TileID.Sets.tileMossBrick[tile.TileType])
                     {
                         player.PickTile(x, y, 10000);
                     }

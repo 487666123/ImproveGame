@@ -1,9 +1,11 @@
-﻿using ImproveGame.Common.Packets.NetAutofisher;
+﻿using ImproveGame.Common.Animations;
+using ImproveGame.Common.Packets.NetAutofisher;
 using ImproveGame.Common.ModPlayers;
 using ImproveGame.Content.Tiles;
 using ImproveGame.Entitys;
 using ImproveGame.Interface.Common;
 using ImproveGame.Interface.GUI;
+using ImproveGame.Interface.GUI.ItemSearcher;
 using Terraria.DataStructures;
 
 namespace ImproveGame.Common.ModSystems;
@@ -55,6 +57,26 @@ public class GameRectangleSystem : ModSystem
                         MyUtils.DrawString(Main.MouseScreen + new Vector2(30, 40), Main.tile[point].TileFrameX.ToString(), Color.White, Color.Red);
                         MyUtils.DrawString(Main.MouseScreen + new Vector2(30, 60), (Main.tile[point].TileFrameX / 18).ToString(), Color.White, Color.Red);
                     }*/
+                    return true;
+                },
+                InterfaceScaleType.Game)
+            );
+            layers.Insert(rulerIndex, new LegacyGameInterfaceLayer("ImproveGame: Matched Chests", delegate
+                {
+                    if (!ItemSearcherGUI.Visible || ItemSearcherGUI.MatchedChests is not {Count: > 0}) return true;
+
+                    
+                    var border = new Color(255, 231, 69);
+                    var background = border * 0.4f;
+
+                    Vector2 size = new(36, 36);
+                    
+                    foreach (var chest in ItemSearcherGUI.MatchedChests.Select(matchedChest => Main.chest[matchedChest]))
+                    {
+                        var position = new Vector2(chest.x, chest.y) * 16f - Main.screenPosition;
+                        position.X -= 2f;
+                        SDFRectangle.HasBorder(position, size, new Vector4(4f), background, 2f, border, false);
+                    }
                     return true;
                 },
                 InterfaceScaleType.Game)

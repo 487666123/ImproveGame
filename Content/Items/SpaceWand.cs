@@ -56,7 +56,7 @@ public class SpaceWand : ModItem, IMarqueeItem
     public override void SetDefaults()
     {
         Item.SetBaseValues(30, 30, ItemRarityID.Red, Item.sellPrice(0, 0, 50));
-        Item.SetUseValues(ItemUseStyleID.Shoot, SoundID.Item1, 12, 12, mana: 20);
+        Item.SetUseValues(ItemUseStyleID.Shoot, SoundID.Item1, 12, 12);
         Item.channel = true;
     }
 

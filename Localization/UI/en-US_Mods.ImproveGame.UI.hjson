@@ -166,3 +166,43 @@ WorldFeature: {
 	OpenWiki: <right> to open its wiki page
 	NotPermitted: You have no permission to modify this world's features.
 }
+
+ItemSearcher: {
+	Title: 查找物品
+	TipText: 查找到的物品将显示在此处
+	NotFoundText: 没有找到任何物品
+}
+
+OpenBag: {
+	Title: 快速开袋
+	TipText: 获取到的物品将暂存在此处
+	Open: Open All
+	Stop: Stop
+	EmptyText: Grab Bag
+	NotFullyDisplayed: 此外，还有{0}个物品被隐藏
+
+	SellAll: {
+		Name: Sell All
+		Tooltip:
+			'''
+			以基础售价的110%出售全部物品
+			出售所得将直接放置到你的钱币槽中
+			'''
+	}
+
+	AreYouSure: {
+		Name: Are you sure?
+		Tooltip:
+			'''
+			左键点击以出售
+			右键点击以取消
+			'''
+	}
+}
+
+MapLayer: {
+	TheAether: The Aether
+	Pyramid: Pyramid
+	FloatingIsland: Floating Island
+	FloatingLake: Floating Lake
+}

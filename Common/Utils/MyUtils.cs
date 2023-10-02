@@ -7,6 +7,7 @@ using ImproveGame.Core;
 using ImproveGame.Interface.GUI.WorldFeature;
 using ReLogic.Graphics;
 using System.Collections;
+using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.UI.Chat;
 using static Microsoft.Xna.Framework.Vector2;
@@ -55,7 +56,7 @@ partial class MyUtils
 
     public static void UseItemByType(Player player, int itemType)
     {
-        if (player.ItemAnimationActive) return;
+        if (!player.ItemAnimationEndingOrEnded) return;
 
         const int fakeSlot = 58;
         var originalItem = player.inventory[fakeSlot];
@@ -644,40 +645,15 @@ partial class MyUtils
     /// <returns>堆叠后剩余的物品, 如果没有剩余物品就会 new Item</returns>
     public static Item ItemStackToInventoryItem(Item[] inventory, int slot, Item item, bool hint)
     {
-        if (!inventory[slot].IsAir && inventory[slot].type == item.type)
-        {
-            // 堆叠部分
-            if (inventory[slot].stack + item.stack >= inventory[slot].maxStack)
-            {
-                int reduce = inventory[slot].maxStack - inventory[slot].stack;
-                if (reduce > 0)
-                {
-                    if (hint)
-                    {
-                        PopupText.NewText(PopupTextContext.ItemPickupToVoidContainer, item,
-                            inventory[slot].maxStack - inventory[slot].stack);
-                        SoundEngine.PlaySound(SoundID.Grab);
-                    }
+        if (inventory[slot].IsAir || inventory[slot].type != item.type)
+            return item;
 
-                    item.stack -= reduce;
-                    inventory[slot].stack = inventory[slot].maxStack;
-                }
+        ItemLoader.TryStackItems(inventory[slot], item, out int numTransferred);
+        if (!hint)
+            return item;
 
-                return item;
-            }
-            // 全部堆叠
-            else
-            {
-                if (hint)
-                {
-                    PopupText.NewText(PopupTextContext.ItemPickupToVoidContainer, item, item.stack, noStack: false);
-                    SoundEngine.PlaySound(SoundID.Grab);
-                }
-
-                inventory[slot].stack += item.stack;
-                return new Item();
-            }
-        }
+        PopupText.NewText(PopupTextContext.ItemPickupToVoidContainer, item, numTransferred, noStack: false);
+        SoundEngine.PlaySound(SoundID.Grab);
 
         return item;
     }
@@ -699,6 +675,17 @@ partial class MyUtils
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// 判断指定 IEnumerable.Item 中是否有 item
+    /// </summary>
+    /// <param name="items">The list of items</param>
+    /// <param name="types">The types to check for</param>
+    /// <returns>True if yes, false if no</returns>
+    public static bool HasItem(IEnumerable<Item> items, params int[] types)
+    {
+        return items.Any(item => types.Contains(item.type));
     }
 
     // 获取配置

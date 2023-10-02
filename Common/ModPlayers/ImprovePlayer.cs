@@ -3,6 +3,8 @@ using ImproveGame.Content.Items;
 using ImproveGame.Interface.Common;
 using ImproveGame.Interface.GUI;
 using ImproveGame.Interface.GUI.AutoTrash;
+using ImproveGame.Interface.GUI.ItemSearcher;
+using ImproveGame.Interface.GUI.OpenBag;
 using ImproveGame.Interface.GUI.WorldFeature;
 using Microsoft.Xna.Framework.Input;
 using Terraria.DataStructures;
@@ -229,6 +231,12 @@ public class ImprovePlayer : ModPlayer
     /// </summary>
     public override void ProcessTriggers(TriggersSet triggersSet)
     {
+        if (KeybindSystem.ConfigKeybind.JustPressed)
+            PressConfigKeybind();
+        if (KeybindSystem.OpenBagGUIKeybind.JustPressed)
+            PressOpenBagGUIKeybind();
+        if (KeybindSystem.ItemSearcherKeybind.JustPressed)
+            PressItemSearcherKeybind();
         if (KeybindSystem.SuperVaultKeybind.JustPressed)
             PressSuperVaultKeybind();
         if (KeybindSystem.BuffTrackerKeybind.JustPressed)
@@ -241,10 +249,45 @@ public class ImprovePlayer : ModPlayer
             PressHotbarSwitchKeybind();
         if (KeybindSystem.AutoTrashKeybind.JustPressed)
             PressAutoTrashKeybind();
+
+        // 下面是操作类快捷键
+        if (Player.DeadOrGhost) return;
         if (KeybindSystem.DiscordRodKeybind.JustPressed)
             PressDiscordKeybind();
         if (KeybindSystem.HomeKeybind.JustPressed)
             PressHomeKeybind();
+    }
+
+    private void PressConfigKeybind()
+    {
+        if (Main.inFancyUI) return;
+
+        SoundEngine.PlaySound(SoundID.MenuOpen);
+        Main.inFancyUI = true;
+        Terraria.ModLoader.UI.Interface.modConfig.SetMod(Mod, Config);
+        Main.InGameUI.SetState(Terraria.ModLoader.UI.Interface.modConfig);
+    }
+
+    private static void PressOpenBagGUIKeybind()
+    {
+        var ui = UISystem.Instance.OpenBagGUI;
+        if (ui is null) return;
+
+        if (OpenBagGUI.Visible)
+            ui.Close();
+        else
+            ui.Open();
+    }
+
+    private static void PressItemSearcherKeybind()
+    {
+        var ui = UISystem.Instance.ItemSearcherGUI;
+        if (ui is null) return;
+
+        if (ItemSearcherGUI.Visible)
+            ui.Close();
+        else
+            ui.Open();
     }
 
     private static void PressSuperVaultKeybind()
@@ -359,8 +402,6 @@ public class ImprovePlayer : ModPlayer
 
     private void PressHomeKeybind()
     {
-        if (Player.ItemAnimationActive) return;
-
         var items = GetAllInventoryItemsList(Player);
 
         // 返回药水优先级最高
@@ -388,8 +429,6 @@ public class ImprovePlayer : ModPlayer
         if (itemType is ItemID.None)
             return;
 
-        // 假的，拿来看的
-        UseItemByType(Player, itemType);
         SoundEngine.PlaySound(SoundID.Item6, Player.position);
 
         for (int l = 0; l < 70; l++)

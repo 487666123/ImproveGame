@@ -24,6 +24,13 @@ public class BaseGrid : View
     /// 单元格大小
     /// </summary>
     public Vector2 CellSize;
+
+    /// <summary>
+    /// 基准点，单元格以此点为左上角铺开 <br/>
+    /// 更改此值并使用OverflowHidden以实现滚动条效果 <br/>
+    /// 如果不使用该字段，而是直接改 Top.Pixels，单元格的IsMouseHovering会出Bug
+    /// </summary>
+    public Vector2 DatumPoint;
     #endregion
 
     /// <summary>
@@ -78,17 +85,15 @@ public class BaseGrid : View
     /// </summary>
     public virtual void CalculateWithSetChildrenPosition()
     {
-        if (Children is List<UIElement> uies)
+        var uies = Children.ToList();
+        int uiesCount = uies.Count;
+
+        for (int i = 0; i < uiesCount; i++)
         {
-            int uiesCount = uies.Count;
+            UIElement uie = uies[i];
 
-            for (int i = 0; i < uiesCount; i++)
-            {
-                UIElement uie = uies[i];
-
-                uie.Left.Pixels = i % ColumnCount * (CellSize.X + CellSpacing.X);
-                uie.Top.Pixels = i / ColumnCount * (CellSize.Y + CellSpacing.Y);
-            }
+            uie.Left.Pixels = i % ColumnCount * (CellSize.X + CellSpacing.X) + DatumPoint.X;
+            uie.Top.Pixels = i / ColumnCount * (CellSize.Y + CellSpacing.Y) + DatumPoint.Y;
         }
     }
 
