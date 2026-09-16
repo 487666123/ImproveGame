@@ -1,6 +1,7 @@
 ﻿using ImproveGame.Common.Configs;
 using ImproveGame.Content.Items.Globes.Core;
 using ImproveGame.Core;
+using System.Reflection.Emit;
 
 namespace ImproveGame.Content.Projectiles;
 
@@ -260,7 +261,10 @@ public abstract class GlobeProjBase(Color mainColor) : ModProjectile
     {
         var projTex = TextureAssets.Projectile[Type].Value;
 
-        Main.spriteBatch.ReBegin(SpriteSortMode.Deferred, BlendState.Additive);
+        // Main.spriteBatch.ReBegin(SpriteSortMode.Deferred, BlendState.Additive);
+        Main.spriteBatch.End();
+        Main.graphics.GraphicsDevice.BlendState = BlendState.Additive;
+
 
         // 干掉注释就可以显示三角形栅格
         // RasterizerState rasterizerState = new RasterizerState();
@@ -268,33 +272,37 @@ public abstract class GlobeProjBase(Color mainColor) : ModProjectile
         // rasterizerState.FillMode = FillMode.WireFrame;
         // Main.graphics.GraphicsDevice.RasterizerState = rasterizerState;
 
-        var screenCenter = Main.screenPosition + Main.ScreenSize.ToVector2() / 2f;
-        var screenSize = Main.ScreenSize.ToVector2() / Main.GameViewMatrix.Zoom;
-        if (Main.LocalPlayer.gravDir == -1)
-        {
-            screenSize.Y = -screenSize.Y;
-        }
-
-        var screenPos = screenCenter - screenSize / 2f;
-
-        var projection = Matrix.CreateOrthographicOffCenter(0, screenSize.X, screenSize.Y, 0, 0, 1);
-        var model = Matrix.CreateTranslation(new Vector3(-screenPos.X, -screenPos.Y, 0));
+        var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, 0, 1);
+        var model = Matrix.CreateTranslation(new Vector3(-Main.screenPosition.X, -Main.screenPosition.Y, 0));
+        var trans = Main.GameViewMatrix != null ? Main.GameViewMatrix.TransformationMatrix : Matrix.Identity;
 
         float uTime = (Main.GameUpdateCount % 30) / 30f;
 
-        ModAsset.GlobeTrail.Value.Parameters["uTransform"].SetValue(model * projection);
-        ModAsset.GlobeTrail.Value.Parameters["pixelSize"].SetValue(new Vector2(1f) / projTex.Size() * 6f);
+        ModAsset.GlobeTrail.Value.Parameters["uTransform"].SetValue(model * trans * projection);
         ModAsset.GlobeTrail.Value.Parameters["uTime"].SetValue(uTime);
 
-        Main.graphics.GraphicsDevice.Textures[0] = projTex;
-        Main.graphics.GraphicsDevice.Textures[1] = ModAsset.TrailStyle3.Value;
+        Main.graphics.GraphicsDevice.Textures[0] = ModAsset.TrailStyle3.Value;
+        Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
 
         ModAsset.GlobeTrail.Value.CurrentTechnique.Passes[0].Apply();
 
-        Main.instance.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, triangleList.ToArray(), 0,
-            triangleList.Count / 3);
+        try
+        {
+            Main.instance.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, triangleList.ToArray(), 0, triangleList.Count / 3);
+        }
+        catch (Exception e)
+        {
+            TimeLogger.DrawException(e);
+            Projectile.active = false;
+            goto label;
+        }
 
-        Main.spriteBatch.ReBegin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+        label:
+        var sb = Main.spriteBatch;
+        var matrix = sb.transformMatrix;
+        var effect = sb.customEffect;
+        sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, sb.GraphicsDevice.SamplerStates[0],
+            sb.GraphicsDevice.DepthStencilState, sb.GraphicsDevice.RasterizerState, effect, matrix);
     }
 
     private List<VertexInfo2> PrepareTriangleList()

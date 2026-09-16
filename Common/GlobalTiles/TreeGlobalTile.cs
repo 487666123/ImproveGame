@@ -5,7 +5,7 @@ namespace ImproveGame.Common.GlobalTiles
     public class TreeGlobalTile : GlobalTile
     {
         // 秉承着能不用IL就不用的稳定至上原则，这里直接RandomUpdate了（其实就是懒）
-        public override void RandomUpdate(int i, int j, int type)
+        public override void RandomUpdate(int i, int j, int type, bool underground)
         {
             if (type is not TileID.Saplings and not TileID.VanityTreeSakuraSaplings
                     and not TileID.VanityTreeWillowSaplings and not TileID.GemSaplings &&
@@ -43,7 +43,7 @@ namespace ImproveGame.Common.GlobalTiles
                 // Mod的，让他自己执行自己的RandomUpdate
                 if (TileID.Sets.TreeSapling[type])
                 {
-                    TileLoader.GetTile(type)?.RandomUpdate(i, j);
+                    TileLoader.GetTile(type)?.RandomUpdate(i, j, underground);
                 }
             }
         }

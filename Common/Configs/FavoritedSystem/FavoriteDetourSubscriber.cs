@@ -72,8 +72,11 @@ public class FavoriteDetourSubscriber : ILoadable
                 i => i.Match(OpCodes.Ldarg_0),
                 i => i.MatchCallOrCallvirt(typeof(ConfigElement), "get_TextDisplayFunction"),
                 i => i.MatchCallOrCallvirt(typeof(Func<string>), "Invoke")
-            ))
+            )) 
+        {
+            ILMatchLog(nameof(DrawSelfILEditing), il);
             return;
+        }
 
         c.Emit(OpCodes.Ldarg_0);
         c.EmitDelegate<Func<string, ConfigElement, string>>((text, self) =>

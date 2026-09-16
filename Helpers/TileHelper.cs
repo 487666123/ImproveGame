@@ -444,7 +444,7 @@ partial class MyUtils
     public static bool BongBongPlace(int i, int j, Item item, Player player, bool mute = false, bool forced = false, bool playSound = false)
     {
         // 物块魔杖特判    
-        if (item.tileWand > 0)
+        if (item.tileWand > 0 && !MyUtils.HasDevMark)
         {
             if (CheckWandUsability(item, player, out int index) && index != -1)
                 TryConsumeItem(ref player.inventory[index], player, true);
@@ -547,7 +547,7 @@ partial class MyUtils
             }
         }
         // 物块魔杖特判    
-        if (item.tileWand > 0)
+        if (item.tileWand > 0 && !HasDevMark)
         {
             if (CheckWandUsability(item, player, out int index) && index != -1)
                 TryConsumeItem(ref player.inventory[index], player, true);

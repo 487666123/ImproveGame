@@ -168,7 +168,7 @@ public class ApplyBuffItem : GlobalItem
             {
                 _oldMiddlePressed = true;
 
-                if (SilkyUISystem.Instance.SilkyUIManager.TryGetInstance<InfiniteBuffController>(out var controller))
+                if (UISceneManager.Instance.TryGetInstance<InfiniteBuffController>(out var controller))
                 {
                     controller.Enabled = !controller.Enabled;
                 }

@@ -42,7 +42,7 @@ public class WarriorPreset : OfficialPreset
         modConfig.PumpkinGrowsFaster = true;
         modConfig.LifeFruitGrowsFaster = true;
         modConfig.LifeFruitLimit = 30;
-        modConfig.StaffOfRegenerationAutomaticPlanting = true;
+        // modConfig.StaffOfRegenerationAutomaticPlanting = true;
         modConfig.NoBiomeSpread = true;
         modConfig.RespawnWithFullHP = true;
         modConfig.DontDeleteBuff = true;

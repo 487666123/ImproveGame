@@ -41,7 +41,7 @@ public class FukMeCalamityElement : PresetElement
         config.PumpkinGrowsFaster = true;
         config.LifeFruitGrowsFaster = true;
         config.LifeFruitLimit = 30;
-        config.StaffOfRegenerationAutomaticPlanting = true;
+        // config.StaffOfRegenerationAutomaticPlanting = true;
         config.NoBiomeSpread = true;
         config.RespawnWithFullHP = true;
         config.DontDeleteBuff = true;
@@ -107,7 +107,7 @@ public class ILoveBalanceElement : PresetElement
         config.PumpkinGrowsFaster = false;
         config.LifeFruitGrowsFaster = false;
         config.LifeFruitLimit = 30;
-        config.StaffOfRegenerationAutomaticPlanting = true;
+        // config.StaffOfRegenerationAutomaticPlanting = true;
         config.NoBiomeSpread = false;
         config.RespawnWithFullHP = true;
         config.DontDeleteBuff = true;
@@ -175,7 +175,7 @@ public class AllOffElement : PresetElement
         config.PumpkinGrowsFaster = false;
         config.LifeFruitGrowsFaster = false;
         config.LifeFruitLimit = -1;
-        config.StaffOfRegenerationAutomaticPlanting = false;
+        // config.StaffOfRegenerationAutomaticPlanting = false;
         config.NoBiomeSpread = false;
         config.RespawnWithFullHP = false;
         config.DontDeleteBuff = false;

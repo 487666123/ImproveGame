@@ -69,6 +69,10 @@ public class ImproveItem : GlobalItem, IItemOverrideHover, IItemMiddleClickable
     /// </summary>
     public override float UseTimeMultiplier(Item item, Player player)
     {
+        // 特判：铲子鱼【灾厄】（这东西纯纯有病，拿远程弹幕做破坏效果）
+        if (ModLoader.TryGetMod("CalamityMod", out Mod c) && c.TryFind<ModItem>("Spadefish", out ModItem fish) && item.type == fish.Type)
+            return 1f;
+
         if (item.pick > 0 || item.hammer > 0 || item.axe > 0 || item.type is ItemID.WireCutter)
             return 1f - ImproveConfigs.Instance.ExtraToolSpeed;
         return 1f;

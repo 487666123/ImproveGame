@@ -271,9 +271,14 @@ public class MinorPatches : ModSystem
         ShakeTreeTweak.Load();
         // “草药” 生长速度
         IL_WorldGen.GrowAlch += WorldGen_GrowAlch;
-        // “草药” 是否可以被 “再生法杖” 收割
-        IL_Player.PlaceThing_Tiles_BlockPlacementForAssortedThings +=
-            Player_PlaceThing_Tiles_BlockPlacementForAssortedThings;
+
+        //// “草药” 是否可以被 “再生法杖” 收割
+        //IL_Player.PlaceThing_Tiles_BlockPlacementForAssortedThings +=
+        //    Player_PlaceThing_Tiles_BlockPlacementForAssortedThings;
+
+        // “草药” 永久开花
+        On_WorldGen.IsAlchemyPlantHarvestable += AlwaysBloomModify;
+
         // “草药” 是否掉落成熟时候物品
         On_WorldGen.IsHarvestableHerbWithSeed += WorldGen_IsHarvestableHerbWithSeed;
         // “南瓜”生长速度
@@ -310,7 +315,10 @@ public class MinorPatches : ModSystem
                         MoveType.After,
                         i => i.Match(OpCodes.Ldarg_0),
                         i => i.MatchLdfld<Item>(name)))
+                {
+                    ILMatchLog(nameof(IL_Main.MouseText_DrawItemTooltip_GetLinesInfo), il);
                     return;
+                }
                 c.Emit(OpCodes.Pop);
                 c.Emit(OpCodes.Ldc_I4_0);
             }
@@ -333,7 +341,10 @@ public class MinorPatches : ModSystem
                     i => i.MatchLdfld<Item>(nameof(Item.useAmmo)),
                     i => i.Match(OpCodes.Pop),
                     i => i.Match(OpCodes.Ldc_I4_0)))
+            {
+                ILMatchLog(nameof(IL_ItemSlot.Draw_SpriteBatch_ItemArray_int_int_Vector2_Color), il);
                 return;
+            }
             c.Emit(OpCodes.Ldloc_1); // 将weapon读入
             c.EmitDelegate<Func<int, Item, int>>((_, weapon) =>
             {
@@ -416,6 +427,11 @@ public class MinorPatches : ModSystem
         On_AmbientWindSystem.Update += GraveyardMistRemoval;
     }
 
+    private bool AlwaysBloomModify(On_WorldGen.orig_IsAlchemyPlantHarvestable orig, int style, int y)
+    {
+        return ImproveConfigs.Instance.AlchemyGrassAlwaysBlooms || orig.Invoke(style, y);
+    }
+
     private void IL_WorldGen_UpdateWorld_GrassGrowth(ILContext il)
     {
         var c = new ILCursor(il);
@@ -426,6 +442,10 @@ public class MinorPatches : ModSystem
             {
                 return (ImproveConfigs.Instance.LifeFruitGrowsFaster ? 1 : maxValue2);
             });
+        }
+        else
+        {
+            ILMatchLog(nameof(IL_WorldGen_UpdateWorld_GrassGrowth), il);
         }
 
         if (c.TryGotoNext(MoveType.Before, i => i.MatchStloc(20)))
@@ -444,6 +464,10 @@ public class MinorPatches : ModSystem
 
                 return limit;
             });
+        }
+        else
+        {
+            ILMatchLog(nameof(IL_WorldGen_UpdateWorld_GrassGrowth), il);
         }
     }
 
@@ -496,7 +520,7 @@ public class MinorPatches : ModSystem
     }
 
     private void NoExplodeTiles(On_Projectile.orig_ExplodeTiles orig, Projectile self, Vector2 compareSpot,
-        int radius, int minI, int maxI, int minJ, int maxJ, bool wallSplode,bool explodeHardmodeOres)
+        int radius, int minI, int maxI, int minJ, int maxJ, bool wallSplode, bool explodeHardmodeOres)
     {
         if (ImproveConfigs.Instance.DisableNonPlayerBombsExplosions != DisableNonPlayerBombsExplosionsType.Disabled &&
             (self.type == ProjectileID.Bomb && self.GetGlobalProjectile<ImproveProjectile>().NonPlayer ||
@@ -588,14 +612,17 @@ public class MinorPatches : ModSystem
                 MoveType.After,
                 i => i.MatchLdcR4(0.8f),
                 i => i.MatchLdcR4(0.0f),
-                i => i.Match(OpCodes.Ldloc_S),
-                i => i.Match(OpCodes.Ldloc_3),
-                i => i.Match(OpCodes.Sub),
+                i => i.MatchLdloc(out _),
+                i => i.MatchLdloc(out _),
+                i => i.MatchSub(),
                 i => i.Match(OpCodes.Call),
-                i => i.Match(OpCodes.Ldc_R4),
-                i => i.Match(OpCodes.Mul),
+                i => i.MatchLdcR4(10),
+                i => i.MatchMul(),
                 i => i.Match(OpCodes.Call)))
+        {
+            ILMatchLog(nameof(TranslucentInfernoRings), il);
             return;
+        }
 
         c.EmitCall(typeof(UIConfigs).GetProperty(nameof(UIConfigs.Instance))!.GetGetMethod()!);
         c.EmitLdfld(typeof(UIConfigs).GetField("InfernoTransparency")!);
@@ -620,7 +647,10 @@ public class MinorPatches : ModSystem
                 i => i.Match(OpCodes.Stloc_S),
                 i => i.Match(OpCodes.Ldloc_S),
                 i => i.Match(OpCodes.Ldc_I4_S)))
+        {
+            ILMatchLog(nameof(LiveInCorrupt), il);
             return;
+        }
         // < 50则会设置为0，开选项的时候把这个设置成114514就行了
         c.EmitDelegate<Func<int, int>>((returnValue) => ImproveConfigs.Instance.NPCLiveInEvil ? 114514 : returnValue);
     }
@@ -641,7 +671,10 @@ public class MinorPatches : ModSystem
                 i => i.Match(OpCodes.Ceq),
                 i => i.MatchStsfld<WorldGen>(nameof(WorldGen.AllowedToSpreadInfections))
             ))
+        {
+            ILMatchLog(nameof(DisableBiomeSpread), il);
             return;
+        }
 
         var label = c.DefineLabel();
 
@@ -679,7 +712,10 @@ public class MinorPatches : ModSystem
                 i => i.Match(OpCodes.Ldelem_I4),
                 i => i.Match(OpCodes.Ldelem_U1)
             ))
+        {
+            ILMatchLog(nameof(KeepBuffOnUpdateDead), il);
             return;
+        }
 
         c.Emit(OpCodes.Ldarg_0); // Player实例
         c.Emit(OpCodes.Ldfld,
@@ -706,13 +742,18 @@ public class MinorPatches : ModSystem
 
         if (!c.TryGotoNext(
                 MoveType.After,
-                i => i.MatchCall(typeof(Main), "get_expertMode"),
-                i => i.Match(OpCodes.Brfalse),
+                i => i.MatchCall<Main>("get_expertMode"),
+                i => i.MatchBrtrue(out _),
+                i => i.MatchLdsfld(typeof(WorldGen.Skyblock), nameof(WorldGen.Skyblock.lowTiles)),
+                i => i.MatchBrfalse(out _),
                 i => i.Match(OpCodes.Ldarg_0),
-                i => i.MatchLdfld(typeof(NPC), nameof(NPC.type)),
+                i => i.MatchLdfld<NPC>(nameof(NPC.type)),
                 i => i.Match(OpCodes.Ldc_I4_S, (sbyte)NPCID.LavaSlime)
             ))
+        {
+            ILMatchLog(nameof(LavalessLavaSlime), il);
             return;
+        }
 
         c.EmitDelegate<Func<int, int>>(returnValue => ImproveConfigs.Instance.LavalessLavaSlime ? NPCLoader.NPCCount : returnValue);
     }
@@ -753,6 +794,9 @@ public class MinorPatches : ModSystem
     }
 
     // “草药” 是否可以被 “再生法杖” 收割
+    // 自动补种已经在1.4.5内置了所以不需要了
+    // 永久开花现在可以用On改独立一个函数了
+#if false
     private static int _herbStyle;
     private static int _herbType;
     private static int _herbImmatureImmuneTime;
@@ -762,9 +806,12 @@ public class MinorPatches : ModSystem
 
         // 移动到破坏草/草药的判定处
         if (!c.TryGotoNext(MoveType.After,
-                i => i.Match(OpCodes.Ldc_I4_S, (sbyte)84),
-                i => i.Match(OpCodes.Bne_Un_S)))
+                i => i.MatchLdcI4(84),
+                i => i.MatchBneUn(out _)))
+        {
+            ILMatchLog(nameof(Player_PlaceThing_Tiles_BlockPlacementForAssortedThings), il);
             return;
+        }
 
         // 如果开了自动补种就记录当前物块的Type和Style
         c.EmitDelegate(() =>
@@ -783,7 +830,10 @@ public class MinorPatches : ModSystem
                 i => i.Match(OpCodes.Ldc_I4_0),
                 i => i.Match(OpCodes.Ldc_I4_0),
                 i => i.Match(OpCodes.Call)))
+        {
+            ILMatchLog(nameof(Player_PlaceThing_Tiles_BlockPlacementForAssortedThings), il);
             return;
+        }
 
         // 旧的逻辑：在KillTile和它的发包之间插入，满足条件时立刻补种并发包，这样有时候会同步失败
         /*c.EmitDelegate(() =>
@@ -801,7 +851,11 @@ public class MinorPatches : ModSystem
 
         // 移除原先的KillTile发包
         int startIndex = c.Index;
-        if (!c.TryGotoNext(i => i.Match(OpCodes.Br))) return;
+        if (!c.TryGotoNext(i => i.Match(OpCodes.Br)))
+        {
+            ILMatchLog(nameof(Player_PlaceThing_Tiles_BlockPlacementForAssortedThings), il);
+            return;
+        }
         int endIndex = c.Index;
         c.Index = startIndex;
         c.RemoveRange(endIndex - startIndex);
@@ -844,7 +898,10 @@ public class MinorPatches : ModSystem
                 i => i.Match(OpCodes.Ldc_I4_1),
                 i => i.Match(OpCodes.Stloc_S),
                 i => i.Match(OpCodes.Ldloc_S)))
+        {
+            ILMatchLog(nameof(Player_PlaceThing_Tiles_BlockPlacementForAssortedThings), il);
             return;
+        }
 
         // 同样记录Type和Style
         c.EmitDelegate<Func<bool, bool>>(flag =>
@@ -866,7 +923,10 @@ public class MinorPatches : ModSystem
                 i => i.Match(OpCodes.Ldc_I4_0),
                 i => i.Match(OpCodes.Ldc_I4_0),
                 i => i.Match(OpCodes.Call)))
+        {
+            ILMatchLog(nameof(Player_PlaceThing_Tiles_BlockPlacementForAssortedThings), il);
             return;
+        }
 
         // 旧的逻辑：在KillTile和它的发包之间插入，满足条件时立刻补种并发包，这样有时候会同步失败
         /*c.EmitDelegate(() =>
@@ -884,7 +944,11 @@ public class MinorPatches : ModSystem
 
         // 移除原先的KillTile发包
         startIndex = c.Index;
-        if (!c.TryGotoNext(MoveType.After, i => i.Match(OpCodes.Call))) return;
+        if (!c.TryGotoNext(MoveType.After, i => i.Match(OpCodes.Call)))
+        {
+            ILMatchLog(nameof(Player_PlaceThing_Tiles_BlockPlacementForAssortedThings), il);
+            return;
+        }
         endIndex = c.Index;
         c.Index = startIndex;
         c.RemoveRange(endIndex - startIndex);
@@ -922,18 +986,27 @@ public class MinorPatches : ModSystem
 
         // 阻止再生法杖或者再生之斧破坏非种植盆内药草
         if (!c.TryGotoNext(i => i.MatchLdcI4(380)))
+        {
+            ILMatchLog(nameof(Player_PlaceThing_Tiles_BlockPlacementForAssortedThings), il);
             return;
+        }
         if (!c.TryGotoNext(i => i.MatchLdcI4(0)))
+        {
+            ILMatchLog(nameof(Player_PlaceThing_Tiles_BlockPlacementForAssortedThings), il);
             return;
+        }
         if (!c.TryGotoNext(MoveType.After, i => i.MatchLdcI4(0)))
+        {
+            ILMatchLog(nameof(Player_PlaceThing_Tiles_BlockPlacementForAssortedThings), il);
             return;
+        }
 
         c.Index++;
         c.EmitPop();
         c.EmitDelegate<Func<bool, bool>>(flag => flag && _herbImmatureImmuneTime-- <= 0);
         c.EmitLdsflda(typeof(Main).GetField(nameof(Main.tile), BindingFlags.Static | BindingFlags.Public));
     }
-
+#endif
     // 提升草药生长速度
     private void WorldGen_GrowAlch(ILContext il)
     {
@@ -942,7 +1015,10 @@ public class MinorPatches : ModSystem
         if (!c.TryGotoNext(MoveType.After,
                 i => i.Match(OpCodes.Call),
                 i => i.Match(OpCodes.Ldc_I4_S)))
+        {
+            ILMatchLog(nameof(WorldGen_GrowAlch), il);
             return;
+        }
         c.EmitDelegate<Func<int, int>>(num => ImproveConfigs.Instance.AlchemyGrassGrowsFaster ? 1 : num);
 
         /*if (!c.TryGotoNext(MoveType.After,
@@ -996,9 +1072,13 @@ public class MinorPatches : ModSystem
         // 计算剩余平台
         var c = new ILCursor(il);
         if (!c.TryGotoNext(MoveType.After,
-                i => i.Match(OpCodes.Pop),
-                i => i.Match(OpCodes.Ldc_I4_M1)))
+                i => i.MatchLdcI4(-1),
+                i => i.MatchStloc(48)))
+        {
+            ILMatchLog(nameof(TweakDrawCountInventory), il);
             return;
+        }
+        c.Index--;
         c.Emit(OpCodes.Ldarg_1); // 玩家物品槽
         c.Emit(OpCodes.Ldarg_2); // content
         c.Emit(OpCodes.Ldarg_3); // 物品在物品槽的位置
@@ -1081,6 +1161,7 @@ public class MinorPatches : ModSystem
         else
         {
             MonoModHooks.DumpIL(ImproveGame.Instance, il);
+            ILMatchLog(nameof(IL_WorldGen_UpdateWorld_GrassGrowth), il);
         }
     }
 }

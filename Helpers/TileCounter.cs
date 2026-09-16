@@ -67,6 +67,7 @@ public class TileCounter : ILoadable
         var c = new ILCursor(il);
         if (!c.TryGotoNext(MoveType.After, i => i.MatchCallvirt<BiomeLoader>(nameof(BiomeLoader.UpdateBiomes))))
         {
+            ILMatchLog(nameof(SimulateUpdateBiomes), il);
             return;
         }
 

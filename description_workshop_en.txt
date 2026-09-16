@@ -48,7 +48,7 @@ English: Lastprismer, Lacewing
 Russian: Zavarski, Pengolin
 
 Coder:
-局长, Cyril, 夜谷紫幽, Reits, hezuo1hao, LogSpiral
+局长, Cyril, 夜谷紫幽, Reits, hezuo1hao, LogSpiral, DD-Mantodea
 
 Special Thanks:
 gardenapple - WMITF

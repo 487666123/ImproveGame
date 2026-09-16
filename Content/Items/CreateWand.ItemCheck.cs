@@ -97,7 +97,7 @@ public partial class CreateWand
 
         public static bool IsTileBlock(int tileType) =>
             tileType >= TileID.Dirt
-            && TileObjectData.GetTileData(tileType, 0) == null
+            && TileObjectData.GetTileData(tileType, 0) is null
             && Main.tileSolid[tileType]
             && !Main.tileSolidTop[tileType];
 
@@ -106,64 +106,64 @@ public partial class CreateWand
             && TileID.Sets.Torches[tileType];
 
         public static bool IsTileWorkbench(int tileType) =>
-            tileType == TileID.WorkBenches;
+            tileType is TileID.WorkBenches;
 
         public static bool IsTileChair(int tileType, int placeStyle) =>
-            tileType == TileID.Chairs
+            tileType is TileID.Chairs
             && placeStyle is not 1 and not 20;
 
         public static bool IsTileTable(int tileType) =>
             tileType is TileID.Tables or TileID.Tables2;
 
         public static bool IsTileDoor(int tileType) =>
-            tileType == TileID.ClosedDoor;
+            tileType is TileID.ClosedDoor;
 
         public static bool IsTileBed(int tileType) =>
-            tileType == TileID.Beds;
+            tileType is TileID.Beds;
 
         public static bool IsTileChest(int tileType) =>
             tileType is TileID.Containers or TileID.Containers2;
 
         public static bool IsTileBookcase(int tileType) =>
-            tileType == TileID.Bookcases;
+            tileType is TileID.Bookcases;
 
         public static bool IsTileBathtub(int tileType) =>
-            tileType == TileID.Bathtubs;
+            tileType is TileID.Bathtubs;
 
         public static bool IsTileCandelabra(int tileType) =>
-            tileType == TileID.Candelabras;
+            tileType is TileID.Candelabras or TileID.PlatinumCandelabra;
 
         public static bool IsTileCandle(int tileType) =>
-            tileType == TileID.Candles;
+            tileType is TileID.Candles or TileID.PlatinumCandle or TileID.WaterCandle or TileID.PeaceCandle or TileID.ShadowCandle;
 
         public static bool IsTileChandelier(int tileType) =>
-            tileType == TileID.Chandeliers;
+            tileType is TileID.Chandeliers;
 
         public static bool IsTileClock(int tileType) =>
-             tileType == TileID.GrandfatherClocks;
+             tileType is TileID.GrandfatherClocks;
         public static bool IsTileDresser(int tileType)
-            => tileType == TileID.Dressers;
+            => tileType is TileID.Dressers;
 
         public static bool IsTileLamp(int tileType) =>
-            tileType == TileID.Lamps;
+            tileType is TileID.Lamps;
 
         public static bool IsTileLantern(int tileType) =>
-            tileType == TileID.HangingLanterns;
+            tileType is TileID.HangingLanterns;
 
         public static bool IsTilePiano(int tileType) =>
-            tileType == TileID.Pianos;
+            tileType is TileID.Pianos;
 
         public static bool IsTileSink(int tileType) =>
-            tileType == TileID.Sinks;
+            tileType is TileID.Sinks;
 
         public static bool IsTileBench(int tileType) =>
-            tileType == TileID.Benches;
+            tileType is TileID.Benches;
 
         public static bool IsTileToilet(int tileType, int placeStyle) =>
-            tileType == TileID.Toilets || (tileType == TileID.Chairs && placeStyle is 1 or 20);
+            tileType is TileID.Toilets || (tileType is TileID.Chairs && placeStyle is 1 or 20);
 
         public static bool IsTileCampfire(int tileType) =>
-            tileType == TileID.Campfire;
+            tileType is TileID.Campfire;
 
         public static readonly Func<int, bool>[] CheckersForTile =
         [

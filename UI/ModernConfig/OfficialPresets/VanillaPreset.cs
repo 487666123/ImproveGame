@@ -43,7 +43,7 @@ public class VanillaPreset : OfficialPreset
         modConfig.PumpkinGrowsFaster = false;
         modConfig.LifeFruitGrowsFaster = false;
         modConfig.LifeFruitLimit = -1;
-        modConfig.StaffOfRegenerationAutomaticPlanting = false;
+        // modConfig.StaffOfRegenerationAutomaticPlanting = false;
         modConfig.NoBiomeSpread = false;
         modConfig.RespawnWithFullHP = false;
         modConfig.DontDeleteBuff = false;

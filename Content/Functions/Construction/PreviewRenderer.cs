@@ -1,6 +1,7 @@
 ﻿using ImproveGame.Common.ModSystems;
 using ImproveGame.Content.Items;
 using MonoMod.Cil;
+using System.Diagnostics;
 using System.Reflection;
 using Terraria.GameContent.Drawing;
 using Terraria.ObjectData;
@@ -32,7 +33,11 @@ namespace ImproveGame.Content.Functions.Construction
         private void DrawTarget(ILContext il)
         {
             var cursor = new ILCursor(il);
-            if (!cursor.TryGotoNext(c => c.MatchCall(typeof(Main).GetMethod(nameof(Main.DoDraw_UpdateCameraPosition), BindingFlags.Static | BindingFlags.NonPublic)))) return;
+            if (!cursor.TryGotoNext(c => c.MatchCall(typeof(Main).GetMethod(nameof(Main.DoDraw_UpdateCameraPosition), BindingFlags.Static | BindingFlags.NonPublic))))
+            {
+                ILMatchLog(nameof(DrawTarget), il);
+                return;
+            }
             cursor.Index += 2;
             cursor.EmitDelegate(DrawTarget_Inner);
         }

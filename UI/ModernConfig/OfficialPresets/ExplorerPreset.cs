@@ -42,7 +42,7 @@ public class ExplorerPreset : OfficialPreset
         modConfig.PumpkinGrowsFaster = false;
         modConfig.LifeFruitGrowsFaster = false;
         modConfig.LifeFruitLimit = 30;
-        modConfig.StaffOfRegenerationAutomaticPlanting = true;
+        // modConfig.StaffOfRegenerationAutomaticPlanting = true;
         modConfig.NoBiomeSpread = false;
         modConfig.RespawnWithFullHP = true;
         modConfig.DontDeleteBuff = true;

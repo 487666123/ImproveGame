@@ -13,7 +13,7 @@ public sealed class PlantSettings : Category
         panel.AddToggle(ImproveConfigs.Instance, nameof(ImproveConfigs.Instance.PumpkinGrowsFaster));
         panel.AddToggle(ImproveConfigs.Instance, nameof(ImproveConfigs.Instance.LifeFruitGrowsFaster));
         panel.AddValueSlider(ImproveConfigs.Instance, nameof(ImproveConfigs.Instance.LifeFruitLimit));
-        panel.AddToggle(ImproveConfigs.Instance, nameof(ImproveConfigs.Instance.StaffOfRegenerationAutomaticPlanting));
+        // panel.AddToggle(ImproveConfigs.Instance, nameof(ImproveConfigs.Instance.StaffOfRegenerationAutomaticPlanting));
         panel.AddToggle(ImproveConfigs.Instance, nameof(ImproveConfigs.Instance.TreeGrowFaster));
         panel.AddToggle(ImproveConfigs.Instance, nameof(ImproveConfigs.Instance.ShakeTreeFruit));
         panel.AddToggle(ImproveConfigs.Instance, nameof(ImproveConfigs.Instance.GemTreeAlwaysDropGem));

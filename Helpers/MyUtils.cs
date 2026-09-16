@@ -6,6 +6,7 @@ using ImproveGame.Content.Items.Coin;
 using ImproveGame.Core;
 using ImproveGame.Packets.Items;
 using ImproveGame.UI.WorldFeature;
+using MonoMod.Cil;
 using ReLogic.Graphics;
 using System.Collections;
 using System.Diagnostics;
@@ -21,6 +22,18 @@ namespace ImproveGame.Helpers;
 /// </summary>
 partial class MyUtils
 {
+
+    public static void ILMatchLog(string methodName, ILContext il)
+    {
+        string message = $"IL Match Failed in {methodName} method";
+#if DEBUG && false
+        throw new Exception(message);
+#else
+        MonoModHooks.DumpIL(ImproveGame.Instance, il);
+        ImproveGame.Instance.Logger.Warn(message);
+#endif
+    }
+
     public static bool HasDevMark => LocalPlayerHasItemFast(ModContent.ItemType<DevMark>(), "mod bank") &&
                                      Main.netMode is NetmodeID.SinglePlayer;
 

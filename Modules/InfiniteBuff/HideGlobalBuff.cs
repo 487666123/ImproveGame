@@ -34,7 +34,7 @@ class HideGlobalBuff : GlobalBuff
     {
         if (TryGetKeybindString(KeybindSystem.BuffTrackerKeybind, out _)) return;
 
-        if (!SilkyUISystem.Instance.SilkyUIManager.TryGetInstance<InfiniteBuffController>(out var controller)) return;
+        if (!UISceneManager.Instance.TryGetInstance<InfiniteBuffController>(out var controller)) return;
 
         tip += $"\n{GetText($"Tips.BuffTracker{(controller.Enabled ? "Off" : "On")}")}";
 
@@ -68,12 +68,16 @@ class HideGlobalBuff : GlobalBuff
         var c = new ILCursor(il);
         if (!c.TryGotoNext(MoveType.After,
             i => i.MatchCall(typeof(BuffLoader), "ModifyBuffText")
-            )) return;
+            )) 
+        {
+            ILMatchLog(nameof(ClickBuff), il);
+            return;
+        }
 
         c.EmitDelegate(() =>
         {
             if (!Main.mouseLeft || !Main.mouseLeftRelease) return;
-            if (!SilkyUISystem.Instance.SilkyUIManager.TryGetInstance<InfiniteBuffController>(out var controller)) return;
+            if (!UISceneManager.Instance.TryGetInstance<InfiniteBuffController>(out var controller)) return;
 
             controller.Enabled = !controller.Enabled;
         });
@@ -91,8 +95,12 @@ class HideGlobalBuff : GlobalBuff
         // int x = 32 + i * 38;
         if (!c.TryGotoNext(MoveType.After,
             i => i.MatchLdcI4(32),
-            i => i.MatchLdloc(3)
-            )) return;
+            i => i.MatchLdloc(2)
+            ))
+        {
+            ILMatchLog(nameof(IL_Main_DrawInterface_Resources_Buffs), il);
+            return;
+        }
 
         //for (int i = 0; i < Player.maxBuffs; i++)
         //{
@@ -120,8 +128,12 @@ class HideGlobalBuff : GlobalBuff
 
         // int num4 = i;
         if (!c.TryGotoNext(MoveType.After,
-            i => i.MatchLdloc(3)
-            )) return;
+            i => i.MatchLdloc(2)
+            ))
+        {
+            ILMatchLog(nameof(IL_Main_DrawInterface_Resources_Buffs), il);
+            return;
+        }
 
         c.EmitDelegate<Func<int, int>>(static (i) =>
         {
@@ -142,16 +154,24 @@ class HideGlobalBuff : GlobalBuff
 
         if (!c.TryGotoNext(MoveType.After,
             i => i.MatchCall<Main>("DrawBuffIcon")
-            )) return;
+            ))
+        {
+            ILMatchLog(nameof(IL_Main_DrawInventory), il);
+            return;
+        }
 
         // 这个循环结束，进入下个循环前，会 +1，现在让无限 Buff 不 +1
         if (!c.TryGotoNext(MoveType.After,
             i => i.MatchCall<UILinkPointNavigator>("SetPosition"),
-            i => i.MatchLdloc(55),
+            i => i.MatchLdloc(49),
             i => i.MatchLdcI4(1),
             i => i.MatchAdd(),
-            i => i.MatchStloc(55)
-            )) return;
+            i => i.MatchStloc(49)
+            ))
+        {
+            ILMatchLog(nameof(IL_Main_DrawInventory), il);
+            return;
+        }
 
         //for (int n = 0; n < Player.maxBuffs; n++)
         //{
@@ -170,8 +190,8 @@ class HideGlobalBuff : GlobalBuff
         //    }
         //}
 
-        c.EmitLdloc(68);
-        c.EmitLdloc(55);
+        c.EmitLdloc(62);
+        c.EmitLdloc(49);
         c.EmitDelegate<Func<int, int, int>>(static (index, count) =>
         {
             var player = Main.LocalPlayer;
@@ -184,7 +204,7 @@ class HideGlobalBuff : GlobalBuff
 
             return count;
         });
-        c.EmitStloc(55);
+        c.EmitStloc(49);
     }
 
     private static bool CompatibleWithInfiniteBuff(On_Main.orig_TryGetBuffTime orig, int buffSlotOnPlayer, out int buffTimeValue)

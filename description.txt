@@ -35,7 +35,7 @@
 ---------------------------
 [c/990000:画师：枫林半叶, 逆风而行的信鸽, 中学生]
 [c/9900ff:翻译：Lastprismer, Lacewing, Zavarski, Pengolin]
-[c/0099ff:代码：局长, Cyril, 夜谷紫幽, Reits, 合作一号, 错数螺线]
+[c/0099ff:代码：局长, Cyril, 夜谷紫幽, Reits, 合作一号, 错数螺线, DD-Mantodea]
 [c/00ff99:贡献者: 炜尔, han.liu, Kadeanon]
 ---------------------------
 版权声明:

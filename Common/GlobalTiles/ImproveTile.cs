@@ -7,7 +7,7 @@ namespace ImproveGame.Common.GlobalTiles
     {
         public override void DrawEffects(int i, int j, int type, SpriteBatch spriteBatch, ref TileDrawInfo drawData)
         {
-            if (UIConfigs.Instance.SpelunkerColor != new Color(0, 0, 0, 0) && Main.tileSpelunker[type])
+            if (UIConfigs.Instance.SpelunkerColor != new Color(0, 0, 0, 0) && Main.LocalPlayer.findTreasure && Main.IsTileSpelunkable(i, j))
             {
                 drawData.tileLight = UIConfigs.Instance.SpelunkerColor;
             }

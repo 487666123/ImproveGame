@@ -105,7 +105,7 @@ namespace ImproveGame.UIFramework.UIElements
                 //}
             }
         }
-
+        internal static Item[] singleSlotArray;
         public override void DrawSelf(SpriteBatch spriteBatch)
         {
             if (Item is null)
@@ -131,7 +131,9 @@ namespace ImproveGame.UIFramework.UIElements
                     // 千万不要伪装成箱子，因为那样多人会传同步信息，然后理所当然得出Bug
                     if (Item is not null && !Item.IsAir)
                     {
-                        ItemSlot.RightClick([Item], AllowSwapEquip ? ItemSlot.Context.InventoryItem : ItemSlot.Context.CreativeSacrifice);
+                        singleSlotArray[0] = Item;
+                        ItemSlot.RightClick(singleSlotArray, AllowSwapEquip ? ItemSlot.Context.InventoryItem : ItemSlot.Context.CreativeSacrifice);
+                        Item = singleSlotArray[0];
                     }
                 }
                 DrawText();

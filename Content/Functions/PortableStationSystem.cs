@@ -125,8 +125,11 @@ internal class PortableStationSystem : ModSystem
     private void AddPortableStations(ILContext il)
     {
         var c = new ILCursor(il);
-        if (!c.TryGotoNext(MoveType.Before, i => i.MatchLdsfld<Main>(nameof(Main.playerInventory))))
+        if (!c.TryGotoNext(MoveType.Before, i => i.MatchRet()))
+        {
+            ILMatchLog(nameof(AddPortableStations), il);
             return;
+        }
         c.Emit(OpCodes.Ldarg_0);
         c.EmitDelegate<Action<Player>>(player =>
         {

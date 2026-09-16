@@ -331,9 +331,9 @@ public class ImproveConfigs : ModConfig
     [Slider]
     public int LifeFruitLimit;
 
-    /// <summary> 再生法杖自动种植 </summary>
-    [DefaultValue(false)]
-    public bool StaffOfRegenerationAutomaticPlanting;
+    /// <summary> 再生法杖自动种植, 因为1.4.5已经内置该功能了所以注释掉了 </summary>
+    // [DefaultValue(false)]
+    // public bool StaffOfRegenerationAutomaticPlanting;
 
     /// <summary> 禁止邪恶生物群落蔓延 </summary>
     [DefaultValue(true)]
