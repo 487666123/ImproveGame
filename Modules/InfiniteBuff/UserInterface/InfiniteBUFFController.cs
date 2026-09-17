@@ -107,7 +107,7 @@ public class UIScaleMarks : UITextView
         Width = new Dimension(35);
     }
 
-    protected override object CommandParameter => Progress;
+    protected override object CommandParameter => new Vector2(Progress, 0);
 
     /// <summary>
     /// 代表刻度值，修改随之改变位置和文本

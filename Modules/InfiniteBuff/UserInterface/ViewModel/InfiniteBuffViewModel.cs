@@ -42,7 +42,7 @@ public sealed partial class InfiniteBuffViewModel : ObservableObject, IUpdatable
         _model.PropertyChanged += OnModelPropertyChanged;
 
         OpenSlider = _model.ShowSlider;
-        SliderValue = _model.SpawnRateSliderValue;
+        SliderValue = new Vector2(_model.SpawnRateSliderValue, 0);
     }
 
     private void OnModelPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -56,16 +56,16 @@ public sealed partial class InfiniteBuffViewModel : ObservableObject, IUpdatable
             }
             case nameof(SpawnRateSliderModPlayer.SpawnRateSliderValue):
             {
-                SliderValue = player.SpawnRateSliderValue; break;
+                SliderValue = new Vector2(player.SpawnRateSliderValue, 0); break;
             }
         }
     }
 
     [ObservableProperty]
-    public partial float SliderValue { get; private set; }
+    public partial Vector2 SliderValue { get; private set; }
 
     [RelayCommand]
-    private void SetSliderValue(float value) => _model.SpawnRateSliderValue = value;
+    private void SetSliderValue(Vector2 value) => _model.SpawnRateSliderValue = value.X;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HiddenSlider))]
