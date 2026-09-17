@@ -134,12 +134,13 @@ partial class MyUtils
     public static void SpawnTileBreakItem(Point16 tileCoords, Item item, string? context = null)
     {
         var position = tileCoords.ToWorldCoordinates();
-        int i = Item.NewItem(new EntitySource_TileBreak(tileCoords.X, tileCoords.Y, context), (int)position.X, (int)position.Y, 32, 32, item.type);
+       
+        int i = Item.NewItem(new EntitySource_TileBreak(tileCoords.X, tileCoords.Y, context), position, item.type);
         var drop = Main.item[i];
         drop.velocity.Y = -2f;
         drop.velocity.X = Main.rand.NextFloat(-4f, 4f);
-        drop.favorited = false;
-        drop.newAndShiny = false;
+        drop.inner.favorited = false;
+        drop.inner.newAndShiny = false;
     }
 
     /// <summary>

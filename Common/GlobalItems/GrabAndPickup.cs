@@ -20,10 +20,10 @@ public class GrabAndPickup : GlobalItem
     {
         // 已废弃
         // On_Player.PickupItem += PickupItem;
-        On_Player.GetItem_Item_GetItemSettings += On_Player_GetItem_Item_GetItemSettings;
+        On_Player.GetItem += On_Player_GetItem_Item_GetItemSettings;
     }
 
-    private Item On_Player_GetItem_Item_GetItemSettings(On_Player.orig_GetItem_Item_GetItemSettings orig, Player self, Item newItem, GetItemSettings settings)
+    private Item On_Player_GetItem_Item_GetItemSettings(On_Player.orig_GetItem orig, Player self, Item newItem, GetItemSettings settings)
     {
         newItem = orig.Invoke(self, newItem, settings);
 

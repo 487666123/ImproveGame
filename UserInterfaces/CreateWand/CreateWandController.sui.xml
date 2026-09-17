@@ -1,41 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- Class 填写对应类名 -->
-<Body Class="ImproveGame.UserInterfaces.CreateWand.CreateWandController"
+<Body xmlns:s="https://github.com/487666123/SilkyUIFramework"
+	  xmlns:b="https://github.com/487666123/SilkyUIFramework/Binding"
+	  s:Class="ImproveGame.UserInterfaces.CreateWand.CreateWandController"
       Enabled="false" EnableBlur="true"
       Border="0" BorderColor="#00000000" BackgroundColor="#00000000"
       Gap="0" FitWidth="true" FitHeight="true" Left="50#" Top="50#">
-	<ElementGroup Name="MainContainer" Border="2" BorderRadius="8"
+	<ElementGroup s:Name="MainContainer" Border="2" BorderRadius="8"
                   FitWidth="true" FitHeight="true" Height="300px"
                   FlexDirection="Column" CrossAlignment="Stretch">
-		<DraggableView Name="Header" FitWidth="true" Height="36px"
+		<DraggableView s:Name="Header" FitWidth="true" Height="36px"
                        Padding="8 0" FlexDirection="Row" MainAlignment="Start" CrossAlignment="Center">
 			<!-- Title -->
-			<TextView Name="Title" TextScale="0.4" FlexGrow="1" DisableMouseInteraction="true"/>
+			<TextView s:Name="Title" TextScale="0.4" FlexGrow="1" DisableMouseInteraction="true"/>
 			<!--<Image Name="Download" Bind.Texture2D="Download" Width="30px" ImageAlign="1 0.5"/>-->
-			<Image Name="Folder" Width="30px" ImageAlign="1 0.5" Bind.Command="OpenFolderCommand"/>
-			<Image Name="X" Width="30px" ImageAlign="1 0.5"/>
+			<Image s:Name="Folder" Width="30px" ImageAlign="1 0.5" b:Command="OpenFolderCommand"/>
+			<Image s:Name="X" Width="30px" ImageAlign="1 0.5"/>
 		</DraggableView>
 		<HR BackgroundColor="rgba(0,0,0,0.75)"/>
 		<ElementGroup FitWidth="true" FitHeight="true" FlexDirection="Column"
                       CrossAlignment="Stretch" Padding="8">
 			<!-- 根据 ItemSlot 计算的大小，没有 Grid 之前只能先这样 -->
 			<ElementGroup Width="328px" Height="220px">
-				<ElementGroup Name="ItemSlot_Container" Width="100%" Height="100%"
+				<ElementGroup s:Name="ItemSlot_Container" Width="100%" Height="100%"
 							  FlexDirection="Row" FlexWrap="true" Gap="8">
 				</ElementGroup>
-				<ElementGroup Name="BuildingDataListPanel" Invalid="true" Width="100%" Height="100%" FlexDirection="Column">
-					<ElementGroup Name="BuildingDataImportPanel" Height="36px" Width="100%" Border="2" Margin="0 0 0 4" CrossAlignment="Strecth">
-						<TextView Name="FromStructureFileButton" BorderRadius="4 0 4 0" FlexGrow="1"
+				<ElementGroup s:Name="BuildingDataListPanel" Invalid="true" Width="100%" Height="100%" FlexDirection="Column">
+					<ElementGroup s:Name="BuildingDataImportPanel" Height="36px" Width="100%" Border="2" Margin="0 0 0 4" CrossAlignment="Stretch">
+						<TextView s:Name="FromStructureFileButton" BorderRadius="4 0 4 0" FlexGrow="1"
 								  TextScale="0.9" FitHeight="False" TextAlign="0.5" Height="100%"/>
 						<VR BackgroundColor="rgba(0,0,0,0.75)"/>
-						<TextView Name="FromDatamapButton" BorderRadius="0 4 0 4" FlexGrow="1"
-								  TextScale="0.9" FitHeight="False" TextAlign="0.5" Bind.Command="RegisterFromDatamapCommand" Height="100%"/>
+						<TextView s:Name="FromDatamapButton" BorderRadius="0 4 0 4" FlexGrow="1"
+								  TextScale="0.9" FitHeight="False" TextAlign="0.5" b:Command="RegisterFromDatamapCommand" Height="100%"/>
 					</ElementGroup>
-					<DataSourceScrollView Name="BuildingDataList" Width="100%" FlexGrow="1" FlexShrink="1" Height="100%" Bind.ItemSource="BuildingDataList">
+					<DataSourceScrollView s:Name="BuildingDataList" Width="100%" FlexGrow="1" FlexShrink="1" Height="100%" b:ItemSource="BuildingDataList">
 						<M.Mask Width="100%" Height="100%" />
 						<M.Container Width="100%" FlexWrap="true" FitHeight="true" FlexDirection="Row" MainAlignment="Start"/>
 					</DataSourceScrollView>
-					<DataSourceScrollView Name="StructureFileList" Width="100%" FlexGrow="1" FlexShrink="1" Bind.ItemSource="QotStructureList"  Height="100%" Invalid="true">
+					<DataSourceScrollView s:Name="StructureFileList" Width="100%" FlexGrow="1" FlexShrink="1" b:ItemSource="QotStructureList"  Height="100%" Invalid="true">
 						<M.Mask Width="100%" Height="100%" />
 						<M.Container Width="100%" FitHeight="true" FlexDirection="Row" MainAlignment="Start"/>
 					</DataSourceScrollView>
@@ -44,14 +46,14 @@
 		</ElementGroup>
 		<HR BackgroundColor="rgba(0,0,0,0.75)"/>
 		<!-- 导航栏 -->
-		<ElementGroup Name="NavBar" Height="36px" FlexDirection="Row" CrossAlignment="Stretch" BackgroundColor="rgba(0,0,0,0.25)">
+		<ElementGroup s:Name="NavBar" Height="36px" FlexDirection="Row" CrossAlignment="Stretch" BackgroundColor="rgba(0,0,0,0.25)">
 			<ElementGroup Padding="4" FlexGrow="1" FlexDirection="Row" CrossAlignment="Stretch">
-				<TextView Name="MaterialButton" BorderRadius="4" FlexGrow="1"
+				<TextView s:Name="MaterialButton" BorderRadius="4" FlexGrow="1"
 						  TextScale="0.8" TextAlign="0.5" />
 			</ElementGroup>
 			<VR BackgroundColor="rgba(0,0,0,0.75)"/>
 			<ElementGroup Padding="4" FlexGrow="1" FlexDirection="Row" CrossAlignment="Stretch">
-				<TextView Name="BuildingDataListButton" BorderRadius="4" FlexGrow="1"
+				<TextView s:Name="BuildingDataListButton" BorderRadius="4" FlexGrow="1"
 						  TextScale="0.8" TextAlign="0.5" />
 			</ElementGroup>
 		</ElementGroup>

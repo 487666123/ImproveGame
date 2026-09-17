@@ -136,7 +136,7 @@ public class ApplyBuffItem : GlobalItem
             return;
 
         if (IsBuffTileItem(item, out _) || item.type is ItemID.HoneyBucket or ItemID.GardenGnome ||
-            (item.stack >= ImproveConfigs.Instance.NoConsume_PotionRequirement && item.buffType > 0 && item.active))
+            (item.stack >= ImproveConfigs.Instance.NoConsume_PotionRequirement && item.buffType > 0))
         {
             var buffTypes = GetItemBuffTypes(item);
             if (buffTypes.Count != 1)
@@ -206,7 +206,7 @@ public class ApplyBuffItem : GlobalItem
         }
 
         if (IsBuffTileItem(item, out _) || item.type is ItemID.HoneyBucket ||
-            (item.stack >= ImproveConfigs.Instance.NoConsume_PotionRequirement && item.buffType > 0 && item.active))
+            (item.stack >= ImproveConfigs.Instance.NoConsume_PotionRequirement && item.buffType > 0))
         {
             var buffTypes = GetItemBuffTypes(item);
 

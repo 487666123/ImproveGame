@@ -373,7 +373,6 @@ public static class ItemExtensions
     {
         Item hoverItem = item;
         int yoyoLogo = -1;
-        int researchLine = -1;
         int rare = ItemRarityID.White;
 
         float knockBack = hoverItem.knockBack;
@@ -412,7 +411,7 @@ public static class ItemExtensions
         // This array will be filled with internal names assigned to vanilla tooltips.
         string[] tooltipNames = new string[mouseTextTooltipLine_Text.Length];
 
-        Main.MouseText_DrawItemTooltip_GetLinesInfo(hoverItem, ref yoyoLogo, ref researchLine, knockBack, ref numLines, mouseTextTooltipLine_Text, mouseTextTooltipLine_Color, tooltipNames, out int prefixlineIndex);
+        Main.MouseText_DrawItemTooltip_GetLinesInfo(hoverItem, ref yoyoLogo, knockBack, ref numLines, mouseTextTooltipLine_Text, mouseTextTooltipLine_Color, tooltipNames, out int prefixlineIndex);
         Main.MouseText_DrawItemTooltip_AddShopLines(hoverItem, ref numLines, mouseTextTooltipLine_Text, mouseTextTooltipLine_Color, tooltipNames);
         if (NewCraftingUI.Visible)
             NewCraftingUI.AddTooltipLines(hoverItem, ref numLines, mouseTextTooltipLine_Text, mouseTextTooltipLine_Color, tooltipNames);

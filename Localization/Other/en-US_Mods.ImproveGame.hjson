@@ -69,8 +69,8 @@ QuickHome: {
 Tips: {
 	AmmoChainDisabled: Ammo Chain disabled
 	AmmoChain: "[centeritem:ImproveGame/AmmoChainItem]Ammo Chain: "
-	AmmoInfo: "弹药类型为 [i:{0}] {1}"
-	UseAmmoInfo: "使用弹药类型为 [i:{0}] {1}"
+	AmmoInfo: 弹药类型为 [i:{0}] {1}
+	UseAmmoInfo: 使用弹药类型为 [i:{0}] {1}
 	ShimmerInto: "Can be shimmered into "
 	ShimmerIntoWithStack: "Every {0} can be shimmered into "
 	ShimmerIntoWithCoinLuck: Can be shimmered into {0} 'coin luck'

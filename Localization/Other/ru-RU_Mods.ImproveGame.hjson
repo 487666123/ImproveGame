@@ -69,8 +69,8 @@ QuickHome: {
 Tips: {
 	AmmoChainDisabled: Цепочка боеприпасов отключена
 	AmmoChain: "[centeritem:ImproveGame/AmmoChainItem]Цепочка боеприпасов: "
-	AmmoInfo: "弹药类型为 [i:{0}] {1}"
-	UseAmmoInfo: "使用弹药类型为 [i:{0}] {1}"
+	AmmoInfo: 弹药类型为 [i:{0}] {1}
+	UseAmmoInfo: 使用弹药类型为 [i:{0}] {1}
 	ShimmerInto: "Можно превратить с помощью мерцания в "
 	ShimmerIntoWithStack: "Каждые {0} можно превратить с помощью мерцания в "
 	ShimmerIntoWithCoinLuck: Можно превратить с помощью мерцания в {0} 'удачи монет'
