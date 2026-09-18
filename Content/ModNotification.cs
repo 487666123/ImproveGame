@@ -68,7 +68,7 @@ public class ModNotificationPopup : IInGameNotification
         if (!_isMouseHovering || TimeLeft <= 24 || TimeLeft >= TimeLeftMax - 15)
             TimeLeft--;
 
-        if (_isMouseHovering && Main.mouseLeft && FocusHelper.AllowUIInputs && clickCoolDown <= 0)
+        if (_isMouseHovering && Main.mouseLeft && FocusHelper.AllowInputProcessing && clickCoolDown <= 0)
         {
             OnLeftMouseClick?.Invoke();
             clickCoolDown = 10;

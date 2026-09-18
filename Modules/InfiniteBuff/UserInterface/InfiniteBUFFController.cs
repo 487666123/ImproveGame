@@ -16,7 +16,7 @@ public class SpawnRateSlider : SUISlider
         base.Draw(gameTime, spriteBatch);
 
         if (!Thumb.IsMouseHovering && !Thumb.LeftMousePressed) return;
-        UICommon.TooltipMouseText($"{InfiniteBuffHelper.RemapSliderToSpawnRate(Value):0.##}");
+        UICommon.TooltipMouseText($"{InfiniteBuffHelper.RemapSliderToSpawnRate(Orientation == Orientation.Vertical ? Value.Y : Value.X):0.##}");
     }
 }
 
@@ -107,7 +107,7 @@ public class UIScaleMarks : UITextView
         Width = new Dimension(35);
     }
 
-    protected override object CommandParameter => Progress;
+    protected override object CommandParameter => new Vector2(Progress, 0);
 
     /// <summary>
     /// 代表刻度值，修改随之改变位置和文本

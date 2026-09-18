@@ -324,7 +324,7 @@ public class MinorPatches : ModSystem
             }
         };
         // 大背包内弹药可直接被使用
-        On_Player.ChooseAmmo += (orig, player, weapon) =>
+        On_Player.PickAmmo_PickAmmoItem += (orig, player, weapon) =>
             orig.Invoke(player, weapon) ??
             GetAllInventoryItemsList(player, "inv portable")
                 .FirstOrDefault(i => i.stack > 0 && ItemLoader.CanChooseAmmo(weapon, i, player), null);

@@ -69,8 +69,8 @@ QuickHome: {
 Tips: {
 	AmmoChainDisabled: 弹药链功能已关闭
 	AmmoChain: "[centeritem:ImproveGame/AmmoChainItem]弹药链："
-	AmmoInfo: "弹药类型为 [i:{0}] {1}"
-	UseAmmoInfo: "使用弹药类型为 [i:{0}] {1}"
+	AmmoInfo: 弹药类型为 [i:{0}] {1}
+	UseAmmoInfo: 使用弹药类型为 [i:{0}] {1}
 	ShimmerInto: "可在微光中转化为 "
 	ShimmerIntoWithStack: "每{0}个可在微光中转化为 "
 	ShimmerIntoWithCoinLuck: 可在微光中转换为{0}点钱币幸运

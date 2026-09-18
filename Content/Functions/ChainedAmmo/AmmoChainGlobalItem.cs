@@ -18,7 +18,7 @@ public class AmmoChainGlobalItem : GlobalItem, IItemOverrideHover, IItemOverride
     public override void Load()
     {
         On_Player.PickAmmo_Item_refInt32_refSingle_refBoolean_refInt32_refSingle_refInt32_bool += OnPickAmmo;
-        On_Player.ChooseAmmo += OnChooseAmmo;
+        On_Player.PickAmmo_PickAmmoItem += OnChooseAmmo;
     }
 
     private void OnPickAmmo(
@@ -34,7 +34,7 @@ public class AmmoChainGlobalItem : GlobalItem, IItemOverrideHover, IItemOverride
         IsPickingAmmo = false;
     }
 
-    private Item OnChooseAmmo(On_Player.orig_ChooseAmmo orig, Player player, Item weapon)
+    private Item OnChooseAmmo(On_Player.orig_PickAmmo_PickAmmoItem orig, Player player, Item weapon)
     {
         if (!ImproveConfigs.Instance.AmmoChain || !IsPickingAmmo || !weapon.TryGetGlobalItem<AmmoChainGlobalItem>(out var globalItem) ||
             globalItem.Chain is null || globalItem.Chain.Chain.Count is 0)
@@ -138,7 +138,7 @@ public class AmmoChainGlobalItem : GlobalItem, IItemOverrideHover, IItemOverride
     }
 
     // 调用orig，但同时算入大背包的子弹
-    private Item DoVanillaChooseAmmoPlusBigBagAmmo(On_Player.orig_ChooseAmmo orig, Player player, Item weapon)
+    private Item DoVanillaChooseAmmoPlusBigBagAmmo(On_Player.orig_PickAmmo_PickAmmoItem orig, Player player, Item weapon)
     {
         var item = orig.Invoke(player, weapon);
         if (item is null)
