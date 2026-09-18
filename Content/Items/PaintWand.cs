@@ -58,8 +58,7 @@ namespace ImproveGame.Content.Items
                         _ => 4349 + frameX / 22
                     };
 
-                    int number = Item.NewItem(new EntitySource_ItemUse(player, player.HeldItem), player.Center, 16, 16,
-                        type);
+                    int number = Item.NewItem(new EntitySource_ItemUse(player, player.HeldItem), player.Center, new Vector2(16), type);
                     NetMessage.SendData(MessageID.SyncItem, -1, -1, null, number, 1f);
                 }
             }

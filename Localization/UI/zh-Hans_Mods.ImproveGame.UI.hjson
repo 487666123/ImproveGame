@@ -10,7 +10,7 @@ CreateWandController: {
 	Title: 建造魔杖控制器
 	BuildingMaterial: 房屋材料
 	StructureSelection: 结构选择
-	ImportFromStructureFile: 从构造魔杖导入
+	ImportFromStructureFile: 构造魔杖
 	ImportFromDatamap: 从数据图导入
 	BackToBuildingDataList: 返回结构列表
 }

@@ -30,7 +30,7 @@ public partial class CreateWand
     [CloneByReference] public Item Campfire = new Item();
     [CloneByReference] public Item Wall = new Item(); 
     */
-    private void HandleLegacyData(TagCompound tag) 
+    private void HandleLegacyData(TagCompound tag)
     {
         if (tag.TryGet("Block", out Item block))
             BuildingMaterials[0] = block;
@@ -59,7 +59,7 @@ public partial class CreateWand
         if (tag.TryGet("Chandelier", out Item chandelier))
             BuildingMaterials[12] = chandelier;
         if (tag.TryGet("Clock", out Item clock))
-            BuildingMaterials[13] =  clock;
+            BuildingMaterials[13] = clock;
         if (tag.TryGet("Dresser", out Item dresser))
             BuildingMaterials[14] = dresser;
         if (tag.TryGet("Lamp", out Item lamp))
@@ -83,25 +83,24 @@ public partial class CreateWand
     }
 
     [CloneByReference]
-    public readonly Item[] BuildingMaterials;
+    public readonly Item[] BuildingMaterials = new Item[30];
 
     public CreateWand()
     {
-        BuildingMaterials = new Item[24];
-        for (int n = 0; n < 24; n++)
+        for (int n = 0; n < BuildingMaterials.Length; n++)
             BuildingMaterials[n] = new();
     }
 
     public override void SaveData(TagCompound tag)
     {
-        for (int n = 0; n < 24; n++)
+        for (int n = 0; n < BuildingMaterials.Length; n++)
             tag[$"m_{n}"] = BuildingMaterials[n];
     }
 
     public override void LoadData(TagCompound tag)
     {
-        HandleLegacyData(tag);
-        for (int n = 0; n < 24; n++) 
+        //HandleLegacyData(tag);
+        for (int n = 0; n < BuildingMaterials.Length; n++)
         {
             if (tag.TryGet($"m_{n}", out Item item))
                 BuildingMaterials[n] = item;
@@ -110,13 +109,13 @@ public partial class CreateWand
 
     public override void NetSend(BinaryWriter writer)
     {
-        for(int n = 0;n < 24; n++)
+        for (int n = 0; n < BuildingMaterials.Length; n++)
             ItemIO.Send(BuildingMaterials[n], writer, true, true);
     }
 
     public override void NetReceive(BinaryReader reader)
     {
-        for (int n = 0; n < 24; n++)
+        for (int n = 0; n < BuildingMaterials.Length; n++)
             BuildingMaterials[n] = ItemIO.Receive(reader, true, true);
     }
 }

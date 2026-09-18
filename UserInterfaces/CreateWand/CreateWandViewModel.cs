@@ -35,7 +35,7 @@ public partial class CreateWandViewModel : ObservableObject
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
-        switch (e.PropertyName) 
+        switch (e.PropertyName)
         {
             case nameof(BuildingData):
                 CWand.SetBuildingData(BuildingData);
@@ -79,30 +79,30 @@ public partial class CreateWandViewModel : ObservableObject
     public void SetModel(CWand wand) => _model = wand;
 
     [RelayCommand]
-    public void SetBuildingData(BuildingData data) 
+    public void SetBuildingData(BuildingData data)
     {
         BuildingData = data;
     }
 
-    public void SetMaterial(Item item,int index) 
+    public void SetMaterial(Item item, int index)
     {
         _model?.BuildingMaterials[index] = item;
     }
 
     [RelayCommand]
-    public static void RegisterFromQotStructure(string path) 
+    public static void RegisterFromQotStructure(string path)
     {
         CWand.RegisterFromQotStructureFile(path);
     }
 
     [RelayCommand]
-    public static void RegisterFromDatamap() 
+    public static void RegisterFromDatamap()
     {
         CWand.OpenDialogAndChooseDataMap();
     }
 
     [RelayCommand]
-    public static void OpenFolder() 
+    public static void OpenFolder()
     {
         TrUtils.OpenFolder(Path.Combine(Main.SavePath, "Mods", "ImproveGame", "CreateWand"));
     }

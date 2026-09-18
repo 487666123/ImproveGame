@@ -10,7 +10,7 @@ CreateWandController: {
 	Title: CreateWand Controller
 	BuildingMaterial: Building Materials
 	StructureSelection: Building Selection
-	ImportFromStructureFile: Import - ConstructWand
+	ImportFromStructureFile: ConstructWand
 	ImportFromDatamap: Import - Datamap
 	BackToBuildingDataList: Back to List
 }

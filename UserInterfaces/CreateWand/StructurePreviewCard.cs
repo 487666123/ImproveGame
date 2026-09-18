@@ -46,7 +46,8 @@ public class StructurePreviewCardTemplate : ISourcedUIViewTemplate
             BorderColor = SUIColor.Border,
             BackgroundColor = Color.Black * .25f,
             BorderRadius = new(8),
-            Margin = new(4, 2, 2, 2)
+            Margin = new(4, 2, 2, 2),
+            FlexGrow = 1,
         };
         card.Bind(nameof(CreateWandViewModel.SetBuildingDataCommand), nameof(StructurePreviewCard.Command));
         return card;
