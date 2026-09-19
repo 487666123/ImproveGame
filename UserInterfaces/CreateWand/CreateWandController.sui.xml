@@ -2,6 +2,7 @@
 <!-- Class 填写对应类名 -->
 <Body xmlns:s="https://github.com/487666123/SilkyUIFramework"
 	  xmlns:b="https://github.com/487666123/SilkyUIFramework/Binding"
+	  xmlns:prop="https://github.com/487666123/SilkyUIFramework/Properties"
 	  s:Class="ImproveGame.UserInterfaces.CreateWand.CreateWandController"
       Enabled="false" EnableBlur="true" Width="375px" Height="300px"
       Border="0" BorderColor="#00000000" BackgroundColor="#00000000"
@@ -27,20 +28,20 @@
 			<ElementGroup Width="100%" Height="100%">
 				<!-- 物品栏 -->
 				<ScrollView s:Name="ItemSlot_Container" Width="100%" Height="100%" Orientation="Vertical">
-					<M.Mask Width="100%" Height="100%" />
-					<M.Container LayoutType="Grid" GridDirection="Row" />
+					<prop:Mask Width="100%" Height="100%" />
+					<prop:Container LayoutType="Grid" GridDirection="Row" />
 				</ScrollView>
 				<!-- 建筑数据表 -->
 				<ElementGroup s:Name="BuildingDataListPanel" Invalid="true" Width="100%" Height="100%" FlexDirection="Column">
 					<DataSourceScrollView s:Name="BuildingDataList" Width="100%" FlexGrow="1" FlexShrink="1" Height="100%" b:ItemSource="BuildingDataList">
-						<M.Mask Width="100%" Height="100%" />
-						<M.Container Width="100%" FlexWrap="true" FitHeight="true" FlexDirection="Row" MainAlignment="Start" />
+						<prop:Mask Width="100%" Height="100%" />
+						<prop:Container Width="100%" FlexWrap="true" FitHeight="true" FlexDirection="Row" MainAlignment="Start" />
 					</DataSourceScrollView>
 				</ElementGroup>
 				<!-- 结构文件表 -->
 				<DataSourceScrollView s:Name="StructureFileList" Width="100%" FlexGrow="1" FlexShrink="1" Height="100%" Invalid="true" b:ItemSource="QotStructureList" >
-					<M.Mask Width="100%" Height="100%" />
-					<M.Container Width="100%" FitHeight="true" FlexDirection="Row" MainAlignment="Start"/>
+					<prop:Mask Width="100%" Height="100%" />
+					<prop:Container Width="100%" FitHeight="true" FlexDirection="Row" MainAlignment="Start"/>
 				</DataSourceScrollView>
 			</ElementGroup>
 		</ElementGroup>
