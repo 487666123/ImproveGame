@@ -3,6 +3,7 @@
 <Body
 	xmlns:s="https://github.com/487666123/SilkyUIFramework"
 	xmlns:b="https://github.com/487666123/SilkyUIFramework/Binding"
+	xmlns:prop="https://github.com/487666123/SilkyUIFramework/Properties"
 	s:Class="ImproveGame.Modules.InfiniteBuff.UserInterface.InfiniteBuffController"
 	Enabled="false" EnableBlur="true" BorderColor="#00000000" BackgroundColor="#00000000"
 	Gap="0" BorderRadius="8" FitWidth="true" FitHeight="true" Left="50#" Top="50#"
@@ -40,11 +41,11 @@
 			</ElementGroup>
 			<ScrollView s:Name="ScrollView" FitWidth="true" FitHeight="true" CrossAlignment="Stretch"
 				Gap="4">
-				<M.Mask FitWidth="true" FitHeight="false" Height="200px" />
-				<M.Container FitHeight="true" Width="378px" MinHeight="100%" Gap="2"
+				<prop:Mask FitWidth="true" FitHeight="false" Height="200px" />
+				<prop:Container FitHeight="true" Width="378px" MinHeight="100%" Gap="2"
 					FlexDirection="Row" FlexWrap="true" MainAlignment="Start"
 					CrossContentAlignment="Start" CrossAlignment="Start">
-				</M.Container>
+				</prop:Container>
 			</ScrollView>
 		</ElementGroup>
 	</ElementGroup>
