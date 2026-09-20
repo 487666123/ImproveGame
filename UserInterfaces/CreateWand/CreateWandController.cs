@@ -8,6 +8,47 @@ using CWand = ImproveGame.Content.Items.CreateWand;
 
 namespace ImproveGame.UserInterfaces.CreateWand;
 
+[XmlElementMapping("CWImageButton")]
+public class MiniImageButton : SUIImage
+{
+    public MiniImageButton()
+    {
+        SetSize(26f, 26f, 0, 0);
+        ImageAlign = new Vector2(0.5f);
+        ImageScale = new Vector2(0.6f);
+
+        BorderRadius = new Vector4(8);
+        Border = 2f;
+
+        StyleSheet.SetStyle(UIElementState.Normal,
+            new StyleDefinition()
+            {
+                [nameof(ImageColor)] = Color.White
+            }
+            .BorderColor(SUIColor.Border * 0.75f)
+            .Background(SUIColor.Background * 0.5f));
+
+        StyleSheet.SetStyle(UIElementState.Hover,
+            new StyleDefinition()
+            {
+                [nameof(ImageColor)] = SUIColor.Highlight
+            }
+            .BorderColor(SUIColor.Highlight)
+            .Background(SUIColor.Highlight * 0.25f));
+    }
+
+    public void SetWarnStyle()
+    {
+        StyleSheet.SetStyle(UIElementState.Hover,
+            new StyleDefinition()
+            {
+                [nameof(ImageColor)] = SUIColor.Warn
+            }
+            .BorderColor(SUIColor.Warn)
+            .Background(SUIColor.Warn * 0.25f));
+    }
+}
+
 [RegisterUI]
 public partial class CreateWandController : BaseBody
 {
@@ -43,8 +84,7 @@ public partial class CreateWandController : BaseBody
         Header.ControlTarget = this;
         Title.UseDeathText();
 
-        X.Texture2D = ModAsset.X;
-        X.LeftMouseDown += (_, _) => Enabled = false;
+        CloseButton.LeftMouseDown += (_, _) => Enabled = false;
 
         Title.Text = GetText("UI.CreateWandController.Title");
         //FromDatamapButton.Text = GetText("UI.CreateWandController.ImportFromDatamap");
@@ -52,21 +92,24 @@ public partial class CreateWandController : BaseBody
         BuildingDataListButton.Text = GetText("UI.CreateWandController.StructureSelection");
         StructDataListButton.Text = GetText("UI.CreateWandController.ImportFromStructureFile");
 
-        Folder.Texture2D = ModAsset.folder;
-        ImportButton.Texture2D = ModAsset.Download;
+        CloseButton.Texture2D = ModAsset.Close_Alt;
+        FolderButton.Texture2D = ModAsset.Folder_Alt;
+        ImportButton.Texture2D = ModAsset.Download_Alt;
 
-        foreach (var item in new Span<SUIImage>([ImportButton, Folder, X]))
-        {
-            item.StyleSheet.SetStyle(UIElementState.Normal, new StyleDefinition()
-            {
-                [nameof(item.ImageColor)] = Color.White * 0.5f
-            });
+        CloseButton.SetWarnStyle();
 
-            item.StyleSheet.SetStyle(UIElementState.Hover, new StyleDefinition()
-            {
-                [nameof(item.ImageColor)] = Color.White
-            });
-        }
+        //foreach (var item in new Span<SUIImage>([ImportButton, FolderButton, CloseButton]))
+        //{
+        //    item.StyleSheet.SetStyle(UIElementState.Normal, new StyleDefinition()
+        //    {
+        //        [nameof(item.ImageColor)] = Color.White * 0.85f
+        //    });
+
+        //    item.StyleSheet.SetStyle(UIElementState.Hover, new StyleDefinition()
+        //    {
+        //        [nameof(item.ImageColor)] = Color.White
+        //    });
+        //}
 
         foreach (var item in new Span<UIView>([MaterialButton, BuildingDataListButton, StructDataListButton]))
         {

@@ -10,16 +10,13 @@
 	<ElementGroup s:Name="MainContainer" Border="2" BorderRadius="8"
                   Width="100%" Height="100%"
                   FlexDirection="Column" CrossAlignment="Stretch">
-		<DraggableView s:Name="Header" FitWidth="true" Height="36px" Gap="4"
+		<DraggableView s:Name="Header" FitWidth="true" Height="36px" Gap="8"
                        Padding="8 0" FlexDirection="Row" MainAlignment="Start" CrossAlignment="Center">
 			<!-- Title -->
 			<TextView s:Name="Title" TextScale="0.4" FlexGrow="1" DisableMouseInteraction="true"/>
-			<Image s:Name="ImportButton"
-				   Width="30px" ImageAlign="1 0.5" b:Command="RegisterFromDatamapCommand" />
-			<Image s:Name="Folder"
-				   Width="30px" ImageAlign="1 0.5" b:Command="OpenFolderCommand"/>
-			<Image s:Name="X"
-				   Width="30px" ImageAlign="1 0.5"/>
+			<CWImageButton s:Name="ImportButton" b:Command="RegisterFromDatamapCommand" />
+			<CWImageButton s:Name="FolderButton" b:Command="OpenFolderCommand"/>
+			<CWImageButton s:Name="CloseButton" />
 		</DraggableView>
 		<HR BackgroundColor="rgba(0,0,0,0.75)"/>
 		<ElementGroup Width="100%" Height="100%" FlexDirection="Column" FlexShrink="1"
