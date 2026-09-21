@@ -3,6 +3,8 @@ using ImproveGame.Common.ModSystems;
 using ImproveGame.UIFramework;
 using ImproveGame.UIFramework.BaseViews;
 using ImproveGame.UIFramework.SUIElements;
+using ImproveGame.UserInterfaces.AutoTrash;
+using SilkyUIFramework;
 using Terraria.ModLoader.UI;
 
 namespace ImproveGame.UI.AutoTrash;
@@ -77,17 +79,8 @@ public class InventoryTrashGUI : BaseBody
             SettingsButton.OnMouseOut += (_, _) => SettingsButton.Texture = setting;
             SettingsButton.OnLeftMouseDown += (_, _) =>
             {
-                GarbageListGUI.Instace.Enabled = !GarbageListGUI.Instace.Enabled;
-
-                if (GarbageListGUI.Instace.Enabled)
-                {
-                    EventTriggerManager.FocusUIElement = GarbageListGUI.Instace;
-                    SoundEngine.PlaySound(SoundID.MenuOpen);
-                }
-                else
-                {
-                    SoundEngine.PlaySound(SoundID.MenuClose);
-                }
+                if (UISceneManager.Instance.TryGetInstance<AutoTrashListUI>(out var garbageList))
+                    garbageList.Toggle();
             };
 
             Window.JoinParent(this);

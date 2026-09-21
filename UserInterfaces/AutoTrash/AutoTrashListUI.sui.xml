@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Body xmlns:s="https://github.com/487666123/SilkyUIFramework"
+      s:Class="ImproveGame.UserInterfaces.AutoTrash.AutoTrashListUI"
+      Enabled="false" EnableBlur="true" FitWidth="true" FitHeight="true"
+      Border="2" BorderRadius="8" Gap="0" Left="280px" Top="320px"
+      FlexDirection="Column" CrossAlignment="Stretch">
+    <DraggableView s:Name="Header" Width="100%" Height="36px"
+                   Padding="0" Gap="4" BorderRadius="6 6 0 0"
+                   FlexDirection="Row" CrossAlignment="Center">
+        <TextView s:Name="Title" FitWidth="false" Width="0px" FlexGrow="1" FlexShrink="1"
+                  TextScale="0.4" TextAlign="0 0.5" WordWrap="true" MaxLines="1" Padding="8 0"
+                  DisableMouseInteraction="true" />
+		<!-- <Image s:Name="CloseButton" Width="30px" Height="30px" ImageAlign="1 0.5" /> -->
+		<Cross s:Name="CrossButton"
+			   CrossSize="20" Width="40px" Height="100%" />
+    </DraggableView>
+    <HR BackgroundColor="rgba(0,0,0,0.75)" />
+    <GarbageListGrid s:Name="GarbageList" Width="100%" Height="180px" Padding="8" />
+</Body>
