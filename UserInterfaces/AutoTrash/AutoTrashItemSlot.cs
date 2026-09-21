@@ -13,7 +13,7 @@ public class AutoTrashItemSlot : SUIItemSlot
         DisplayItemStack = false;
         ItemScale = 0.85f;
 
-        SetSize(40, 40);
+        SetSize(44, 44);
         BorderRadius = new Vector4(8f);
         BorderColor = SUIColor.Border * 0.75f;
         BackgroundColor = SUIColor.Background * 0.5f;

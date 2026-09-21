@@ -11,9 +11,8 @@
                   TextScale="0.4" TextAlign="0 0.5" WordWrap="true" MaxLines="1" Padding="8 0"
                   DisableMouseInteraction="true" />
 		<!-- <Image s:Name="CloseButton" Width="30px" Height="30px" ImageAlign="1 0.5" /> -->
-		<Cross s:Name="CrossButton"
-			   CrossSize="20" Width="40px" Height="100%" />
+		<Cross s:Name="CrossButton" CrossSize="20" Width="40px" Height="100%" />
     </DraggableView>
     <HR BackgroundColor="rgba(0,0,0,0.75)" />
-    <GarbageListGrid s:Name="GarbageList" Width="100%" Height="180px" Padding="8" />
+    <GarbageListGrid s:Name="GarbageList" Width="100%" Height="200px" Padding="8" />
 </Body>
