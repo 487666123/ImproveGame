@@ -13,7 +13,8 @@
 		<DraggableView s:Name="Header" FitWidth="true" Height="36px" Gap="8"
                        Padding="8 0" FlexDirection="Row" MainAlignment="Start" CrossAlignment="Center">
 			<!-- Title -->
-			<TextView s:Name="Title" TextScale="0.4" FlexGrow="1" DisableMouseInteraction="true"/>
+			<TextView s:Name="Title" TextScale="0.45" FlexGrow="1" DisableMouseInteraction="true"/>
+			
 			<CWImageButton s:Name="ImportButton" b:Command="RegisterFromDatamapCommand" />
 			<CWImageButton s:Name="FolderButton" b:Command="OpenFolderCommand"/>
 			<CWImageButton s:Name="CloseButton" />
@@ -48,6 +49,7 @@
 
 			<s:Style s:Name="ButtonContainer" s:Target="SilkyUIFramework.Elements.UIElementGroup"
 					 Padding="4" FlexGrow="1" FlexDirection="Row" CrossAlignment="Stretch" />
+			
 			<s:Style s:Name="Button" s:Target="SilkyUIFramework.Elements.UITextView"
 					 BorderRadius="4" FlexGrow="1" TextScale="0.8" TextAlign="0.5"/>
 

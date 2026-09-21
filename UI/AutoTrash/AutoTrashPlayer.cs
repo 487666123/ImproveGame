@@ -22,7 +22,7 @@ public class AutoTrashPlayer : ModPlayer
     /// <summary>
     /// 最近丢弃的的 <see cref="MaxCapacity"/> 件物品
     /// </summary>
-    public List<Item> RecentlyThrownAwayItems { get; init; } = new List<Item>(MaxCapacity);
+    public List<Item> RecentlyThrownAwayItems { get; init; } = [with(MaxCapacity)];
     #endregion
 
     public override bool ShiftClickSlot(Item[] inventory, int context, int slot)

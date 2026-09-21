@@ -11,41 +11,38 @@ namespace ImproveGame.UserInterfaces.CreateWand;
 [XmlElementMapping("CWImageButton")]
 public class MiniImageButton : SUIImage
 {
+    private StyleDefinition StyleNormal { get; }
+    private StyleDefinition StyleHover { get; }
+    private StyleDefinition StyleHoverWarn { get; }
+
     public MiniImageButton()
     {
         SetSize(26f, 26f, 0, 0);
         ImageAlign = new Vector2(0.5f);
         ImageScale = new Vector2(0.6f);
 
-        BorderRadius = new Vector4(8);
+        BorderRadius = new Vector4(12);
         Border = 2f;
 
-        StyleSheet.SetStyle(UIElementState.Normal,
-            new StyleDefinition()
-            {
-                [nameof(ImageColor)] = Color.White
-            }
-            .BorderColor(SUIColor.Border * 0.75f)
-            .Background(SUIColor.Background * 0.5f));
+        StyleNormal = new StyleDefinition() { [nameof(ImageColor)] = SUIColor.Border * 0.75f }
+            .BorderColor(Color.Black * 0.5f)
+            .Background(Color.White * 0.5f);
 
-        StyleSheet.SetStyle(UIElementState.Hover,
-            new StyleDefinition()
-            {
-                [nameof(ImageColor)] = SUIColor.Highlight
-            }
+        StyleHover = new StyleDefinition() { [nameof(ImageColor)] = SUIColor.Highlight }
             .BorderColor(SUIColor.Highlight)
-            .Background(SUIColor.Highlight * 0.25f));
+            .Background(SUIColor.Highlight * 0.25f);
+
+        StyleHoverWarn = new StyleDefinition() { [nameof(ImageColor)] = SUIColor.Warn }
+            .BorderColor(SUIColor.Warn)
+            .Background(SUIColor.Warn * 0.25f);
+
+        StyleSheet.SetStyle(UIElementState.Normal, StyleNormal);
+        StyleSheet.SetStyle(UIElementState.Hover, StyleHover);
     }
 
     public void SetWarnStyle()
     {
-        StyleSheet.SetStyle(UIElementState.Hover,
-            new StyleDefinition()
-            {
-                [nameof(ImageColor)] = SUIColor.Warn
-            }
-            .BorderColor(SUIColor.Warn)
-            .Background(SUIColor.Warn * 0.25f));
+        StyleSheet.SetStyle(UIElementState.Hover, StyleHoverWarn);
     }
 }
 
