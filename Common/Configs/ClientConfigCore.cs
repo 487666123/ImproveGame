@@ -11,6 +11,7 @@ using ImproveGame.UI.QuickShimmer;
 using ImproveGame.UI.WorldFeature;
 using ImproveGame.UIFramework;
 using ImproveGame.UIFramework.Common;
+using ImproveGame.UserInterfaces.BigBag;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using Terraria.ModLoader.Config;
@@ -157,7 +158,7 @@ public class CommonClientConfig
         var uiSystem = UISystem.Instance;
 
         HugeInventoryUIPosition =
-            BigBagGUI.Instance?.MainPanel?.GetDimensions().Position() ?? new Vector2(150, 340);
+            BigBagUI.Instance?.WindowPosition ?? UIPlayer.HugeInventoryUIPosition;
         UIPlayer.HugeInventoryUIPosition = HugeInventoryUIPosition; // 在这里也保存一下
 
         //BuffTrackerPosition =

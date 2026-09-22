@@ -11,6 +11,7 @@ using ImproveGame.UI.PlayerStats;
 using ImproveGame.UI.QuickShimmer;
 using ImproveGame.UI.WeatherControl;
 using ImproveGame.UI.WorldFeature;
+using ImproveGame.UserInterfaces.BigBag;
 
 namespace ImproveGame.UI.MasterControl;
 
@@ -91,10 +92,7 @@ public class MasterControlManager : ModSystem
                 return;
             }
 
-            if (BigBagGUI.Instance.Enabled && BigBagGUI.Instance.StartTimer.AnyOpen)
-                BigBagGUI.Instance.Close();
-            else
-                BigBagGUI.Instance.Open();
+            BigBagUI.Instance?.Toggle();
         };
 
         #endregion

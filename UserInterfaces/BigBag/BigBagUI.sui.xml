@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    大背包布局：顶部标题栏、左侧图标工具栏、右侧物品网格。
+    s:Class 关联界面类，s:Name 生成供 C# 访问的控件成员。
+    外观在 BigBagUI.Appearance.cs 中配置，批量物品操作在 BigBagUI.Inventory.cs 中处理。
+    设置弹窗及开关绑定在 BigBagUI.Settings.cs 中处理，窗口生命周期与动画由 BigBagUI.cs 管理。
+-->
+<Body xmlns:s="https://github.com/487666123/SilkyUIFramework"
+      s:Class="ImproveGame.UserInterfaces.BigBag.BigBagUI"
+      Enabled="false" EnableBlur="true" FitWidth="true" FitHeight="true"
+      Border="2" BorderRadius="8" Gap="0" OverflowHidden="true" IndependentRenderTarget="true"
+      FlexDirection="Column" CrossAlignment="Stretch" CrossContentAlignment="Stretch">
+
+	<!-- 标题栏：拖动目标在 C# 中设为整个窗口；图标和标题不拦截鼠标。 -->
+	<DraggableView s:Name="Header" Height="40px" Padding="0" Gap="8" FitWidth="true"
+				   FlexDirection="Row" CrossAlignment="Center" BackgroundColor="rgba(0,0,0,0.25)">
+		<!-- 标题占据图标与关闭按钮之间的剩余宽度，最多显示一行。 -->
+		<TextView s:Name="Title" FitWidth="true" FlexGrow="1" FlexShrink="1" Padding="12 0"
+                  TextScale="0.5" TextAlign="0 0.5" DisableMouseInteraction="true" />
+		<Cross s:Name="CloseButton" Width="50px" Height="100%"/>
+	</DraggableView>
+
+	<!-- 标题栏与操作区域之间的分隔线。 -->
+	<HR Height="2px" BackgroundColor="rgba(0,0,0,0.75)"/>
+
+	<!-- 内容区：侧栏与物品区等高，设置按钮通过弹性留白固定在侧栏底部。 -->
+	<ElementGroup s:Name="MainContent" FitWidth="true" FitHeight="true" FlexDirection="Row" CrossAlignment="Stretch">
+
+		<ElementGroup s:Name="Sidebar" FitWidth="true" FlexShrink="0" Padding="8" Gap="8"
+					  BackgroundColor="rgba(0,0,0,0.25)"
+                      FlexDirection="Column" CrossAlignment="Center">
+
+			<s:Style s:Name="ActionButton" Width="40px" Height="40px" FlexShrink="0"
+					 Border="2" BorderRadius="6" MainAlignment="Center" CrossAlignment="Center" />
+
+			<s:Style s:Name="SmallIcon" Width="24px" Height="24px" ImageAlign="0.5"
+					 DisableMouseInteraction="true" />
+
+			<!-- 全部拿走：从大背包转移物品到玩家背包。 -->
+			<ElementGroup s:Name="QuickButton" s:Style="ActionButton">
+				<Image s:Name="QuickIcon" s:Style="SmallIcon" />
+			</ElementGroup>
+			<!-- 全部放入：从玩家背包转移物品到大背包。 -->
+			<ElementGroup s:Name="PutButton" s:Style="ActionButton">
+				<Image s:Name="PutIcon" s:Style="SmallIcon" />
+			</ElementGroup>
+			<!-- 快速堆叠：用玩家背包中的物品补充大背包内已有的同类物品。 -->
+			<ElementGroup s:Name="ReplenishButton" s:Style="ActionButton">
+				<Image s:Name="ReplenishIcon" s:Style="SmallIcon" />
+			</ElementGroup>
+			<!-- 排序：整理大背包中的非收藏物品。 -->
+			<ElementGroup s:Name="SortButton" s:Style="ActionButton">
+				<Image s:Name="SortIcon" s:Style="SmallIcon" />
+			</ElementGroup>
+
+			<View FlexGrow="1" DisableMouseInteraction="true" />
+
+			<ElementGroup s:Name="SettingsButton" s:Style="ActionButton">
+				<Image s:Name="SettingsIcon" s:Style="SmallIcon" />
+			</ElementGroup>
+
+		</ElementGroup>
+
+		<VR BackgroundColor="rgba(0,0,0,0.75)"/>
+
+		<ElementGroup FitWidth="true" FlexGrow="1" FlexShrink="1" FitHeight="true"
+                      Padding="0" FlexDirection="Column" CrossAlignment="Stretch">
+			<BigBagItemGrid s:Name="ItemGrid" Padding="8" FitWidth="true" />
+
+			<HR BackgroundColor="rgba(0,0,0,0.75)"/>
+
+			<ElementGroup FitWidth="true" Height="40px" FlexDirection="Row"
+						  BackgroundColor="rgba(0,0,0,0.25)">
+
+				<ElementGroup FlexGrow="1" FitHeight="true">
+				</ElementGroup>
+
+				<ElementGroup FlexGrow="1" FitHeight="true">
+				</ElementGroup>
+
+				<ElementGroup FlexGrow="1" FitHeight="true">
+				</ElementGroup>
+
+			</ElementGroup>
+		</ElementGroup>
+
+	</ElementGroup>
+
+	<!--
+        遮罩只覆盖大背包内部，脱离布局流，不挤占物品区域。
+        它接收鼠标事件，阻止点击和滚轮穿透；弹窗以整个遮罩为参照居中。
+    -->
+	<ElementGroup s:Name="SettingsOverlay" Invalid="true" Positioning="Absolute"
+				  BackgroundColor="rgba(0,0,0,0.25)" Width="100%" Height="100%">
+
+		<ElementGroup s:Name="SettingsPanel" Positioning="Absolute" Left="50#" Top="50#"
+                      Width="256px" FitHeight="true" Border="2" BorderRadius="12"
+                      FlexDirection="Column" CrossAlignment="Stretch">
+
+			<DraggableView s:Name="SettingsHeader" Height="36px" CrossAlignment="Center"
+						   BackgroundColor="rgba(0,0,0,0.25)">
+
+				<TextView s:Name="SettingsTitle" FitWidth="true" FlexGrow="1" FlexShrink="1" Padding="12 0"
+						  TextScale="0.45" TextAlign="0 0.5" DisableMouseInteraction="true" />
+				<Cross s:Name="SettingsCloseButton" CrossSize="20" Width="40px" Height="100%"/>
+
+			</DraggableView>
+
+			<HR Height="2px" BackgroundColor="rgba(0,0,0,0.75)"/>
+
+			<ElementGroup FitHeight="true" Padding="8" Gap="8"
+                          FlexDirection="Column" CrossAlignment="Stretch">
+
+				<s:Style s:Name="SettingRow" MinHeight="40px" BorderRadius="8" Border="2" BorderColor="rgba(0,0,0,0.5)"
+						 Padding="12 8" CrossAlignment="Center" BackgroundColor="rgba(0,0,0,0.25)"/>
+
+				<s:Style s:Name="ContentLabel" FitWidth="false" Width="0px" FlexGrow="1" FlexShrink="1"
+						 TextScale="0.85" WordWrap="true" DisableMouseInteraction="true" />
+
+				<!-- 设置值和本地化文本仍沿用原有绑定；点击行或开关均可切换。 -->
+				<ElementGroup s:Name="RecipesRow" s:Style="SettingRow">
+					<TextView s:Name="RecipesLabel" s:Style="ContentLabel" />
+					<ToggleSwitch s:Name="RecipesSwitch" />
+				</ElementGroup>
+
+				<ElementGroup s:Name="SmartGrabRow" s:Style="SettingRow">
+					<TextView s:Name="SmartGrabLabel" s:Style="ContentLabel" />
+					<ToggleSwitch s:Name="SmartGrabSwitch" />
+				</ElementGroup>
+
+				<ElementGroup s:Name="AutoGrabRow" s:Style="SettingRow">
+					<TextView s:Name="AutoGrabLabel" s:Style="ContentLabel" />
+					<ToggleSwitch s:Name="AutoGrabSwitch" />
+				</ElementGroup>
+
+			</ElementGroup>
+		</ElementGroup>
+	</ElementGroup>
+
+</Body>

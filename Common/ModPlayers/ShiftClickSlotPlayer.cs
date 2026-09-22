@@ -7,6 +7,7 @@ using ImproveGame.UI.Autofisher;
 using ImproveGame.UI.ExtremeStorage;
 using ImproveGame.UI.ItemContainer;
 using ImproveGame.UIFramework;
+using ImproveGame.UserInterfaces.BigBag;
 using ImproveGame.UserInterfaces.CreateWand;
 using ItemSlot = Terraria.UI.ItemSlot;
 
@@ -64,7 +65,7 @@ public class ShiftClickSlotPlayer : ModPlayer
                 return true;
             }
 
-            if (BigBagGUI.Instance.Enabled && Main.LocalPlayer.TryGetModPlayer<DataPlayer>(out var dataPlayer) &&
+            if (BigBagUI.Instance is { Enabled: true } && Main.LocalPlayer.TryGetModPlayer<DataPlayer>(out var dataPlayer) &&
                 dataPlayer.SuperVault.Any(s => CanPlaceInSlot(s, item) is 2 or 3))
             {
                 Main.cursorOverride = CursorOverrideID.InventoryToChest;
@@ -132,7 +133,7 @@ public class ShiftClickSlotPlayer : ModPlayer
                 return true; // 阻止原版代码运行
             }
 
-            if (BigBagGUI.Instance.Enabled)
+            if (BigBagUI.Instance is { Enabled: true })
             {
                 inventory[slot] =
                     ItemStackToInventory(Player.GetModPlayer<DataPlayer>().SuperVault, inventory[slot], false);

@@ -13,6 +13,7 @@ using ImproveGame.UI.MasterControl;
 using ImproveGame.UI.OpenBag;
 using ImproveGame.UI.QuickShimmer;
 using ImproveGame.UIFramework;
+using ImproveGame.UserInterfaces.BigBag;
 using SilkyUIFramework;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
@@ -223,16 +224,18 @@ public class ImprovePlayer : ModPlayer
     private static void PressSuperVaultKeybind()
     {
         if (!ImproveConfigs.Instance.SuperVault) return;
+        var bigBag = BigBagUI.Instance;
+        if (bigBag is null) return;
 
-        if (BigBagGUI.Instance.Enabled && BigBagGUI.Instance.StartTimer.AnyOpen)
+        if (bigBag.IsOpen)
         {
-            BigBagGUI.Instance.Close();
+            bigBag.Close();
         }
         else
         {
             bool oldInventory = Main.playerInventory;
 
-            BigBagGUI.Instance.Open();
+            bigBag.Open();
 
             // 假设也按了物品栏快捷键...
             if (PlayerInput.Triggers.JustPressed.Inventory)
