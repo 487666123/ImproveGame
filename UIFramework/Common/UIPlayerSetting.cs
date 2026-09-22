@@ -35,15 +35,17 @@ public class PlayerBigBagSettingPacket : NetModule
 public class UIPlayerSetting : ModPlayer
 {
     /// <summary>
-    /// 大背包 参与合成
+    /// 大背包：让大背包中的参与物品合成
     /// </summary>
     public bool SuperVault_ParticipateSynthesis;
+
     /// <summary>
-    /// 大背包 如果即将进入背包的物品在大背包中已存在，优先存入大背包 (优先抓取)
+    /// 大背包：即将进入背包的物品在大背包中有同类物品时，优先进入大背包。
     /// </summary>
     public bool SuperVault_PrioritizeGrabbing;
+
     /// <summary>
-    /// 大背包 背包溢出时将物品抓取至大背包 (溢出抓取)
+    /// 大背包：如果物品无法进入普通背包时，尝试进入大背包
     /// </summary>
     public bool SuperVault_GrabItemsWhenOverflowing;
 

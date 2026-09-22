@@ -41,7 +41,6 @@ public partial class BigBagUI
     private void SetSettingsState(bool visible)
     {
         if (SettingsOverlay.Invalid == !visible) return;
-
         SettingsOverlay.Invalid = !visible;
         SoundEngine.PlaySound(SoundID.MenuTick);
     }
@@ -57,11 +56,15 @@ public partial class BigBagUI
             SoundEngine.PlaySound(SoundID.MenuTick);
         };
 
-        @switch.OnUpdateStatus += _ => @switch.Status = getter();
+        @switch.OnUpdateStatus += _ =>
+        {
+            if (getter() == @switch.Status) return;
+            setter(@switch.Status);
+        };
 
         itemBar.LeftMouseDown += (el, evt) =>
         {
-            if (evt.Source == el) @switch.OnSwitchDown(!@switch.Status);
+            if (evt.Source != @switch) @switch.OnSwitchDown(!@switch.Status);
         };
     }
 }
