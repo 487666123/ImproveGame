@@ -224,23 +224,9 @@ public class ImprovePlayer : ModPlayer
     private static void PressSuperVaultKeybind()
     {
         if (!ImproveConfigs.Instance.SuperVault) return;
-        var bigBag = BigBagUI.Instance;
-        if (bigBag is null) return;
+        if (BigBagUI.Instance is not { } bigBag) return;
 
-        if (bigBag.IsOpen)
-        {
-            bigBag.Close();
-        }
-        else
-        {
-            bool oldInventory = Main.playerInventory;
-
-            bigBag.Open();
-
-            // 假设也按了物品栏快捷键...
-            if (PlayerInput.Triggers.JustPressed.Inventory)
-                OperateInventory(oldInventory);
-        }
+        bigBag.Toggle();
     }
 
     private static void PressBuffTrackerKeybind()

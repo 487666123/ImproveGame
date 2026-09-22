@@ -1,11 +1,11 @@
 using ImproveGame.Common.Configs;
 using ImproveGame.Common.ModPlayers;
-using ImproveGame.Packets;
 using ImproveGame.UIFramework.Common;
 using SilkyUIFramework;
-using SilkyUIFramework.Animation;
 using SilkyUIFramework.Attributes;
+using SilkyUIFramework.Common.Tweening;
 using SilkyUIFramework.Elements;
+using SilkyUIFramework.Extensions;
 
 namespace ImproveGame.UserInterfaces.BigBag;
 
@@ -14,24 +14,20 @@ public partial class BigBagUI : BaseBody
 {
     public static BigBagUI Instance { get; private set; }
 
-    private readonly AnimationTimer _openAnimation = new(3);
-    private bool _isOpen;
+    private Tween Tween { get; set; } = new();
 
-    public bool IsOpen => _isOpen && Main.playerInventory && ImproveConfigs.Instance.SuperVault;
-    public override bool IsInteractable => IsOpen;
+    public override bool IsInteractable => !Tween.IsPlaying;
 
     public override bool Enabled
     {
         get
         {
-            if (_isOpen && !IsOpen) Close();
-            return _isOpen || _openAnimation.IsReverseUpdating;
+            if (!Main.playerInventory) return false;
+            if (!ImproveConfigs.Instance.SuperVault) return false;
+
+            return field;
         }
-        set
-        {
-            if (value) Open();
-            else Close();
-        }
+        set;
     }
 
     public Vector2 WindowPosition => new Vector2(Left.Pixels, Top.Pixels) + DragOffset;
@@ -55,28 +51,26 @@ public partial class BigBagUI : BaseBody
     }
 
     private void RefreshInventory() =>
-        ItemGrid?.Items = DataPlayer.Get(Main.LocalPlayer).SuperVault;
+        ItemGrid?.Items = Main.LocalPlayer.GetModPlayer<DataPlayer>().SuperVault;
 
     protected override void UpdateStatus(GameTime gameTime)
     {
         base.UpdateStatus(gameTime);
-        _openAnimation.Update(gameTime);
 
         RefreshLabels();
-
         RefreshInventory();
     }
 
     public override void HandleDraw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        UseRenderTarget = !_openAnimation.IsForwardCompleted;
-        Opacity = _openAnimation.Schedule;
-        var center = Vector2.Transform(Bounds.Center, SilkyUI.TransformMatrix);
-        RenderTargetMatrix = Matrix.CreateTranslation(-center.X, -center.Y, 0f)
-            * Matrix.CreateScale(_openAnimation.Lerp(0.95f, 1f))
-            * Matrix.CreateTranslation(center.X, center.Y, 0f);
         base.HandleDraw(gameTime, spriteBatch);
+    }
+
+    protected override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        base.Draw(gameTime, spriteBatch);
         DrawButtonTooltip();
+        UIPlayer.HugeInventoryUIPosition = WindowPosition;
     }
 
     public void SetWindowPosition(Vector2 position)
@@ -93,39 +87,66 @@ public partial class BigBagUI : BaseBody
         SetWindowPosition(UIPlayer.HugeInventoryUIPosition);
     }
 
+    private bool _target = false;
+
     public void Toggle()
     {
-        if (IsOpen) Close();
-        else Open();
+        if (_target) Close(); else Open();
+        ClientConfigCore.SaveConfig();
     }
 
-    public void Open()
+    private void Open()
     {
-        if (IsOpen || Main.gameMenu || !ImproveConfigs.Instance.SuperVault) return;
+        if (_target) return;
+        if (Main.gameMenu || !ImproveConfigs.Instance.SuperVault) return;
 
-        RefreshInventory();
-        if (!_isOpen) RestorePosition();
-        OperateInventory(true);
-        _isOpen = true;
-        _openAnimation.StartUpdate();
         UISceneManager.Instance.Activate(this);
         SoundEngine.PlaySound(SoundID.MenuOpen);
+        OperateInventory(true);
+
+        AnimateTo(1f, Matrix.Identity, 0.2f);
+        Tween.OnFinished += () =>
+        {
+            UseRenderTarget = false;
+        };
+
+        _target = true;
+        Enabled = true;
+        UseRenderTarget = true;
     }
 
-    public void Close()
+    private void Close()
     {
-        if (!_isOpen) return;
-
-        _isOpen = false;
-        _openAnimation.StartReverseUpdate();
-        UIPlayer.HugeInventoryUIPosition = WindowPosition;
+        if (!_target) return;
         SoundEngine.PlaySound(SoundID.MenuClose);
-        ClientConfigCore.SaveConfig();
+
+        var center = Vector2.Transform(Bounds.Center, SilkyUI.TransformMatrix);
+        var matrix = Matrix.CreateTranslation(-center.X, -center.Y, 0f)
+            * Matrix.CreateScale(0.95f)
+            * Matrix.CreateTranslation(center.X, center.Y, 0f);
+
+        AnimateTo(0f, matrix, 0.2f);
+        Tween.OnFinished += () =>
+        {
+            Enabled = false;
+            UseRenderTarget = false;
+        };
+
+        _target = false;
+        UseRenderTarget = true;
+    }
+
+    private void AnimateTo(float opacity, Matrix matrix, float duration)
+    {
+        Tween?.Kill();
+        Tween = CreateTween().Parallel().SetEase(EaseType.Out).SetTrans(TransitionType.Expo);
+        Tween.FadeTo(this, opacity, duration);
+        Tween.MemberTo(this, nameof(RenderTargetMatrix), matrix, duration);
     }
 
     protected override void OnExitTree()
     {
-        if (Instance == this) Instance = null;
         base.OnExitTree();
+        if (Instance == this) Instance = null;
     }
 }
