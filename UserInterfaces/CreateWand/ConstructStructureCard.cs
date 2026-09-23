@@ -17,14 +17,10 @@ public class ConstructStructureCard : UIElementGroup
         }.Join(this);
 
         StyleSheet.SetStyle(UIElementState.Normal, new StyleDefinition()
-        {
-            [nameof(BackgroundColor)] = Color.Black * 0.2f
-        });
+            .Set(nameof(BackgroundColor), Color.Black * 0.2f));
 
         StyleSheet.SetStyle(UIElementState.Hover, new StyleDefinition()
-        {
-            [nameof(BackgroundColor)] = Color.Black * 0.3f
-        });
+            .Set(nameof(BackgroundColor), Color.Black * 0.3f));
     }
 
     public override void OnLeftMouseClick(SilkyUIFramework.UIMouseEvent evt)

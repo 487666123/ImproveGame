@@ -24,15 +24,15 @@ public class MiniImageButton : SUIImage
         BorderRadius = new Vector4(12);
         Border = 2f;
 
-        StyleNormal = new StyleDefinition() { [nameof(ImageColor)] = SUIColor.Border * 0.75f }
+        StyleNormal = new StyleDefinition().Set(nameof(ImageColor), SUIColor.Border * 0.75f)
             .BorderColor(Color.Black * 0.5f)
             .Background(Color.White * 0.5f);
 
-        StyleHover = new StyleDefinition() { [nameof(ImageColor)] = SUIColor.Highlight }
+        StyleHover = new StyleDefinition().Set(nameof(ImageColor), SUIColor.Highlight)
             .BorderColor(SUIColor.Highlight)
             .Background(SUIColor.Highlight * 0.25f);
 
-        StyleHoverWarn = new StyleDefinition() { [nameof(ImageColor)] = SUIColor.Warn }
+        StyleHoverWarn = new StyleDefinition().Set(nameof(ImageColor), SUIColor.Warn)
             .BorderColor(SUIColor.Warn)
             .Background(SUIColor.Warn * 0.25f);
 
@@ -98,27 +98,19 @@ public partial class CreateWandController : BaseBody
         //foreach (var item in new Span<SUIImage>([ImportButton, FolderButton, CloseButton]))
         //{
         //    item.StyleSheet.SetStyle(UIElementState.Normal, new StyleDefinition()
-        //    {
-        //        [nameof(item.ImageColor)] = Color.White * 0.85f
-        //    });
+        //        .Set(nameof(item.ImageColor), Color.White * 0.85f));
 
         //    item.StyleSheet.SetStyle(UIElementState.Hover, new StyleDefinition()
-        //    {
-        //        [nameof(item.ImageColor)] = Color.White
-        //    });
+        //        .Set(nameof(item.ImageColor), Color.White));
         //}
 
         foreach (var item in new Span<UIView>([MaterialButton, BuildingDataListButton, StructDataListButton]))
         {
             item.StyleSheet.SetStyle(UIElementState.Normal, new StyleDefinition()
-            {
-                [nameof(BackgroundColor)] = Color.Transparent
-            });
+                .Set(nameof(BackgroundColor), Color.Transparent));
 
             item.StyleSheet.SetStyle(UIElementState.Hover, new StyleDefinition()
-            {
-                [nameof(BackgroundColor)] = Color.Black * 0.25f
-            });
+                .Set(nameof(BackgroundColor), Color.Black * 0.25f));
         }
 
         ItemSlot_Container.Container.SetTemplateColumns(GridTrack.Repeat(6, TemplateType.Fraction, 1f));
