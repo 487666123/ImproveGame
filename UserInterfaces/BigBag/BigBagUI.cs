@@ -22,8 +22,11 @@ public partial class BigBagUI : BaseBody
     {
         get
         {
-            if (!Main.playerInventory) return false;
-            if (!ImproveConfigs.Instance.SuperVault) return false;
+            if (!Main.playerInventory || !ImproveConfigs.Instance.SuperVault)
+            {
+                field = false;
+                return false;
+            }
 
             return field;
         }
