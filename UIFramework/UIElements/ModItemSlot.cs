@@ -142,7 +142,7 @@ namespace ImproveGame.UIFramework.UIElements
             {
                 ItemChange(true);
                 RightClickItemChange(Item.stack - lastStack, lastType != Item.type);
-                OperateInventory(true);
+                MyUtils.OperateInventory(true);
             }
 
             Vector2 origin = GetDimensions().Position();
@@ -294,14 +294,14 @@ namespace ImproveGame.UIFramework.UIElements
             // 常规单点
             if (placeItem is not null && CanPlaceItem(placeItem))
             {
-                byte placeMode = CanPlaceInSlot(Item, placeItem);
+                byte placeMode = MyUtils.CanPlaceInSlot(Item, placeItem);
 
                 // type不同直接切换吧
                 if (placeMode is 1 or 3)
                 {
                     SwapItem(ref placeItem);
                     SoundEngine.PlaySound(SoundID.Grab);
-                    OperateInventory(true);
+                    MyUtils.OperateInventory(true);
                     return;
                 }
                 // type相同，里面的能堆叠，放进去

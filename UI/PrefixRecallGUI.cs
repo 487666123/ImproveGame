@@ -314,7 +314,7 @@ public class PrefixTab : SUIPanel
             textColor = RarityLoader.GetRarity(item.rare).RarityColor;
         position.Y += 6f;
         string str = PrefixId < 0 || PrefixId >= Lang.prefix.Length
-            ? GetText("Configs.ImproveConfigs.ImprovePrefix.Unknown")
+            ? MyUtils.GetText("Configs.ImproveConfigs.ImprovePrefix.Unknown")
             : Lang.prefix[PrefixId].Value;
         ChatManager.DrawColorCodedStringWithShadow(sb, FontAssets.MouseText.Value, str, position, textColor, 0f,
             Vector2.Zero, Vector2.One);

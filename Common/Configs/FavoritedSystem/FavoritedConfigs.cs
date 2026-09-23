@@ -40,7 +40,7 @@ public class FavoritedConfigs : ModConfig
 
     private static void AddHeader(UIModConfig configUI, string localizationKey, int order)
     {
-        var e = new HeaderElement(GetText($"Configs.FavoritedConfigs.Header.{localizationKey}"));
+        var e = new HeaderElement(MyUtils.GetText($"Configs.FavoritedConfigs.Header.{localizationKey}"));
         e.Recalculate();
         var elementHeight = (int)e.GetOuterDimensions().Height;
         var container = UIModConfig.GetContainer(e, order);

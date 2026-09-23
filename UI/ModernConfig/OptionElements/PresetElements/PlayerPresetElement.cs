@@ -60,7 +60,7 @@ public class PlayerPresetElement : BasePresetElement
 
         var deleteTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonDelete", AssetRequestMode.ImmediateLoad)
             .Value;
-        var deleteTooltip = GetText("ModernConfig.ButtonDelete");
+        var deleteTooltip = MyUtils.GetText("ModernConfig.ButtonDelete");
         var deleteButton = new SUIImageButton(deleteTexture, deleteTooltip)
         {
             Spacing = new Vector2(2),
@@ -78,7 +78,7 @@ public class PlayerPresetElement : BasePresetElement
 
         var renameTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonRename", AssetRequestMode.ImmediateLoad)
             .Value;
-        var renameTooltip = GetText("ModernConfig.ButtonRename");
+        var renameTooltip = MyUtils.GetText("ModernConfig.ButtonRename");
         var renameButton = new SUIImageButton(renameTexture, renameTooltip)
         {
             Spacing = new Vector2(2),
@@ -96,7 +96,7 @@ public class PlayerPresetElement : BasePresetElement
         renameButton.JoinParent(buttonBox);
 
         var applyTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay", AssetRequestMode.ImmediateLoad).Value;
-        var applyTooltip = GetText("ModernConfig.ButtonApply");
+        var applyTooltip = MyUtils.GetText("ModernConfig.ButtonApply");
         var applyButton = new SUIImageButton(applyTexture, applyTooltip)
         {
             Spacing = new Vector2(2),
@@ -122,12 +122,12 @@ public class PlayerPresetElement : BasePresetElement
         base.DrawSelf(spriteBatch);
 
         if (_editableText.Text.IsPathIllegal())
-            TooltipPanel.SetText(GetText("PathIllegal"));
+            TooltipPanel.SetText(MyUtils.GetText("PathIllegal"));
         if (_editableText.Text.Length is 0)
-            TooltipPanel.SetText(GetText("FolderNameEmpty"));
+            TooltipPanel.SetText(MyUtils.GetText("FolderNameEmpty"));
 
         // 提示
         if (IsMouseHovering)
-            TooltipPanel.SetText(GetText("ModernConfig.Presets.PlayerPresetTooltip"));
+            TooltipPanel.SetText(MyUtils.GetText("ModernConfig.Presets.PlayerPresetTooltip"));
     }
 }

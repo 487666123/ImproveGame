@@ -114,7 +114,7 @@ public class ConfigOptionPacket : NetModule
                 //ChatHelper.SendChatMessageToClient(
                 //        new NetworkText(GetText("Configs.ImproveConfigs.OnlyHostByPassword.Unaccepted"),
                 //        NetworkText.Mode.Literal), Color.Red, Sender);
-                SendRejectedConfig(GetText("Configs.ImproveConfigs.OnlyHostByPassword.Unaccepted"), modConfig);
+                SendRejectedConfig(MyUtils.GetText("Configs.ImproveConfigs.OnlyHostByPassword.Unaccepted"), modConfig);
                 return;
             }
 

@@ -25,7 +25,7 @@ namespace ImproveGame.Packets.NetAutofisher
 
         public override void Receive()
         {
-            if (TryGetTileEntityAs<TEAutofisher>(_tileEntityID, out var autofisher))
+            if (MyUtils.TryGetTileEntityAs<TEAutofisher>(_tileEntityID, out var autofisher))
             {
                 autofisher.SetFishingTip((Autofisher.TipType)_tipType, _fishingLevel, _waterQuality);
             }

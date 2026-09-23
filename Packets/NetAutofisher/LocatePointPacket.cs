@@ -19,7 +19,7 @@ namespace ImproveGame.Packets.NetAutofisher
 
         public override void Receive()
         {
-            if (TryGetTileEntityAs<TEAutofisher>(tileEntityID, out var autofisher))
+            if (MyUtils.TryGetTileEntityAs<TEAutofisher>(tileEntityID, out var autofisher))
             {
                 autofisher.locatePoint = new(locatePoint.X, locatePoint.Y);
             }

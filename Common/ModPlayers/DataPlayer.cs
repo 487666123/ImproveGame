@@ -137,7 +137,7 @@ public class DataPlayer : ModPlayer
         var items = new List<Item>();
         bool superVaultParticipateSynthesis = ImproveConfigs.Instance.SuperVault && Main.LocalPlayer.GetModPlayer<UIPlayerSetting>().SuperVault_ParticipateSynthesis && SuperVault is not null;
 
-        foreach (Item item in GetAllInventoryItemsList(Main.LocalPlayer, superVaultParticipateSynthesis ? "" : "mod", estimatedCapacity: 260))
+        foreach (Item item in MyUtils.GetAllInventoryItemsList(Main.LocalPlayer, superVaultParticipateSynthesis ? "" : "mod", estimatedCapacity: 260))
         {
             if (item is null || item.IsAir)
                 continue;

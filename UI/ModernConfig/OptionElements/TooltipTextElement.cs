@@ -38,7 +38,7 @@ public class TooltipTextElement : SUIText
             TextOffset.Y = -textOffset; // 文字滑动
         }
 
-        DrawInClippingRectangle(spriteBatch, GetClippingRectangle(spriteBatch), base.DrawSelf);
+        MyUtils.DrawInClippingRectangle(spriteBatch, GetClippingRectangle(spriteBatch), base.DrawSelf);
     }
 
     private const float TextSlideSpeed = 0.006f;

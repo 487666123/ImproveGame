@@ -192,7 +192,7 @@ public class ItemSearcherGUI : BaseBody
         itemsPanel.JoinParent(MainPanel);
 
         // 没搜到物品时显示的提示，这里先Append，要用到的时候调一下Left就行
-        TipText = new UIText(GetText("UI.ItemSearcher.TipText"))
+        TipText = new UIText(MyUtils.GetText("UI.ItemSearcher.TipText"))
         {
             Width = { Percent = 1f },
             Height = { Percent = 1f },
@@ -330,7 +330,7 @@ public class ItemSearcherGUI : BaseBody
         // 控制提示文本是否显示及其内容
         if (itemTypes.Count is 0)
         {
-            TipText.SetText(GetText("UI.ItemSearcher.NotFoundText"));
+            TipText.SetText(MyUtils.GetText("UI.ItemSearcher.NotFoundText"));
             TipText.Left.Pixels = 0;
         }
         else
@@ -341,7 +341,7 @@ public class ItemSearcherGUI : BaseBody
         if (string.IsNullOrEmpty(SearchContent) || SearchContent.Length <= 0)
         {
             TipText.Left.Pixels = 0;
-            TipText.SetText(GetText("UI.ItemSearcher.TipText"));
+            TipText.SetText(MyUtils.GetText("UI.ItemSearcher.TipText"));
         }
 
         TipText.Recalculate();

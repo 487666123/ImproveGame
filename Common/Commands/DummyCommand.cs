@@ -8,8 +8,8 @@ public class DummyCommand : ModCommand
 {
     public override CommandType Type => CommandType.Chat;
     public override string Command => "dummy";
-    public override string Usage => GetText("NPC.DummyCommand_Usage");
-    public override string Description => GetText("NPC.DummyCommand_Description");
+    public override string Usage => MyUtils.GetText("NPC.DummyCommand_Usage");
+    public override string Description => MyUtils.GetText("NPC.DummyCommand_Description");
 
     public override void Action(CommandCaller caller, string input, string[] args)
     {
@@ -23,7 +23,7 @@ public class DummyCommand : ModCommand
             {
                 FieldInfo[] fields = type.GetFields();
 
-                caller.Reply(GetText("NPC.DummyCommand_DummyAttributes"), MyColor.Normal);
+                caller.Reply(MyUtils.GetText("NPC.DummyCommand_DummyAttributes"), MyColor.Normal);
 
                 foreach (var field in fields)
                 {
@@ -33,11 +33,11 @@ public class DummyCommand : ModCommand
 
                         if (annotate.Equals(string.Empty))
                         {
-                            annotate = GetText($"NPC.{field.Name}");
+                            annotate = MyUtils.GetText($"NPC.{field.Name}");
                         }
                         else if (annotate.Length > 1 && annotate.StartsWith('$'))
                         {
-                            annotate = GetText($"NPC.{annotate.TrimStart('$')}");
+                            annotate = MyUtils.GetText($"NPC.{annotate.TrimStart('$')}");
                         }
 
                         caller.Reply(
@@ -61,7 +61,7 @@ public class DummyCommand : ModCommand
                         {
                             field.SetValueDirect(__makeref(DummyNPC.LocalConfig),
                                 Convert.ChangeType(args[1], field.FieldType));
-                            caller.Reply(GetTextWith("NPC.DummyCommand_Success", new { name, args = args[1] }),
+                            caller.Reply(MyUtils.GetTextWith("NPC.DummyCommand_Success", new { name, args = args[1] }),
                                 MyColor.Success);
 
                             SyncDummyModule.Get(null, Main.myPlayer, DummyNPC.LocalConfig).Send(runLocally: true);
@@ -69,7 +69,7 @@ public class DummyCommand : ModCommand
                         }
                         catch
                         {
-                            caller.Reply(GetTextWith("NPC.DummyCommand_Fail", new { input }), MyColor.Fail);
+                            caller.Reply(MyUtils.GetTextWith("NPC.DummyCommand_Fail", new { input }), MyColor.Fail);
                             return;
                         }
                     }
@@ -79,7 +79,7 @@ public class DummyCommand : ModCommand
             }
         }
 
-        caller.Reply(GetTextWith("NPC.DummyCommand_Invalid", new { input }), MyColor.Fail);
+        caller.Reply(MyUtils.GetTextWith("NPC.DummyCommand_Invalid", new { input }), MyColor.Fail);
     }
 
     public record CommandColor(Color Normal, Color Success, Color Fail);

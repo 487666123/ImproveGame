@@ -93,7 +93,7 @@ public class SlideText : View
     {
         UpdateTextSlide();
 
-        DrawInClippingRectangle(sb, GetClippingRectangle(sb), DrawText);
+        MyUtils.DrawInClippingRectangle(sb, GetClippingRectangle(sb), DrawText);
     }
 
     private const float TextSlideSpeed = 0.01f;

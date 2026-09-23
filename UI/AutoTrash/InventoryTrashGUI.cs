@@ -209,8 +209,8 @@ public class InventoryTrashGUI : BaseBody
 
         if (SettingsButton.IsMouseHovering)
         {
-            TryGetKeybindString(KeybindSystem.AutoTrashKeybind, out var keybind);
-            UICommon.TooltipMouseText(GetText("UI.AutoTrash.Introduction", keybind));
+            MyUtils.TryGetKeybindString(KeybindSystem.AutoTrashKeybind, out var keybind);
+            UICommon.TooltipMouseText(MyUtils.GetText("UI.AutoTrash.Introduction", keybind));
         }
     }
 }

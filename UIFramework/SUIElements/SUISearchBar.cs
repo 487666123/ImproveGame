@@ -56,7 +56,7 @@ public class SUISearchBar : View
 
         searchBar.InnerText.TextScale = 0.9f;
         searchBar.InnerText.TextOffset.X = 6f;
-        searchBar.InnerText.Placeholder = GetText("Search");
+        searchBar.InnerText.Placeholder = MyUtils.GetText("Search");
 
         if (string.Equals(Language.ActiveCulture.Name, "zh-Hans") && _pinyinSearchTip)
             searchBar.InnerText.Placeholder = "搜索名称(支持拼音或首字母): ";

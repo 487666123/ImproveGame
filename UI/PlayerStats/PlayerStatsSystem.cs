@@ -133,7 +133,7 @@ public class PlayerStatsSystem : ModSystem
         #region 其他
 
         BaseStatsCategory other =
-            new BaseStatsCategory(GetTexture("UI/PlayerStats/Luck").Value, "UI.PlayerStats.Other");
+            new BaseStatsCategory(MyUtils.GetTexture("UI/PlayerStats/Luck").Value, "UI.PlayerStats.Other");
 
         // 生命回复
         other.BaseProperties.Add(new BaseStat(other, "UI.PlayerStats.LifeRegen",

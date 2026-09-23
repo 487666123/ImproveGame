@@ -26,8 +26,8 @@ public class AutoSummonLogic : ModPlayer
             ContentSamples.ProjectilesByType[type].minion && _lastUsedStaffType != item.type)
         {
             _lastUsedStaffType = item.type;
-            var text = GetText("AutoSummon.Set", item.Name);
-            AddNotification(text, default, item.type);
+            var text = MyUtils.GetText("AutoSummon.Set", item.Name);
+            MyUtils.AddNotification(text, default, item.type);
         }
 
         return base.Shoot(item, source, position, velocity, type, damage, knockback);
@@ -42,7 +42,7 @@ public class AutoSummonLogic : ModPlayer
 
     public override void OnRespawn()
     {
-        if (!Enabled || Main.myPlayer != Player.whoAmI || !LocalPlayerHasItemFast(_lastUsedStaffType))
+        if (!Enabled || Main.myPlayer != Player.whoAmI || !MyUtils.LocalPlayerHasItemFast(_lastUsedStaffType))
             return;
 
         SummonRunner.StopAll();
@@ -53,7 +53,7 @@ public class AutoSummonLogic : ModPlayer
     IEnumerator SummonMinions()
     {
         // 还是要遍历，因为要正确处理词缀，找到正确的物品
-        var allItems = GetAllInventoryItemsList(Player);
+        var allItems = MyUtils.GetAllInventoryItemsList(Player);
         var item = allItems.Find(item => item.type == _lastUsedStaffType);
         Player.slotsMinions = 0f;
 
@@ -64,8 +64,8 @@ public class AutoSummonLogic : ModPlayer
         int iterationTimes = (int)(Player.maxMinions / slotsPerSpawn);
 
         SoundEngine.PlaySound(item.UseSound);
-        var text = GetText("AutoSummon.Summoned", iterationTimes, item.Name);
-        AddNotification(text, Color.Pink, item.type);
+        var text = MyUtils.GetText("AutoSummon.Summoned", iterationTimes, item.Name);
+        MyUtils.AddNotification(text, Color.Pink, item.type);
 
         for (int i = 0; i < iterationTimes; i++)
         {

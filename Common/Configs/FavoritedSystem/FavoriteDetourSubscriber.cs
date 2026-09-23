@@ -74,7 +74,7 @@ public class FavoriteDetourSubscriber : ILoadable
                 i => i.MatchCallOrCallvirt(typeof(Func<string>), "Invoke")
             )) 
         {
-            ILMatchLog(nameof(DrawSelfILEditing), il);
+            MyUtils.ILMatchLog(nameof(DrawSelfILEditing), il);
             return;
         }
 

@@ -128,7 +128,7 @@ public class ChainEditPage : View
         _availableAmmos.JoinParent(_lowerPanel);
         SetupAvailableAmmos();
 
-        var saveButton = new SUIButton(GetText("UI.AmmoChain.Confirm"))
+        var saveButton = new SUIButton(MyUtils.GetText("UI.AmmoChain.Confirm"))
         {
             RelativeMode = RelativeMode.Vertical,
             Spacing = new Vector2(10f, 10f),
@@ -139,7 +139,7 @@ public class ChainEditPage : View
         saveButton.SetSize(280f, 40f, 0f, 0f);
         saveButton.JoinParent(_lowerPanel);
 
-        var cancelButton = new SUIButton(GetText("UI.AmmoChain.Cancel"))
+        var cancelButton = new SUIButton(MyUtils.GetText("UI.AmmoChain.Cancel"))
         {
             RelativeMode = RelativeMode.Horizontal,
             Spacing = new Vector2(10f, 0f),
@@ -155,13 +155,13 @@ public class ChainEditPage : View
     {
         if (EditingChain.Chain.Count is 0)
         {
-            AddNotification(GetText("UI.AmmoChain.Empty"), itemIconType: ModContent.ItemType<AmmoChainItem>());
+            MyUtils.AddNotification(MyUtils.GetText("UI.AmmoChain.Empty"), itemIconType: ModContent.ItemType<AmmoChainItem>());
             return;
         }
 
         if (ChainName.IsPathIllegal())
         {
-            AddNotification(GetText("PathIllegal"));
+            MyUtils.AddNotification(MyUtils.GetText("PathIllegal"));
             return;
         }
 

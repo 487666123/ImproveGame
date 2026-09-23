@@ -42,7 +42,7 @@ public class TagItem : GlobalItem
 
         if (itemType is ItemID.GardenGnome)
         {
-            tooltips.Add(new(mod, "TagDetailed.GardenGnome", GetText("Tips.TagDetailed.GardenGnome"))
+            tooltips.Add(new(mod, "TagDetailed.GardenGnome", MyUtils.GetText("Tips.TagDetailed.GardenGnome"))
             {
                 Color = Color.SkyBlue
             });
@@ -53,14 +53,14 @@ public class TagItem : GlobalItem
         // 是否被增益追踪器禁用
         if (!buffEnabled)
         {
-            tooltips.Add(new(mod, "TagDetailed.Disabled", GetText("Tips.TagDetailed.Disabled"))
+            tooltips.Add(new(mod, "TagDetailed.Disabled", MyUtils.GetText("Tips.TagDetailed.Disabled"))
             {
                 Color = Color.SkyBlue
             });
         }
         else
         {
-            tooltips.Add(new(mod, "TagDetailed.Enabled", GetText("Tips.TagDetailed.Enabled"))
+            tooltips.Add(new(mod, "TagDetailed.Enabled", MyUtils.GetText("Tips.TagDetailed.Enabled"))
             {
                 Color = Color.SkyBlue
             });
@@ -73,7 +73,7 @@ public class TagItem : GlobalItem
         {
             if (combination.Contains(itemType))
             {
-                tooltips.Add(new(mod, $"CombinedBuff.{name}", GetText("Tips.TagDetailed.CombinedBuff"))
+                tooltips.Add(new(mod, $"CombinedBuff.{name}", MyUtils.GetText("Tips.TagDetailed.CombinedBuff"))
                 {
                     Color = Color.Turquoise
                 });
@@ -88,14 +88,14 @@ public class TagItem : GlobalItem
         // 图标是否被隐藏
         if (UIConfigs.Instance.HideNoConsumeBuffs)
         {
-            tooltips.Add(new TooltipLine(mod, "TagDetailed.Hided", GetText("Tips.TagDetailed.Hided"))
+            tooltips.Add(new TooltipLine(mod, "TagDetailed.Hided", MyUtils.GetText("Tips.TagDetailed.Hided"))
             {
                 Color = Color.LightGreen
             });
         }
         else
         {
-            tooltips.Add(new TooltipLine(mod, "TagDetailed.NonHided", GetText("Tips.TagDetailed.NonHided"))
+            tooltips.Add(new TooltipLine(mod, "TagDetailed.NonHided", MyUtils.GetText("Tips.TagDetailed.NonHided"))
             {
                 Color = Color.LightGreen
             });
@@ -106,7 +106,7 @@ public class TagItem : GlobalItem
     {
         // Shift显示更多信息
         if (!ItemSlot.ShiftInUse)
-            tooltips.Add(new(ImproveGame.Instance, "Tag.ShiftEnable", GetText("Tips.Tag.ShiftEnable"))
+            tooltips.Add(new(ImproveGame.Instance, "Tag.ShiftEnable", MyUtils.GetText("Tips.Tag.ShiftEnable"))
             {
                 Color = Color.Orange
             });
@@ -158,11 +158,11 @@ public class TagItem : GlobalItem
                 {
                     if (arg is not null)
                     {
-                        list.Add(new(Mod, key, GetTextWith(key, arg)));
+                        list.Add(new(Mod, key, MyUtils.GetTextWith(key, arg)));
                     }
                     else
                     {
-                        list.Add(new(Mod, key, GetText(key)));
+                        list.Add(new(Mod, key, MyUtils.GetText(key)));
                     }
                 }
             }

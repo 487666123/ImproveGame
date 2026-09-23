@@ -51,7 +51,7 @@ public class TooltipPanel : SUIPanel
     {
         var dimension = PreviewDrawer.GetDimensions();
         if (Instance.Text.TextOrKey == "")
-            Instance.Text.TextOrKey = GetText("ModernConfig.NoTooltip");
+            Instance.Text.TextOrKey = MyUtils.GetText("ModernConfig.NoTooltip");
         base.Draw(spriteBatch);
         Instance.Text.TextOrKey = ConfigOptionsPanel.CurrentCategory?.Tooltip ?? "";
     }

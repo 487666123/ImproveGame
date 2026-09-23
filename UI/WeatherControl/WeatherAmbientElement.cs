@@ -121,19 +121,19 @@ public partial class WeatherAmbientElement : View
             {
                 case true when Main.time < 27000:
                     SetTimePacket.SetTime(27000, setIsDayTime: true);
-                    Main.NewText(GetText("UI.WeatherGUI.Noon"), tipColor);
+                    Main.NewText(MyUtils.GetText("UI.WeatherGUI.Noon"), tipColor);
                     break;
                 case true:
                     SetTimePacket.SetTime(0, setIsDayTime: false);
-                    Main.NewText(GetText("UI.WeatherGUI.Dusk"), tipColor);
+                    Main.NewText(MyUtils.GetText("UI.WeatherGUI.Dusk"), tipColor);
                     break;
                 case false when Main.time < 16200:
                     SetTimePacket.SetTime(16200, setIsDayTime: false);
-                    Main.NewText(GetText("UI.WeatherGUI.Midnight"), tipColor);
+                    Main.NewText(MyUtils.GetText("UI.WeatherGUI.Midnight"), tipColor);
                     break;
                 case false:
                     SetTimePacket.SetTime(0, setIsDayTime: true);
-                    Main.NewText(GetText("UI.WeatherGUI.Dawn"), tipColor);
+                    Main.NewText(MyUtils.GetText("UI.WeatherGUI.Dawn"), tipColor);
                     break;
             }
         }
@@ -147,7 +147,7 @@ public partial class WeatherAmbientElement : View
             if (targetMoonPhase >= 8)
                 targetMoonPhase = 0;
             SetMoonPhasePacket.SetTo(targetMoonPhase);
-            Main.NewText(GetText("UI.WeatherGUI.MoonPhaseAdjusted", MoonPhaseToText(targetMoonPhase)), tipColor);
+            Main.NewText(MyUtils.GetText("UI.WeatherGUI.MoonPhaseAdjusted", MyUtils.MoonPhaseToText(targetMoonPhase)), tipColor);
         }
 
         // 音乐盒和雨天调节
@@ -155,9 +155,9 @@ public partial class WeatherAmbientElement : View
         if (musixBoxHitbox.Contains(Main.MouseScreen.ToPoint()))
         {
             if (Main.raining)
-                Main.NewText(GetText("UI.WeatherGUI.RainOff"), tipColor);
+                Main.NewText(MyUtils.GetText("UI.WeatherGUI.RainOff"), tipColor);
             else
-                Main.NewText(GetText("UI.WeatherGUI.RainOn"), tipColor);
+                Main.NewText(MyUtils.GetText("UI.WeatherGUI.RainOn"), tipColor);
 
             SetRainPacket.ToggleRain();
         }
@@ -172,9 +172,9 @@ public partial class WeatherAmbientElement : View
             }
 
             if (Sandstorm.Happening)
-                Main.NewText(GetText("UI.WeatherGUI.SandstormOff"), tipColor);
+                Main.NewText(MyUtils.GetText("UI.WeatherGUI.SandstormOff"), tipColor);
             else
-                Main.NewText(GetText("UI.WeatherGUI.SandstormOn"), tipColor);
+                Main.NewText(MyUtils.GetText("UI.WeatherGUI.SandstormOn"), tipColor);
 
             SetSandstormPacket.ToggleSandstorm();
         }
@@ -187,7 +187,7 @@ public partial class WeatherAmbientElement : View
                 >= 0.4f => SetWindPacket.WindStage.East,
                 _ => SetWindPacket.WindStage.No
             };
-            Main.NewText(GetText($"UI.WeatherGUI.Wind{setToStage}"), tipColor);
+            Main.NewText(MyUtils.GetText($"UI.WeatherGUI.Wind{setToStage}"), tipColor);
             SetWindPacket.SetTo(setToStage);
         }
     }
@@ -207,8 +207,8 @@ public partial class WeatherAmbientElement : View
             WeatherLockerPacket.ToggleWind();
             Main.NewText(
                 WeatherController.WindLocked
-                    ? GetText("UI.WeatherGUI.WindLocked")
-                    : GetText("UI.WeatherGUI.WindUnlocked"), tipColor);
+                    ? MyUtils.GetText("UI.WeatherGUI.WindLocked")
+                    : MyUtils.GetText("UI.WeatherGUI.WindUnlocked"), tipColor);
         }
 
         // 月玻璃球和月相调节
@@ -219,8 +219,8 @@ public partial class WeatherAmbientElement : View
             WeatherLockerPacket.ToggleMoonPhase();
             Main.NewText(
                 WeatherController.MoonPhaseLocked
-                    ? GetText("UI.WeatherGUI.MoonPhaseLocked", MoonPhaseToText(Main.moonPhase))
-                    : GetText("UI.WeatherGUI.MoonPhaseUnlocked"), tipColor);
+                    ? MyUtils.GetText("UI.WeatherGUI.MoonPhaseLocked", MyUtils.MoonPhaseToText(Main.moonPhase))
+                    : MyUtils.GetText("UI.WeatherGUI.MoonPhaseUnlocked"), tipColor);
         }
 
         // 音乐盒和雨天调节
@@ -230,8 +230,8 @@ public partial class WeatherAmbientElement : View
             WeatherLockerPacket.ToggleRain();
             Main.NewText(
                 WeatherController.RainLocked
-                    ? GetText("UI.WeatherGUI.RainLocked")
-                    : GetText("UI.WeatherGUI.RainUnlocked"), tipColor);
+                    ? MyUtils.GetText("UI.WeatherGUI.RainLocked")
+                    : MyUtils.GetText("UI.WeatherGUI.RainUnlocked"), tipColor);
         }
 
         // 音乐盒和沙尘暴调节
@@ -241,8 +241,8 @@ public partial class WeatherAmbientElement : View
             WeatherLockerPacket.ToggleSandstorm();
             Main.NewText(
                 WeatherController.SandstormLocked
-                    ? GetText("UI.WeatherGUI.SandstormLocked")
-                    : GetText("UI.WeatherGUI.SandstormUnlocked"), tipColor);
+                    ? MyUtils.GetText("UI.WeatherGUI.SandstormLocked")
+                    : MyUtils.GetText("UI.WeatherGUI.SandstormUnlocked"), tipColor);
         }
 
         // 钟和时间调节（暂不开放时间锁定）
@@ -388,12 +388,12 @@ public partial class WeatherAmbientElement : View
         {
             Main.spriteBatch.Draw(ModAsset.ClockLocked.Value, clockHitbox.Location.ToVector2(), color);
             if (clockHovered)
-                _hoverText = GetText("UI.WeatherGUI.TimeUnlockCondition");
+                _hoverText = MyUtils.GetText("UI.WeatherGUI.TimeUnlockCondition");
         }
         else if (clockHovered)
         {
             Main.spriteBatch.Draw(clock, clockHitbox.Location.ToVector2(), color);
-            _hoverText = GetText("UI.WeatherGUI.Time");
+            _hoverText = MyUtils.GetText("UI.WeatherGUI.Time");
         }
 
         var globe = ModAsset.MoonPhaseHighlight.Value;
@@ -401,8 +401,8 @@ public partial class WeatherAmbientElement : View
         if (globeHitbox.Contains(Main.MouseScreen.ToPoint()))
         {
             Main.spriteBatch.Draw(globe, globeHitbox.Location.ToVector2(), color);
-            _hoverText = GetText("UI.WeatherGUI.MoonPhase") + "\n" +
-                         GetText($"UI.WeatherGUI.MoonPhaseLock{WeatherController.MoonPhaseLocked}");
+            _hoverText = MyUtils.GetText("UI.WeatherGUI.MoonPhase") + "\n" +
+                         MyUtils.GetText($"UI.WeatherGUI.MoonPhaseLock{WeatherController.MoonPhaseLocked}");
         }
 
         if (WeatherController.MoonPhaseLocked)
@@ -422,9 +422,9 @@ public partial class WeatherAmbientElement : View
         {
             Main.spriteBatch.Draw(musixBoxHighlight, position, color);
             _hoverText = Main.raining
-                ? GetText("UI.WeatherGUI.RainInactive")
-                : GetText("UI.WeatherGUI.RainActive");
-            _hoverText += "\n" + GetText($"UI.WeatherGUI.RainLock{WeatherController.RainLocked}");
+                ? MyUtils.GetText("UI.WeatherGUI.RainInactive")
+                : MyUtils.GetText("UI.WeatherGUI.RainActive");
+            _hoverText += "\n" + MyUtils.GetText($"UI.WeatherGUI.RainLock{WeatherController.RainLocked}");
         }
 
         if (WeatherController.RainLocked)
@@ -448,9 +448,9 @@ public partial class WeatherAmbientElement : View
                 Main.spriteBatch.Draw(musixBoxHighlight_1, position, color);
 
             _hoverText = Sandstorm.Happening
-                ? GetText("UI.WeatherGUI.SandstormInactive")
-                : GetText("UI.WeatherGUI.SandstormActive");
-            _hoverText += "\n" + GetText($"UI.WeatherGUI.SandstormLock{WeatherController.SandstormLocked}");
+                ? MyUtils.GetText("UI.WeatherGUI.SandstormInactive")
+                : MyUtils.GetText("UI.WeatherGUI.SandstormActive");
+            _hoverText += "\n" + MyUtils.GetText($"UI.WeatherGUI.SandstormLock{WeatherController.SandstormLocked}");
         }
 
         if (WeatherController.SandstormLocked)
@@ -471,8 +471,8 @@ public partial class WeatherAmbientElement : View
         if (hovered)
         {
             Main.spriteBatch.Draw(pinHighlight, pinPosition, color);
-            _hoverText = GetText("UI.WeatherGUI.Wind") + "\n" +
-                         GetText($"UI.WeatherGUI.WindLock{WeatherController.MoonPhaseLocked}");
+            _hoverText = MyUtils.GetText("UI.WeatherGUI.Wind") + "\n" +
+                         MyUtils.GetText($"UI.WeatherGUI.WindLock{WeatherController.MoonPhaseLocked}");
         }
 
         Main.spriteBatch.Draw(wheelTexture, center, null, color, _pinWheelRotation,

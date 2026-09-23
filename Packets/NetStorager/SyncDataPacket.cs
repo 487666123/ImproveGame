@@ -16,7 +16,7 @@ namespace ImproveGame.Packets.NetStorager
 
         public override void Send(ModPacket p)
         {
-            if (!TryGetTileEntityAs<TEExtremeStorage>(_tileEntityID, out var tileEntity))
+            if (!MyUtils.TryGetTileEntityAs<TEExtremeStorage>(_tileEntityID, out var tileEntity))
             {
                 return;
             }
@@ -26,7 +26,7 @@ namespace ImproveGame.Packets.NetStorager
 
         public override void Read(BinaryReader r)
         {
-            if (!TryGetTileEntityAs<TEExtremeStorage>(_tileEntityID, out var tileEntity))
+            if (!MyUtils.TryGetTileEntityAs<TEExtremeStorage>(_tileEntityID, out var tileEntity))
             {
                 return;
             }

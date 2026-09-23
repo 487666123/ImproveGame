@@ -22,7 +22,7 @@ public class AbsorbElement : TimerView
         PreventOverflow = true;
         DragIgnore = false;
 
-        UITextPanel<string> liquidName = new(GetText("UI.LiquidWandUI.Absorb"), 1f)
+        UITextPanel<string> liquidName = new(MyUtils.GetText("UI.LiquidWandUI.Absorb"), 1f)
         {
             IgnoresMouseInteraction = true,
             DrawPanel = false,

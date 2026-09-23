@@ -13,7 +13,7 @@ namespace ImproveGame.Common.GlobalItems
             {
                 if (item.ModItem is not null && !item.Name.Contains("[" + item.ModItem.Mod.Name + "]") && !item.Name.Contains("[" + item.ModItem.Mod.DisplayName + "]") && item.ModItem is not IHideExtraTooltips)
                 {
-                    string text = GetTextWith("Tips.FromMod", new { item.ModItem.Mod.DisplayName });
+                    string text = MyUtils.GetTextWith("Tips.FromMod", new { item.ModItem.Mod.DisplayName });
                     TooltipLine line = new(Mod, "FromModTip", text)
                     {
                         Color = Colors.RarityBlue

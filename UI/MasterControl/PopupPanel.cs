@@ -26,10 +26,10 @@ public class PopupPanel : BaseBody
 
     public override void OnInitialize()
     {
-        int panelWidth = int.TryParse(GetText("UI.MasterControl.PopupPanelWidth"), out int wValue)
+        int panelWidth = int.TryParse(MyUtils.GetText("UI.MasterControl.PopupPanelWidth"), out int wValue)
             ? wValue
             : 280;
-        int panelHeight = int.TryParse(GetText("UI.MasterControl.PopupPanelHeight"), out int hValue)
+        int panelHeight = int.TryParse(MyUtils.GetText("UI.MasterControl.PopupPanelHeight"), out int hValue)
             ? hValue
             : 180;
 

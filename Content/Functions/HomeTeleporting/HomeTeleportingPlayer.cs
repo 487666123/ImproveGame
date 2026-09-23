@@ -47,8 +47,8 @@ public class HomeTeleportingPlayer : ModPlayer
             Projectile.NewProjectile(new EntitySource_Sync(), Player.position, Vector2.Zero,
                 ModContent.ProjectileType<HomeEffect>(), 0, 0, Player.whoAmI);
 
-            var text = GetText("QuickHome.Teleported", Lang.GetItemName(itemType));
-            AddNotification(text, Color.Yellow, itemType);
+            var text = MyUtils.GetText("QuickHome.Teleported", Lang.GetItemName(itemType));
+            MyUtils.AddNotification(text, Color.Yellow, itemType);
 
             if (isComebackItem)
             {
@@ -67,6 +67,6 @@ public class HomeTeleportingPlayer : ModPlayer
             return;
         }
 
-        AddNotificationFromKey("QuickHome.NoItem", Color.Yellow, ItemID.MagicMirror);
+        MyUtils.AddNotificationFromKey("QuickHome.NoItem", Color.Yellow, ItemID.MagicMirror);
     }
 }

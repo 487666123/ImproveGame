@@ -47,7 +47,7 @@ namespace ImproveGame.UI.ExtremeStorage
             char groupIdentifier = ExtremeStorageGUI.RealGroup.GetIdentifier();
 
             // 右键点击以取消 提示
-            string tip = GetText("UI.ExtremeStorage.AddChestTip");
+            string tip = MyUtils.GetText("UI.ExtremeStorage.AddChestTip");
             var scale = new Vector2(0.4f);
             var font = FontAssets.DeathText.Value;
             var size = ChatManager.GetStringSize(font, tip, Vector2.One);

@@ -32,7 +32,7 @@ namespace ImproveGame.UI.ExtremeStorage
         public LongSwitch(Func<bool> getState, Action<bool> setState, string text, bool hasTooltip = true)
         {
             _text = text;
-            _textSize = GetFontSize(text);
+            _textSize = MyUtils.GetFontSize(text);
             this._getState = getState;
             this._setState = setState;
             _hasTooltip = hasTooltip;
@@ -95,7 +95,7 @@ namespace ImproveGame.UI.ExtremeStorage
             Vector2 boxSize2 = new(boxSize.Y - 10);
             Vector2 position2 = boxPosition + Vector2.Lerp(new Vector2(3 + 2, size.Y / 2 - boxSize2.Y / 2),
                 new Vector2(boxSize.X - 3 - 2 - boxSize2.X, size.Y / 2 - boxSize2.Y / 2), _timer.Schedule);
-            SDFGraphics.NoBorderRound(position2, default, boxSize2.X, color3, GetMatrix(true));
+            SDFGraphics.NoBorderRound(position2, default, boxSize2.X, color3, MyUtils.GetMatrix(true));
 
             var textOffsetX = 0;
             if (_icon is not null)
@@ -110,15 +110,15 @@ namespace ImproveGame.UI.ExtremeStorage
             }
 
             // 文字
-            string text = GetText(!_hasTooltip ? _text : $"{_text}.Label");
+            string text = MyUtils.GetText(!_hasTooltip ? _text : $"{_text}.Label");
             var textCenter = new Vector2(position.X + 10 + textOffsetX, center.Y - _textSize.Y / 2f + UIConfigs.Instance.GeneralFontOffsetY);
             textCenter.Y -= 4f;
-            DrawString(textCenter, text, _textColor, _textBorderColor, spread: 1.5f);
+            MyUtils.DrawString(textCenter, text, _textColor, _textBorderColor, spread: 1.5f);
 
             // 提示
             if (IsMouseHovering && _hasTooltip)
             {
-                UICommon.TooltipMouseText(GetText($"{_text}.Tooltip"));
+                UICommon.TooltipMouseText(MyUtils.GetText($"{_text}.Tooltip"));
             }
         }
     }

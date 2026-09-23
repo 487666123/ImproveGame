@@ -34,7 +34,7 @@ public class RollItemRequest : NetModule
 
     public override void Receive()
     {
-        if (!TryGetTileEntityAs<TEAutofisher>(_tileEntityID, out var autofisher) ||
+        if (!MyUtils.TryGetTileEntityAs<TEAutofisher>(_tileEntityID, out var autofisher) ||
             TileLoader.GetTile(Main.tile[autofisher.Position.ToPoint()].TileType) is not Autofisher)
         {
             return;

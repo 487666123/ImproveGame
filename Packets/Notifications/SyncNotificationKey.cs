@@ -17,6 +17,6 @@ public class SyncNotificationKey : NetModule
 
     public override void Receive()
     {
-        AddNotification(GetText(_key), _textColor);
+        MyUtils.AddNotification(MyUtils.GetText(_key), _textColor);
     }
 }

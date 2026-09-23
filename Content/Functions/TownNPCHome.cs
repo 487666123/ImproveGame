@@ -97,7 +97,7 @@ public class TownNPCHome : ModSystem
                     if (Collision.CheckAABBvAABBCollision(iconPosition, size, Main.MouseScreen, Vector2.One) &&
                         Main.mouseItem.stack < 1)
                     {
-                        Main.hoverItemName += GetText("Configs.ImproveConfigs.TownNPCHome.HoverText");
+                        Main.hoverItemName += MyUtils.GetText("Configs.ImproveConfigs.TownNPCHome.HoverText");
                         if (Main.mouseRight && Main.mouseRightRelease)
                         {
                             SoundEngine.PlaySound(SoundID.Chat);

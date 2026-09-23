@@ -30,7 +30,7 @@ namespace ImproveGame.Packets.NetAutofisher
                 }
             }
 
-            if (!TryGetTileEntityAs<TEAutofisher>(tileEntityID, out var autofisher))
+            if (!MyUtils.TryGetTileEntityAs<TEAutofisher>(tileEntityID, out var autofisher))
                 return;
 
             // 没玩家，发开箱包
@@ -85,7 +85,7 @@ namespace ImproveGame.Packets.NetAutofisher
 
         public override void Receive()
         {
-            TryGetTileEntityAs<TEAutofisher>(tileEntityID, out var autofisher);
+            MyUtils.TryGetTileEntityAs<TEAutofisher>(tileEntityID, out var autofisher);
 
             if (Main.netMode is NetmodeID.MultiplayerClient)
             {

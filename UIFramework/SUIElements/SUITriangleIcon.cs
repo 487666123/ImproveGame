@@ -39,7 +39,7 @@ namespace ImproveGame.UIFramework.SUIElements
             Vector2 pos = GetDimensions().Position();
             Vector2 size = GetDimensions().Size();
             Color fork = HoverTimer.Lerp(TriangleBeginColor, TriangleEndColor);
-            SDFGraphics.HasBorderTriangle(pos + size * trianglePercentCoord[0], pos + size * trianglePercentCoord[1], pos + size * trianglePercentCoord[2], fork, CrossBorder, borderColor, GetMatrix(true));
+            SDFGraphics.HasBorderTriangle(pos + size * trianglePercentCoord[0], pos + size * trianglePercentCoord[1], pos + size * trianglePercentCoord[2], fork, CrossBorder, borderColor, MyUtils.GetMatrix(true));
         }
     }
 }

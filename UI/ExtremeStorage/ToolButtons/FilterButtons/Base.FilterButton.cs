@@ -17,7 +17,7 @@ public abstract class FilterButton : ToolButton
 
     public override Texture2D Texture => ModAsset.FilterIcons.Value;
 
-    public sealed override string HoverText => GetText($"UI.ExtremeStorage.{Group}.{LocalizationKey}");
+    public sealed override string HoverText => MyUtils.GetText($"UI.ExtremeStorage.{Group}.{LocalizationKey}");
 
     // 这玩意没用，重写了DrawSelf
     public sealed override Rectangle? SourceRectangle => null;

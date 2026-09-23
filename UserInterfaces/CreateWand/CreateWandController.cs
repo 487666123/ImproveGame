@@ -83,11 +83,11 @@ public partial class CreateWandController : BaseBody
 
         CloseButton.LeftMouseDown += (_, _) => Enabled = false;
 
-        Title.Text = GetText("UI.CreateWandController.Title");
+        Title.Text = MyUtils.GetText("UI.CreateWandController.Title");
         //FromDatamapButton.Text = GetText("UI.CreateWandController.ImportFromDatamap");
-        MaterialButton.Text = GetText("UI.CreateWandController.BuildingMaterial");
-        BuildingDataListButton.Text = GetText("UI.CreateWandController.StructureSelection");
-        StructDataListButton.Text = GetText("UI.CreateWandController.ImportFromStructureFile");
+        MaterialButton.Text = MyUtils.GetText("UI.CreateWandController.BuildingMaterial");
+        BuildingDataListButton.Text = MyUtils.GetText("UI.CreateWandController.StructureSelection");
+        StructDataListButton.Text = MyUtils.GetText("UI.CreateWandController.ImportFromStructureFile");
 
         CloseButton.Texture2D = ModAsset.Close_Alt;
         FolderButton.Texture2D = ModAsset.Folder_Alt;

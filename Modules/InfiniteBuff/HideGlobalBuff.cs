@@ -32,13 +32,13 @@ class HideGlobalBuff : GlobalBuff
 
     public override void ModifyBuffText(int type, ref string buffName, ref string tip, ref int rare)
     {
-        if (TryGetKeybindString(KeybindSystem.BuffTrackerKeybind, out _)) return;
+        if (MyUtils.TryGetKeybindString(KeybindSystem.BuffTrackerKeybind, out _)) return;
 
         if (!UISceneManager.Instance.TryGetInstance<InfiniteBuffController>(out var controller)) return;
 
-        tip += $"\n{GetText($"Tips.BuffTracker{(controller.Enabled ? "Off" : "On")}")}";
+        tip += $"\n{MyUtils.GetText($"Tips.BuffTracker{(controller.Enabled ? "Off" : "On")}")}";
 
-        if (!UIConfigs.Instance.HideNoConsumeBuffs) tip += $"\n{GetText("Tips.HideMyBuffs")}";
+        if (!UIConfigs.Instance.HideNoConsumeBuffs) tip += $"\n{MyUtils.GetText("Tips.HideMyBuffs")}";
     }
 
     // 先用 IL，如果 IL 出错了才在本次加载中启用备用方案
@@ -70,7 +70,7 @@ class HideGlobalBuff : GlobalBuff
             i => i.MatchCall(typeof(BuffLoader), "ModifyBuffText")
             )) 
         {
-            ILMatchLog(nameof(ClickBuff), il);
+            MyUtils.ILMatchLog(nameof(ClickBuff), il);
             return;
         }
 
@@ -98,7 +98,7 @@ class HideGlobalBuff : GlobalBuff
             i => i.MatchLdloc(2)
             ))
         {
-            ILMatchLog(nameof(IL_Main_DrawInterface_Resources_Buffs), il);
+            MyUtils.ILMatchLog(nameof(IL_Main_DrawInterface_Resources_Buffs), il);
             return;
         }
 
@@ -131,7 +131,7 @@ class HideGlobalBuff : GlobalBuff
             i => i.MatchLdloc(2)
             ))
         {
-            ILMatchLog(nameof(IL_Main_DrawInterface_Resources_Buffs), il);
+            MyUtils.ILMatchLog(nameof(IL_Main_DrawInterface_Resources_Buffs), il);
             return;
         }
 
@@ -156,7 +156,7 @@ class HideGlobalBuff : GlobalBuff
             i => i.MatchCall<Main>("DrawBuffIcon")
             ))
         {
-            ILMatchLog(nameof(IL_Main_DrawInventory), il);
+            MyUtils.ILMatchLog(nameof(IL_Main_DrawInventory), il);
             return;
         }
 
@@ -169,7 +169,7 @@ class HideGlobalBuff : GlobalBuff
             i => i.MatchStloc(49)
             ))
         {
-            ILMatchLog(nameof(IL_Main_DrawInventory), il);
+            MyUtils.ILMatchLog(nameof(IL_Main_DrawInventory), il);
             return;
         }
 

@@ -50,12 +50,12 @@ public class StatBar : TimerView
 
         Vector2 textPos = innerPos +
             new Vector2(0, UIConfigs.Instance.GeneralFontOffsetY * Scale + (innerSize.Y - TextSize.Y) / 2);
-        DrawString(textPos, StatName, Color.White, Color.Black, Scale, spread: 1f);
+        MyUtils.DrawString(textPos, StatName, Color.White, Color.Black, Scale, spread: 1f);
 
         string infoText = StatValue();
-        Vector2 infoSize = GetFontSize(infoText) * Scale;
+        Vector2 infoSize = MyUtils.GetFontSize(infoText) * Scale;
         Vector2 infoPos = innerPos + new Vector2(innerSize.X - infoSize.X,
             UIConfigs.Instance.GeneralFontOffsetY * Scale + (innerSize.Y - infoSize.Y) / 2);
-        DrawString(infoPos, infoText, Color.White, Color.Black, Scale, spread: 1f);
+        MyUtils.DrawString(infoPos, infoText, Color.White, Color.Black, Scale, spread: 1f);
     }
 }

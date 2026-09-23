@@ -87,12 +87,12 @@ public partial class SpaceWand : ModItem, IMarqueeItem, IConditionItem
             }
             else
             {
-                ItemCount(player.inventory, GetConditions(), out int count);
+                MyUtils.ItemCount(player.inventory, GetConditions(), out int count);
 
                 if (count > 0)
                 {
                     if (Main.myPlayer == player.whoAmI)
-                        ItemRotation(player);
+                        MyUtils.ItemRotation(player);
                     _syncRunner.StopAll();
                     CanPlaceTiles = true;
                     StartingPoint = Main.MouseWorld.ToTileCoordinates().ToVector2() * 16f;
@@ -134,7 +134,7 @@ public partial class SpaceWand : ModItem, IMarqueeItem, IConditionItem
     {
         _shouldDrawing = true;
 
-        ItemRotation(player, false);
+        MyUtils.ItemRotation(player, false);
 
         UseItem_HandleCoroutines(player);
 
@@ -145,7 +145,7 @@ public partial class SpaceWand : ModItem, IMarqueeItem, IConditionItem
         if (Main.mouseRight && CanPlaceTiles)
         {
             CanPlaceTiles = false;
-            CombatText.NewText(player.getRect(), new Color(250, 40, 80), GetText("CombatText.Item.SpaceWand_Cancel"));
+            CombatText.NewText(player.getRect(), new Color(250, 40, 80), MyUtils.GetText("CombatText.Item.SpaceWand_Cancel"));
         }
 
         Color color = CanPlaceTiles ? new Color(135, 0, 180) : new Color(250, 40, 80);
@@ -162,12 +162,12 @@ public partial class SpaceWand : ModItem, IMarqueeItem, IConditionItem
 
         // Runner用来实现间隔为8帧的rotation同步
         if (!_handle.IsRunning)
-            _handle = _syncRunner.Run(8, ItemRotationCoroutines(player));
+            _handle = _syncRunner.Run(8, MyUtils.ItemRotationCoroutines(player));
     }
 
     public override void HoldItem(Player player)
     {
-        int oneIndex = EnoughItem(player, GetConditions());
+        int oneIndex = MyUtils.EnoughItem(player, GetConditions());
         if (oneIndex == -1) return;
 
         player.cursorItemIconEnabled = true;
@@ -197,7 +197,7 @@ public partial class SpaceWand : ModItem, IMarqueeItem, IConditionItem
         var tiles = GetSelectedTiles(ShapeType, StartingPoint, MousePosition, _lastControlLeft);
         var sortedPoints = tiles.OrderByDescending(p => p.Y); // Y轴降序排序，从下放到上，保证沙子不出问题
         var tilesHashSet = tiles.ToHashSet();
-        ForeachTile(sortedPoints, (x, y) =>
+        MyUtils.ForeachTile(sortedPoints, (x, y) =>
         {
             OperateTile(player, x, y, tilesHashSet, PlaceType, BlockType, ref playSound, []);
         });
@@ -208,7 +208,7 @@ public partial class SpaceWand : ModItem, IMarqueeItem, IConditionItem
 
     void IMarqueeItem.PostDrawMarquee(Rectangle marquee, Color backgroundColor, Color borderColor)
     {
-        DrawString(Main.MouseScreen + new Vector2(18f), _dataText, Color.White, _borderColor);
+        MyUtils.DrawString(Main.MouseScreen + new Vector2(18f), _dataText, Color.White, _borderColor);
     }
 
     public void PreDrawMarquee(ref bool shouldDraw, Rectangle marquee, Color backgroundColor, Color borderColor)

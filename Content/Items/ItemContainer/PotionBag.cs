@@ -123,16 +123,16 @@ public class PotionBag : ModItem, IItemOverrideLeftClick, IItemOverrideHover, II
         ((IItemMiddleClickable)this).HandleTooltips(Item, tooltips);
 
         // 显示当前绑定的特殊交互按键
-        TryGetKeybindString(KeybindSystem.ItemInteractKeybind, out string keybind);
+        MyUtils.TryGetKeybindString(KeybindSystem.ItemInteractKeybind, out string keybind);
         foreach (TooltipLine tooltip in tooltips)
             if (tooltip.Text == "{TooltipByKeybind}")
-                tooltip.Text = GetTextWith($"Items.{Name}.TooltipByKeybind", new { KeybindName = keybind });
+                tooltip.Text = MyUtils.GetTextWith($"Items.{Name}.TooltipByKeybind", new { KeybindName = keybind });
 
         if (ItemContainer is not null && ItemContainer.Count > 0)
         {
             string storeText = ItemContainer.Count >= 200
-                ? GetText("Tips.PotionBagCurrentFull")
-                : GetTextWith("Tips.PotionBagCurrent", new { StoredCount = ItemContainer.Count });
+                ? MyUtils.GetText("Tips.PotionBagCurrentFull")
+                : MyUtils.GetTextWith("Tips.PotionBagCurrent", new { StoredCount = ItemContainer.Count });
             tooltips.Add(new(Mod, "PotionBagCurrent", storeText)
             {
                 Color = Color.LightGreen
@@ -176,11 +176,11 @@ public class PotionBag : ModItem, IItemOverrideLeftClick, IItemOverrideHover, II
                         if (!ImproveConfigs.Instance.NoConsume_Potion || Main.LocalPlayer.GetModPlayer<InfiniteBuffModPlayer>().Blacklist.ContainsByType(potion.buffType))
                         {
                             // 被禁用了
-                            text += $"  {GetText("Tips.PotionBagDisabled")}";
+                            text += $"  {MyUtils.GetText("Tips.PotionBagDisabled")}";
                         }
                         else
                         {
-                            text += $"  {GetText("Tips.PotionBagAvailable")}";
+                            text += $"  {MyUtils.GetText("Tips.PotionBagAvailable")}";
                             color = Color.LightGreen;
                         }
                     }
@@ -188,7 +188,7 @@ public class PotionBag : ModItem, IItemOverrideLeftClick, IItemOverrideHover, II
                     else
                     {
                         text +=
-                            $"  {GetText("Tips.PotionBagUnavailable")} ({potion.stack}/{ImproveConfigs.Instance.NoConsume_PotionRequirement})";
+                            $"  {MyUtils.GetText("Tips.PotionBagUnavailable")} ({potion.stack}/{ImproveConfigs.Instance.NoConsume_PotionRequirement})";
                     }
 
                     tooltips.Add(new(Mod, $"PotionBagP{i}", text)
@@ -200,7 +200,7 @@ public class PotionBag : ModItem, IItemOverrideLeftClick, IItemOverrideHover, II
         }
         else
         {
-            tooltips.Add(new(Mod, "PotionBagNone", GetText("Tips.PotionBagNone"))
+            tooltips.Add(new(Mod, "PotionBagNone", MyUtils.GetText("Tips.PotionBagNone"))
             {
                 Color = Color.SkyBlue
             });
@@ -300,7 +300,7 @@ public class PotionBag : ModItem, IItemOverrideLeftClick, IItemOverrideHover, II
 
     public void OnMiddleClicked(Item item)
     {
-        var items = GetAllInventoryItemsList(Main.LocalPlayer, estimatedCapacity: 260);
+        var items = MyUtils.GetAllInventoryItemsList(Main.LocalPlayer, estimatedCapacity: 260);
         foreach (var sourceItem in items.Where(sourceItem => !sourceItem.IsAir && MeetEntryCriteria(sourceItem)))
         {
             ItemIntoContainer(sourceItem, false);

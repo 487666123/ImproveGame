@@ -43,7 +43,7 @@ public class SpaceWandOperation : NetModule
         var shapeType = (ShapeType)_shapeType;
         var tiles = SpaceWand.GetSelectedTiles(shapeType, _startPoint, _mousePosition, _controlLeft);
         var tilesHashSet = tiles.ToHashSet();
-        ForeachTile(tilesHashSet, (x, y) =>
+        MyUtils.ForeachTile(tilesHashSet, (x, y) =>
         {
             SpaceWand.OperateTile(Main.player[Sender], x, y, tilesHashSet, (PlaceType)_placeType, (BlockType)_blockType,
                 ref playSound, itemsConsumed);
@@ -65,7 +65,7 @@ public class SpaceWandOperation : NetModule
             case ShapeType.Corner:
             case ShapeType.SquareEmpty:
             case ShapeType.CircleEmpty:
-                ForeachTile(tilesHashSet, (x, y) =>
+                MyUtils.ForeachTile(tilesHashSet, (x, y) =>
                 {
                     // NetMessage.SendTileSquare(-1, x, y);
                     NetMessage.SendTileSquare(-1, x - 1, y - 1, 3, 3);
@@ -76,7 +76,7 @@ public class SpaceWandOperation : NetModule
                 var startingPoint = _startPoint.ToTileCoordinates();
                 var nowPoint = _mousePosition.ToTileCoordinates();
                 int maxSize = 60;
-                nowPoint = ModifySize(startingPoint, nowPoint, maxSize, maxSize);
+                nowPoint = MyUtils.ModifySize(startingPoint, nowPoint, maxSize, maxSize);
                 var position = PointExtensions.Min(startingPoint, nowPoint);
                 var size = (startingPoint - nowPoint).Abs();
                 position.X -= 1;

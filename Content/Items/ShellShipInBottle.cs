@@ -65,7 +65,7 @@ public class ShellShipInBottle_Shimmered : ModItem
         if (QuickShimmerSystem.Unlocked)
         {
             if (player.itemAnimation == player.itemAnimationMax)
-                AddNotification(GetText("UI.QuickShimmer.AlreadyUnlocked"), Color.Pink);
+                MyUtils.AddNotification(MyUtils.GetText("UI.QuickShimmer.AlreadyUnlocked"), Color.Pink);
             return null;
         }
 

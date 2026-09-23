@@ -1,7 +1,7 @@
 ﻿namespace ImproveGame.UI.ModernConfig.OptionElements.PresetElements;
 
-public class OpenFolderElement() : BasePresetElement(GetText("ModernConfig.Presets.OpenFolder.Label"),
-    GetText("ModernConfig.Presets.OpenFolder.Tooltip"))
+public class OpenFolderElement() : BasePresetElement(MyUtils.GetText("ModernConfig.Presets.OpenFolder.Label"),
+    MyUtils.GetText("ModernConfig.Presets.OpenFolder.Tooltip"))
 {
     public override void LeftMouseDown(UIMouseEvent evt)
     {

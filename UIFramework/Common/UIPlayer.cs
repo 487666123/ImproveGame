@@ -124,7 +124,7 @@ public class UIPlayer : ModPlayer
         SidedEventTrigger.RegisterViewBody(uiSystem.PrefixRecallGUI);
 
         // 总控快捷键弹窗提示
-        bool hasKeybind = TryGetKeybindString(KeybindSystem.MasterControlKeybind, out _);
+        bool hasKeybind = MyUtils.TryGetKeybindString(KeybindSystem.MasterControlKeybind, out _);
         if (!UIConfigs.Instance.FckKeybindPopup && !hasKeybind && UISystem.TryGetBaseBody<PopupPanel>(out var panel) && panel is not null)
             panel.Open();
         yield return null;

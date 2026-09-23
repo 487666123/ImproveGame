@@ -166,7 +166,7 @@ public class MasterControlGUI : BaseBody
         {
             TextScale = 0.9f,
             // KeyMode暂不支持传参
-            TextOrKey = GetText("UI.MasterControl.Version", ImproveGame.Instance.Version),
+            TextOrKey = MyUtils.GetText("UI.MasterControl.Version", ImproveGame.Instance.Version),
             TextAlign = new Vector2(0.5f),
             TextBorder = 1.5f,
             HAlign = 1f,
@@ -179,7 +179,7 @@ public class MasterControlGUI : BaseBody
         {
             TextScale = 0.9f,
             // KeyMode暂不支持传参
-            TextOrKey = GetText("UI.MasterControl.Changelog", ImproveGame.Instance.Version),
+            TextOrKey = MyUtils.GetText("UI.MasterControl.Changelog", ImproveGame.Instance.Version),
             TextAlign = new Vector2(0.5f),
             TextBorder = 1.5f
         };
@@ -188,7 +188,7 @@ public class MasterControlGUI : BaseBody
         {
             var versionArray = ImproveGame.Instance.Version.ToString().Split('.');
             versionArray[3] = "x";
-            string link = GetText("UI.MasterControl.ChangelogLink", string.Join('.', versionArray));
+            string link = MyUtils.GetText("UI.MasterControl.ChangelogLink", string.Join('.', versionArray));
             TrUtils.OpenToURL(link);
         };
         ChangelogText.Width.Pixels = ChangelogText.TextSize.X * ChangelogText.TextScale;

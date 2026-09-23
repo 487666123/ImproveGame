@@ -579,7 +579,7 @@ public class ModIntegrationsSystem : ModSystem
                     case "GetBigBagItems":
                     {
                         Player player = (Player)args[1];
-                        return GetAllInventoryItemsList(player, "portable, inv", 110);
+                        return MyUtils.GetAllInventoryItemsList(player, "portable, inv", 110);
                     }
                     // 获取“任意弹药”物品的ID
                     case "GetUniversalAmmoId":

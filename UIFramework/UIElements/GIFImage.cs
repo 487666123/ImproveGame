@@ -22,7 +22,7 @@ namespace ImproveGame.UIFramework.UIElements
 
         public GIFImage(string texPath, int horizontalFrames, int verticalFrames, int totalFrames, int ticksPerFrame)
         {
-            Texture = new(GetTexture($"GIFs/{texPath}").Value, horizontalFrames, verticalFrames, totalFrames, ticksPerFrame)
+            Texture = new(MyUtils.GetTexture($"GIFs/{texPath}").Value, horizontalFrames, verticalFrames, totalFrames, ticksPerFrame)
             {
                 ShouldLoop = true
             };
@@ -33,7 +33,7 @@ namespace ImproveGame.UIFramework.UIElements
 
         public GIFImage(string texPath, int horizontalFrames, int verticalFrames, int totalFrames, int ticksPerFrame, string parentPath)
         {
-            Texture = new(GetTexture($"{parentPath}/{texPath}").Value, horizontalFrames, verticalFrames, totalFrames, ticksPerFrame)
+            Texture = new(MyUtils.GetTexture($"{parentPath}/{texPath}").Value, horizontalFrames, verticalFrames, totalFrames, ticksPerFrame)
             {
                 ShouldLoop = true
             };

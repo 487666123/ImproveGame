@@ -82,7 +82,7 @@ public class RecipeSearchUI : BaseBody
         }
 
         if (_searchBar.IsSearchButtonMouseHovering)
-            UICommon.TooltipMouseText(GetText("UI.RecipeSearchUI.Tips"));
+            UICommon.TooltipMouseText(MyUtils.GetText("UI.RecipeSearchUI.Tips"));
     }
 
     private void SetupSettingButtons(View parent)

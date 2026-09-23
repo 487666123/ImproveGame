@@ -101,7 +101,7 @@ public abstract class SelectorItem : ModItem
         }
         else if (Main.myPlayer == player.whoAmI && player.ItemAnimationJustStarted)
         {
-            ItemRotation(player);
+            MyUtils.ItemRotation(player);
         }
 
         player.SetCompositeArmFront(enabled: true, Player.CompositeArmStretchAmount.Full,
@@ -120,22 +120,22 @@ public abstract class SelectorItem : ModItem
             unCancelled = false;
         }
 
-        end = ModifySize(start, Main.MouseWorld.ToTileCoordinates(), SelectRange.X, SelectRange.Y);
+        end = MyUtils.ModifySize(start, Main.MouseWorld.ToTileCoordinates(), SelectRange.X, SelectRange.Y);
         Color color = ModifyColor(!unCancelled);
         GameRectangle.Create(this, IsNeedKill, start, end, color * 0.35f, color, TextDisplayType.All);
         if (Main.mouseLeft)
         {
             player.itemAnimation = 8;
-            ItemRotation(player, false);
+            MyUtils.ItemRotation(player, false);
 
             // Runner用来实现间隔为(player.itemAnimationMax - 6f)帧的rotation同步
             if (!_handle.IsRunning && Main.netMode is NetmodeID.MultiplayerClient)
-                _handle = _syncRunner.Run(player.itemAnimationMax - 6f, ItemRotationCoroutines(player));
+                _handle = _syncRunner.Run(player.itemAnimationMax - 6f, MyUtils.ItemRotationCoroutines(player));
         }
         else
         {
             player.itemAnimation = 0;
-            ItemRotation(player);
+            MyUtils.ItemRotation(player);
             if (unCancelled)
             {
                 if (!UseNewThread)

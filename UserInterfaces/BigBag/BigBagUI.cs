@@ -105,7 +105,7 @@ public partial class BigBagUI : BaseBody
 
         UISceneManager.Instance.Activate(this);
         SoundEngine.PlaySound(SoundID.MenuOpen);
-        OperateInventory(true);
+        MyUtils.OperateInventory(true);
 
         AnimateTo(1f, Matrix.Identity, 0.2f);
         Tween.OnFinished += () =>

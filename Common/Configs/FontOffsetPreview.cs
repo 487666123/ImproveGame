@@ -27,7 +27,7 @@ public class FontOffsetPreview : FloatElement
         CalculatedStyle dimensions = this.GetDimensions();
         var linePosition = dimensions.Position() + new Vector2(6f, dimensions.Height - 14f);
         var textPosition = linePosition + new Vector2(0f, BaseOffset + (float)GetObject());
-        var text = GetText(TextKey);
+        var text = MyUtils.GetText(TextKey);
         var textOrigin = new Vector2(0f, Font.Value.MeasureString(text).Y) / 2f;
         ChatManager.DrawColorCodedStringWithShadow(spriteBatch, Font.Value, text, textPosition, Color.White, 0f,
             textOrigin, Vector2.One, spread: 1.2f);

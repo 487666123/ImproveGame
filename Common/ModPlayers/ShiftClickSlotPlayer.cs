@@ -42,7 +42,7 @@ public class ShiftClickSlotPlayer : ModPlayer
 
             // 至尊储存
             if (ExtremeStorageGUI.Visible && ExtremeStorageGUI.AllItemsCached
-                    .Any(s => CanPlaceInSlot(s, item) is 2 or 3))
+                    .Any(s => MyUtils.CanPlaceInSlot(s, item) is 2 or 3))
             {
                 Main.cursorOverride = CursorOverrideID.InventoryToChest;
                 return true;
@@ -52,7 +52,7 @@ public class ShiftClickSlotPlayer : ModPlayer
             if (CreateWandController.Instance is { Enabled : true} controller &&
                 controller.ItemSlots.Any(s =>
                     s.CanPutInItemSlot(item) &&
-                    CanPlaceInSlot(s.Item, item) is 2 or 3))
+                    MyUtils.CanPlaceInSlot(s.Item, item) is 2 or 3))
             {
                 Main.cursorOverride = CursorOverrideID.InventoryToChest;
                 return true;
@@ -66,14 +66,14 @@ public class ShiftClickSlotPlayer : ModPlayer
             }
 
             if (BigBagUI.Instance is { Enabled: true } && Main.LocalPlayer.TryGetModPlayer<DataPlayer>(out var dataPlayer) &&
-                dataPlayer.SuperVault.Any(s => CanPlaceInSlot(s, item) is 2 or 3))
+                dataPlayer.SuperVault.Any(s => MyUtils.CanPlaceInSlot(s, item) is 2 or 3))
             {
                 Main.cursorOverride = CursorOverrideID.InventoryToChest;
                 return true;
             }
 
             var fisher = AutofishPlayer.LocalPlayer.Autofisher;
-            if (AutofisherGUI.Visible && fisher is not null && fisher.fish.Any(s => CanPlaceInSlot(s, item) is 2 or 3))
+            if (AutofisherGUI.Visible && fisher is not null && fisher.fish.Any(s => MyUtils.CanPlaceInSlot(s, item) is 2 or 3))
             {
                 Main.cursorOverride = CursorOverrideID.InventoryToChest;
                 return true;
@@ -100,7 +100,7 @@ public class ShiftClickSlotPlayer : ModPlayer
 
             // 至尊储存
             if (ExtremeStorageGUI.Visible &&
-                ExtremeStorageGUI.AllItemsCached.Any(s => CanPlaceInSlot(s, inventory[slot]) is 2 or 3))
+                ExtremeStorageGUI.AllItemsCached.Any(s => MyUtils.CanPlaceInSlot(s, inventory[slot]) is 2 or 3))
             {
                 switch (Main.netMode)
                 {
@@ -136,7 +136,7 @@ public class ShiftClickSlotPlayer : ModPlayer
             if (BigBagUI.Instance is { Enabled: true })
             {
                 inventory[slot] =
-                    ItemStackToInventory(Player.GetModPlayer<DataPlayer>().SuperVault, inventory[slot], false);
+                    MyUtils.ItemStackToInventory(Player.GetModPlayer<DataPlayer>().SuperVault, inventory[slot], false);
                 // Recipe.FindRecipes();
                 SoundEngine.PlaySound(SoundID.Grab);
 
@@ -145,9 +145,9 @@ public class ShiftClickSlotPlayer : ModPlayer
 
             var fisher = AutofishPlayer.LocalPlayer.Autofisher;
             if (AutofisherGUI.Visible && fisher is not null &&
-                fisher.fish.Any(s => CanPlaceInSlot(s, inventory[slot]) is 2 or 3))
+                fisher.fish.Any(s => MyUtils.CanPlaceInSlot(s, inventory[slot]) is 2 or 3))
             {
-                inventory[slot] = ItemStackToInventory(fisher.fish, inventory[slot], false);
+                inventory[slot] = MyUtils.ItemStackToInventory(fisher.fish, inventory[slot], false);
                 AutofisherGUI.RequireRefresh = true;
                 UISystem.Instance.AutofisherGUI.RefreshItems();
                 if (Main.netMode == NetmodeID.MultiplayerClient)
@@ -168,7 +168,7 @@ public class ShiftClickSlotPlayer : ModPlayer
                     Item slotItem = itemSlot.Item;
                     Item placeItem = inventory[slot];
 
-                    byte placeMode = CanPlaceInSlot(slotItem, placeItem);
+                    byte placeMode = MyUtils.CanPlaceInSlot(slotItem, placeItem);
 
                     // type不同直接切换吧
                     if (placeMode is 3)

@@ -83,21 +83,21 @@ public class SUIEditText : TimerView
 
         if (string.IsNullOrEmpty(Text))
         {
-            Vector2 textSize = GetChatFontSize(HintText, TextScale);
+            Vector2 textSize = MyUtils.GetChatFontSize(HintText, TextScale);
             Vector2 textOffset = (innerSize - textSize) * TextAlign + TextOffset;
             textOffset.Y += UIConfigs.Instance.BigFontOffsetY * TextScale;
             Vector2 textPos = innerPos + textOffset;
 
-            DrawString(textPos, HintText, TextColor, TextBorderColor, TextScale);
+            MyUtils.DrawString(textPos, HintText, TextColor, TextBorderColor, TextScale);
         }
         else
         {
-            Vector2 textSize = GetChatFontSize(Text, TextScale);
+            Vector2 textSize = MyUtils.GetChatFontSize(Text, TextScale);
             Vector2 textOffset = (innerSize - textSize) * TextAlign + TextOffset;
             textOffset.Y += UIConfigs.Instance.BigFontOffsetY * TextScale;
             Vector2 textPos = innerPos + textOffset;
 
-            DrawString(textPos, Text, TextColor, TextBorderColor, TextScale);
+            MyUtils.DrawString(textPos, Text, TextColor, TextBorderColor, TextScale);
         }
     }
 }

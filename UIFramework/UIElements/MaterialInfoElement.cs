@@ -23,7 +23,7 @@ namespace ImproveGame.UIFramework.UIElements
             ItemType = itemType;
             iconItem = new(ItemType);
 
-            StackInfo = new(GetTextWith("ConstructGUI.MaterialInfo.Requirement", new { Stack = stackRequired }), 1f)
+            StackInfo = new(MyUtils.GetTextWith("ConstructGUI.MaterialInfo.Requirement", new { Stack = stackRequired }), 1f)
             {
                 IgnoresMouseInteraction = true,
                 DrawPanel = false,
@@ -53,12 +53,12 @@ namespace ImproveGame.UIFramework.UIElements
 
         public override void DrawSelf(SpriteBatch spriteBatch)
         {
-            var inventory = GetAllInventoryItemsList(Main.LocalPlayer, "portable").ToArray();
-            ItemCount(inventory, (item) => item.type == ItemType, out int stackCount);
-            StackCheckedInfo.SetText(GetTextWith("ConstructGUI.MaterialInfo.Stored", new { Stack = stackCount }));
+            var inventory = MyUtils.GetAllInventoryItemsList(Main.LocalPlayer, "portable").ToArray();
+            MyUtils.ItemCount(inventory, (item) => item.type == ItemType, out int stackCount);
+            StackCheckedInfo.SetText(MyUtils.GetTextWith("ConstructGUI.MaterialInfo.Stored", new { Stack = stackCount }));
             if (stackCount > 99999)
             {
-                StackCheckedInfo.SetText(GetTextWith("ConstructGUI.MaterialInfo.Stored", new { Stack = ">99999" }));
+                StackCheckedInfo.SetText(MyUtils.GetTextWith("ConstructGUI.MaterialInfo.Stored", new { Stack = ">99999" }));
             }
             if (stackCount < StackRequired)
             {
@@ -104,7 +104,7 @@ namespace ImproveGame.UIFramework.UIElements
             ItemType = itemType;
             iconItem = new(ItemType);
 
-            StackInfo = new(GetTextWith("ConstructGUI.MaterialInfo.Requirement", new { Stack = stackRequired }), 1f)
+            StackInfo = new(MyUtils.GetTextWith("ConstructGUI.MaterialInfo.Requirement", new { Stack = stackRequired }), 1f)
             {
                 IgnoresMouseInteraction = true,
                 DrawPanel = false,
@@ -146,12 +146,12 @@ namespace ImproveGame.UIFramework.UIElements
 
         public override void DrawSelf(SpriteBatch spriteBatch)
         {
-            var inventory = GetAllInventoryItemsList(Main.LocalPlayer, "portable").ToArray();
-            ItemCount(inventory, (item) => item.type == ItemType, out int stackCount);
-            StackCheckedInfo.SetText(GetTextWith("ConstructGUI.MaterialInfo.Stored", new { Stack = stackCount }));
+            var inventory = MyUtils.GetAllInventoryItemsList(Main.LocalPlayer, "portable").ToArray();
+            MyUtils.ItemCount(inventory, (item) => item.type == ItemType, out int stackCount);
+            StackCheckedInfo.SetText(MyUtils.GetTextWith("ConstructGUI.MaterialInfo.Stored", new { Stack = stackCount }));
             if (stackCount > 99)
             {
-                StackCheckedInfo.SetText(GetTextWith("ConstructGUI.MaterialInfo.Stored", new { Stack = ">99" }));
+                StackCheckedInfo.SetText(MyUtils.GetTextWith("ConstructGUI.MaterialInfo.Stored", new { Stack = ">99" }));
             }
             if (stackCount < StackRequired)
             {

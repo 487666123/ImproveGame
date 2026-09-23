@@ -62,7 +62,7 @@ public class ExtremeStorage : TETileBase
 
     public override bool OnRightClick(int i, int j)
     {
-        var origin = GetTileOrigin(i, j);
+        var origin = MyUtils.GetTileOrigin(i, j);
         if (!TEExtremeStorage.TryGet(out var storage, origin))
         {
             Mod.Logger.Error("Failed to get TEExtremeStorage");
@@ -77,9 +77,9 @@ public class ExtremeStorage : TETileBase
             if (player.selectedItem == 58)
                 Main.mouseItem = item.Clone();
 
-            GetMeterCoords(origin.ToPoint(), out string compassText, out string depthText);
+            MyUtils.GetMeterCoords(origin.ToPoint(), out string compassText, out string depthText);
 
-            Main.NewText(GetText("Items.StorageCommunicator.SetTo", compassText, depthText));
+            Main.NewText(MyUtils.GetText("Items.StorageCommunicator.SetTo", compassText, depthText));
             return true;
         }
 

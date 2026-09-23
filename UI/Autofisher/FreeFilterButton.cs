@@ -38,7 +38,7 @@ public class FreeFilterButton : TimerView
             spriteBatch.Draw(hoverTexture, pos, SourceRectangle, color * HoverTimer.Schedule);
 
         if (IsMouseHovering)
-            UICommon.TooltipMouseText(GetText("UI.Autofisher.PerItemFilter"));
+            UICommon.TooltipMouseText(MyUtils.GetText("UI.Autofisher.PerItemFilter"));
     }
 
     public override void LeftMouseDown(UIMouseEvent evt)

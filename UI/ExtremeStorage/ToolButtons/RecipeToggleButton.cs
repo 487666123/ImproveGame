@@ -9,6 +9,6 @@ public class RecipeToggleButton : ToolButton
         TextureAssets.CraftToggle[ExtremeStorageGUI.DisplayCrafting.ToInt() * 2 + IsMouseHovering.ToInt()].Value;
 
     public override string HoverText => ExtremeStorageGUI.DisplayCrafting
-        ? GetText("UI.ExtremeStorage.CloseCraftingWindow")
-        : GetText("UI.ExtremeStorage.OpenCraftingWindow");
+        ? MyUtils.GetText("UI.ExtremeStorage.CloseCraftingWindow")
+        : MyUtils.GetText("UI.ExtremeStorage.OpenCraftingWindow");
 }

@@ -24,13 +24,13 @@ namespace ImproveGame.Content.Projectiles
 
         public override void AI()
         {
-            Item firstWall = FirstWall(Player);
+            Item firstWall = MyUtils.FirstWall(Player);
             Lighting.AddLight(Projectile.Center, 45 / 510f, 206 / 510f, 255 / 510f);
 
             // 没有墙体，结束放置。
             if (firstWall is null)
             {
-                CombatText.NewText(Projectile.getRect(), new Color(225, 0, 0), GetText("CombatText.Projectile.PlaceWall_Lack"));
+                CombatText.NewText(Projectile.getRect(), new Color(225, 0, 0), MyUtils.GetText("CombatText.Projectile.PlaceWall_Lack"));
                 Projectile.Kill();
                 return;
             }
@@ -38,7 +38,7 @@ namespace ImproveGame.Content.Projectiles
             if (index < Walls.Count)
             {
                 Point wall = Walls[index++];
-                BongBong(wall.ToVector2() * 16, 16, 16);
+                MyUtils.BongBong(wall.ToVector2() * 16, 16, 16);
                 Tile tile = Main.tile[wall.X, wall.Y];
                 if (firstWall.createWall != tile.WallType)
                 {
@@ -74,7 +74,7 @@ namespace ImproveGame.Content.Projectiles
             {
                 Vector2 center = Projectile.Center - Main.screenPosition,
                     target = Walls[index - 1].ToVector2() * 16f + new Vector2(8) - Main.screenPosition;
-                SDFGraphics.HasBorderLine(center, target, 2f, background, 1f, border, GetMatrix(false));
+                SDFGraphics.HasBorderLine(center, target, 2f, background, 1f, border, MyUtils.GetMatrix(false));
             }
             return true;
         }
@@ -88,7 +88,7 @@ namespace ImproveGame.Content.Projectiles
         {
             SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
             for (int i = 0; i < 10; i++)
-                BongBong(Projectile.position, Projectile.width, Projectile.height);
+                MyUtils.BongBong(Projectile.position, Projectile.width, Projectile.height);
         }
     }
 }

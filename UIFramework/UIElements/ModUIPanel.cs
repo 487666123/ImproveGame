@@ -27,7 +27,7 @@
             OnLeftMouseUp += DragEnd;
             _minResizeWidth = minResizeWidth;
             _minResizeHeight = minResizeHeight;
-            ResizeIndicator = GetTexture("UI/Resize");
+            ResizeIndicator = MyUtils.GetTexture("UI/Resize");
         }
 
         public override void Recalculate()

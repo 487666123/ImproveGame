@@ -118,11 +118,11 @@ internal class PlayerUpdater : ModPlayer
         // CountItemsFromArray(Player.inventory, CurrentFrameProperties.ExistItems.InventoryCount);
 
         // Banks
-        var bankItems = GetAllInventoryItemsList(Player, "inv mod", 160);
+        var bankItems = MyUtils.GetAllInventoryItemsList(Player, "inv mod", 160);
         CountItemsFrom(bankItems, CurrentFrameProperties.ExistItems.BanksCount);
 
         // 大背包
-        var bigBagItems = GetAllInventoryItemsList(Player, "inv portable", 110);
+        var bigBagItems = MyUtils.GetAllInventoryItemsList(Player, "inv portable", 110);
         CountItemsFrom(bigBagItems, CurrentFrameProperties.ExistItems.BigBagCount);
     }
 

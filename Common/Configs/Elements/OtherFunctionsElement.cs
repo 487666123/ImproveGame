@@ -56,7 +56,7 @@ public class OtherFunctionsElement : ConfigElement
         });
 
         _expandedPanel.Append(new UIText(
-            GetText("Configs.ImproveConfigs.OtherFunctions.Subtitle"),
+            MyUtils.GetText("Configs.ImproveConfigs.OtherFunctions.Subtitle"),
             0.7f)
         {
             Top = { Pixels = 40f },
@@ -115,7 +115,7 @@ public class OtherFunctionsElement : ConfigElement
                 Parent.Height.Pixels = RegularHeight;
 
             if (IsMouseHovering)
-                UICommon.TooltipMouseText(GetText("Configs.ImproveConfigs.OtherFunctions.ExpandTip"));
+                UICommon.TooltipMouseText(MyUtils.GetText("Configs.ImproveConfigs.OtherFunctions.ExpandTip"));
 
             return;
         }

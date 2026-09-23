@@ -358,7 +358,7 @@ public class ExtremeStorageGUI : BaseBody, ISidedView
         SetGroup(CurrentGroup); // 用于重置一些基础设置
         OpenStateUpdatePacket.Send(Storage.ID);
 
-        OperateInventory(true);
+        MyUtils.OperateInventory(true);
         SoundEngine.PlaySound(SoundID.MenuOpen);
 
         FindChestsAndPopulate(true);

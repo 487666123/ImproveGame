@@ -41,7 +41,7 @@ public sealed class AutoDepositToggle : TimerView
         if (IsMouseHovering)
         {
             spriteBatch.Draw(hoverTexture, pos, null, Color.White * HoverTimer.Schedule);
-            UICommon.TooltipMouseText(GetText("UI.Autofisher.ChestAutoDeposit"));
+            UICommon.TooltipMouseText(MyUtils.GetText("UI.Autofisher.ChestAutoDeposit"));
         }
     }
 

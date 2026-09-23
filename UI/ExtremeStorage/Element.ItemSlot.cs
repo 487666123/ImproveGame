@@ -241,7 +241,7 @@ namespace ImproveGame.UI.ExtremeStorage
             // base.DrawSelf(sb);
             if (!Interactable && IsMouseHovering)
             {
-                UICommon.TooltipMouseText(GetText("UI.ExtremeStorage.ChestBeingUsed"));
+                UICommon.TooltipMouseText(MyUtils.GetText("UI.ExtremeStorage.ChestBeingUsed"));
             }
         }
 

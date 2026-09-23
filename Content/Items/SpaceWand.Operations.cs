@@ -28,7 +28,7 @@ public partial class SpaceWand
     public static void OperateTile(Player player, int x, int y, HashSet<Point> tilesHashSet, PlaceType placeType,
         BlockType blockType, ref bool playSound, Dictionary<int, int> itemsConsumed)
     {
-        int oneIndex = EnoughItem(player, GetConditions(placeType));
+        int oneIndex = MyUtils.EnoughItem(player, GetConditions(placeType));
         if (oneIndex <= -1)
             return;
         // 使用物块魔杖时，ignoreConsumable应为true，无论如何都消耗物品。这是原版的逻辑
@@ -37,7 +37,7 @@ public partial class SpaceWand
         Item item = player.inventory[oneIndex];
         if (item.tileWand >= 0)
         {
-            int actualItemIndex = EnoughItem(player, i => i.type == item.tileWand);
+            int actualItemIndex = MyUtils.EnoughItem(player, i => i.type == item.tileWand);
             if (actualItemIndex <= -1)
                 return;
 
@@ -73,7 +73,7 @@ public partial class SpaceWand
                 if (player.TileReplacementEnabled)
                 {
                     // 物品放置的瓷砖就是位置对应的瓷砖则无需替换
-                    if (!ValidTileForReplacement(item, x, y))
+                    if (!MyUtils.ValidTileForReplacement(item, x, y))
                     {
                         // 至少还可以设置个斜坡
                         SetSlopeFor(placeType, blockType, x, y, tilesHashSet);
@@ -99,7 +99,7 @@ public partial class SpaceWand
                     else
                     {
                         // 尝试破坏
-                        TryKillTile(x, y, player);
+                        MyUtils.TryKillTile(x, y, player);
                         if (!originalTile.HasTile && WorldGen.PlaceTile(x, y, item.createTile, true, true,
                                 player.whoAmI, item.placeStyle))
                         {
@@ -131,7 +131,7 @@ public partial class SpaceWand
 
         ref Item item = ref player.inventory[index];
         int type = item.type; // TurnToAir之后type就为0了，提前存好
-        if (!TryConsumeItem(ref item, player, ignoreConsumable))
+        if (!MyUtils.TryConsumeItem(ref item, player, ignoreConsumable))
             return;
 
         if (!itemsConsumed.TryAdd(type, 1))

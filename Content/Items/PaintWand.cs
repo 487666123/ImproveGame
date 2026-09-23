@@ -75,7 +75,7 @@ namespace ImproveGame.Content.Items
                     return true;
                 }
 
-                PickItemInInventory(
+                MyUtils.PickItemInInventory(
                     player,
                     item => item.PaintOrCoating,
                     false,
@@ -102,7 +102,7 @@ namespace ImproveGame.Content.Items
 
         public override void HoldItem(Player player)
         {
-            PickItemInInventory(
+            MyUtils.PickItemInInventory(
                 player,
                 item => item.PaintOrCoating,
                 false,

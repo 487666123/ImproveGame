@@ -79,7 +79,7 @@ namespace ImproveGame.Content.Tiles
             Tile tile = Main.tile[point.ToPoint()];
             if (!tile.HasTile)
                 return null;
-            return !TryGetTileEntityAs<TEExtremeStorage>(point.X, point.Y, out var te) ? null : te;
+            return !MyUtils.TryGetTileEntityAs<TEExtremeStorage>(point.X, point.Y, out var te) ? null : te;
         }
 
         #endregion
@@ -144,7 +144,7 @@ namespace ImproveGame.Content.Tiles
             {
                 for (int i = 0; i < chestItems.Length; i++)
                 {
-                    item = ItemStackToInventoryItem(chestItems, i, item, false);
+                    item = MyUtils.ItemStackToInventoryItem(chestItems, i, item, false);
                     if (item.IsAir) return item;
                 }
             }

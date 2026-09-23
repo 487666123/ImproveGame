@@ -31,7 +31,7 @@ public class OptionKeybind : TimerView
                 : Color.White;
 
             if (KeybindName is "ImproveGame/MasterControl" && !ListeningThis &&
-                !TryGetKeybindString(ModKeybind, out var _))
+                !MyUtils.TryGetKeybindString(ModKeybind, out var _))
                 labelElement.TextColor = new Color(255, (byte)(Main.masterColor * 200f), 0, Main.mouseTextColor);
         };
         labelElement.JoinParent(this);
@@ -47,7 +47,7 @@ public class OptionKeybind : TimerView
         grayBox.SetSizePixels(130, 28);
         grayBox.JoinParent(this);
 
-        TryGetKeybindString(ModKeybind, out var bindString);
+        MyUtils.TryGetKeybindString(ModKeybind, out var bindString);
         var bindElement = new SlideText(bindString, 0, 0.9f)
         {
             HAlign = 0.5f,
@@ -58,7 +58,7 @@ public class OptionKeybind : TimerView
             bindElement.TextColor = ListeningThis
                 ? Color.Gold
                 : Color.White;
-            if (!TryGetKeybindString(ModKeybind, out var text) && !ListeningThis)
+            if (!MyUtils.TryGetKeybindString(ModKeybind, out var text) && !ListeningThis)
                 bindElement.TextColor = Color.Gray;
             bindElement.DisplayText = text;
         };
@@ -90,12 +90,12 @@ public class OptionKeybind : TimerView
         if (ModKeybind.Mod.Name == "ImproveGame")
         {
             var tip = Language.GetOrRegister($"Mods.{ModKeybind.Mod.Name}.Keybinds.{ModKeybind.Name}.Tip", () => "");
-            var text = $"{tip.Value}\n{GetText("ModernConfig.Keybinds.Default", defaultBinding)}";
+            var text = $"{tip.Value}\n{MyUtils.GetText("ModernConfig.Keybinds.Default", defaultBinding)}";
             TooltipPanel.SetText(text);
         }
         else
         {
-            var text = GetText("ModernConfig.Keybinds.Default", defaultBinding);
+            var text = MyUtils.GetText("ModernConfig.Keybinds.Default", defaultBinding);
             TooltipPanel.SetText(text);
         }
     }
@@ -214,7 +214,7 @@ public sealed class KeybindChineseToggle : TimerView
         Vector2 boxSize2 = new(boxSize.Y - 10);
         Vector2 position2 = boxPosition + Vector2.Lerp(new Vector2(3 + 2, size.Y / 2 - boxSize2.Y / 2),
             new Vector2(boxSize.X - 3 - 2 - boxSize2.X, size.Y / 2 - boxSize2.Y / 2), _timer.Schedule);
-        SDFGraphics.NoBorderRound(position2, default, boxSize2.X, color3, GetMatrix(true));
+        SDFGraphics.NoBorderRound(position2, default, boxSize2.X, color3, MyUtils.GetMatrix(true));
     }
 
     private readonly AnimationTimer _timer = new(4);

@@ -17,7 +17,7 @@ public class Keybinds(string ModName) : Category()
         panel.ShouldHideSearchBar = true;
 
         var uiConfig = UIConfigs.Instance;
-        bool hasKeybind = TryGetKeybindString(KeybindSystem.MasterControlKeybind, out _);
+        bool hasKeybind = MyUtils.TryGetKeybindString(KeybindSystem.MasterControlKeybind, out _);
         if (!hasKeybind)
             panel.AddToOptionsDirect<OptionToggle>(uiConfig, nameof(uiConfig.FckKeybindPopup));
 

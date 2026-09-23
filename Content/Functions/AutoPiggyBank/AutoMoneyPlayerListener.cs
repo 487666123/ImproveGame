@@ -47,7 +47,7 @@ public class AutoMoneyPlayerListener : ModPlayer, IHookPostSetup
         // 看看能不能解锁自动存钱
         if (!AutoSaveUnlocked && _detectCd % 90 == 0)
         {
-            AutoSaveUnlocked = InventoryHasItemFast(Main.LocalPlayer,
+            AutoSaveUnlocked = MyUtils.InventoryHasItemFast(Main.LocalPlayer,
                 ItemID.PiggyBank, ItemID.ChesterPetItem, ItemID.MoneyTrough);
         }
 

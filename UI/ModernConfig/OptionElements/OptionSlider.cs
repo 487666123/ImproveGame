@@ -138,7 +138,7 @@ public class OptionSlider : ModernConfigOption //去掉了sealed
             var innerColor = ColorMethod != null ? ColorMethod.Invoke(_value) : UIStyle.SliderRound;
             //var borderColor = innerColor;
             var borderColor = UIStyle.SliderRound;
-            if (MouseInRound(roundCenter, (int)roundRadius))
+            if (MyUtils.MouseInRound(roundCenter, (int)roundRadius))
                 borderColor = UIStyle.SliderRoundHover;
 
 
@@ -149,7 +149,7 @@ public class OptionSlider : ModernConfigOption //去掉了sealed
             }
 
             // 绘制
-            SDFGraphics.HasBorderRound(roundLeftTop, default, roundDiameter, innerColor, 2f, borderColor, GetMatrix(true));
+            SDFGraphics.HasBorderRound(roundLeftTop, default, roundDiameter, innerColor, 2f, borderColor, MyUtils.GetMatrix(true));
         }
 
         public void OutSideEditEnd() => EndDraggingCallback?.Invoke();

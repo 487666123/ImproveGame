@@ -147,7 +147,7 @@ namespace ImproveGame.Content.Items
             return true;
         }
 
-        private static bool BucketExists(int bucketId) => LocalPlayerHasItemFast(bucketId);
+        private static bool BucketExists(int bucketId) => MyUtils.LocalPlayerHasItemFast(bucketId);
 
         public override bool CanUseItem(Player player)
         {
@@ -174,7 +174,7 @@ namespace ImproveGame.Content.Items
             switch (player.altFunctionUse)
             {
                 case 0:
-                    ItemRotation(player);
+                    MyUtils.ItemRotation(player);
                     break;
                 case 2:
                     return false;
@@ -253,10 +253,10 @@ namespace ImproveGame.Content.Items
         public void ManageHoverTooltips(Item item, List<TooltipLine> tooltips)
         {
             // 决定文本显示的是“开启”还是“关闭”
-            TryGetKeybindString(KeybindSystem.ItemInteractKeybind, out string keybind);
-            string tooltip = GetTextWith("Tips.LiquidWandOn", new { KeybindName = keybind });
+            MyUtils.TryGetKeybindString(KeybindSystem.ItemInteractKeybind, out string keybind);
+            string tooltip = MyUtils.GetTextWith("Tips.LiquidWandOn", new { KeybindName = keybind });
             if (LiquidWandUI.Instance.Enabled)
-                tooltip = GetTextWith("Tips.LiquidWandOff", new { KeybindName = keybind });
+                tooltip = MyUtils.GetTextWith("Tips.LiquidWandOff", new { KeybindName = keybind });
 
             tooltips.Add(new TooltipLine(Mod, "LiquidWand", tooltip) { Color = Color.LightGreen });
         }

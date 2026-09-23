@@ -31,7 +31,7 @@ public class ModernConfigDetours : ILoadable
             if (!isInGameModernConfig)
                 return;
 
-            OperateInventory(false);
+            MyUtils.OperateInventory(false);
             ModernConfigUI.Instance.Enabled = false;
 
             // 如果是从tModLoader配置选择界面打开的，就重新打开主界面

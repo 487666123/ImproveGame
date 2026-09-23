@@ -77,7 +77,7 @@ public class BaseItemSlot : TimerView
 
             Vector2 textSize = FontAssets.ItemStack.Value.MeasureString(Item.stack.ToString()) * 0.75f * ItemIconScale;
             Vector2 textPos = pos + new Vector2(size.X * 0.18f, (size.Y - textSize.Y) * 0.9f);
-            DrawString(textPos, Item.stack.ToString(), Color.White, Color.Black, 0.75f * ItemIconScale);
+            MyUtils.DrawString(textPos, Item.stack.ToString(), Color.White, Color.Black, 0.75f * ItemIconScale);
         }
     }
 }

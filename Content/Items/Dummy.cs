@@ -82,9 +82,9 @@ public class Dummy : ModItem
     public override void ModifyTooltips(List<TooltipLine> tooltips)
     {
         string keyBindName;
-        if (!TryGetKeybindString(KeybindSystem.ItemInteractKeybind, out keyBindName))
-            keyBindName = GetText("Items.Dummy.NoneKeyBind");
-        tooltips.Add(new TooltipLine(Mod, "openUITip", GetText("Items.Dummy.ConfigUIOpenTip", keyBindName)));
+        if (!MyUtils.TryGetKeybindString(KeybindSystem.ItemInteractKeybind, out keyBindName))
+            keyBindName = MyUtils.GetText("Items.Dummy.NoneKeyBind");
+        tooltips.Add(new TooltipLine(Mod, "openUITip", MyUtils.GetText("Items.Dummy.ConfigUIOpenTip", keyBindName)));
         base.ModifyTooltips(tooltips);
     }
     public override void AddRecipes()

@@ -26,7 +26,7 @@ public sealed class WeatherBook : ModItem, IConditionItem
         if (WeatherController.Unlocked)
         {
             if (player.itemAnimation == player.itemAnimationMax)
-                AddNotification(GetText("UI.WeatherGUI.AlreadyUnlocked"), Color.Pink);
+                MyUtils.AddNotification(MyUtils.GetText("UI.WeatherGUI.AlreadyUnlocked"), Color.Pink);
             return null;
         }
 

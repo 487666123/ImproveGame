@@ -85,7 +85,7 @@ partial class SDFGraphics
     public static void FumoFumoKoishi(Vector2 position)
     {
         //NoBorderBox(default, default, new Vector2(10000, 10000), Color.White, GetMatrix(true));
-        Matrix matrix = GetMatrix(true);
+        Matrix matrix = MyUtils.GetMatrix(true);
         float border = 2f;
         Color borderColor = Color.Black;
 
@@ -211,7 +211,7 @@ partial class SDFGraphics
     }
     public static void Gallery(Vector2 position, Vector2 percentOrigin, Vector2 unitSize, Color backgroundColor, float border, Color borderColor, Texture2D barTexture, float time, float distanceScaler, Matrix matrix)
     {
-        NoBorderBox(default, default, new Vector2(10000, 10000), Color.Black, GetMatrix(true));
+        NoBorderBox(default, default, new Vector2(10000, 10000), Color.Black, MyUtils.GetMatrix(true));
 
         Vector2 start = position;
         Vector2 stepY = Vector2.UnitY * 2 * unitSize;

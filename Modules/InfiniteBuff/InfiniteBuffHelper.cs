@@ -7,11 +7,11 @@ namespace ImproveGame.Modules.InfiniteBuff;
 /// </summary>
 internal static class InfiniteBuffHelper
 {
-    private static string LeftClickDisable => GetText("BuffController.LeftClick.Disable");
-    private static string LeftClickEnable => GetText("BuffController.LeftClick.Enable");
+    private static string LeftClickDisable => MyUtils.GetText("BuffController.LeftClick.Disable");
+    private static string LeftClickEnable => MyUtils.GetText("BuffController.LeftClick.Enable");
     public static string GetLeftClickString(bool enable) => enable ? LeftClickDisable : LeftClickEnable;
-    private static string RightClickDisable => GetText("BuffController.RightClick.Disable");
-    private static string RightClickEnable => GetText("BuffController.RightClick.Enable");
+    private static string RightClickDisable => MyUtils.GetText("BuffController.RightClick.Disable");
+    private static string RightClickEnable => MyUtils.GetText("BuffController.RightClick.Enable");
     public static string GetRightClickString(bool enable) => enable ? RightClickDisable : RightClickEnable;
 
     public static float RemapSliderToSpawnRate(float value, int digits = 0) =>

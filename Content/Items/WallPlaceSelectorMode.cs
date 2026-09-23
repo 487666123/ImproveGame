@@ -24,7 +24,7 @@ public class WallPlaceSelectorMode : SelectorItem
     public override bool ModifySelectedTiles(Player player, int i, int j)
     {
         Tile t = Main.tile[i, j];
-        Item firstWall = FirstWall(player);
+        Item firstWall = MyUtils.FirstWall(player);
         if (firstWall is null)
             return false;
         if (firstWall.createWall == t.WallType)
@@ -56,7 +56,7 @@ public class WallPlaceSelectorMode : SelectorItem
     {
         if (player.noBuilding)
             return false;
-        Item firstWall = FirstWall(player);
+        Item firstWall = MyUtils.FirstWall(player);
         if (firstWall is null)
             return false;
         return base.CanUseItem(player);
@@ -64,7 +64,7 @@ public class WallPlaceSelectorMode : SelectorItem
 
     public override void HoldItem(Player player)
     {
-        Item firstWall = FirstWall(player);
+        Item firstWall = MyUtils.FirstWall(player);
         if (firstWall is null)
             return;
 
@@ -88,7 +88,7 @@ public class WallPlaceSelectorMode : SelectorItem
         switch (player.altFunctionUse)
         {
             case 0:
-                ItemRotation(player);
+                MyUtils.ItemRotation(player);
                 break;
             case 2:
                 return false;

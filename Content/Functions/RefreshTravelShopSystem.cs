@@ -30,10 +30,10 @@ namespace ImproveGame.Content.Functions
         {
             get
             {
-                string text = GetText("Tips.Refresh");
+                string text = MyUtils.GetText("Tips.Refresh");
                 if (Refreshing)
                 {
-                    text = GetText("Tips.Refreshing");
+                    text = MyUtils.GetText("Tips.Refreshing");
                     for (int i = 0; i < (int)AnimationTimer; i++)
                     {
                         text += '.';

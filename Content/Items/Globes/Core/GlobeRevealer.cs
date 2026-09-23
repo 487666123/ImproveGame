@@ -17,7 +17,7 @@ public static class GlobeRevealer
         }
         else
         {
-            AddNotification(
+            MyUtils.AddNotification(
                 Language.GetText(key)
                 .WithFormatArgs(Language.GetTextValue(argumentKey)).Value,
                 Globe.hintTextColor);
@@ -32,7 +32,7 @@ public static class GlobeRevealer
         }
         else
         {
-            AddNotification(Language.GetTextValue(key), Globe.hintTextColor);
+            MyUtils.AddNotification(Language.GetTextValue(key), Globe.hintTextColor);
         }
     }
     public static void AlreadyRevealedNotification(Globe dummyItem, int owner)
@@ -45,7 +45,7 @@ public static class GlobeRevealer
         }
         else
         {
-            AddNotification(
+            MyUtils.AddNotification(
                 Language.GetText(key)
                 .WithFormatArgs(Language.GetTextValue(argumentKey)).Value,
                 Globe.hintTextColor);
@@ -69,7 +69,7 @@ public static class GlobeRevealer
         }
         else
         {
-            AddNotification(
+            MyUtils.AddNotification(
                 Language.GetText(key)
                 .WithFormatArgs(Language.GetTextValue(argumentKey), name).Value,
                 Globe.foundColor);
@@ -319,6 +319,6 @@ public class GlobePopupMessagePacket : NetModule
                 text = text.WithFormatArgs(Language.GetTextValue(ArgumentKey));
 
         }
-        AddNotification(text.Value, IsFoundText ? Globe.foundColor : Globe.hintTextColor);
+        MyUtils.AddNotification(text.Value, IsFoundText ? Globe.foundColor : Globe.hintTextColor);
     }
 }

@@ -32,19 +32,19 @@ namespace ImproveGame.Common.GlobalItems
                     _ => null
                 };
 
-                ToggleChest(ref player, -2, sound: sound);
+                MyUtils.ToggleChest(ref player, -2, sound: sound);
                 return;
             }
 
             if (Lookups.Bank3Items.Contains(item.type))
             {
-                ToggleChest(ref player, -3);
+                MyUtils.ToggleChest(ref player, -3);
                 return;
             }
 
             if (Lookups.Bank4Items.Contains(item.type))
             {
-                ToggleChest(ref player, -4);
+                MyUtils.ToggleChest(ref player, -4);
                 return;
             }
 
@@ -55,7 +55,7 @@ namespace ImproveGame.Common.GlobalItems
                     sound = SoundID.Item130;
                 }
 
-                ToggleChest(ref player, -5, sound: sound);
+                MyUtils.ToggleChest(ref player, -5, sound: sound);
             }
         }
 
@@ -72,14 +72,14 @@ namespace ImproveGame.Common.GlobalItems
         {
             // 决定文本显示的是“开启”还是“关闭”
             var player = Main.LocalPlayer;
-            TryGetKeybindString(KeybindSystem.ItemInteractKeybind, out string keybind);
-            string tooltip = GetTextWith("Tips.BankEnableOn", new { KeybindName = keybind });
+            MyUtils.TryGetKeybindString(KeybindSystem.ItemInteractKeybind, out string keybind);
+            string tooltip = MyUtils.GetTextWith("Tips.BankEnableOn", new { KeybindName = keybind });
             if ((player.chest is -2 && Lookups.Bank2Items.Contains(item.type)) ||
                 (player.chest is -3 && Lookups.Bank3Items.Contains(item.type)) ||
                 (player.chest is -4 && Lookups.Bank4Items.Contains(item.type)) ||
                 (player.chest is -5 && Lookups.Bank5Items.Contains(item.type)))
             {
-                tooltip = GetTextWith("Tips.BankEnableOff", new { KeybindName = keybind });
+                tooltip = MyUtils.GetTextWith("Tips.BankEnableOff", new { KeybindName = keybind });
             }
 
             tooltips.Add(new TooltipLine(Mod, "BankEnable", tooltip) { Color = Color.LightGreen });
@@ -98,7 +98,7 @@ namespace ImproveGame.Common.GlobalItems
 
             if (Lookups.Bank2Items.Contains(item.type))
             {
-                tooltips.Add(new TooltipLine(Mod, "TagDetailed.AutoCollect", GetText("Tips.TagDetailed.AutoCollect"))
+                tooltips.Add(new TooltipLine(Mod, "TagDetailed.AutoCollect", MyUtils.GetText("Tips.TagDetailed.AutoCollect"))
                 { Color = Color.SkyBlue });
                 TagItem.AddShiftForMoreTooltip(tooltips);
             }

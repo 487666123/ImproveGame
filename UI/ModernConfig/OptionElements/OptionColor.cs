@@ -195,7 +195,7 @@ namespace ImproveGame.UI.ModernConfig.OptionElements
             }
             Effect colorPanel = colorPanelEffect.Value;
             colorPanel.Parameters["uColor"].SetValue(current.ToVector3());
-            colorPanel.Parameters["uTransform"].SetValue(GetMatrix(true));
+            colorPanel.Parameters["uTransform"].SetValue(MyUtils.GetMatrix(true));
             colorPanel.CurrentTechnique.Passes[0].Apply();
             Main.instance.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, [vertexs[0], vertexs[1], vertexs[2], vertexs[1], vertexs[2], vertexs[3]], 0, 2);
             Main.spriteBatch.spriteEffectPass.Apply();
@@ -211,7 +211,7 @@ namespace ImproveGame.UI.ModernConfig.OptionElements
             Effect colorPanel = colorPanelEffect.Value;
             colorPanel.Parameters["uHsl"].SetValue(hsl);
             colorPanel.Parameters["uHueRotation"].SetValue(Matrix.CreateRotationZ(hsl.X * MathHelper.TwoPi));
-            colorPanel.Parameters["uTransform"].SetValue(GetMatrix(true));
+            colorPanel.Parameters["uTransform"].SetValue(MyUtils.GetMatrix(true));
             colorPanel.CurrentTechnique.Passes[1].Apply();
             Main.instance.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, [vertexs[0], vertexs[1], vertexs[2], vertexs[1], vertexs[2], vertexs[3]], 0, 2);
             Main.spriteBatch.spriteEffectPass.Apply();
@@ -271,7 +271,7 @@ namespace ImproveGame.UI.ModernConfig.OptionElements
                 {
                     //currentColor.packedValue = result;
                     c.Hex = str;
-                    textOnColorPanel = GetText("ModernConfig.ColorPastedPopup");
+                    textOnColorPanel = MyUtils.GetText("ModernConfig.ColorPastedPopup");
                 }
             };
             colorPanel.OnLeftClick += (evt, elem) =>
@@ -279,7 +279,7 @@ namespace ImproveGame.UI.ModernConfig.OptionElements
                 SoundEngine.PlaySound(SoundID.MenuTick);
                 string code = currentColor.Hex3();
                 Platform.Get<IClipboard>().Value = code;
-                textOnColorPanel = GetText("ModernConfig.ColorCopiedPopup");
+                textOnColorPanel = MyUtils.GetText("ModernConfig.ColorCopiedPopup");
             };
             colorPanel.JoinParent(this);
             colorfulSliderButton = new View()
@@ -582,7 +582,7 @@ namespace ImproveGame.UI.ModernConfig.OptionElements
         public override void DrawChildren(SpriteBatch spriteBatch)
         {
 
-            Matrix matrix = GetMatrix(true);
+            Matrix matrix = MyUtils.GetMatrix(true);
             //currentColor = c.current;
             currentColor = c.current with { A = 255 };
             currentHSL = c.hsl;
@@ -604,7 +604,7 @@ namespace ImproveGame.UI.ModernConfig.OptionElements
                 {
                     var textColor = c.hsl.Z > 0.5f ? Color.Black : Color.White;
                     var boderColor = c.hsl.Z > 0.5f ? Color.White : Color.Black;
-                    DrawString(colorDimension.Position() + new Vector2(8, 8), textOnColorPanel, textColor, boderColor, scale: 0.8f, spread: 1.2f);
+                    MyUtils.DrawString(colorDimension.Position() + new Vector2(8, 8), textOnColorPanel, textColor, boderColor, scale: 0.8f, spread: 1.2f);
                 }
             }
 
@@ -646,8 +646,8 @@ namespace ImproveGame.UI.ModernConfig.OptionElements
             {
                 // 这里如果Tooltip为空，就显示默认提示
                 if (text == "")
-                    text = GetText("ModernConfig.NoTooltip");
-                text += $"\n{GetText("ModernConfig.ColorButtonTip")}";
+                    text = MyUtils.GetText("ModernConfig.NoTooltip");
+                text += $"\n{MyUtils.GetText("ModernConfig.ColorButtonTip")}";
             }
 
             TooltipPanel.SetText(text);

@@ -31,19 +31,19 @@ public sealed class SelectionButton : UIElement
         this.SetSize(ModAsset.RoundBackground.Size());
 
         _materialPiece = new SelectionPiece(
-            GetText("SpaceWandGUI.PlaceType"),
+            MyUtils.GetText("SpaceWandGUI.PlaceType"),
             ModAsset.SelectionPieceMaterial_Hover,
             ModAsset.SelectionPieceMaterial,
             () => SpaceWandGUI.CurrentPage is SpaceWandGUI.PageType.Material);
 
         _slopePiece = new SelectionPiece(
-            GetText("SpaceWandGUI.BlockType"),
+            MyUtils.GetText("SpaceWandGUI.BlockType"),
             ModAsset.SelectionPieceSlope_Hover,
             ModAsset.SelectionPieceSlope,
             () => SpaceWandGUI.CurrentPage is SpaceWandGUI.PageType.Slope);
 
         _shapePiece = new SelectionPiece(
-            GetText("SpaceWandGUI.ShapeType"),
+            MyUtils.GetText("SpaceWandGUI.ShapeType"),
             ModAsset.SelectionPieceShape_Hover,
             ModAsset.SelectionPieceShape,
             () => SpaceWandGUI.CurrentPage is SpaceWandGUI.PageType.Shape);
@@ -105,7 +105,7 @@ public sealed class SelectionButton : UIElement
         if (_pieceHoveredOn is not null)
         {
             var textColor = new Color(135, 0, 180);
-            DrawString(MouseScreenOffset(20), _pieceHoveredOn.HoverText, Color.White, textColor, spread: 1f);
+            MyUtils.DrawString(MyUtils.MouseScreenOffset(20), _pieceHoveredOn.HoverText, Color.White, textColor, spread: 1f);
             Main.LocalPlayer.cursorItemIconEnabled = false;
         }
     }

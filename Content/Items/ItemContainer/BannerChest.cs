@@ -22,7 +22,7 @@ public class BannerChest : ModItem, IItemOverrideLeftClick, IItemOverrideHover, 
 
     public void ItemIntoContainer(Item item) => ItemIntoContainer(item, true);
 
-    public bool MeetEntryCriteria(Item item) => ItemToBanner(item) != -1;
+    public bool MeetEntryCriteria(Item item) => MyUtils.ItemToBanner(item) != -1;
 
     // 克隆内容不克隆引用
     public override ModItem Clone(Item newEntity)
@@ -61,7 +61,7 @@ public class BannerChest : ModItem, IItemOverrideLeftClick, IItemOverrideHover, 
     public bool OverrideLeftClick(Item[] inventory, int context, int slot)
     {
         // 很多的条件
-        int bannerID = ItemToBanner(Main.mouseItem);
+        int bannerID = MyUtils.ItemToBanner(Main.mouseItem);
         if (ItemSlot.ShiftInUse || ItemSlot.ControlInUse || !AvailableContexts.Contains(context) ||
             Main.mouseItem.IsAir || !Main.mouseItem.consumable || bannerID == -1)
         {
@@ -145,14 +145,14 @@ public class BannerChest : ModItem, IItemOverrideLeftClick, IItemOverrideHover, 
         ((IItemMiddleClickable)this).HandleTooltips(Item, tooltips);
 
         // 显示当前绑定的特殊交互按键
-        TryGetKeybindString(KeybindSystem.ItemInteractKeybind, out string keybind);
+        MyUtils.TryGetKeybindString(KeybindSystem.ItemInteractKeybind, out string keybind);
         foreach (TooltipLine tooltip in tooltips)
             if (tooltip.Text == "{TooltipByKeybind}")
-                tooltip.Text = GetTextWith($"Items.{Name}.TooltipByKeybind", new { KeybindName = keybind });
+                tooltip.Text = MyUtils.GetTextWith($"Items.{Name}.TooltipByKeybind", new { KeybindName = keybind });
 
         if (!ImproveConfigs.Instance.NoPlace_BUFFTile_Banner)
         {
-            tooltips.Add(new TooltipLine(Mod, "BannerChestUseless", GetText("Tips.BannerChestUseless"))
+            tooltips.Add(new TooltipLine(Mod, "BannerChestUseless", MyUtils.GetText("Tips.BannerChestUseless"))
             {
                 Color = Color.SkyBlue
             });
@@ -161,8 +161,8 @@ public class BannerChest : ModItem, IItemOverrideLeftClick, IItemOverrideHover, 
         if (ItemContainer is not null && ItemContainer.Count > 0)
         {
             string storeText = ItemContainer.Count >= 500
-                ? GetText("Tips.BannerChestCurrentFull")
-                : GetTextWith("Tips.BannerChestCurrent", new { StoredCount = ItemContainer.Count });
+                ? MyUtils.GetText("Tips.BannerChestCurrentFull")
+                : MyUtils.GetTextWith("Tips.BannerChestCurrent", new { StoredCount = ItemContainer.Count });
             tooltips.Add(new TooltipLine(Mod, "BannerChestCurrent", storeText)
             {
                 Color = Color.LightGreen
@@ -190,7 +190,7 @@ public class BannerChest : ModItem, IItemOverrideLeftClick, IItemOverrideHover, 
         }
         else
         {
-            tooltips.Add(new TooltipLine(Mod, "BannerChestNone", GetText("Tips.BannerChestNone"))
+            tooltips.Add(new TooltipLine(Mod, "BannerChestNone", MyUtils.GetText("Tips.BannerChestNone"))
             {
                 Color = Color.SkyBlue
             });
@@ -265,7 +265,7 @@ public class BannerChest : ModItem, IItemOverrideLeftClick, IItemOverrideHover, 
 
     public void OnMiddleClicked(Item item)
     {
-        var items = GetAllInventoryItemsList(Main.LocalPlayer, estimatedCapacity: 260);
+        var items = MyUtils.GetAllInventoryItemsList(Main.LocalPlayer, estimatedCapacity: 260);
         foreach (var sourceItem in items.Where(sourceItem => !sourceItem.IsAir && MeetEntryCriteria(sourceItem)))
         {
             ItemIntoContainer(sourceItem, false);

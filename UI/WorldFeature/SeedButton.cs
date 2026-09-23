@@ -76,13 +76,13 @@ public class SeedButton : TimerView
         else
             spriteBatch.Draw(_icon.Value, position, color);
 
-        if (GetSeedFeatureFlag(_seedType))
+        if (MyUtils.GetSeedFeatureFlag(_seedType))
             spriteBatch.Draw(ModAsset.WorldFeatureEnabled.Value, position - new Vector2(2f), color);
 
         if (IsMouseHovering)
         {
-            string mouseText = GetText($"UI.WorldFeature.{_seedType.ToString()}");
-            mouseText += "\n" + GetText("UI.WorldFeature.OpenWiki");
+            string mouseText = MyUtils.GetText($"UI.WorldFeature.{_seedType.ToString()}");
+            mouseText += "\n" + MyUtils.GetText("UI.WorldFeature.OpenWiki");
             UICommon.TooltipMouseText(mouseText);
         }
     }

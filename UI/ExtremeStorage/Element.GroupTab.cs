@@ -54,7 +54,7 @@ public class GroupTab : View
             SpriteEffects.None, 0f);
 
         if (IsMouseHovering)
-            Main.instance.MouseText(GetText($"UI.ExtremeStorage.ItemGroup.{_group}"));
+            Main.instance.MouseText(MyUtils.GetText($"UI.ExtremeStorage.ItemGroup.{_group}"));
     }
 
     public override void Update(GameTime gameTime)

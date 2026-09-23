@@ -28,7 +28,7 @@ public class LiquidElement : TimerView
         PreventOverflow = true;
         DragIgnore = false;
 
-        UITextPanel<string> liquidName = new(GetText($"UI.LiquidWandUI.{LiquidName}"), 1f)
+        UITextPanel<string> liquidName = new(MyUtils.GetText($"UI.LiquidWandUI.{LiquidName}"), 1f)
         {
             IgnoresMouseInteraction = true,
             DrawPanel = false,
@@ -154,5 +154,5 @@ public class LiquidElement : TimerView
 
     private DataPlayer DataPlayer => DataPlayer.Get(Main.LocalPlayer);
 
-    public bool BucketExists => LocalPlayerHasItemFast(BucketId);
+    public bool BucketExists => MyUtils.LocalPlayerHasItemFast(BucketId);
 }

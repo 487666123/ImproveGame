@@ -60,14 +60,14 @@ public class DummyDPS
         float hitFrame = IsStarted ? Math.Max(1f, HitDuration) : 0f;
         float hitTick = MathF.Max(1f / 60f, hitFrame / 60f);
 
-        return $"{GetTextWith("NPC.Dummy_Damage",
+        return $"{MyUtils.GetTextWith("NPC.Dummy_Damage",
             new
             {
                 S = IsStarted ? MathF.Round(TotalDamage / hitTick) : 0,
                 F = IsStarted ? MathF.Round(TotalDamage / hitFrame, 1) : 0
             })} ({TotalDamage})\n" +
-               $"{GetTextWith("NPC.Dummy_Time", new { S = Math.Round(hitTick, 1), F = hitFrame })}\n" +
-               $"{GetTextWith("NPC.Dummy_FinalBlow", new { FinalBlow })}";
+               $"{MyUtils.GetTextWith("NPC.Dummy_Time", new { S = Math.Round(hitTick, 1), F = hitFrame })}\n" +
+               $"{MyUtils.GetTextWith("NPC.Dummy_FinalBlow", new { FinalBlow })}";
     }
 
     public void DrawString(Vector2 position, Vector2 percentOrign)

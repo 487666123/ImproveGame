@@ -331,9 +331,9 @@ namespace ImproveGame.UI.ModernConfig.OptionElements
 
             // 这里如果Tooltip为空，就显示默认提示
             if (text == "")
-                text = GetText("ModernConfig.NoTooltip");
+                text = MyUtils.GetText("ModernConfig.NoTooltip");
 
-            text += $"\n{GetText("ModernConfig.CollectionsTip")}";
+            text += $"\n{MyUtils.GetText("ModernConfig.CollectionsTip")}";
 
             TooltipPanel.SetText(text);
         }

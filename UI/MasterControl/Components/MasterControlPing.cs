@@ -24,7 +24,7 @@ public class MasterControlPing : View
             return;
 
         DrawPin(spriteBatch, ModAsset.PinSelected.Value);
-        UICommon.TooltipMouseText(GetText("UI.MasterControl.PinIntro"));
+        UICommon.TooltipMouseText(MyUtils.GetText("UI.MasterControl.PinIntro"));
     }
 
     private void DrawPin(SpriteBatch spriteBatch, Texture2D texture)

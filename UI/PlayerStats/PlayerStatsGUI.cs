@@ -105,7 +105,7 @@ public class PlayerStatsGUI : BaseBody
         TitleView.Height.Pixels = 42f;
         TitleView.JoinParent(Window);
 
-        var Title = new SUITitle(GetText("UI.PlayerStats.Control"), 0.42f)
+        var Title = new SUITitle(MyUtils.GetText("UI.PlayerStats.Control"), 0.42f)
         {
             VAlign = 0.5f
         };
@@ -303,7 +303,7 @@ public class PlayerStatsGUI : BaseBody
 
         if (ControllerSwitch.IsMouseHovering)
         {
-            UICommon.TooltipMouseText(GetText("UI.PlayerStats.Introduction"));
+            UICommon.TooltipMouseText(MyUtils.GetText("UI.PlayerStats.Introduction"));
         }
     }
 

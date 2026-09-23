@@ -25,7 +25,7 @@ public class InvToChestPacket : NetModule
     {
         // 客户端不应该收到这个包
         if (Main.netMode is NetmodeID.MultiplayerClient ||
-            !TryGetTileEntityAs<TEExtremeStorage>(_tileEntityID, out var tileEntity))
+            !MyUtils.TryGetTileEntityAs<TEExtremeStorage>(_tileEntityID, out var tileEntity))
         {
             return;
         }
@@ -63,7 +63,7 @@ public class InvToChestPacket : NetModule
             for (int i = 0; i < chestItems.Length; i++)
             {
                 int oldStack = invItem.stack;
-                invItem = ItemStackToInventoryItem(chestItems, i, invItem, false);
+                invItem = MyUtils.ItemStackToInventoryItem(chestItems, i, invItem, false);
 
                 // 堆叠发生了改变，发送箱子更新包
                 if (oldStack != invItem.stack)

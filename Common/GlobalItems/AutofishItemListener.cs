@@ -39,11 +39,11 @@ public class AutofishItemListener : GlobalItem
         int iconId = stat.LavaFishing ? ItemID.LavaproofTackleBag : ItemID.AnglerTackleBag;
         // 将stat.SpeedMultiplier转为百分比形式
         string speed = stat.SpeedMultiplier.ToString("P0");
-        string text = GetTextWith("UI.Autofisher.AccBoost", new { IconID = iconId, Speed = speed, stat.Power });
+        string text = MyUtils.GetTextWith("UI.Autofisher.AccBoost", new { IconID = iconId, Speed = speed, stat.Power });
         if (stat.TackleBox)
-            text += $"\n{GetText("UI.Autofisher.AccBoostTackle")}";
+            text += $"\n{MyUtils.GetText("UI.Autofisher.AccBoostTackle")}";
         if (stat.LavaFishing)
-            text += $"\n{GetText("UI.Autofisher.AccBoostLava")}";
+            text += $"\n{MyUtils.GetText("UI.Autofisher.AccBoostLava")}";
         tooltips.Add(new TooltipLine(Mod, "AutofisherAccBoost", text) { Color = Color.Pink });
     }
 }

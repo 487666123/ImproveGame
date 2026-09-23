@@ -76,8 +76,8 @@ namespace ImproveGame.Common.GlobalNPCs
         {
             if (!info.IsInSimulation)
             {
-                var allItems = GetAllInventoryItemsList(info.player, "portable", 160);
-                return !HasItem(allItems, itemTypes);
+                var allItems = MyUtils.GetAllInventoryItemsList(info.player, "portable", 160);
+                return !MyUtils.HasItem(allItems, itemTypes);
             }
 
             return false;
@@ -85,38 +85,38 @@ namespace ImproveGame.Common.GlobalNPCs
 
         public bool CanShowItemDropInUI() => true;
 
-        public string GetConditionDescription() => GetText("ItemDropRule.WandDrop");
+        public string GetConditionDescription() => MyUtils.GetText("ItemDropRule.WandDrop");
     }
 
     public class SpaceWandDrop : IItemDropRuleCondition
     {
-        public bool CanDrop(DropAttemptInfo info) => AvailableConfig.AvailableSpaceWand;
+        public bool CanDrop(DropAttemptInfo info) => MyUtils.AvailableConfig.AvailableSpaceWand;
 
-        public bool CanShowItemDropInUI() => AvailableConfig.AvailableSpaceWand;
+        public bool CanShowItemDropInUI() => MyUtils.AvailableConfig.AvailableSpaceWand;
 
-        public string GetConditionDescription() => GetText("ItemDropRule.DropWhenEnabled",
-            GetText("Conditions.AvailableSpaceWand"));
+        public string GetConditionDescription() => MyUtils.GetText("ItemDropRule.DropWhenEnabled",
+            MyUtils.GetText("Conditions.AvailableSpaceWand"));
     }
 
     public class WallPlaceDrop : IItemDropRuleCondition
     {
-        public bool CanDrop(DropAttemptInfo info) => AvailableConfig.AvailableWallPlace;
+        public bool CanDrop(DropAttemptInfo info) => MyUtils.AvailableConfig.AvailableWallPlace;
 
-        public bool CanShowItemDropInUI() => AvailableConfig.AvailableWallPlace;
+        public bool CanShowItemDropInUI() => MyUtils.AvailableConfig.AvailableWallPlace;
 
-        public string GetConditionDescription() => GetText("ItemDropRule.DropWhenEnabled",
-            GetText("Conditions.AvailableWallPlace"));
+        public string GetConditionDescription() => MyUtils.GetText("ItemDropRule.DropWhenEnabled",
+            MyUtils.GetText("Conditions.AvailableWallPlace"));
     }
 
     public class CoinOneDrop : IItemDropRuleCondition
     {
         public bool CanDrop(DropAttemptInfo info)
-            => ImproveConfigs.Instance.NPCCoinDropRate is 25 && AvailableConfig.AvailableCoinOne;
+            => ImproveConfigs.Instance.NPCCoinDropRate is 25 && MyUtils.AvailableConfig.AvailableCoinOne;
 
         // 彩蛋式物品，不在UI中显示
         public bool CanShowItemDropInUI() => false;
         // public bool CanShowItemDropInUI() => Config.NPCCoinDropRate is 25 && AvailableConfig.AvailableCoinOne;
 
-        public string GetConditionDescription() => GetText("ItemDropRule.DropCoinOne");
+        public string GetConditionDescription() => MyUtils.GetText("ItemDropRule.DropCoinOne");
     }
 }

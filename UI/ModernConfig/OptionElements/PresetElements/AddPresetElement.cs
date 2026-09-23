@@ -7,8 +7,8 @@ public class AddPresetElement : BasePresetElement
 {
     private SUIImageButton _infoButton;
 
-    public AddPresetElement() : base(GetText("ModernConfig.Presets.AddPreset.Label"),
-        GetText("ModernConfig.Presets.AddPreset.Tooltip"))
+    public AddPresetElement() : base(MyUtils.GetText("ModernConfig.Presets.AddPreset.Label"),
+        MyUtils.GetText("ModernConfig.Presets.AddPreset.Tooltip"))
     {
         var buttonBox = new View
         {
@@ -21,7 +21,7 @@ public class AddPresetElement : BasePresetElement
         buttonBox.JoinParent(this);
 
         var infoTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonSeed", AssetRequestMode.ImmediateLoad).Value;
-        var infoTooltip = GetText("ModernConfig.ButtonInfo");
+        var infoTooltip = MyUtils.GetText("ModernConfig.ButtonInfo");
         _infoButton = new SUIImageButton(infoTexture, infoTooltip)
         {
             Spacing = new Vector2(2),
@@ -33,7 +33,7 @@ public class AddPresetElement : BasePresetElement
         _infoButton.OnLeftMouseDown += (_, _) =>
         {
             SoundEngine.PlaySound(SoundID.MenuOpen);
-            TrUtils.OpenToURL(GetText("ModernConfig.Presets.AddPreset.Link"));
+            TrUtils.OpenToURL(MyUtils.GetText("ModernConfig.Presets.AddPreset.Link"));
         };
         _infoButton.JoinParent(buttonBox);
     }
@@ -46,7 +46,7 @@ public class AddPresetElement : BasePresetElement
             return;
 
         SoundEngine.PlaySound(SoundID.Item37);
-        PresetHandler.SaveAsPreset(GetText("ModernConfig.Presets.DefaultPresetName"));
+        PresetHandler.SaveAsPreset(MyUtils.GetText("ModernConfig.Presets.DefaultPresetName"));
     }
 
     protected override bool Interactable => true;

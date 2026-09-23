@@ -167,7 +167,7 @@ public class ItemContainerGUI : BaseBody
 
         text.Height.Pixels = 20f;
         text.TextScale = 0.8f;
-        text.TextOrKey = GetText("PackageGUI.AutoStorage");
+        text.TextOrKey = MyUtils.GetText("PackageGUI.AutoStorage");
         text.SetInnerPixels(text.TextSize.X, 20f);
         text.SetSizePixels(text.TextSize * text.TextScale);
 
@@ -192,7 +192,7 @@ public class ItemContainerGUI : BaseBody
         switchView2.Spacing = new Vector2(8);
 
         text2.TextScale = 0.8f;
-        text2.TextOrKey = GetText("PackageGUI.AutoSort");
+        text2.TextOrKey = MyUtils.GetText("PackageGUI.AutoSort");
         text2.SetInnerPixels(text2.TextSize.X, 20f);
         text2.SetSizePixels(text2.TextSize * text2.TextScale);
 
@@ -217,7 +217,7 @@ public class ItemContainerGUI : BaseBody
         switchView3.Spacing = new Vector2(8);
 
         text3.TextScale = 0.8f;
-        text3.TextOrKey = GetText("PackageGUI.Synthesis");
+        text3.TextOrKey = MyUtils.GetText("PackageGUI.Synthesis");
         text3.SetInnerPixels(text3.TextSize.X, 20f);
         text3.SetSizePixels(text3.TextSize * text3.TextScale);
 
@@ -251,9 +251,9 @@ public class ItemContainerGUI : BaseBody
                 var optionNames = _allOptions
                     .Select(item => item.Name).ToList();
                 // 调用DeepSeek写的搜索方法
-                var results = TextSearch(content, optionNames);
+                var results = MyUtils.TextSearch(content, optionNames);
                 // 对结果进行处理
-                foreach (SearchResult result in results)
+                foreach (MyUtils.SearchResult result in results)
                 {
                     var option = _allOptions[result.OriginalIndex];
                     // 将allOptions里的对应元素按照次序生成排序后的列表
@@ -312,7 +312,7 @@ public class ItemContainerGUI : BaseBody
 
         UpdateSwitchView();
         SoundEngine.PlaySound(SoundID.MenuOpen);
-        OperateInventory(true);
+        MyUtils.OperateInventory(true);
         ItemContainerGrid.SetInventory(container.ItemContainer);
         Title.TextOrKey = container.Name;
         Title.SetInnerPixels(Title.TextSize);

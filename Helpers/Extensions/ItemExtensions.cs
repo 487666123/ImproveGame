@@ -41,7 +41,7 @@ public static class ItemExtensions
         if (string.IsNullOrEmpty(searchString))
             return false;
 
-        string searchContent = RemoveSpaces(searchString.ToLower());
+        string searchContent = MyUtils.RemoveSpaces(searchString.ToLower());
         return items.Any(item => MatchWithString(item, searchContent));
     }
 
@@ -53,13 +53,13 @@ public static class ItemExtensions
         if (string.IsNullOrEmpty(searchString))
             return false;
 
-        string searchContent = stringLowered ? searchString : RemoveSpaces(searchString.ToLower());
+        string searchContent = stringLowered ? searchString : MyUtils.RemoveSpaces(searchString.ToLower());
 
         UIPlayerSetting setting = Main.LocalPlayer.GetModPlayer<UIPlayerSetting>();
         bool fuzzySearch = setting.FuzzySearch;
         bool tooltipSearch = setting.SearchTooltip;
 
-        string currentLanguageName = RemoveSpaces(
+        string currentLanguageName = MyUtils.RemoveSpaces(
                 tooltipSearch
                     ? string.Concat(GetItemTooltipLines(item))
                     : Lang.GetItemNameValue(item.type))
@@ -76,7 +76,7 @@ public static class ItemExtensions
 
         if (Language.ActiveCulture.Name is not "zh-Hans") return false;
 
-        string pinyin = RemoveSpaces(PinyinConvert.GetPinyinForAutoComplete(currentLanguageName));
+        string pinyin = MyUtils.RemoveSpaces(PinyinConvert.GetPinyinForAutoComplete(currentLanguageName));
         return fuzzySearch ? FuzzySearch.Find(searchContent, pinyin, 1).Any() : pinyin.Contains(searchContent);
     }
 

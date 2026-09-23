@@ -59,12 +59,12 @@ public class BasePresetElement : TimerView
 
         if (CantOperateDueToHostVerification)
         {
-            string hostTip = GetText("Configs.ImproveConfigs.OnlyHost.Tips");
+            string hostTip = MyUtils.GetText("Configs.ImproveConfigs.OnlyHost.Tips");
             UICommon.TooltipMouseText(hostTip);
         }
         else if (CantOperateDueToPasswordVerification)
         {
-            string passwordTip = GetText("Configs.ImproveConfigs.OnlyHostByPassword.Tips");
+            string passwordTip = MyUtils.GetText("Configs.ImproveConfigs.OnlyHostByPassword.Tips");
             UICommon.TooltipMouseText(passwordTip);
         }
     }

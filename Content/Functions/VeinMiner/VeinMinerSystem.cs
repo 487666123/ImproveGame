@@ -121,7 +121,7 @@ public class VeinMinerSystem : ModSystem
             return;
 
         _popupTipTimer = 0;
-        AddNotification(GetText("Configs.ImproveConfigs.SimpleVeinMining.PopupTip"), itemIconType: ItemID.IronPickaxe);
+        MyUtils.AddNotification(MyUtils.GetText("Configs.ImproveConfigs.SimpleVeinMining.PopupTip"), itemIconType: ItemID.IronPickaxe);
     }
 
     public static void DoVeinMiningAt(Point pos, int tileType)

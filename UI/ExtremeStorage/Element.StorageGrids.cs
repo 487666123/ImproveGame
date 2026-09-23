@@ -108,12 +108,12 @@ public class StorageGrids : ModItemGrid
         }
 
         ref string placeholder = ref SearchBar.SearchBarInner.InnerText.Placeholder;
-        placeholder = GetText("Search");
+        placeholder = MyUtils.GetText("Search");
         if (string.Equals(Language.ActiveCulture.Name, "zh-Hans"))
             placeholder = "搜索名称(支持拼音或首字母): ";
-        if (Main.HoverItem is { } item && !item.IsAir && UISystem.Instance.ExtremeStorageGUI is not null && TryGetKeybindString(KeybindSystem.ExtremeStorageSearch, out string keybindName))
+        if (Main.HoverItem is { } item && !item.IsAir && UISystem.Instance.ExtremeStorageGUI is not null && MyUtils.TryGetKeybindString(KeybindSystem.ExtremeStorageSearch, out string keybindName))
         {
-            placeholder = GetText("UI.ExtremeStorage.QuickSearch", keybindName);
+            placeholder = MyUtils.GetText("UI.ExtremeStorage.QuickSearch", keybindName);
         }
     }
 

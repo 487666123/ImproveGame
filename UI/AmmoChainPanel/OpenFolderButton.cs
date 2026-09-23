@@ -30,6 +30,6 @@ public class OpenFolderButton : TimerView
             ModAsset.Folder_Highlight.Size() / 2f, 1f, SpriteEffects.None, 0f);
 
         if (IsMouseHovering)
-            UICommon.TooltipMouseText(GetText("UI.AmmoChain.OpenFolder"));
+            UICommon.TooltipMouseText(MyUtils.GetText("UI.AmmoChain.OpenFolder"));
     }
 }

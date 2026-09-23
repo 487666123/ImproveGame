@@ -91,7 +91,7 @@ namespace ImproveGame.UIFramework.SUIElements
                 // 颜色选择
                 var innerColor = UIStyle.SliderRound;
                 var borderColor = UIStyle.SliderRound;
-                if (MouseInRound(roundCenter, (int)roundRadius))
+                if (MyUtils.MouseInRound(roundCenter, (int)roundRadius))
                     borderColor = UIStyle.SliderRoundHover;
 
                 if (IgnoresMouseInteraction)
@@ -101,7 +101,7 @@ namespace ImproveGame.UIFramework.SUIElements
                 }
 
                 // 绘制
-                SDFGraphics.HasBorderRound(roundLeftTop, default, roundDiameter, innerColor, 2f, borderColor, GetMatrix(true));
+                SDFGraphics.HasBorderRound(roundLeftTop, default, roundDiameter, innerColor, 2f, borderColor, MyUtils.GetMatrix(true));
             }
         }
 

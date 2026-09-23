@@ -20,7 +20,7 @@ namespace ImproveGame.Content.Functions
                         var cursorText = Main.instance._mouseTextCache.cursorText;
 
                         if (Main.LocalPlayer.ItemAnimationActive || !Main.mouseText || string.IsNullOrEmpty(cursorText) ||
-                            cursorText != Lang.inter[105].Value + "\n" + GetText("LifeAnalyzer.Tip"))
+                            cursorText != Lang.inter[105].Value + "\n" + MyUtils.GetText("LifeAnalyzer.Tip"))
                         {
                             return true;
                         }
@@ -71,7 +71,7 @@ namespace ImproveGame.Content.Functions
             if (currentDisplay != InfoDisplay.LifeformAnalyzer)
                 return;
 
-            displayName += "\n" + GetText("LifeAnalyzer.Tip");
+            displayName += "\n" + MyUtils.GetText("LifeAnalyzer.Tip");
 
             const int maxDistance = 1300;
             int maxRarity = 0;

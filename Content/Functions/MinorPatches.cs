@@ -207,7 +207,7 @@ public class MinorPatches : ModSystem
             if (Main.myPlayer != Player.whoAmI)
                 return;
 
-            var items = GetAllInventoryItemsList(Player, "inv void");
+            var items = MyUtils.GetAllInventoryItemsList(Player, "inv void");
             foreach (var item in items)
             {
                 if (item.type != ItemID.EncumberingStone)
@@ -249,11 +249,11 @@ public class MinorPatches : ModSystem
                 case FishQuestResetType.NotResetFish:
                     Main.anglerQuestFinished = false;
                     Main.anglerWhoFinishedToday.Clear();
-                    AddNotification(GetText("Tips.AnglerQuest"), Color.Cyan);
+                    MyUtils.AddNotification(MyUtils.GetText("Tips.AnglerQuest"), Color.Cyan);
                     break;
                 case FishQuestResetType.ResetFish:
                     Main.AnglerQuestSwap();
-                    AddNotification(GetText("Tips.AnglerQuest"), Color.Cyan);
+                    MyUtils.AddNotification(MyUtils.GetText("Tips.AnglerQuest"), Color.Cyan);
                     break;
             }
         }
@@ -316,7 +316,7 @@ public class MinorPatches : ModSystem
                         i => i.Match(OpCodes.Ldarg_0),
                         i => i.MatchLdfld<Item>(name)))
                 {
-                    ILMatchLog(nameof(IL_Main.MouseText_DrawItemTooltip_GetLinesInfo), il);
+                    MyUtils.ILMatchLog(nameof(IL_Main.MouseText_DrawItemTooltip_GetLinesInfo), il);
                     return;
                 }
                 c.Emit(OpCodes.Pop);
@@ -326,7 +326,7 @@ public class MinorPatches : ModSystem
         // 大背包内弹药可直接被使用
         On_Player.PickAmmo_PickAmmoItem += (orig, player, weapon) =>
             orig.Invoke(player, weapon) ??
-            GetAllInventoryItemsList(player, "inv portable")
+            MyUtils.GetAllInventoryItemsList(player, "inv portable")
                 .FirstOrDefault(i => i.stack > 0 && ItemLoader.CanChooseAmmo(weapon, i, player), null);
         // 大背包内弹药在UI的数值显示
         IL_ItemSlot.Draw_SpriteBatch_ItemArray_int_int_Vector2_Color += il =>
@@ -342,13 +342,13 @@ public class MinorPatches : ModSystem
                     i => i.Match(OpCodes.Pop),
                     i => i.Match(OpCodes.Ldc_I4_0)))
             {
-                ILMatchLog(nameof(IL_ItemSlot.Draw_SpriteBatch_ItemArray_int_int_Vector2_Color), il);
+                MyUtils.ILMatchLog(nameof(IL_ItemSlot.Draw_SpriteBatch_ItemArray_int_int_Vector2_Color), il);
                 return;
             }
             c.Emit(OpCodes.Ldloc_1); // 将weapon读入
             c.EmitDelegate<Func<int, Item, int>>((_, weapon) =>
             {
-                ItemCount(GetAllInventoryItemsList(Main.LocalPlayer, "inv portable").ToArray(),
+                MyUtils.ItemCount(MyUtils.GetAllInventoryItemsList(Main.LocalPlayer, "inv portable").ToArray(),
                     i => i.stack > 0 && ItemLoader.CanChooseAmmo(weapon, i, Main.LocalPlayer), out int count);
                 return count;
             });
@@ -445,7 +445,7 @@ public class MinorPatches : ModSystem
         }
         else
         {
-            ILMatchLog(nameof(IL_WorldGen_UpdateWorld_GrassGrowth), il);
+            MyUtils.ILMatchLog(nameof(IL_WorldGen_UpdateWorld_GrassGrowth), il);
         }
 
         if (c.TryGotoNext(MoveType.Before, i => i.MatchStloc(20)))
@@ -467,7 +467,7 @@ public class MinorPatches : ModSystem
         }
         else
         {
-            ILMatchLog(nameof(IL_WorldGen_UpdateWorld_GrassGrowth), il);
+            MyUtils.ILMatchLog(nameof(IL_WorldGen_UpdateWorld_GrassGrowth), il);
         }
     }
 
@@ -620,7 +620,7 @@ public class MinorPatches : ModSystem
                 i => i.MatchMul(),
                 i => i.Match(OpCodes.Call)))
         {
-            ILMatchLog(nameof(TranslucentInfernoRings), il);
+            MyUtils.ILMatchLog(nameof(TranslucentInfernoRings), il);
             return;
         }
 
@@ -648,7 +648,7 @@ public class MinorPatches : ModSystem
                 i => i.Match(OpCodes.Ldloc_S),
                 i => i.Match(OpCodes.Ldc_I4_S)))
         {
-            ILMatchLog(nameof(LiveInCorrupt), il);
+            MyUtils.ILMatchLog(nameof(LiveInCorrupt), il);
             return;
         }
         // < 50则会设置为0，开选项的时候把这个设置成114514就行了
@@ -672,7 +672,7 @@ public class MinorPatches : ModSystem
                 i => i.MatchStsfld<WorldGen>(nameof(WorldGen.AllowedToSpreadInfections))
             ))
         {
-            ILMatchLog(nameof(DisableBiomeSpread), il);
+            MyUtils.ILMatchLog(nameof(DisableBiomeSpread), il);
             return;
         }
 
@@ -713,7 +713,7 @@ public class MinorPatches : ModSystem
                 i => i.Match(OpCodes.Ldelem_U1)
             ))
         {
-            ILMatchLog(nameof(KeepBuffOnUpdateDead), il);
+            MyUtils.ILMatchLog(nameof(KeepBuffOnUpdateDead), il);
             return;
         }
 
@@ -751,7 +751,7 @@ public class MinorPatches : ModSystem
                 i => i.Match(OpCodes.Ldc_I4_S, (sbyte)NPCID.LavaSlime)
             ))
         {
-            ILMatchLog(nameof(LavalessLavaSlime), il);
+            MyUtils.ILMatchLog(nameof(LavalessLavaSlime), il);
             return;
         }
 
@@ -1016,7 +1016,7 @@ public class MinorPatches : ModSystem
                 i => i.Match(OpCodes.Call),
                 i => i.Match(OpCodes.Ldc_I4_S)))
         {
-            ILMatchLog(nameof(WorldGen_GrowAlch), il);
+            MyUtils.ILMatchLog(nameof(WorldGen_GrowAlch), il);
             return;
         }
         c.EmitDelegate<Func<int, int>>(num => ImproveConfigs.Instance.AlchemyGrassGrowsFaster ? 1 : num);
@@ -1075,7 +1075,7 @@ public class MinorPatches : ModSystem
                 i => i.MatchLdcI4(-1),
                 i => i.MatchStloc(48)))
         {
-            ILMatchLog(nameof(TweakDrawCountInventory), il);
+            MyUtils.ILMatchLog(nameof(TweakDrawCountInventory), il);
             return;
         }
         c.Index--;
@@ -1089,12 +1089,12 @@ public class MinorPatches : ModSystem
                 if (inv[slot].ModItem is SpaceWand)
                 {
                     SpaceWand spaceWand = inv[slot].ModItem as SpaceWand;
-                    ItemCount(inv, spaceWand.GetConditions(), out int count);
+                    MyUtils.ItemCount(inv, spaceWand.GetConditions(), out int count);
                     return count;
                 }
                 else if (inv[slot].ModItem is WallPlace)
                 {
-                    ItemCount(inv, (item) => item.createWall > -1, out int count);
+                    MyUtils.ItemCount(inv, (item) => item.createWall > -1, out int count);
                     return count;
                 }
 
@@ -1161,7 +1161,7 @@ public class MinorPatches : ModSystem
         else
         {
             MonoModHooks.DumpIL(ImproveGame.Instance, il);
-            ILMatchLog(nameof(IL_WorldGen_UpdateWorld_GrassGrowth), il);
+            MyUtils.ILMatchLog(nameof(IL_WorldGen_UpdateWorld_GrassGrowth), il);
         }
     }
 }

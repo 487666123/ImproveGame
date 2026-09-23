@@ -51,7 +51,7 @@ public class MagickWand : SelectorItem, IConditionItem
         {
             // 服务端不播放本地音效，避免重复或无意义调用。
             SoundEngine.PlaySound(SoundID.Item14, Main.MouseWorld);
-            BongBong(new Vector2(i, j) * 16f, 16, 16);
+            MyUtils.BongBong(new Vector2(i, j) * 16f, 16, 16);
         }
 
         var tile = Main.tile[i, j];
@@ -62,7 +62,7 @@ public class MagickWand : SelectorItem, IConditionItem
 
         if (TileMode && tile.HasTile)
         {
-            TryKillTile(i, j, player);
+            MyUtils.TryKillTile(i, j, player);
             CheckChestDestroy(player, i, j);
         }
 
@@ -79,7 +79,7 @@ public class MagickWand : SelectorItem, IConditionItem
         if (!TileID.Sets.IsAContainer[tile.TileType] || !ChestMode)
             return false;
 
-        var origin = GetTileOrigin(i, j);
+        var origin = MyUtils.GetTileOrigin(i, j);
         int chestIndex = Chest.FindChest(origin.X, origin.Y);
         if (chestIndex == -1 || !Main.chest.IndexInRange(chestIndex))
             return false;
@@ -93,9 +93,9 @@ public class MagickWand : SelectorItem, IConditionItem
         // 先掉落内容物。
         for (int k = 0; k < chest.item.Length; k++)
             if (!chest.item[k].IsAir)
-                SpawnTileBreakItem(i, j, chest.item[k], "ChestBrokenFromBlastsWand");
+                MyUtils.SpawnTileBreakItem(i, j, chest.item[k], "ChestBrokenFromBlastsWand");
         // 再破坏箱体本身。
-        TryKillTile(i, j, player);
+        MyUtils.TryKillTile(i, j, player);
         return true;
     }
 
@@ -216,7 +216,7 @@ public class MagickWand : SelectorItem, IConditionItem
             // 音效通过数据包广播，保证多人环境中的听感一致。
             if (UIConfigs.Instance.ExplosionEffect)
                 PlaySoundPacket.PlaySound(LegacySoundIDs.Item, Main.MouseWorld, style: 14);
-            ForeachTile(rectangle, (x, y) =>
+            MyUtils.ForeachTile(rectangle, (x, y) =>
             {
                 if (Main.tile[x, y].WallType > WallID.None && WandSystem.WallMode)
                 {
@@ -227,14 +227,14 @@ public class MagickWand : SelectorItem, IConditionItem
 
                 if (WandSystem.TileMode && Main.tile[x, y].HasTile)
                 {
-                    TryKillTile(x, y, player);
+                    MyUtils.TryKillTile(x, y, player);
                     // 固定模式下每格读取一次当前开关，确保与 UI 最新状态一致。
                     ChestMode = WandSystem.ChestMode;
                     CheckChestDestroy(player, x, y);
                 }
 
                 if (UIConfigs.Instance.ExplosionEffect)
-                    BongBong(new Vector2(x, y) * 16f, 16, 16);
+                    MyUtils.BongBong(new Vector2(x, y) * 16f, 16, 16);
             }, (x, y, wid, hei) => DoBoomPacket.Send(x, y, wid, hei)); // 同步爆炸特效到其他客户端。
         }
     }
@@ -295,7 +295,7 @@ public class MagickWand : SelectorItem, IConditionItem
         Point playerCenter = player.Center.ToTileCoordinates();
         Point mousePosition = Main.MouseWorld.ToTileCoordinates();
         // 先把鼠标目标裁剪到可交互范围内，再生成最终拆除矩形。
-        mousePosition = ModifySize(playerCenter, mousePosition, Player.tileRangeX + ExtraRange.X,
+        mousePosition = MyUtils.ModifySize(playerCenter, mousePosition, Player.tileRangeX + ExtraRange.X,
             Player.tileRangeY + ExtraRange.Y);
         rect.X = mousePosition.X - KillSize.X / 2;
         rect.Y = mousePosition.Y - KillSize.Y / 2;

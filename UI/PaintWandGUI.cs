@@ -52,22 +52,22 @@ namespace ImproveGame.UI
         public override void DrawChildren(SpriteBatch spriteBatch)
         {
             base.DrawChildren(spriteBatch);
-            var position = MouseScreenOffset(15);
+            var position = MyUtils.MouseScreenOffset(15);
             var borderColor = new Color(135, 0, 180);
             var textColor = Color.White;
             if (RoundButtons[0].IsMouseHovering)
             {
-                DrawString(position, GetText("PaintWandGUI.Paintbrush"), textColor, borderColor);
+                MyUtils.DrawString(position, MyUtils.GetText("PaintWandGUI.Paintbrush"), textColor, borderColor);
                 Main.LocalPlayer.cursorItemIconEnabled = false;
             }
             else if (RoundButtons[1].IsMouseHovering)
             {
-                DrawString(position, GetText("PaintWandGUI.PaintRoller"), textColor, borderColor);
+                MyUtils.DrawString(position, MyUtils.GetText("PaintWandGUI.PaintRoller"), textColor, borderColor);
                 Main.LocalPlayer.cursorItemIconEnabled = false;
             }
             else if (RoundButtons[2].IsMouseHovering)
             {
-                DrawString(position, GetText("PaintWandGUI.PaintScraper"), textColor, borderColor);
+                MyUtils.DrawString(position, MyUtils.GetText("PaintWandGUI.PaintScraper"), textColor, borderColor);
                 Main.LocalPlayer.cursorItemIconEnabled = false;
             }
         }
@@ -111,7 +111,7 @@ namespace ImproveGame.UI
 
         public void Open()
         {
-            MainPanel.SetCenterPixels(TransformToUIPosition(Main.MouseScreen));
+            MainPanel.SetCenterPixels(MyUtils.TransformToUIPosition(Main.MouseScreen));
             MainPanel.Recalculate();
             Timer.OpenAndResetTimer();
 

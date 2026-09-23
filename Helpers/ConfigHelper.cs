@@ -368,14 +368,14 @@ public static class ConfigHelper
                 if (config.Mod.Name == "ImproveGame" && ImproveConfigs.Instance.OnlyHost && !Main.countsAsHostForGameplay[Main.myPlayer])
                 {
                     // “无法更改: 你不是服务器主机玩家！”
-                    Main.NewText(GetText("Configs.ImproveConfigs.OnlyHost.Unaccepted"), Color.Red);
+                    Main.NewText(MyUtils.GetText("Configs.ImproveConfigs.OnlyHost.Unaccepted"), Color.Red);
                     return;
                 }
 
                 if (config.Mod.Name == "ImproveGame" && ImproveConfigs.Instance.OnlyHostByPassword && !NetPasswordSystem.LocalPlayerRegistered)
                 {
                     // “无法更改：你没有通过密码验证！”
-                    Main.NewText(GetText("Configs.ImproveConfigs.OnlyHostByPassword.Unaccepted"), Color.Red);
+                    Main.NewText(MyUtils.GetText("Configs.ImproveConfigs.OnlyHostByPassword.Unaccepted"), Color.Red);
                     return;
                 }
 
@@ -569,7 +569,7 @@ public static class ConfigHelper
         string key = $"Mods.{modName}.{str}";
         string text = Language.GetTextValue(key, arg);
         hasValue = Language.Exists(key);
-        return ConvertLeftRight(text);
+        return MyUtils.ConvertLeftRight(text);
     }
     public static string GetLocalizationKey(ModConfig config, string optionName)
         => $"Configs.{config.Name}.{optionName}";

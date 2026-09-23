@@ -186,7 +186,7 @@ public class ApplyBuffItem : GlobalItem
         // 红药水扩展
         if (item.CanActivateRedPotionExtension())
         {
-            tooltips.Add(new TooltipLine(Mod, "TagDetailed.RedPotion", GetText("Tips.TagDetailed.RedPotion"))
+            tooltips.Add(new TooltipLine(Mod, "TagDetailed.RedPotion", MyUtils.GetText("Tips.TagDetailed.RedPotion"))
             {
                 Color = Color.SkyBlue
             });
@@ -217,7 +217,7 @@ public class ApplyBuffItem : GlobalItem
             if (buffType is -1)
                 return base.PreDrawTooltip(item, lines, ref x, ref y);
 
-            TryGetKeybindString(KeybindSystem.ItemInteractKeybind, out string keybind);
+            MyUtils.TryGetKeybindString(KeybindSystem.ItemInteractKeybind, out string keybind);
             object arg = new
             {
                 BuffName = Lang.GetBuffName(buffType),

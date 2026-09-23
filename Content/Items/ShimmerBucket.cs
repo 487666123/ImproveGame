@@ -56,7 +56,7 @@ public class ShimmerBucketGlobalItem : GlobalItem
 
         var sItem = player.inventory[player.selectedItem];
 
-        if (!AvailableConfig.AvailableShimmerBucket) return;
+        if (!MyUtils.AvailableConfig.AvailableShimmerBucket) return;
         if (sItem.type != ItemID.EmptyBucket) return;
         if (!player.ItemTimeIsZero || player.itemAnimation <= 0 || !player.controlUseItem)
             return;

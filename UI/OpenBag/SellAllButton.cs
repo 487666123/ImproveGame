@@ -20,7 +20,7 @@ public class SellAllButton : SUIButton
         base.DrawSelf(spriteBatch);
 
         if (IsMouseHovering)
-            UICommon.TooltipMouseText(GetText($"UI.OpenBag.{(_showingWarning ? "AreYouSure" : "SellAll")}.Tooltip"));
+            UICommon.TooltipMouseText(MyUtils.GetText($"UI.OpenBag.{(_showingWarning ? "AreYouSure" : "SellAll")}.Tooltip"));
     }
 
     public override void LeftClick(UIMouseEvent evt)
@@ -32,7 +32,7 @@ public class SellAllButton : SUIButton
             keeper.Loots.Count is 0)
         {
             _showingWarning = false;
-            Text = GetText("UI.OpenBag.SellAll.Name");
+            Text = MyUtils.GetText("UI.OpenBag.SellAll.Name");
             TextColor = Color.White;
             return;
         }
@@ -40,14 +40,14 @@ public class SellAllButton : SUIButton
         if (!_showingWarning)
         {
             _showingWarning = true;
-            Text = GetText("UI.OpenBag.AreYouSure.Name");
+            Text = MyUtils.GetText("UI.OpenBag.AreYouSure.Name");
             TextColor = Color.Red;
             return;
         }
 
         _sellAllCallback?.Invoke();
         _showingWarning = false;
-        Text = GetText("UI.OpenBag.SellAll.Name");
+        Text = MyUtils.GetText("UI.OpenBag.SellAll.Name");
         TextColor = Color.White;
     }
 
@@ -59,7 +59,7 @@ public class SellAllButton : SUIButton
             return;
 
         _showingWarning = false;
-        Text = GetText("UI.OpenBag.SellAll.Name");
+        Text = MyUtils.GetText("UI.OpenBag.SellAll.Name");
         TextColor = Color.White;
     }
 }

@@ -38,9 +38,9 @@ public class DoBoomPacket : NetModule
             return;
 
         var rectangle = new Rectangle(_x, _y, _width, _height);
-        ForeachTile(rectangle, (x, y) =>
+        MyUtils.ForeachTile(rectangle, (x, y) =>
         {
-            BongBong(new Vector2(x, y) * 16f, 16, 16);
+            MyUtils.BongBong(new Vector2(x, y) * 16f, 16, 16);
         });
     }
 }

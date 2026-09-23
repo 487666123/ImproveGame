@@ -8,9 +8,9 @@ public abstract class OfficialPreset
 {
     public virtual string LocalizationKey => GetType().Name;
 
-    public string Label => GetText($"ModernConfig.Presets.{LocalizationKey}.Label");
-    public string Tooltip => GetText($"ModernConfig.Presets.{LocalizationKey}.Tooltip");
-    public string Link => GetText($"ModernConfig.Presets.{LocalizationKey}.Link");
+    public string Label => MyUtils.GetText($"ModernConfig.Presets.{LocalizationKey}.Label");
+    public string Tooltip => MyUtils.GetText($"ModernConfig.Presets.{LocalizationKey}.Tooltip");
+    public string Link => MyUtils.GetText($"ModernConfig.Presets.{LocalizationKey}.Link");
 
     public abstract void ApplyPreset(ImproveConfigs modConfig, UIConfigs uiConfig,
         AvailableModItemConfigs modItemConfig);
@@ -19,7 +19,7 @@ public abstract class OfficialPreset
     {
         var mainConfig = ImproveConfigs.Instance;
         var uiConfig = UIConfigs.Instance;
-        var modItemConfig = AvailableConfig;
+        var modItemConfig = MyUtils.AvailableConfig;
 
         ApplyPreset(mainConfig, uiConfig, modItemConfig);
 

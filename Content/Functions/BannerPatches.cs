@@ -18,7 +18,7 @@ public class BannerPatches : ModSystem
         if (item is null)
             return;
 
-        int bannerID = ItemToBanner(item);
+        int bannerID = MyUtils.ItemToBanner(item);
         if (bannerID != -1)
         {
             Main.SceneMetrics.NPCBannerBuff[bannerID] = true;
@@ -56,7 +56,7 @@ public class BannerPatches : ModSystem
     }
 
     private static void TryAddBuff(Player player) =>
-        CheckBanners(GetAllInventoryItemsList(player));
+        CheckBanners(MyUtils.GetAllInventoryItemsList(player));
 
     /// <summary>
     /// 从某个玩家的各种物品栏中拿效果

@@ -236,7 +236,7 @@ public class AmmoChainUI : BaseBody
         ResetPagePosition();
 
         SoundEngine.PlaySound(SoundID.MenuOpen);
-        OperateInventory(true);
+        MyUtils.OperateInventory(true);
     }
 
     public void Close()
@@ -285,7 +285,7 @@ public class AmmoChainUI : BaseBody
     }
 
     public bool SlotQuickPutAvailable(Item item) =>
-        PageSlideTimer.AnyClose && CanPlaceInSlot(_weaponPage.SlotItem, item) is 3;
+        PageSlideTimer.AnyClose && MyUtils.CanPlaceInSlot(_weaponPage.SlotItem, item) is 3;
 
     public override bool RenderTarget2DDraw => !StartTimer.Opened;
     public override float RenderTarget2DOpacity => StartTimer.Schedule;

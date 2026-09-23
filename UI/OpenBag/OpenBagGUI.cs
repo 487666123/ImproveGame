@@ -136,7 +136,7 @@ public class OpenBagGUI : BaseBody
         itemsPanel.JoinParent(MainPanel);
 
         // 没有物品时显示的提示，这里先Append，要用到的时候调一下Left就行
-        TipText = new UIText(GetText("UI.OpenBag.TipText"))
+        TipText = new UIText(MyUtils.GetText("UI.OpenBag.TipText"))
         {
             Width = { Percent = 1f },
             Height = { Percent = 1f },
@@ -167,7 +167,7 @@ public class OpenBagGUI : BaseBody
         sellAllArea.SetSize(-30f, 52f, 1f, 0f);
         sellAllArea.JoinParent(MainPanel);
 
-        var sellAll = new SellAllButton(GetText("UI.OpenBag.SellAll.Name"), SellAll)
+        var sellAll = new SellAllButton(MyUtils.GetText("UI.OpenBag.SellAll.Name"), SellAll)
         {
             DragIgnore = true,
             RelativeMode = RelativeMode.Vertical,
@@ -192,21 +192,21 @@ public class OpenBagGUI : BaseBody
         bagPanel.SetSize(0f, 56, 1f, 0f);
         bagPanel.JoinParent(MainPanel);
 
-        var itemSlot = CreateItemSlot(20f, 6f, onItemChanged: (item, _) =>
+        var itemSlot = MyUtils.CreateItemSlot(20f, 6f, onItemChanged: (item, _) =>
             {
                 if (Main.LocalPlayer is not null && Main.LocalPlayer.TryGetModPlayer(out LootKeeper keeper))
                     keeper.Bag = item;
             },
             parent: bagPanel,
             iconTextureName: "Bag",
-            emptyText: () => GetText("UI.OpenBag.EmptyText"));
+            emptyText: () => MyUtils.GetText("UI.OpenBag.EmptyText"));
         itemSlot.OnUpdate += _ =>
         {
             if (Main.LocalPlayer is not null && Main.LocalPlayer.TryGetModPlayer(out LootKeeper keeper))
                 itemSlot.Item = keeper.Bag;
         };
 
-        var openButton = new SUIButton(ModAsset.Open.Value, GetText("UI.OpenBag.Open"))
+        var openButton = new SUIButton(ModAsset.Open.Value, MyUtils.GetText("UI.OpenBag.Open"))
         {
             Left = { Pixels = 80f },
             Top = { Pixels = 8f }
@@ -226,7 +226,7 @@ public class OpenBagGUI : BaseBody
         };
         openButton.OnUpdate += _ =>
         {
-            openButton.Text = GetText(CoroutineSystem.OpenBagRunner.Count > 0 ? "UI.OpenBag.Stop" : "UI.OpenBag.Open");
+            openButton.Text = MyUtils.GetText(CoroutineSystem.OpenBagRunner.Count > 0 ? "UI.OpenBag.Stop" : "UI.OpenBag.Open");
         };
         openButton.JoinParent(bagPanel);
 
@@ -314,7 +314,7 @@ public class OpenBagGUI : BaseBody
                 // 最多显示一百列，不然生成Children时太卡了
                 if (i >= 8 * 100)
                 {
-                    var tip = new UIText(GetText("UI.OpenBag.NotFullyDisplayed", keeper.Loots.Count - 800))
+                    var tip = new UIText(MyUtils.GetText("UI.OpenBag.NotFullyDisplayed", keeper.Loots.Count - 800))
                     {
                         Width = { Percent = 1f },
                         Height = { Pixels = 46f },

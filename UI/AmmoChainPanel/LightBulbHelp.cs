@@ -31,6 +31,6 @@ public class LightBulbHelp : TimerView
             ModAsset.LightBulb_Highlight.Size() / 2f, 1f, SpriteEffects.None, 0f);
 
         if (IsMouseHovering)
-            UICommon.TooltipMouseText(GetText("UI.AmmoChain.GetHelp"));
+            UICommon.TooltipMouseText(MyUtils.GetText("UI.AmmoChain.GetHelp"));
     }
 }

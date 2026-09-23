@@ -135,7 +135,7 @@ public class QuickShimmerGUI : BaseBody
         itemsPanel.JoinParent(MainPanel);
 
         // 没有物品时显示的提示，这里先Append，要用到的时候调一下Left就行
-        TipText = new UIText(GetText("UI.QuickShimmer.TipText"))
+        TipText = new UIText(MyUtils.GetText("UI.QuickShimmer.TipText"))
         {
             Width = { Percent = 1f },
             Height = { Percent = 1f },
@@ -170,21 +170,21 @@ public class QuickShimmerGUI : BaseBody
         bagPanel.SetSize(0f, 150, 1f, 0f);
         bagPanel.JoinParent(MainPanel);
 
-        var itemSlot = CreateItemSlot(20f, 6f, onItemChanged: (item, _) =>
+        var itemSlot = MyUtils.CreateItemSlot(20f, 6f, onItemChanged: (item, _) =>
         {
             if (Main.LocalPlayer is not null && Main.LocalPlayer.TryGetModPlayer(out ShimmerLootKeeper keeper))
                 keeper.targetItem = item;
         },
             parent: bagPanel,
             iconTextureName: "Bag",
-            emptyText: () => GetText("UI.QuickShimmer.EmptyText"));
+            emptyText: () => MyUtils.GetText("UI.QuickShimmer.EmptyText"));
         itemSlot.OnUpdate += _ =>
         {
             if (Main.LocalPlayer is not null && Main.LocalPlayer.TryGetModPlayer(out ShimmerLootKeeper keeper))
                 itemSlot.Item = keeper.targetItem;
         };
 
-        var openButton = new SUIButton(ModAsset.Open.Value, GetText("UI.QuickShimmer.Open"))
+        var openButton = new SUIButton(ModAsset.Open.Value, MyUtils.GetText("UI.QuickShimmer.Open"))
         {
             Left = { Pixels = 80f },
             Top = { Pixels = 8f }
@@ -208,7 +208,7 @@ public class QuickShimmerGUI : BaseBody
                 float coinLuckOld = Main.LocalPlayer.coinLuck;
                 Main.LocalPlayer.AddCoinLuck(Main.LocalPlayer.Center, coinValue * item.stack);
                 float coinLuckGain = Main.LocalPlayer.coinLuck - coinLuckOld;
-                AddNotification(GetText("UI.QuickShimmer.CoinLuck", coinLuckGain), Color.Pink, item.type);
+                MyUtils.AddNotification(MyUtils.GetText("UI.QuickShimmer.CoinLuck", coinLuckGain), Color.Pink, item.type);
                 item.TurnToAir();
                 return;
             }
@@ -223,7 +223,7 @@ public class QuickShimmerGUI : BaseBody
         };
         openButton.OnUpdate += _ =>
         {
-            openButton.Text = GetText(CoroutineSystem.QuickShimmerRunner.Count > 0
+            openButton.Text = MyUtils.GetText(CoroutineSystem.QuickShimmerRunner.Count > 0
                 ? "UI.QuickShimmer.Stop"
                 : "UI.QuickShimmer.Open");
             //openButton.SetIcon(CoroutineSystem.QuickShimmerRunner.Count > 0 ? ModAsset.Shimmer_Pause.Value : ModAsset.Shimmer_Start.Value);
@@ -243,7 +243,7 @@ public class QuickShimmerGUI : BaseBody
                 float coinLuckOld = Main.LocalPlayer.coinLuck;
                 Main.LocalPlayer.AddCoinLuck(Main.LocalPlayer.Center, coinValue * item.stack);
                 float coinLuckGain = Main.LocalPlayer.coinLuck - coinLuckOld;
-                AddNotification(GetText("UI.QuickShimmer.CoinLuck", coinLuckGain), Color.Pink, item.type);
+                MyUtils.AddNotification(MyUtils.GetText("UI.QuickShimmer.CoinLuck", coinLuckGain), Color.Pink, item.type);
                 item.TurnToAir();
                 return;
             }
@@ -404,7 +404,7 @@ public class QuickShimmerGUI : BaseBody
                 // 最多显示一百列，不然生成Children时太卡了
                 if (i >= 8 * 100)
                 {
-                    var tip = new UIText(GetText("UI.QuickShimmer.NotFullyDisplayed", keeper.Loots.Count - 800))
+                    var tip = new UIText(MyUtils.GetText("UI.QuickShimmer.NotFullyDisplayed", keeper.Loots.Count - 800))
                     {
                         Width = { Percent = 1f },
                         Height = { Pixels = 46f },

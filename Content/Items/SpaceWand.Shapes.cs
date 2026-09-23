@@ -153,7 +153,7 @@ public partial class SpaceWand
         var startingPoint = startPoint.ToTileCoordinates();
         var nowPoint = mousePosition.ToTileCoordinates();
         int maxSize = filled ? 60 : 160;
-        nowPoint = ModifySize(startingPoint, nowPoint, maxSize, maxSize);
+        nowPoint = MyUtils.ModifySize(startingPoint, nowPoint, maxSize, maxSize);
         var position = PointExtensions.Min(startingPoint, nowPoint);
         var size = (startingPoint - nowPoint).Abs();
 

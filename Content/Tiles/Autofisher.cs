@@ -39,8 +39,8 @@ namespace ImproveGame.Content.Tiles
 
         public override bool OnRightClick(int i, int j)
         {
-            var origin = GetTileOrigin(i, j);
-            if (!TryGetTileEntityAs<TEAutofisher>(origin, out var fisher)) return false;
+            var origin = MyUtils.GetTileOrigin(i, j);
+            if (!MyUtils.TryGetTileEntityAs<TEAutofisher>(origin, out var fisher)) return false;
 
             if (AutofishPlayer.LocalPlayer.Autofisher != fisher)
             {
@@ -84,7 +84,7 @@ namespace ImproveGame.Content.Tiles
         }
 
         public override bool CanKillTile(int i, int j, ref bool blockDamaged) =>
-            !TryGetTileEntityAs<TEAutofisher>(i, j, out var autofisher) || autofisher.IsEmpty;
+            !MyUtils.TryGetTileEntityAs<TEAutofisher>(i, j, out var autofisher) || autofisher.IsEmpty;
 
         public override void ModifyObjectData()
         {

@@ -96,7 +96,7 @@ public class InfiniteBuffModPlayer : ModPlayer
     {
         // 1) 统计玩家自身来源。
         PlayerBuffItems.Clear();
-        CollectAvailableItems(PlayerBuffItems, GetAllInventoryItemsList(Main.LocalPlayer));
+        CollectAvailableItems(PlayerBuffItems, MyUtils.GetAllInventoryItemsList(Main.LocalPlayer));
 
         // 2) 统计储存系统来源（仅启用了无限 Buff 的储存）。
         ExStorageBuffItems.Clear();

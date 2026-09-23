@@ -24,7 +24,7 @@ public class LootItemSlot : BaseItemSlot
     {
         if (Main.LocalPlayer.ItemAnimationActive) return;
 
-        OperateInventory(true);
+        MyUtils.OperateInventory(true);
 
         if (Item.IsAir)
             return;

@@ -57,12 +57,12 @@ public class NetPasswordSystem : ModSystem
         for (int i = 0; i < 4; i++)
             ConfigPassword += (char)Main.rand.Next('A', 'Z' + 1);
 
-        ImproveGame.Instance.Logger.Info(GetTextWith("Configs.ImproveConfigs.OnlyHostByPassword.ServerPasswordLog", new
+        ImproveGame.Instance.Logger.Info(MyUtils.GetTextWith("Configs.ImproveConfigs.OnlyHostByPassword.ServerPasswordLog", new
         {
             Password = ConfigPassword
         }));
 
-        Console.WriteLine(GetTextWith("Configs.ImproveConfigs.OnlyHostByPassword.ServerPassword", new
+        Console.WriteLine(MyUtils.GetTextWith("Configs.ImproveConfigs.OnlyHostByPassword.ServerPassword", new
         {
             Password = ConfigPassword
         }));

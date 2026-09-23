@@ -73,7 +73,7 @@ public partial class BigBagUI
         for (int i = HotbarSlotCount; i < InventorySlotCountWithCoinsAndAmmo; i++)
         {
             if (!CanBulkTransfer(inventory[i])) continue;
-            if (HasItem(bigBag, -1, inventory[i].type))
+            if (MyUtils.HasItem(bigBag, -1, inventory[i].type))
                 inventory[i] = MyUtils.ItemStackToInventory(bigBag, inventory[i], hint: false);
         }
     }

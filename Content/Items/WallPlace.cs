@@ -21,7 +21,7 @@ namespace ImproveGame.Content.Items
 
         public override void HoldItem(Player player)
         {
-            Item firstWall = FirstWall(player);
+            Item firstWall = MyUtils.FirstWall(player);
             if (firstWall is null) return;
 
             player.cursorItemIconEnabled = true;
@@ -88,7 +88,7 @@ namespace ImproveGame.Content.Items
                     if (proj.owner == player.whoAmI && proj.active && proj.type == RobotType)
                     {
                         proj.Kill();
-                        CombatText.NewText(proj.getRect(), Color.Red, GetText("CombatText.Item.WallPlace_Kill"));
+                        CombatText.NewText(proj.getRect(), Color.Red, MyUtils.GetText("CombatText.Item.WallPlace_Kill"));
                         return true;
                     }
                 }
@@ -101,12 +101,12 @@ namespace ImproveGame.Content.Items
 
                 if (walls1.Count > 10000)
                 {
-                    CombatText.NewText(player.getRect(), Color.Red, GetText("CombatText.Item.WallPlace_Limit"));
+                    CombatText.NewText(player.getRect(), Color.Red, MyUtils.GetText("CombatText.Item.WallPlace_Limit"));
                     return true;
                 }
                 else
                 {
-                    if (FirstWall(player) is not null)
+                    if (MyUtils.FirstWall(player) is not null)
                     {
                         Vector2 center = Main.MouseWorld.ToTileCoordinates().ToVector2() * 16 + new Vector2(8);
                         // 角度排序
@@ -132,7 +132,7 @@ namespace ImproveGame.Content.Items
                             return 0;
                         });*/
                         CombatText.NewText(player.getRect(), new Color(0, 155, 255),
-                            GetText("CombatText.Item.WallPlace_Consume") + walls1.Count);
+                            MyUtils.GetText("CombatText.Item.WallPlace_Consume") + walls1.Count);
                         Projectile proj = Projectile.NewProjectileDirect(
                             new EntitySource_ItemUse(player, Item, "WandOfTechnology"), center, Vector2.Zero, RobotType,
                             0, 0, player.whoAmI);

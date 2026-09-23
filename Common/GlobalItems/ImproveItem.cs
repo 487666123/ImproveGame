@@ -211,8 +211,8 @@ public class ImproveItem : GlobalItem, IItemOverrideHover, IItemMiddleClickable
 
     public void ManageHoverTooltips(Item item, List<TooltipLine> tooltips)
     {
-        TryGetKeybindString(KeybindSystem.ItemInteractKeybind, out string keybind);
-        string text = (GetTextWith("Tips.MouseMiddleUse", new { ItemName = item.Name, KeybindName = keybind }));
+        MyUtils.TryGetKeybindString(KeybindSystem.ItemInteractKeybind, out string keybind);
+        string text = (MyUtils.GetTextWith("Tips.MouseMiddleUse", new { ItemName = item.Name, KeybindName = keybind }));
         tooltips.Add(new TooltipLine(Mod, "MountQuickUse", text) { Color = Color.LightGreen });
     }
 
@@ -238,10 +238,10 @@ public class ImproveItem : GlobalItem, IItemOverrideHover, IItemMiddleClickable
         if (!UIConfigs.Instance.ShowAmmoInfo) return;
 
         if (item.useAmmo > 0)
-            tooltips.Add(new TooltipLine(Mod, "UseAmmo", GetText("Tips.UseAmmoInfo", item.useAmmo, Lang.GetItemNameValue(item.useAmmo))) { Color = new Color(60, 160, 90) });
+            tooltips.Add(new TooltipLine(Mod, "UseAmmo", MyUtils.GetText("Tips.UseAmmoInfo", item.useAmmo, Lang.GetItemNameValue(item.useAmmo))) { Color = new Color(60, 160, 90) });
 
         if (item.ammo > 0)
-            tooltips.Add(new TooltipLine(Mod, "Ammo", GetText("Tips.AmmoInfo", item.ammo, Lang.GetItemNameValue(item.ammo))) { Color = new Color(60, 160, 90) });
+            tooltips.Add(new TooltipLine(Mod, "Ammo", MyUtils.GetText("Tips.AmmoInfo", item.ammo, Lang.GetItemNameValue(item.ammo))) { Color = new Color(60, 160, 90) });
     }
 
     private void TooltipShimmer(Item item, List<TooltipLine> tooltips)
@@ -252,7 +252,7 @@ public class ImproveItem : GlobalItem, IItemOverrideHover, IItemMiddleClickable
         {
             tooltips.Add(
                 new TooltipLine(Mod, "ShimmerResult",
-                        GetText("Tips.ShimmerIntoWithCoinLuck", ItemID.Sets.CoinLuckValue[item.type]))
+                        MyUtils.GetText("Tips.ShimmerIntoWithCoinLuck", ItemID.Sets.CoinLuckValue[item.type]))
                 { Color = new Color(241, 175, 233) });
             return;
         }
@@ -263,8 +263,8 @@ public class ImproveItem : GlobalItem, IItemOverrideHover, IItemMiddleClickable
 
         var text = new StringBuilder();
         text.Append(stackRequired is not 1
-            ? GetText("Tips.ShimmerIntoWithStack", stackRequired)
-            : GetText("Tips.ShimmerInto"));
+            ? MyUtils.GetText("Tips.ShimmerIntoWithStack", stackRequired)
+            : MyUtils.GetText("Tips.ShimmerInto"));
 
         foreach (var result in items)
         {

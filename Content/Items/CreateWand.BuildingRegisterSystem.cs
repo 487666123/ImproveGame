@@ -95,7 +95,7 @@ public partial class CreateWand
 
         private static void HandleRegister(Texture2D texture)
         {
-            var colors = GetColors(texture);
+            var colors = MyUtils.GetColors(texture);
 
             _isWaitingPreview = true;
 
@@ -133,7 +133,7 @@ public partial class CreateWand
             int width = pvRender.Width;
             int height = pvRender.Height;
             Texture2D previewTexture = new Texture2D(Main.graphics.GraphicsDevice, width, height);
-            previewTexture.SetData(GetColors(pvRender));
+            previewTexture.SetData(MyUtils.GetColors(pvRender));
             BuildingDataPreview_Internal.Add(_currentWaitingData, previewTexture);
             OnBuildingDataPreviewAdded?.Invoke(_currentWaitingData);
         }

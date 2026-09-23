@@ -39,10 +39,10 @@ namespace ImproveGame.UIFramework.SUIElements
             var flip = Matrix.CreateTranslation(0, -h, 0) * Matrix.CreateScale(1, -1, 1) * Matrix.CreateTranslation(0, h, 0);
 
             Color upColor = _upButtonTimer.Lerp(UIStyle.SliderRound, UIStyle.SliderRoundHover);
-            SDFGraphics.HasBorderTriangleIsosceles(pos + size * Vector2.UnitY * .05f + size * Vector2.UnitX * .5f, new Vector2(.5f, 0), size * new Vector2(.75f, .4f), buttonColor, 1, upColor, flip * GetMatrix(true));
+            SDFGraphics.HasBorderTriangleIsosceles(pos + size * Vector2.UnitY * .05f + size * Vector2.UnitX * .5f, new Vector2(.5f, 0), size * new Vector2(.75f, .4f), buttonColor, 1, upColor, flip * MyUtils.GetMatrix(true));
 
             Color downColor = _downButtonTimer.Lerp(UIStyle.SliderRound, UIStyle.SliderRoundHover);
-            SDFGraphics.HasBorderTriangleIsosceles(pos + size * Vector2.UnitY * .55f + size * Vector2.UnitX * .5f, new Vector2(.5f, 0), size * new Vector2(.75f, .4f), buttonColor, 1, downColor, GetMatrix(true));
+            SDFGraphics.HasBorderTriangleIsosceles(pos + size * Vector2.UnitY * .55f + size * Vector2.UnitX * .5f, new Vector2(.5f, 0), size * new Vector2(.75f, .4f), buttonColor, 1, downColor, MyUtils.GetMatrix(true));
         }
         public Color buttonColor;
         public Color buttonBorderColor;

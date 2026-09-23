@@ -8,11 +8,11 @@ public class OptionLabelElement(ModConfig config, string optionName, int reserve
     public string OriginLabel()
     {
         if (forcedName != null)
-            return ConvertLeftRight(forcedName);
+            return MyUtils.ConvertLeftRight(forcedName);
         string key = $"Mods.{config.Mod.Name}.Configs.{config.GetType().Name}.{optionName}.Label";
         if (Language.Exists(key))
-            return ConvertLeftRight(Language.GetTextValue(key));
-        return ConvertLeftRight(optionName);
+            return MyUtils.ConvertLeftRight(Language.GetTextValue(key));
+        return MyUtils.ConvertLeftRight(optionName);
 
     }
 

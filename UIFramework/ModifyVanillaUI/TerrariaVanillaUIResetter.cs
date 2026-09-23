@@ -210,7 +210,7 @@ public class TerrariaVanillaUIResetter : ModSystem
             text = self._asterisks;
         }
 
-        Vector2 textSize = GetChatFontSize(text, self._textScale, self._isLarge);
+        Vector2 textSize = MyUtils.GetChatFontSize(text, self._textScale, self._isLarge);
         float textOffsetX = (innerSize.X - textSize.X) * self.TextHAlign;
         float textOffsetY = (innerSize.Y - textSize.Y) / 2f;
         Vector2 textPos = innerPos + new Vector2(textOffsetX, textOffsetY);

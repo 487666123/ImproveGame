@@ -20,7 +20,7 @@ public class OpenStoragePacket : NetModule
 
     public override void Receive()
     {
-        if (!TryGetTileEntityAs<TEExtremeStorage>(_tileEntityID, out var tileEntity) ||
+        if (!MyUtils.TryGetTileEntityAs<TEExtremeStorage>(_tileEntityID, out var tileEntity) ||
             TileLoader.GetTile(Main.tile[tileEntity.Position.ToPoint()].TileType) is not ExtremeStorage storageTile)
         {
             return;

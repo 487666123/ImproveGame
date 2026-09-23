@@ -50,7 +50,7 @@ public class TEBaitSupplier : ModTileEntity
         Tile tile = Main.tile[point.ToPoint()];
         if (!tile.HasTile)
             return null;
-        return !TryGetTileEntityAs<TEBaitSupplier>(point.X, point.Y, out var te) ? null : te;
+        return !MyUtils.TryGetTileEntityAs<TEBaitSupplier>(point.X, point.Y, out var te) ? null : te;
     }
 
     #endregion

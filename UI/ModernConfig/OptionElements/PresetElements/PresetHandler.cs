@@ -81,7 +81,7 @@ public class PresetHandler
         string jsonUIConfig = JsonConvert.SerializeObject(UIConfigs.Instance, SerializerSettings);
         File.WriteAllText(Path.Combine(path, FileNameUIConfig), jsonUIConfig);
 
-        string jsonModItemConfig = JsonConvert.SerializeObject(AvailableConfig, SerializerSettings);
+        string jsonModItemConfig = JsonConvert.SerializeObject(MyUtils.AvailableConfig, SerializerSettings);
         File.WriteAllText(Path.Combine(path, FileNameModItemConfig), jsonModItemConfig);
     }
 

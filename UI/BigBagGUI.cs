@@ -146,7 +146,7 @@ public class BigBagGUI : BaseBody
             {
                 setting.SuperVault_ParticipateSynthesis = state;
                 // Recipe.FindRecipes();
-            }, GetText("SuperVault.Synthesis"), 0.8f)
+            }, MyUtils.GetText("SuperVault.Synthesis"), 0.8f)
         {
             ResetAnotherPosition = true,
             RelativeMode = RelativeMode.Vertical,
@@ -160,7 +160,7 @@ public class BigBagGUI : BaseBody
                 setting.SuperVault_PrioritizeGrabbing = state;
                 PlayerBigBagSettingPacket.SendMyPlayer();
             },
-            GetText("SuperVault.SmartPickup"), 0.8f)
+            MyUtils.GetText("SuperVault.SmartPickup"), 0.8f)
         {
             RelativeMode = RelativeMode.Horizontal,
             Spacing = switchSpacing
@@ -173,7 +173,7 @@ public class BigBagGUI : BaseBody
                 setting.SuperVault_GrabItemsWhenOverflowing = state;
                 PlayerBigBagSettingPacket.SendMyPlayer();
             },
-            GetText("SuperVault.OverflowPickup"), 0.8f)
+            MyUtils.GetText("SuperVault.OverflowPickup"), 0.8f)
         {
             RelativeMode = RelativeMode.Horizontal,
             Spacing = switchSpacing
@@ -183,7 +183,7 @@ public class BigBagGUI : BaseBody
 
         // 按钮
         Vector2 buttonSpacing = new Vector2(10, 8);
-        QuickButton = new SUIButton(GetTexture("UI/Quick").Value, Lang.inter[29].Value)
+        QuickButton = new SUIButton(MyUtils.GetTexture("UI/Quick").Value, Lang.inter[29].Value)
         {
             RelativeMode = RelativeMode.Vertical,
             Spacing = buttonSpacing,
@@ -192,7 +192,7 @@ public class BigBagGUI : BaseBody
         QuickButton.OnLeftMouseDown += (_, _) => QuickTakeOutToPlayerInventory();
         QuickButton.JoinParent(ButtonPanel);
 
-        PutButton = new SUIButton(GetTexture("UI/Put").Value, Lang.inter[30].Value)
+        PutButton = new SUIButton(MyUtils.GetTexture("UI/Put").Value, Lang.inter[30].Value)
         {
             RelativeMode = RelativeMode.Horizontal,
             Spacing = buttonSpacing
@@ -200,7 +200,7 @@ public class BigBagGUI : BaseBody
         PutButton.OnLeftMouseDown += (_, _) => PutAll();
         PutButton.JoinParent(ButtonPanel);
 
-        ReplenishButton = new SUIButton(GetTexture("UI/Put").Value, Lang.inter[31].Value)
+        ReplenishButton = new SUIButton(MyUtils.GetTexture("UI/Put").Value, Lang.inter[31].Value)
         {
             RelativeMode = RelativeMode.Horizontal,
             Spacing = buttonSpacing
@@ -208,7 +208,7 @@ public class BigBagGUI : BaseBody
         ReplenishButton.OnLeftMouseDown += (_, _) => Replenish();
         ReplenishButton.JoinParent(ButtonPanel);
 
-        SortButton = new SUIButton(GetTexture("UI/Put").Value, GetText("SuperVault.Sort"))
+        SortButton = new SUIButton(MyUtils.GetTexture("UI/Put").Value, MyUtils.GetText("SuperVault.Sort"))
         {
             RelativeMode = RelativeMode.Horizontal,
             Spacing = buttonSpacing
@@ -281,7 +281,7 @@ public class BigBagGUI : BaseBody
         StartTimer.Open();
 
         SoundEngine.PlaySound(SoundID.MenuOpen);
-        OperateInventory(true);
+        MyUtils.OperateInventory(true);
     }
 
     public void Close()
@@ -324,7 +324,7 @@ public class BigBagGUI : BaseBody
         // 放入背包
         foreach (var item in testSort)
         {
-            ItemStackToInventory(items, item, false);
+            MyUtils.ItemStackToInventory(items, item, false);
         }
 
         // Recipe.FindRecipes();
@@ -342,9 +342,9 @@ public class BigBagGUI : BaseBody
                 continue;
             }
 
-            if (HasItem(bigBag, -1, inventory[i].type))
+            if (MyUtils.HasItem(bigBag, -1, inventory[i].type))
             {
-                inventory[i] = ItemStackToInventory(bigBag, inventory[i], false);
+                inventory[i] = MyUtils.ItemStackToInventory(bigBag, inventory[i], false);
             }
         }
 
@@ -362,7 +362,7 @@ public class BigBagGUI : BaseBody
         {
             // 物品非空，且未收藏，且不是钱币
             if (inventory[i].IsNotAir && inventory[i].NotFavorited && inventory[i].IsNotACoin)
-                inventory[i] = ItemStackToInventory(bigBag, inventory[i], false);
+                inventory[i] = MyUtils.ItemStackToInventory(bigBag, inventory[i], false);
         }
 
         // Recipe.FindRecipes();
@@ -383,7 +383,7 @@ public class BigBagGUI : BaseBody
             // 物品非空，且未收藏，且不是钱币
             if (bigBag[i].IsNotAir && bigBag[i].NotFavorited && bigBag[i].IsNotACoin)
             {
-                bigBag[i] = ItemStackToInventory(inventory, bigBag[i], false, 50);
+                bigBag[i] = MyUtils.ItemStackToInventory(inventory, bigBag[i], false, 50);
             }
         }
 

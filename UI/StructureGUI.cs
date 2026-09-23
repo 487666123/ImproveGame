@@ -35,12 +35,12 @@ namespace ImproveGame.UI
 
         public override void OnInitialize()
         {
-            var saveTexture = GetTexture("UI/Construct/Save");
-            var loadTexture = GetTexture("UI/Construct/Load");
-            var explodeAndPlaceTexture = GetTexture("UI/Construct/ExplodeAndPlace");
-            var placeOnlyTexture = GetTexture("UI/Construct/PlaceOnly");
-            RefreshTexture = GetTexture("UI/Construct/Refresh");
-            BackTexture = GetTexture("UI/Construct/Back");
+            var saveTexture = MyUtils.GetTexture("UI/Construct/Save");
+            var loadTexture = MyUtils.GetTexture("UI/Construct/Load");
+            var explodeAndPlaceTexture = MyUtils.GetTexture("UI/Construct/ExplodeAndPlace");
+            var placeOnlyTexture = MyUtils.GetTexture("UI/Construct/PlaceOnly");
+            RefreshTexture = MyUtils.GetTexture("UI/Construct/Refresh");
+            BackTexture = MyUtils.GetTexture("UI/Construct/Back");
             ButtonBackgroundTexture = Main.Assets.Request<Texture2D>("Images/UI/CharCreation/CategoryPanel");
 
             BasePanel = new SUIPanel(UIStyle.PanelBorder, UIStyle.PanelBg)
@@ -82,7 +82,7 @@ namespace ImproveGame.UI
             };
             Append(RefreshButton);
 
-            var folderButton = QuickButton(GetTexture("UI/Construct/Folder"), "{$LegacyInterface.110}");
+            var folderButton = QuickButton(MyUtils.GetTexture("UI/Construct/Folder"), "{$LegacyInterface.110}");
             folderButton.SetPos(new(-246f, 100f), 0.5f, 0f);
             folderButton.OnLeftMouseDown += (_, _) => TrUtils.OpenFolder(FileOperator.SavePath);
             Append(folderButton);
@@ -135,7 +135,7 @@ namespace ImproveGame.UI
             };
             Append(explodeButton);
 
-            var closeButton = QuickButton(GetTexture("UI/Construct/Close"), "{$LegacyInterface.71}");
+            var closeButton = QuickButton(MyUtils.GetTexture("UI/Construct/Close"), "{$LegacyInterface.71}");
             closeButton.SetPos(new(246f, 100f), 0.5f, 0f);
             closeButton.OnLeftMouseDown += (_, _) => Close();
             Append(closeButton);
@@ -252,7 +252,7 @@ namespace ImproveGame.UI
                 TextOriginY = 0f
             };
 
-            ComponentList.Add(QuickTitleText(GetText("ConstructGUI.FileInfo.Title"), 0.5f));
+            ComponentList.Add(QuickTitleText(MyUtils.GetText("ConstructGUI.FileInfo.Title"), 0.5f));
             // 检查模组是否被加载了
             foreach ((string blockName, _) in structure.entries)
             {
@@ -261,11 +261,11 @@ namespace ImproveGame.UI
                     continue;
                 }
 
-                char countChar = GetText("ConstructGUI.FileInfo.ModMissing.Count")[0];
+                char countChar = MyUtils.GetText("ConstructGUI.FileInfo.ModMissing.Count")[0];
                 int count = char.IsNumber(countChar) ? countChar - '0' : 2;
                 for (int i = 1; i <= count; i++)
                 {
-                    var text = QuickSmallUIText(GetText($"ConstructGUI.FileInfo.ModMissing.{i}"));
+                    var text = QuickSmallUIText(MyUtils.GetText($"ConstructGUI.FileInfo.ModMissing.{i}"));
                     text.TextColor = new(244, 208, 68);
                     ComponentList.Add(text);
                 }
@@ -273,17 +273,17 @@ namespace ImproveGame.UI
             }
             string name = CacheStructureInfoPath.Split('\\').Last();
             name = name[..^FileOperator.Extension.Length];
-            ComponentList.Add(QuickSmallUIText(GetTextWith("ConstructGUI.FileInfo.Name", new { Name = name }))); // 文件名
-            ComponentList.Add(QuickSmallUIText(GetTextWith("ConstructGUI.FileInfo.Time", new { Time = DateTime.Parse(structure.BuildTime) }))); // 保存时间
-            ComponentList.Add(QuickSmallUIText(GetTextWith("ConstructGUI.FileInfo.Version", new { Version = $"v{structure.ModVersion}" }))); // 模组版本
-            ComponentList.Add(QuickSmallUIText(GetTextWith("ConstructGUI.FileInfo.Size", new { Size = $"{structure.Width + 1}x{structure.Height + 1}" }))); // 结构尺寸
+            ComponentList.Add(QuickSmallUIText(MyUtils.GetTextWith("ConstructGUI.FileInfo.Name", new { Name = name }))); // 文件名
+            ComponentList.Add(QuickSmallUIText(MyUtils.GetTextWith("ConstructGUI.FileInfo.Time", new { Time = DateTime.Parse(structure.BuildTime) }))); // 保存时间
+            ComponentList.Add(QuickSmallUIText(MyUtils.GetTextWith("ConstructGUI.FileInfo.Version", new { Version = $"v{structure.ModVersion}" }))); // 模组版本
+            ComponentList.Add(QuickSmallUIText(MyUtils.GetTextWith("ConstructGUI.FileInfo.Size", new { Size = $"{structure.Width + 1}x{structure.Height + 1}" }))); // 结构尺寸
 
             var materialsAndStacks = MaterialCore.CountMaterials(structure);
             if (materialsAndStacks.Count > 0)
             {
-                ComponentList.Add(QuickTitleText(GetText("ConstructGUI.MaterialInfo.Title"), 0.6f));
+                ComponentList.Add(QuickTitleText(MyUtils.GetText("ConstructGUI.MaterialInfo.Title"), 0.6f));
                 if (ImproveConfigs.Instance.SuperVault)
-                    ComponentList.Add(QuickSmallUIText(GetTextWith("ConstructGUI.MaterialInfo.Tip", new { Name = name }))); // 文件名
+                    ComponentList.Add(QuickSmallUIText(MyUtils.GetTextWith("ConstructGUI.MaterialInfo.Tip", new { Name = name }))); // 文件名
 
                 var sortedResult = from pair in materialsAndStacks orderby pair.Key select pair; // 排序
                 foreach ((int itemType, int stack) in from mat in sortedResult where mat.Value > 0 select mat)
@@ -292,7 +292,7 @@ namespace ImproveGame.UI
                 }
             }
 
-            ComponentList.Add(QuickTitleText(GetText("ConstructGUI.Preview.Title"), 0.85f));
+            ComponentList.Add(QuickTitleText(MyUtils.GetText("ConstructGUI.Preview.Title"), 0.85f));
 
             var viewPanel = new StructurePreviewPanel(CacheStructureInfoPath);
             viewPanel.OnResetHeight += (_) => SetupScrollBar(false);
@@ -333,12 +333,12 @@ namespace ImproveGame.UI
         {
             ComponentList.Clear();
 
-            ComponentList.Add(QuickTitleText(GetText("ConstructGUI.Tutorial.Button"), 0.5f));
-            char countChar = GetText("ConstructGUI.Tutorial.AlphaTest.Count")[0];
+            ComponentList.Add(QuickTitleText(MyUtils.GetText("ConstructGUI.Tutorial.Button"), 0.5f));
+            char countChar = MyUtils.GetText("ConstructGUI.Tutorial.AlphaTest.Count")[0];
             int count = char.IsNumber(countChar) ? countChar - '0' : 2;
             for (int i = 1; i <= count; i++)
             {
-                ComponentList.Add(new UIText(GetText($"ConstructGUI.Tutorial.AlphaTest.{i}"))
+                ComponentList.Add(new UIText(MyUtils.GetText($"ConstructGUI.Tutorial.AlphaTest.{i}"))
                 {
                     TextOriginX = 0.5f,
                     Width = StyleDimension.FromPercent(1f),
@@ -369,8 +369,8 @@ namespace ImproveGame.UI
             #region 保存
             var panel = QuickTransparentPanel();
 
-            ComponentList.Add(QuickTitleText(GetText("ConstructGUI.Tutorial.Save.Title"), 0.5f, 0f).SetPos(6f, 0f));
-            var uiText = new UIText(GetText("ConstructGUI.Tutorial.Save.Text"))
+            ComponentList.Add(QuickTitleText(MyUtils.GetText("ConstructGUI.Tutorial.Save.Title"), 0.5f, 0f).SetPos(6f, 0f));
+            var uiText = new UIText(MyUtils.GetText("ConstructGUI.Tutorial.Save.Text"))
             {
                 IsWrapped = true,
                 TextOriginX = 0f,
@@ -380,7 +380,7 @@ namespace ImproveGame.UI
             panel.Append(uiText);
 
             var buttonExample = new UIImage(ButtonBackgroundTexture).SetPos(490f, -10f).SetAlign(verticalAlign: 0.5f);
-            buttonExample.Append(new UIImage(GetTexture("UI/Construct/Save")).SetAlign(0.5f, 0.5f));
+            buttonExample.Append(new UIImage(MyUtils.GetTexture("UI/Construct/Save")).SetAlign(0.5f, 0.5f));
             buttonExample.OnLeftMouseDown += (_, _) => WandSystem.ConstructMode = WandSystem.Construct.Save;
             panel.Append(buttonExample);
 
@@ -404,8 +404,8 @@ namespace ImproveGame.UI
             #region 放置
             panel = QuickTransparentPanel();
 
-            ComponentList.Add(QuickTitleText(GetText("ConstructGUI.Tutorial.Place.Title"), 0.5f, 0f).SetPos(6f, 0f));
-            uiText = new UIText(GetText("ConstructGUI.Tutorial.Place.Text"))
+            ComponentList.Add(QuickTitleText(MyUtils.GetText("ConstructGUI.Tutorial.Place.Title"), 0.5f, 0f).SetPos(6f, 0f));
+            uiText = new UIText(MyUtils.GetText("ConstructGUI.Tutorial.Place.Text"))
             {
                 IsWrapped = true,
                 TextOriginX = 0f,
@@ -415,7 +415,7 @@ namespace ImproveGame.UI
             panel.Append(uiText);
 
             buttonExample = new UIImage(ButtonBackgroundTexture).SetPos(490f, -10f).SetAlign(verticalAlign: 0.5f);
-            buttonExample.Append(new UIImage(GetTexture("UI/Construct/Load")).SetAlign(0.5f, 0.5f));
+            buttonExample.Append(new UIImage(MyUtils.GetTexture("UI/Construct/Load")).SetAlign(0.5f, 0.5f));
             buttonExample.OnLeftMouseDown += (_, _) => WandSystem.ConstructMode = WandSystem.Construct.Place;
             panel.Append(buttonExample);
 
@@ -431,8 +431,8 @@ namespace ImproveGame.UI
             #region 爆破
             panel = QuickTransparentPanel();
 
-            ComponentList.Add(QuickTitleText(GetText("ConstructGUI.Tutorial.Explode.Title"), 0.5f, 0f).SetPos(6f, 0f));
-            uiText = new UIText(GetText("ConstructGUI.Tutorial.Explode.Text"))
+            ComponentList.Add(QuickTitleText(MyUtils.GetText("ConstructGUI.Tutorial.Explode.Title"), 0.5f, 0f).SetPos(6f, 0f));
+            uiText = new UIText(MyUtils.GetText("ConstructGUI.Tutorial.Explode.Text"))
             {
                 IsWrapped = true,
                 TextOriginX = 0f,
@@ -442,12 +442,12 @@ namespace ImproveGame.UI
             panel.Append(uiText);
 
             buttonExample = new UIImage(ButtonBackgroundTexture).SetPos(490f, -20f).SetAlign(verticalAlign: 0.5f);
-            buttonExample.Append(new UIImage(GetTexture("UI/Construct/ExplodeAndPlace")).SetAlign(0.5f, 0.5f));
+            buttonExample.Append(new UIImage(MyUtils.GetTexture("UI/Construct/ExplodeAndPlace")).SetAlign(0.5f, 0.5f));
             buttonExample.OnLeftMouseDown += (_, _) => WandSystem.ExplodeMode = WandSystem.Construct.ExplodeAndPlace;
             panel.Append(buttonExample);
 
             buttonExample = new UIImage(ButtonBackgroundTexture).SetPos(440f, -20f).SetAlign(verticalAlign: 0.5f);
-            buttonExample.Append(new UIImage(GetTexture("UI/Construct/PlaceOnly")).SetAlign(0.5f, 0.5f));
+            buttonExample.Append(new UIImage(MyUtils.GetTexture("UI/Construct/PlaceOnly")).SetAlign(0.5f, 0.5f));
             buttonExample.OnLeftMouseDown += (_, _) => WandSystem.ExplodeMode = WandSystem.Construct.Place;
             panel.Append(buttonExample);
 
@@ -463,8 +463,8 @@ namespace ImproveGame.UI
             #region 列表单元
             panel = QuickTransparentPanel();
 
-            ComponentList.Add(QuickTitleText(GetText("ConstructGUI.Tutorial.Panel.Title"), 0.5f, 0f).SetPos(6f, 0f));
-            uiText = new UIText(GetText("ConstructGUI.Tutorial.Panel.Text"))
+            ComponentList.Add(QuickTitleText(MyUtils.GetText("ConstructGUI.Tutorial.Panel.Title"), 0.5f, 0f).SetPos(6f, 0f));
+            uiText = new UIText(MyUtils.GetText("ConstructGUI.Tutorial.Panel.Text"))
             {
                 IsWrapped = true,
                 TextOriginX = 0f,
@@ -481,7 +481,7 @@ namespace ImproveGame.UI
             string imageName = "Tutorial_StructList_En";
             if (Language.ActiveCulture.Name == "zh-Hans")
                 imageName = "Tutorial_StructList_Zh";
-            var uiImage = new UIImage(GetTexture($"UI/Construct/{imageName}"));
+            var uiImage = new UIImage(MyUtils.GetTexture($"UI/Construct/{imageName}"));
             ComponentList.Add(uiImage);
 
             Seperate(ComponentList);
@@ -490,8 +490,8 @@ namespace ImproveGame.UI
             #region 材料明细
             panel = QuickTransparentPanel();
 
-            panel.Append(QuickTitleText(GetText("ConstructGUI.Tutorial.Materials.Title"), 0.5f, 0f).SetPos(0f, -10f));
-            uiText = new UIText(GetText("ConstructGUI.Tutorial.Materials.Text"))
+            panel.Append(QuickTitleText(MyUtils.GetText("ConstructGUI.Tutorial.Materials.Title"), 0.5f, 0f).SetPos(0f, -10f));
+            uiText = new UIText(MyUtils.GetText("ConstructGUI.Tutorial.Materials.Text"))
             {
                 IsWrapped = true,
                 TextOriginX = 0f,
@@ -531,8 +531,8 @@ namespace ImproveGame.UI
             #region 结构预览
             panel = QuickTransparentPanel();
 
-            panel.Append(QuickTitleText(GetText("ConstructGUI.Tutorial.Preview.Title"), 0.5f, 0f).SetPos(0f, -10f));
-            uiText = new UIText(GetText("ConstructGUI.Tutorial.Preview.Text"))
+            panel.Append(QuickTitleText(MyUtils.GetText("ConstructGUI.Tutorial.Preview.Title"), 0.5f, 0f).SetPos(0f, -10f));
+            uiText = new UIText(MyUtils.GetText("ConstructGUI.Tutorial.Preview.Text"))
             {
                 IsWrapped = true,
                 TextOriginX = 0f,
@@ -542,7 +542,7 @@ namespace ImproveGame.UI
             uiText.Recalculate();
             panel.Append(uiText);
 
-            uiImage = new UIImage(GetTexture("UI/Construct/Tutorial_Preview"));
+            uiImage = new UIImage(MyUtils.GetTexture("UI/Construct/Tutorial_Preview"));
             uiImage.SetPos(290f, 8f).SetAlign(verticalAlign: 0.5f);
             panel.Append(uiImage);
 

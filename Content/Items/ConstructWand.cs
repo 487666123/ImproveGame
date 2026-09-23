@@ -43,7 +43,7 @@ namespace ImproveGame.Content.Items
         {
             if (player.altFunctionUse == 0)
             {
-                ItemRotation(player);
+                MyUtils.ItemRotation(player);
 
                 if (!Main.dedServ && Main.myPlayer == player.whoAmI && // 多人客户端或者单人
                     WandSystem.ConstructMode is WandSystem.Construct.Place && // 模式为放置

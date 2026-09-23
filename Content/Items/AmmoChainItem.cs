@@ -40,7 +40,7 @@ public class AmmoChainItem : ModItem
 
         var name = ChainSaver.SaveAsFile(Chain, ChainName);
         var successInfo = this.GetLocalization("Added").WithFormatArgs(name);
-        AddNotification(successInfo.Value, itemIconType: Type);
+        MyUtils.AddNotification(successInfo.Value, itemIconType: Type);
         AmmoChainUI.Instance?.RefreshWeaponPage();
         return true;
     }
@@ -95,7 +95,7 @@ public class AmmoChainItem : ModItem
 
         if (!ImproveConfigs.Instance.AmmoChain)
         {
-            tooltipLines.Add(new TooltipLine(mod, "AmmoChainDisabled", GetText("Tips.AmmoChainDisabled"))
+            tooltipLines.Add(new TooltipLine(mod, "AmmoChainDisabled", MyUtils.GetText("Tips.AmmoChainDisabled"))
             {
                 Color = Color.Yellow
             });
@@ -103,7 +103,7 @@ public class AmmoChainItem : ModItem
             return;
         }
 
-        var ammoChainLineText = GetText("Tips.AmmoChain");
+        var ammoChainLineText = MyUtils.GetText("Tips.AmmoChain");
         // 如果少于或等于9个，就是很少，直接一行显示得了
         if (ammoChain.Chain.Count <= 9)
         {

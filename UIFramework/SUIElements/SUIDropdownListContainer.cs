@@ -118,7 +118,7 @@ public class SUIDropdownListContainer : View
         float containerBottom = dimensions.ToRectangle().Bottom - 10;
         float optionsHeight = DropdownOption.ElementHeight * count + 10;
         float maximumHeight = 340; // 不要太长，限制高度
-        float height = Min(optionsHeight, maximumHeight);
+        float height = MyUtils.Min(optionsHeight, maximumHeight);
         _dropdownList.SetSizePixels(width, height);
 
         // 决定位置，x和y给的是屏幕坐标

@@ -35,7 +35,7 @@ namespace ImproveGame.Content.Functions.Construction
             var cursor = new ILCursor(il);
             if (!cursor.TryGotoNext(c => c.MatchCall(typeof(Main).GetMethod(nameof(Main.DoDraw_UpdateCameraPosition), BindingFlags.Static | BindingFlags.NonPublic))))
             {
-                ILMatchLog(nameof(DrawTarget), il);
+                MyUtils.ILMatchLog(nameof(DrawTarget), il);
                 return;
             }
             cursor.Index += 2;
@@ -147,7 +147,7 @@ namespace ImproveGame.Content.Functions.Construction
 
             var color = Color.GreenYellow;
             var position = Vector2.Zero + new Vector2(2f, 2f);
-            DrawBorder(position, (structure.Width + 1) * 16f, (structure.Height + 1) * 16f, color * 0.35f, color); // 背景边框
+            MyUtils.DrawBorder(position, (structure.Width + 1) * 16f, (structure.Height + 1) * 16f, color * 0.35f, color); // 背景边框
             DrawPreviewFromTag(Main.spriteBatch, structure, position, 1f);
 
             Main.spriteBatch.End();
@@ -245,7 +245,7 @@ namespace ImproveGame.Content.Functions.Construction
                         Texture2D texture = GetTileDrawTexture(tileData.TileColor, tileType);
                         var normalTileRect = new Rectangle(tileData.TileFrameX, tileData.TileFrameY, 16, 16);
 
-                        int tileItemType = GetTileItem(tileType, tileData.TileFrameX, tileData.TileFrameY);
+                        int tileItemType = MyUtils.GetTileItem(tileType, tileData.TileFrameX, tileData.TileFrameY);
                         TileObjectData tileObjectData = null;
                         if (tileItemType is not -1)
                         {

@@ -50,16 +50,16 @@ public class RecipeSystem : ModSystem
 
     public override void AddRecipeGroups()
     {
-        AnyCopperBar = new RecipeGroup(() => GetText($"RecipeGroup.{nameof(AnyCopperBar)}"), ItemID.CopperBar, ItemID.TinBar);
-        AnyIronBar = new RecipeGroup(() => GetText($"RecipeGroup.{nameof(AnyIronBar)}"), ItemID.IronBar, ItemID.LeadBar);
-        AnySilverBar = new RecipeGroup(() => GetText($"RecipeGroup.{nameof(AnySilverBar)}"), ItemID.SilverBar, ItemID.TungstenBar);
-        AnyGoldBar = new RecipeGroup(() => GetText($"RecipeGroup.{nameof(AnyGoldBar)}"), ItemID.GoldBar, ItemID.PlatinumBar);
-        AnyDemoniteBar = new RecipeGroup(() => GetText($"RecipeGroup.{nameof(AnyDemoniteBar)}"), ItemID.DemoniteBar, ItemID.CrimtaneBar);
-        AnyShadowScale = new RecipeGroup(() => GetText($"RecipeGroup.{nameof(AnyShadowScale)}"), ItemID.ShadowScale, ItemID.TissueSample);
-        AnyCobaltBar = new RecipeGroup(() => GetText($"RecipeGroup.{nameof(AnyCobaltBar)}"), ItemID.CobaltBar, ItemID.PalladiumBar);
-        AnyMythrilBar = new RecipeGroup(() => GetText($"RecipeGroup.{nameof(AnyMythrilBar)}"), ItemID.MythrilBar, ItemID.OrichalcumBar);
-        AnyAdamantiteBar = new RecipeGroup(() => GetText($"RecipeGroup.{nameof(AnyAdamantiteBar)}"), ItemID.AdamantiteBar, ItemID.TitaniumBar);
-        AnyGem = new RecipeGroup(() => GetText($"RecipeGroup.{nameof(AnyGem)}"), ItemID.Sapphire, ItemID.Ruby,
+        AnyCopperBar = new RecipeGroup(() => MyUtils.GetText($"RecipeGroup.{nameof(AnyCopperBar)}"), ItemID.CopperBar, ItemID.TinBar);
+        AnyIronBar = new RecipeGroup(() => MyUtils.GetText($"RecipeGroup.{nameof(AnyIronBar)}"), ItemID.IronBar, ItemID.LeadBar);
+        AnySilverBar = new RecipeGroup(() => MyUtils.GetText($"RecipeGroup.{nameof(AnySilverBar)}"), ItemID.SilverBar, ItemID.TungstenBar);
+        AnyGoldBar = new RecipeGroup(() => MyUtils.GetText($"RecipeGroup.{nameof(AnyGoldBar)}"), ItemID.GoldBar, ItemID.PlatinumBar);
+        AnyDemoniteBar = new RecipeGroup(() => MyUtils.GetText($"RecipeGroup.{nameof(AnyDemoniteBar)}"), ItemID.DemoniteBar, ItemID.CrimtaneBar);
+        AnyShadowScale = new RecipeGroup(() => MyUtils.GetText($"RecipeGroup.{nameof(AnyShadowScale)}"), ItemID.ShadowScale, ItemID.TissueSample);
+        AnyCobaltBar = new RecipeGroup(() => MyUtils.GetText($"RecipeGroup.{nameof(AnyCobaltBar)}"), ItemID.CobaltBar, ItemID.PalladiumBar);
+        AnyMythrilBar = new RecipeGroup(() => MyUtils.GetText($"RecipeGroup.{nameof(AnyMythrilBar)}"), ItemID.MythrilBar, ItemID.OrichalcumBar);
+        AnyAdamantiteBar = new RecipeGroup(() => MyUtils.GetText($"RecipeGroup.{nameof(AnyAdamantiteBar)}"), ItemID.AdamantiteBar, ItemID.TitaniumBar);
+        AnyGem = new RecipeGroup(() => MyUtils.GetText($"RecipeGroup.{nameof(AnyGem)}"), ItemID.Sapphire, ItemID.Ruby,
             ItemID.Emerald, ItemID.Topaz, ItemID.Amethyst, ItemID.Diamond, ItemID.Amber);
 
 
@@ -131,7 +131,7 @@ public class RecipeSystem : ModSystem
     {
         // 控制微光
         // 液体法杖月后可直接微光转换为终极液体法杖
-        if (!AvailableConfig.AvailableLiquidWandAdvanced)
+        if (!MyUtils.AvailableConfig.AvailableLiquidWandAdvanced)
             return;
         int liquidWand = ModContent.ItemType<LiquidWand>();
         int liquidWandAdvanced = ModContent.ItemType<LiquidWandAdvanced>();

@@ -123,16 +123,16 @@ public partial class CreateWand
     /// <param name="tryMethod">进行放置尝试的方法，只有符合条件的才会放置</param>
     private static bool TryPlace(Item item, Player player, int x, int y)
     {
-        return BongBongPlace(x, y, item, player, true, true, false);
+        return MyUtils.BongBongPlace(x, y, item, player, true, true, false);
     }
     private static bool TryPlaceWall(Item item, Player player, int x, int y)
     {
         if (item.createWall > -1)
         {
-            TryKillTile(x, y, player);
+            MyUtils.TryKillTile(x, y, player);
             if (UIConfigs.Instance.ExplosionEffect)
             {
-                BongBong(new Vector2(x, y) * 16f, 16, 16);
+                MyUtils.BongBong(new Vector2(x, y) * 16f, 16, 16);
             }
 
             WorldGen.KillWall(x, y);
@@ -189,7 +189,7 @@ public partial class CreateWand
                 if (item == null) return false;
 
                 if (TryPlaceWall(item, player, x, y))
-                    TryConsumeItem(ref item, player);
+                    MyUtils.TryConsumeItem(ref item, player);
             }
 
             switch (tileSort.Sort)
@@ -200,7 +200,7 @@ public partial class CreateWand
                     var item = FindFirstItemInSource(itemSource);
                     if (item == null) return false;
                     if (TryPlace(item, player, x, y))
-                        TryConsumeItem(ref item, player);
+                        MyUtils.TryConsumeItem(ref item, player);
                     break;
                 case TileSort.None:
                     break;
@@ -223,7 +223,7 @@ public partial class CreateWand
             var item = FindFirstItemInSource(itemSource);
             if (item == null) return false;
             if (TryPlace(item, player, x, y))
-                TryConsumeItem(ref item, player);
+                MyUtils.TryConsumeItem(ref item, player);
 
             // 朝向特殊处理，后续看怎么加入对其它方向的支持吧
             switch (info.Sort)
@@ -281,7 +281,7 @@ public partial class CreateWand
                 CombatText.NewText(
                     player.getRect(),
                     new Color(225, 0, 0),
-                    GetText("CombatText.Item.CreateWand_NotEnough"),
+                    MyUtils.GetText("CombatText.Item.CreateWand_NotEnough"),
                     true);
             }
         }
@@ -334,9 +334,9 @@ public partial class CreateWand
             string hex = count > total ? "ff0000" : "ffff00";
             string hex2 = count > total ? "ff0000" : "00a7df";
 
-            string neededText = $"[c/{hex}:{GetText($"Architecture.{key}")}: {count}]";
+            string neededText = $"[c/{hex}:{MyUtils.GetText($"Architecture.{key}")}: {count}]";
             string hasText =
-                $"[c/{hex2}:{GetTextWith("Architecture.StoredMaterials", new { MaterialCountTotal = total, MaterialCountWand = stackInWand, MaterialCountInventory = stackInInventory })}]";
+                $"[c/{hex2}:{MyUtils.GetTextWith("Architecture.StoredMaterials", new { MaterialCountTotal = total, MaterialCountWand = stackInWand, MaterialCountInventory = stackInInventory })}]";
 
             tooltips.Add(new(Mod, $"MaterialConsume.{key}", $"{neededText}   {hasText}"));
         }

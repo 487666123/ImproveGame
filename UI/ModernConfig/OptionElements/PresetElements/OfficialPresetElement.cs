@@ -22,7 +22,7 @@ public class OfficialPresetElement : BasePresetElement
         buttonBox.JoinParent(this);
 
         var infoTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonSeed", AssetRequestMode.ImmediateLoad).Value;
-        var infoTooltip = GetText("ModernConfig.ButtonInfo");
+        var infoTooltip = MyUtils.GetText("ModernConfig.ButtonInfo");
         var infoButton = new SUIImageButton(infoTexture, infoTooltip)
         {
             Spacing = new Vector2(2),
@@ -39,7 +39,7 @@ public class OfficialPresetElement : BasePresetElement
         infoButton.JoinParent(buttonBox);
 
         var applyTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay", AssetRequestMode.ImmediateLoad).Value;
-        var applyTooltip = GetText("ModernConfig.ButtonApply");
+        var applyTooltip = MyUtils.GetText("ModernConfig.ButtonApply");
         var applyButton = new SUIImageButton(applyTexture, applyTooltip)
         {
             Spacing = new Vector2(2),

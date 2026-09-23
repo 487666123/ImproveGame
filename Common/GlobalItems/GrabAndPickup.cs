@@ -222,7 +222,7 @@ public class GrabAndPickup : GlobalItem
         }
 
         // 旗帜盒
-        if (improvePlayer.BannerChest is not null && improvePlayer.BannerChest.AutoStorage && ItemToBanner(sourceInner) != -1)
+        if (improvePlayer.BannerChest is not null && improvePlayer.BannerChest.AutoStorage && MyUtils.ItemToBanner(sourceInner) != -1)
         {
             Item cloneItem = sourceInner.Clone();
             improvePlayer.BannerChest.ItemIntoContainer(sourceInner);

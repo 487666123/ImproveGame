@@ -74,8 +74,8 @@ public class TEAutofisher : ModTileEntity
             Autofisher.TipType.FishingPower => Language.GetTextValue("GameUI.FishingPower", fishingLevel),
             Autofisher.TipType.FullFishingPower => Language.GetTextValue("GameUI.FullFishingPower", fishingLevel,
                 0.0 - Math.Round(waterQuality * 100f)),
-            Autofisher.TipType.Unavailable => GetText("UI.Autofisher.Unavailable"),
-            Autofisher.TipType.InShimmer => GetText("UI.Autofisher.InShimmer"),
+            Autofisher.TipType.Unavailable => MyUtils.GetText("UI.Autofisher.Unavailable"),
+            Autofisher.TipType.InShimmer => MyUtils.GetText("UI.Autofisher.InShimmer"),
             _ => ""
         };
         FishingTipTimer = 0;
@@ -293,7 +293,7 @@ public class TEAutofisher : ModTileEntity
                 switch (Main.netMode)
                 {
                     case NetmodeID.SinglePlayer:
-                        Main.NewText(GetText("UI.Autofisher.CarefulNextTime"), 175, 75);
+                        Main.NewText(MyUtils.GetText("UI.Autofisher.CarefulNextTime"), 175, 75);
                         Main.NewText(Language.GetTextValue("Announcement.HasAwoken", typeName), 175, 75);
                         break;
                     case NetmodeID.Server:
@@ -650,7 +650,7 @@ public class TEAutofisher : ModTileEntity
         int oldStack = item.stack;
 
         // 奇怪的文本，作为彩蛋
-        if (HasDevMark && Main.rand.NextBool(10) && Language.ActiveCulture.Name is "zh-Hans")
+        if (MyUtils.HasDevMark && Main.rand.NextBool(10) && Language.ActiveCulture.Name is "zh-Hans")
         {
             var pos = Position.ToWorldCoordinates(16, 16).ToPoint();
             var rect = new Rectangle(pos.X, pos.Y, 16, 16);
@@ -686,7 +686,7 @@ public class TEAutofisher : ModTileEntity
         for (int i = 0; i < fish.Length; i++)
         {
             int oldStackSlot = fish[i].stack;
-            item = ItemStackToInventoryItem(fish, i, item, false);
+            item = MyUtils.ItemStackToInventoryItem(fish, i, item, false);
             if (fish[i].stack != oldStackSlot && Main.netMode is NetmodeID.Server)
             {
                 // 这包是给开着钓鱼机的玩家用的，只给开着的发包就行了
@@ -756,7 +756,7 @@ public class TEAutofisher : ModTileEntity
                 if (ImproveConfigs.Instance.EmptyAutofisher)
                 {
                     var center = new Point(Position.X + 1, Position.Y + 2);
-                    GetMeterCoords(center, out NetworkText compassText, out NetworkText depthText);
+                    MyUtils.GetMeterCoords(center, out NetworkText compassText, out NetworkText depthText);
                     WorldGen.BroadcastText(NetworkText.FromKey("Mods.ImproveGame.Items.Autofisher.Tip", compassText, depthText), Color.OrangeRed);
                 }
             }
@@ -996,7 +996,7 @@ public class TEAutofisher : ModTileEntity
                 var dummyItem = item.Clone();
                 int oldStack = item.stack;
 
-                item = ItemStackToInventory(chest.item, fish[i], false);
+                item = MyUtils.ItemStackToInventory(chest.item, fish[i], false);
 
                 // 必须是消耗了，也就是真的能存 | TryConsumeBait返回true表示鱼饵消耗了
                 if (item.stack != oldStack)
@@ -1037,7 +1037,7 @@ public class TEAutofisher : ModTileEntity
                 SpawnDropItem(fish[k]);
     }
 
-    private void SpawnDropItem(Item item) => SpawnTileBreakItem(Position, item, "FishingMachine");
+    private void SpawnDropItem(Item item) => MyUtils.SpawnTileBreakItem(Position, item, "FishingMachine");
 
     // 返回的是物品禁用状态，true就是没禁用，false就是禁用了
     public bool ToggleItem(Item item)

@@ -39,11 +39,11 @@ public class TipRenderer : ModSystem
 
                 var text = CurrentState switch
                 {
-                    State.Saving => GetText("ConstructGUI.Saving") + dot,
-                    State.Saved => GetText("ConstructGUI.Saved"),
-                    State.Placing => GetText("ConstructGUI.Placing") + dot,
-                    State.Placed => GetText("ConstructGUI.Placed"),
-                    State.Stopped => GetText("ConstructGUI.Stopped"),
+                    State.Saving => MyUtils.GetText("ConstructGUI.Saving") + dot,
+                    State.Saved => MyUtils.GetText("ConstructGUI.Saved"),
+                    State.Placing => MyUtils.GetText("ConstructGUI.Placing") + dot,
+                    State.Placed => MyUtils.GetText("ConstructGUI.Placed"),
+                    State.Stopped => MyUtils.GetText("ConstructGUI.Stopped"),
                     _ => ""
                 };
 

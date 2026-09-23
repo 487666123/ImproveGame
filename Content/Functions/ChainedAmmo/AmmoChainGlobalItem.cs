@@ -50,7 +50,7 @@ public class AmmoChainGlobalItem : GlobalItem, IItemOverrideHover, IItemOverride
 
         // 至少要有能用的弹药
         int failCounter = 0;
-        var bigBagItems = GetAllInventoryItemsList(player, "portable inv", 110);
+        var bigBagItems = MyUtils.GetAllInventoryItemsList(player, "portable inv", 110);
 
         bool isNotUniversalAmmo = ammoType.ItemData.Item.type != ModContent.ItemType<UniversalAmmoIcon>();
         bool ammoDoesntFitWeapon = ammoType.ItemData.Item.ammo != weapon.useAmmo;
@@ -143,7 +143,7 @@ public class AmmoChainGlobalItem : GlobalItem, IItemOverrideHover, IItemOverride
         var item = orig.Invoke(player, weapon);
         if (item is null)
         {
-            var bigBagItems = GetAllInventoryItemsList(player, "portable, inv", 110);
+            var bigBagItems = MyUtils.GetAllInventoryItemsList(player, "portable, inv", 110);
             foreach (var ammo in bigBagItems.Where(ammo =>
                          ammo.stack > 0 && ItemLoader.CanChooseAmmo(weapon, ammo, player)))
             {

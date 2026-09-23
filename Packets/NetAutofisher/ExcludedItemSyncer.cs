@@ -22,7 +22,7 @@ public class MachineExcludedItemSyncer : NetModule
 
     public override void Receive()
     {
-        if (TryGetTileEntityAs<TEAutofisher>(_tileEntityID, out var autofisher))
+        if (MyUtils.TryGetTileEntityAs<TEAutofisher>(_tileEntityID, out var autofisher))
             autofisher.ExcludedItems = _excludedItemData;
 
         if (Main.netMode is NetmodeID.Server)

@@ -23,13 +23,13 @@ namespace ImproveGame.Content.Functions.Construction
         {
             TrUtils.TryCreatingDirectory(SavePath);
 
-            string name = $"{GetText("ConstructGUI.Structure")}{Extension}";
+            string name = $"{MyUtils.GetText("ConstructGUI.Structure")}{Extension}";
             string thisPath = Path.Combine(SavePath, name);
             if (File.Exists(thisPath))
             {
                 for (int i = 2; i <= 999; i++)
                 {
-                    name = $"{GetText("ConstructGUI.Structure")} ({i}){Extension}";
+                    name = $"{MyUtils.GetText("ConstructGUI.Structure")} ({i}){Extension}";
                     thisPath = Path.Combine(SavePath, name);
                     if (!File.Exists(thisPath))
                     {
@@ -40,7 +40,7 @@ namespace ImproveGame.Content.Functions.Construction
 
             TagIO.ToFile(new QoLStructure(rectInWorld).Tag, thisPath);
 
-            AddNotification(GetText("ConstructGUI.SavedAs") + name, Color.Yellow);
+            MyUtils.AddNotification(MyUtils.GetText("ConstructGUI.SavedAs") + name, Color.Yellow);
             // AddNotification(GetText("ConstructGUI.SavedAs") + thisPath, Color.Yellow);
 
             CachedStructureDatas.Clear();
@@ -70,7 +70,7 @@ namespace ImproveGame.Content.Functions.Construction
                 }
                 catch
                 {
-                    AddNotification(GetText("ConstructGUI.FileInfo.LoadError"), Color.Red);
+                    MyUtils.AddNotification(MyUtils.GetText("ConstructGUI.FileInfo.LoadError"), Color.Red);
                     return null;
                 }
 

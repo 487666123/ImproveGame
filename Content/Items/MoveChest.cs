@@ -321,7 +321,7 @@ public class MoveChest : ModItem, IConditionItem
     {
         if (_hasChest)
         {
-            tooltips.Add(new(Mod, "TooltipHeavy", GetText("MoveChest.Heavy")));
+            tooltips.Add(new(Mod, "TooltipHeavy", MyUtils.GetText("MoveChest.Heavy")));
         }
     }
 

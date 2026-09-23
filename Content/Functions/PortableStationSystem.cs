@@ -40,7 +40,7 @@ internal class PortableStationSystem : ModSystem
     {
         int counter = 0;
         int counter2 = 0;
-        foreach (var item in GetAllInventoryItemsList(player))
+        foreach (var item in MyUtils.GetAllInventoryItemsList(player))
         {
             if (item.createTile == -1)
                 continue;
@@ -127,7 +127,7 @@ internal class PortableStationSystem : ModSystem
         var c = new ILCursor(il);
         if (!c.TryGotoNext(MoveType.Before, i => i.MatchRet()))
         {
-            ILMatchLog(nameof(AddPortableStations), il);
+            MyUtils.ILMatchLog(nameof(AddPortableStations), il);
             return;
         }
         c.Emit(OpCodes.Ldarg_0);
@@ -156,7 +156,7 @@ internal class PortableStationSystem : ModSystem
     }
 
     internal void CheckStationsFromPlayer(Player inventorySource) =>
-        CheckStations(GetAllInventoryItemsList(inventorySource));
+        CheckStations(MyUtils.GetAllInventoryItemsList(inventorySource));
 
     /// <summary>
     /// 从某个玩家的各种物品栏中拿效果

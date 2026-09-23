@@ -9,19 +9,19 @@ namespace ImproveGame.Common.Commands
         public override CommandType Type => CommandType.Server | CommandType.Console;
         public override string Usage => "/qotpassword <password>";
         public override string Command => "qotpassword";
-        public override string Description => GetText("Configs.ImproveConfigs.OnlyHostByPassword.CommandDescription");
+        public override string Description => MyUtils.GetText("Configs.ImproveConfigs.OnlyHostByPassword.CommandDescription");
 
         public override void Action(CommandCaller caller, string input, string[] args)
         {
             if (!ImproveConfigs.Instance.OnlyHostByPassword)
             {
-                caller.Reply(GetText("Configs.ImproveConfigs.OnlyHostByPassword.NotOn"), new(206, 212, 106));
+                caller.Reply(MyUtils.GetText("Configs.ImproveConfigs.OnlyHostByPassword.NotOn"), new(206, 212, 106));
                 return;
             }
 
             if (caller.CommandType == CommandType.Console)
             {
-                caller.Reply(GetTextWith("Configs.ImproveConfigs.OnlyHostByPassword.ServerPasswordLog", new { Password = NetPasswordSystem.ConfigPassword }));
+                caller.Reply(MyUtils.GetTextWith("Configs.ImproveConfigs.OnlyHostByPassword.ServerPasswordLog", new { Password = NetPasswordSystem.ConfigPassword }));
                 return;
             }
 
@@ -35,20 +35,20 @@ namespace ImproveGame.Common.Commands
             {
                 if (char.IsLetter(args[0][i]))
                     continue;
-                caller.Reply(GetText("Configs.ImproveConfigs.OnlyHostByPassword.Format"), new(240, 40, 40));
+                caller.Reply(MyUtils.GetText("Configs.ImproveConfigs.OnlyHostByPassword.Format"), new(240, 40, 40));
                 return;
             }
 
             string password = args[0];
             if (password.ToUpper() == NetPasswordSystem.ConfigPassword)
             {
-                caller.Reply(GetText("Configs.ImproveConfigs.OnlyHostByPassword.Correct"), new(40, 240, 40));
+                caller.Reply(MyUtils.GetText("Configs.ImproveConfigs.OnlyHostByPassword.Correct"), new(40, 240, 40));
                 NetPasswordSystem.Registered[caller.Player.whoAmI] = true;
                 AuthorizedPacket.Send(caller.Player.whoAmI); // 告诉玩家已认证
             }
             else
             {
-                caller.Reply(GetText("Configs.ImproveConfigs.OnlyHostByPassword.Incorrect"), new(240, 40, 40));
+                caller.Reply(MyUtils.GetText("Configs.ImproveConfigs.OnlyHostByPassword.Incorrect"), new(240, 40, 40));
             }
         }
     }

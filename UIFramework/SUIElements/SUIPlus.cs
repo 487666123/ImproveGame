@@ -45,7 +45,7 @@ namespace ImproveGame.UIFramework.SUIElements
             //Vector2 forkPos = pos + (size - new Vector2(PlusSize)) / 2f;
             //SDFGraphics.HasBorderCross(forkPos + CrossOffset, default, PlusSize, PlusRounded, fork, PlusBorder, borderColor, GetMatrix(true));
 
-            SDFGraphics.HasBorderPlus(GetDimensions().Center(), new Vector2(.5f), PlusSize * .6f, PlusSize * .3f, PlusRounded, fork, PlusBorder, borderColor, GetMatrix(true));
+            SDFGraphics.HasBorderPlus(GetDimensions().Center(), new Vector2(.5f), PlusSize * .6f, PlusSize * .3f, PlusRounded, fork, PlusBorder, borderColor, MyUtils.GetMatrix(true));
         }
     }
 }

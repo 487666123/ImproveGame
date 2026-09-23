@@ -43,7 +43,7 @@ public class ActuationRodMkII : SelectorItem, IConditionItem
         switch (player.altFunctionUse)
         {
             case 0:
-                ItemRotation(player);
+                MyUtils.ItemRotation(player);
                 break;
             case 2:
                 return false;

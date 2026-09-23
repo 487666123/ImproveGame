@@ -175,7 +175,7 @@ public sealed partial class ConfigOptionsPanel : SUIPanel
         };
         _searchBar.ContentsChanged += SearchBarTextChanged;
         _searchBar.InnerText.TextOffset.X = 6f;
-        _searchBar.InnerText.Placeholder = GetText("Search");
+        _searchBar.InnerText.Placeholder = MyUtils.GetText("Search");
         _searchBar.SetSize(0f, searchBarHeight, 1f);
         _searchBar.JoinParent(this);
 
@@ -246,9 +246,9 @@ public sealed partial class ConfigOptionsPanel : SUIPanel
         var optionNames = _allOptions
             .Select(o => ItemTagRegex().Replace(o.Label, "")).ToList();
         // 调用DeepSeek写的搜索方法
-        var results = TextSearch(text, optionNames);
+        var results = MyUtils.TextSearch(text, optionNames);
         // 对结果进行处理
-        foreach (SearchResult result in results)
+        foreach (MyUtils.SearchResult result in results)
         {
             var option = _allOptions[result.OriginalIndex];
             // 将allOptions里的对应元素按照次序生成排序后的列表

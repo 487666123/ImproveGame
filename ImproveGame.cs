@@ -10,7 +10,7 @@ public class ImproveGame : Mod
 {
     private class DisplayNameUpdater : ModSystem
     {
-        public override void OnLocalizationsLoaded() => Instance.DisplayName = GetText("ModName");
+        public override void OnLocalizationsLoaded() => Instance.DisplayName = MyUtils.GetText("ModName");
     }
 
     public static ImproveGame Instance => ModContent.GetInstance<ImproveGame>();

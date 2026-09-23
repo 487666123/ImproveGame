@@ -61,8 +61,8 @@ public partial class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClicka
     {
         // 决定文本显示的是“开启”还是“关闭”
         string text = CreateWandController.Instance?.Enabled is false or null ? "Off" : "On";
-        TryGetKeybindString(KeybindSystem.ItemInteractKeybind, out string keybind);
-        tooltips.Add(new TooltipLine(Mod, "CreateWand", GetTextWith($"Tips.CreateWand{text}", new { KeybindName = keybind }))
+        MyUtils.TryGetKeybindString(KeybindSystem.ItemInteractKeybind, out string keybind);
+        tooltips.Add(new TooltipLine(Mod, "CreateWand", MyUtils.GetTextWith($"Tips.CreateWand{text}", new { KeybindName = keybind }))
         { Color = Color.LightGreen });
     }
 
@@ -76,12 +76,12 @@ public partial class CreateWand : ModItem, IItemOverrideHover, IItemMiddleClicka
     {
         ((IItemMiddleClickable)this).HandleTooltips(Item, tooltips);
 
-        tooltips.Add(new(Mod, "MaterialConsume", $"[c/ffff00:{GetText("Architecture.MaterialsRequired")}]"));
+        tooltips.Add(new(Mod, "MaterialConsume", $"[c/ffff00:{MyUtils.GetText("Architecture.MaterialsRequired")}]"));
 
         ModifyTooltipLine_MaterialInfo(tooltips);
 
 
-        tooltips.Add(new TooltipLine(Mod, "TagDetailed.CreateWand", GetText("Tips.TagDetailed.CreateWand")) { Color = Color.SkyBlue });
+        tooltips.Add(new TooltipLine(Mod, "TagDetailed.CreateWand", MyUtils.GetText("Tips.TagDetailed.CreateWand")) { Color = Color.SkyBlue });
         TagItem.AddShiftForMoreTooltip(tooltips);
     }
 

@@ -57,7 +57,7 @@ internal abstract class AutofisherFilterButton : UIElement
 
             Main.LocalPlayer.mouseInterface = true;
 
-            Main.instance.MouseText(GetText($"UI.Autofisher.{GetType().Name}"));
+            Main.instance.MouseText(MyUtils.GetText($"UI.Autofisher.{GetType().Name}"));
         }
         else
         {

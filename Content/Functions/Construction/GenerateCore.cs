@@ -62,7 +62,7 @@ namespace ImproveGame.Content.Functions.Construction
                 {
                     var placePosition = position + new Point(x, y);
                     Tile tile = Main.tile[placePosition.X, placePosition.Y];
-                    if (tile.HasTile && TryKillTile(placePosition.X, placePosition.Y, Main.LocalPlayer))
+                    if (tile.HasTile && MyUtils.TryKillTile(placePosition.X, placePosition.Y, Main.LocalPlayer))
                     {
                         _taskProcessed++;
                     }
@@ -100,7 +100,7 @@ namespace ImproveGame.Content.Functions.Construction
                         tileItemFindType = TileID.Dirt;
                     }
 
-                    int tileItemType = GetTileItem(tileItemFindType, tileData.TileFrameX, tileData.TileFrameY);
+                    int tileItemType = MyUtils.GetTileItem(tileItemFindType, tileData.TileFrameX, tileData.TileFrameY);
                     if (tileItemType == -1 || Main.tile[placePosition].HasTile)
                     {
                         continue;
@@ -112,18 +112,18 @@ namespace ImproveGame.Content.Functions.Construction
                     {
                         continue;
                     }
-                    if (!HasDevMark)
+                    if (!MyUtils.HasDevMark)
                     {
-                        var inventory = GetAllInventoryItemsList(Main.LocalPlayer, "portable").ToArray();
-                        PickItemFromArray(Main.LocalPlayer, inventory, item =>
+                        var inventory = MyUtils.GetAllInventoryItemsList(Main.LocalPlayer, "portable").ToArray();
+                        MyUtils.PickItemFromArray(Main.LocalPlayer, inventory, item =>
                                 item.type == tileItemType &&
-                                TryPlaceTile(placePosition.X, placePosition.Y, item, Main.LocalPlayer, forced: true),
+                                MyUtils.TryPlaceTile(placePosition.X, placePosition.Y, item, Main.LocalPlayer, forced: true),
                             true);
                     }
                     else
                     {
                         var item = new Item(tileItemType);
-                        TryPlaceTile(placePosition.X, placePosition.Y, item, Main.LocalPlayer, forced: true);
+                        MyUtils.TryPlaceTile(placePosition.X, placePosition.Y, item, Main.LocalPlayer, forced: true);
                     }
 
                     // 挖掉重来！
@@ -174,16 +174,16 @@ namespace ImproveGame.Content.Functions.Construction
                     int index = y + x * (height + 1);
                     var placePosition = position + new Point(x, y);
                     TileDefinition tileData = structure.StructureDatas[index];
-                    int wallItemType = GetWallItem(structure.ParseWallType(tileData));
+                    int wallItemType = MyUtils.GetWallItem(structure.ParseWallType(tileData));
                     if (wallItemType == -1 || Main.tile[placePosition].WallType != 0)
                     {
                         continue;
                     }
 
-                    if (!HasDevMark)
+                    if (!MyUtils.HasDevMark)
                     {
-                        var inventory = GetAllInventoryItemsList(Main.LocalPlayer, "portable").ToArray();
-                        PickItemFromArray(Main.LocalPlayer, inventory, item =>
+                        var inventory = MyUtils.GetAllInventoryItemsList(Main.LocalPlayer, "portable").ToArray();
+                        MyUtils.PickItemFromArray(Main.LocalPlayer, inventory, item =>
                                 item.type == wallItemType &&
                                 TryPlaceWall(item, placePosition.X, placePosition.Y),
                             true);
@@ -231,7 +231,7 @@ namespace ImproveGame.Content.Functions.Construction
                     int tileType = structure.ParseTileType(tileData);
                     if (tileType is -1)
                         continue;
-                    var tileObjectData = GetTileData(tileType, tileData.TileFrameX, tileData.TileFrameY);
+                    var tileObjectData = MyUtils.GetTileData(tileType, tileData.TileFrameX, tileData.TileFrameY);
                     if (tileObjectData is null || (tileObjectData.CoordinateFullWidth <= 18 &&
                                                    tileObjectData.CoordinateFullHeight <= 18))
                     {
@@ -242,7 +242,7 @@ namespace ImproveGame.Content.Functions.Construction
                                tileObjectData.CoordinateFullWidth;
                     int subY = (tileData.TileFrameY / tileObjectData.CoordinateFullHeight) *
                                tileObjectData.CoordinateFullHeight;
-                    int tileItemType = GetTileItem(tileType, subX, subY);
+                    int tileItemType = MyUtils.GetTileItem(tileType, subX, subY);
                     if (tileItemType == -1)
                     {
                         continue;
@@ -274,19 +274,19 @@ namespace ImproveGame.Content.Functions.Construction
                     bool _TryPlace(Item item)
                     {
                         if (TileID.Sets.BasicChest[item.createTile])
-                            return PlaceChestNoSync(placePosition.X, placePosition.Y, (ushort)item.createTile, false, item.placeStyle) != -1;
+                            return MyUtils.PlaceChestNoSync(placePosition.X, placePosition.Y, (ushort)item.createTile, false, item.placeStyle) != -1;
                         else if (TileID.Sets.BasicDresser[item.createTile])
-                            return Place3x2NoSyncDresser(placePosition.X, placePosition.Y, (ushort)item.createTile, item.placeStyle);
+                            return MyUtils.Place3x2NoSyncDresser(placePosition.X, placePosition.Y, (ushort)item.createTile, item.placeStyle);
                         else if (tileObjectData is { Width: 1, Height: 1 })
-                            return TryPlaceTile(placePosition.X, placePosition.Y, item, Main.LocalPlayer, forced: true);
+                            return MyUtils.TryPlaceTile(placePosition.X, placePosition.Y, item, Main.LocalPlayer, forced: true);
                         else
-                            return TryPlaceMultiTileDirect(placePosition, item.createTile, item.placeStyle, direction, out _);
+                            return MyUtils.TryPlaceMultiTileDirect(placePosition, item.createTile, item.placeStyle, direction, out _);
                     }
 
-                    if (!HasDevMark)
+                    if (!MyUtils.HasDevMark)
                     {
-                        var inventory = GetAllInventoryItemsList(Main.LocalPlayer, "portable").ToArray();
-                        PickItemFromArray(Main.LocalPlayer, inventory, item =>
+                        var inventory = MyUtils.GetAllInventoryItemsList(Main.LocalPlayer, "portable").ToArray();
+                        MyUtils.PickItemFromArray(Main.LocalPlayer, inventory, item =>
                                 item is not null && item.type == tileItemType &&
                                 _TryPlace(item),
                             true);
@@ -353,11 +353,11 @@ namespace ImproveGame.Content.Functions.Construction
                             return false;
                         }
 
-                        var inventory = GetAllInventoryItemsList(Main.LocalPlayer, "portable").ToArray();
-                        var item = PickItemFromArray(Main.LocalPlayer, inventory, TryConsume, false);
-                        if (HasDevMark)
+                        var inventory = MyUtils.GetAllInventoryItemsList(Main.LocalPlayer, "portable").ToArray();
+                        var item = MyUtils.PickItemFromArray(Main.LocalPlayer, inventory, TryConsume, false);
+                        if (MyUtils.HasDevMark)
                             item = new Item(ItemID.Actuator);
-                        TryConsumeItem(ref item, Main.LocalPlayer, true); // 要手动consume (即无视consumable)
+                        MyUtils.TryConsumeItem(ref item, Main.LocalPlayer, true); // 要手动consume (即无视consumable)
                     }
 
                     tile.WallColor = tileData.WallColor;
@@ -379,9 +379,9 @@ namespace ImproveGame.Content.Functions.Construction
                             return true;
                         }
 
-                        var inventory = GetAllInventoryItemsList(Main.LocalPlayer, "portable").ToArray();
-                        var item = PickItemFromArray(Main.LocalPlayer, inventory, TryConsume, false);
-                        TryConsumeItem(ref item, Main.LocalPlayer, true); // 要手动consume (即无视consumable)
+                        var inventory = MyUtils.GetAllInventoryItemsList(Main.LocalPlayer, "portable").ToArray();
+                        var item = MyUtils.PickItemFromArray(Main.LocalPlayer, inventory, TryConsume, false);
+                        MyUtils.TryConsumeItem(ref item, Main.LocalPlayer, true); // 要手动consume (即无视consumable)
                         return hasWire;
                     }
 

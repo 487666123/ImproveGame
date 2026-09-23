@@ -30,7 +30,7 @@ public class ItemsSyncAllPacket : NetModule
 
     public override void Receive()
     {
-        if (!TryGetTileEntityAs<TEAutofisher>(tileEntityID, out var autofisher) ||
+        if (!MyUtils.TryGetTileEntityAs<TEAutofisher>(tileEntityID, out var autofisher) ||
             TileLoader.GetTile(Main.tile[autofisher.Position.ToPoint()].TileType) is not Autofisher fisherTile)
         {
             return;
@@ -79,7 +79,7 @@ public class ItemsStackChangePacket : NetModule
 
     public override void Receive()
     {
-        if (!TryGetTileEntityAs<TEAutofisher>(tileEntityID, out var autofisher))
+        if (!MyUtils.TryGetTileEntityAs<TEAutofisher>(tileEntityID, out var autofisher))
         {
             return;
         }
@@ -160,7 +160,7 @@ public class ItemSyncPacket : NetModule
         var module = NetModuleLoader.Get<ItemSyncPacket>();
         module.tileEntityID = tileEntityID;
         module.type = type;
-        TryGetTileEntityAs<TEAutofisher>(tileEntityID, out var autofisher);
+        MyUtils.TryGetTileEntityAs<TEAutofisher>(tileEntityID, out var autofisher);
         module.fishingPole = autofisher.fishingPole;
         module.bait = autofisher.bait;
         module.accessory = autofisher.accessory;
@@ -250,7 +250,7 @@ public class ItemSyncPacket : NetModule
 
     public override void Receive()
     {
-        if (TryGetTileEntityAs<TEAutofisher>(tileEntityID, out var autofisher))
+        if (MyUtils.TryGetTileEntityAs<TEAutofisher>(tileEntityID, out var autofisher))
         {
             if (type <= Fishes)
                 autofisher.fish[type] = fish[type];

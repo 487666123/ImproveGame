@@ -27,7 +27,7 @@ public class SeedTypePacket : NetModule
             return;
         }
 
-        ref bool featureFlag = ref GetSeedFeatureFlag(_seedType);
+        ref bool featureFlag = ref MyUtils.GetSeedFeatureFlag(_seedType);
         featureFlag = _setMode switch
         {
             0 => false,

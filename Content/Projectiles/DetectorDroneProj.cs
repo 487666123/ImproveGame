@@ -81,7 +81,7 @@ public class DetectorDroneProj : ModProjectile
         {
             shouldBeKilled = true;
             if (Projectile.owner == Main.myPlayer)
-                AddNotification(this.GetLocalizedValue("TooFarAway"));
+                MyUtils.AddNotification(this.GetLocalizedValue("TooFarAway"));
         }
 
         if (shouldBeKilled)

@@ -145,9 +145,9 @@ public class ModernConfigOption : TimerView
             {
                 var dimension = v.GetDimensions();
                 if (v.IsMouseHovering)
-                    SDFGraphics.BarStarX(dimension.Center(), new(.5f), dimension.Width * .5f, 4, .5f, TextureAssets.Extra[180].Value, Main.GlobalTimeWrappedHourly, 0.15f, GetMatrix(true));
+                    SDFGraphics.BarStarX(dimension.Center(), new(.5f), dimension.Width * .5f, 4, .5f, TextureAssets.Extra[180].Value, Main.GlobalTimeWrappedHourly, 0.15f, MyUtils.GetMatrix(true));
                 else
-                    SDFGraphics.NoBorderStarX(dimension.Center(), new(.5f), dimension.Width * .5f, 4, .5f, Color.Yellow, GetMatrix(true));
+                    SDFGraphics.NoBorderStarX(dimension.Center(), new(.5f), dimension.Width * .5f, 4, .5f, Color.Yellow, MyUtils.GetMatrix(true));
                 //SDFRectangle.HasBorder(dimension.Position(),dimension.Size(),v.Rounded,v.BgColor,v.);
             })
             {
@@ -172,7 +172,7 @@ public class ModernConfigOption : TimerView
             };
             customButton.OnMouseOver += (evt, elem) =>
             {
-                string info = GetText("ModernConfig.CustomItemTip");
+                string info = MyUtils.GetText("ModernConfig.CustomItemTip");
                 ModernConfigUI.PopNewInfo(info, elem.GetDimensions().Position() - FontAssets.MouseText.Value.MeasureString(info), Color.Cyan);
             };
 
@@ -195,11 +195,11 @@ public class ModernConfigOption : TimerView
                 ? Color.Gold
                 : Color.White;
             if (ReloadRequired)
-                labelElement.DisplayText = ConvertLeftRight(Label) + (ValueChanged ? $" - [c/FF0000:{Language.GetTextValue("tModLoader.ModReloadRequired")}]" : "");
+                labelElement.DisplayText = MyUtils.ConvertLeftRight(Label) + (ValueChanged ? $" - [c/FF0000:{Language.GetTextValue("tModLoader.ModReloadRequired")}]" : "");
             //else if (labelElement.DisplayText == "")
             //    labelElement.DisplayText = ConvertLeftRight(Label);
             else
-                labelElement.DisplayText = ConvertLeftRight(Label);
+                labelElement.DisplayText = MyUtils.ConvertLeftRight(Label);
 
         };
         labelElement.JoinParent(this);
@@ -317,7 +317,7 @@ public class ModernConfigOption : TimerView
 
         if (f)
         {
-            string readOnlyTip = GetText("ModernConfig.ReadOnlyTip");
+            string readOnlyTip = MyUtils.GetText("ModernConfig.ReadOnlyTip");
             UICommon.TooltipMouseText(readOnlyTip);
         }
         if (Interactable)
@@ -325,7 +325,7 @@ public class ModernConfigOption : TimerView
 
         if (CantOperateDueToOnlyGetter)
         {
-            string readOnlyTip = GetText("ModernConfig.ReadOnlyTip");
+            string readOnlyTip = MyUtils.GetText("ModernConfig.ReadOnlyTip");
             UICommon.TooltipMouseText(readOnlyTip);
         }
         else if (ReloadRequired)
@@ -336,12 +336,12 @@ public class ModernConfigOption : TimerView
         }
         else if (CantOperateDueToHostVerification)
         {
-            string hostTip = GetText("Configs.ImproveConfigs.OnlyHost.Tips");
+            string hostTip = MyUtils.GetText("Configs.ImproveConfigs.OnlyHost.Tips");
             UICommon.TooltipMouseText(hostTip);
         }
         else if (CantOperateDueToPasswordVerification)
         {
-            string passwordTip = GetText("Configs.ImproveConfigs.OnlyHostByPassword.Tips");
+            string passwordTip = MyUtils.GetText("Configs.ImproveConfigs.OnlyHostByPassword.Tips");
             UICommon.TooltipMouseText(passwordTip);
         }
         //else if (CantOperateDueToCustomCondition(out var networkText)) 
@@ -367,7 +367,7 @@ public class ModernConfigOption : TimerView
         textPosition.Y += 6;
         textPosition.X -= 80;
 
-        DrawString(textPosition, text, Color.Gray, Color.Black, Vector2.Zero, 0.8f, false, 1);
+        MyUtils.DrawString(textPosition, text, Color.Gray, Color.Black, Vector2.Zero, 0.8f, false, 1);
 
         // 不希望绘制Tag文字
         // ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.MouseText.Value, text, textPosition, Color.Gray, Color.Black, 0f, Vector2.Zero, new Vector2(0.8f), -1f, 1f);

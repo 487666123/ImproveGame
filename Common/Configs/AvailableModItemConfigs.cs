@@ -6,7 +6,7 @@ namespace ImproveGame.Common.Configs;
 public class AvailableModItemConfigs : ModConfig
 {
     public override ConfigScope Mode => ConfigScope.ServerSide;
-    public override void OnLoaded() => AvailableConfig = this;
+    public override void OnLoaded() => MyUtils.AvailableConfig = this;
 
     [DefaultValue(true)]
     public bool AvailableMagickWand = true;

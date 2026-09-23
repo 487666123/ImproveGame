@@ -61,7 +61,7 @@ public class ToolOperation : NetModule
 
     public override void Receive()
     {
-        if (!TryGetTileEntityAs<TEExtremeStorage>(_tileEntityID, out var tileEntity)) return;
+        if (!MyUtils.TryGetTileEntityAs<TEExtremeStorage>(_tileEntityID, out var tileEntity)) return;
 
         // 获取所有箱子
         var group = (ItemGroup)_group;
@@ -403,7 +403,7 @@ public class ToolOperation : NetModule
                 orig.Invoke(worldPosition, duration);
 
                 var tilePosition = (worldPosition - new Vector2(16f)).ToTileCoordinates();
-                if (!TryGetTileEntityAs<TEExtremeStorage>(tilePosition, out _)) return;
+                if (!MyUtils.TryGetTileEntityAs<TEExtremeStorage>(tilePosition, out _)) return;
 
                 CoroutineSystem.MiscRunner.Run(duration - 10, DoRandomGrabSoundInner());
                 return;

@@ -258,7 +258,7 @@ public sealed class ModernConfigUI : UIState
         }
         else
         {
-            ExtraText = GetText("ModernConfig.ModdedExtraText", mod.DisplayName);
+            ExtraText = MyUtils.GetText("ModernConfig.ModdedExtraText", mod.DisplayName);
             if (CategorySidePanel.ModdedAboutPage.TryGetValue(mod, out var value))
                 ConfigOptionsPanel.CategoryToSelectOnOpen = value;
             else

@@ -14,7 +14,7 @@ public class SUITitle : View
         set
         {
             _textScale = value;
-            TextSize = GetFontSize(_text, true) * _textScale;
+            TextSize = MyUtils.GetFontSize(_text, true) * _textScale;
         }
     }
 
@@ -26,7 +26,7 @@ public class SUITitle : View
         set
         {
             _text = value;
-            TextSize = GetFontSize(_text, true) * TextScale;
+            TextSize = MyUtils.GetFontSize(_text, true) * TextScale;
         }
     }
 
@@ -54,6 +54,6 @@ public class SUITitle : View
         Vector2 textOffset = (innerSize - TextSize) * TextAlign + TextOffset;
         textOffset.Y += UIConfigs.Instance.BigFontOffsetY * TextScale;
         Vector2 textPos = innerPos + textOffset;
-        DrawString(textPos, _text, TextColor, TextBorderColor, TextScale, true);
+        MyUtils.DrawString(textPos, _text, TextColor, TextBorderColor, TextScale, true);
     }
 }

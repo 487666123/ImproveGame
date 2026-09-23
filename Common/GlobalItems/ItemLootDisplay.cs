@@ -12,14 +12,14 @@ public class ItemLootDisplay : GlobalItem
         if (Main.ItemDropsDB.GetRulesForItemID(item.type).Count <= 0)
             return;
 
-        bool hasKeybind = TryGetKeybindString(KeybindSystem.GrabBagKeybind, out var keybind);
-        tooltips.Add(new TooltipLine(Mod, "LootDisplay", GetTextWith("Tips.LootDisplay", new { KeybindName = keybind }))
+        bool hasKeybind = MyUtils.TryGetKeybindString(KeybindSystem.GrabBagKeybind, out var keybind);
+        tooltips.Add(new TooltipLine(Mod, "LootDisplay", MyUtils.GetTextWith("Tips.LootDisplay", new { KeybindName = keybind }))
         {
             Color = Color.SkyBlue
         });
         if (!hasKeybind)
         {
-            tooltips.Add(new TooltipLine(Mod, "LootDisplay", GetText("Tips.LootDisplayBindless"))
+            tooltips.Add(new TooltipLine(Mod, "LootDisplay", MyUtils.GetText("Tips.LootDisplayBindless"))
             {
                 Color = Color.SkyBlue
             });

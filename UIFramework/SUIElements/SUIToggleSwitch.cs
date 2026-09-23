@@ -76,7 +76,7 @@ public class SUIToggleSwitch : TimerView
 
         float circleSize = Math.Min(innerSize.X, innerSize.Y);
 
-        SDFGraphics.NoBorderRound(innerPos + (innerSize - new Vector2(circleSize)) * SwitchTimer, default, circleSize, ToggleCircleColor, GetMatrix(true));
+        SDFGraphics.NoBorderRound(innerPos + (innerSize - new Vector2(circleSize)) * SwitchTimer, default, circleSize, ToggleCircleColor, MyUtils.GetMatrix(true));
     }
 
     public static View CreateTextSwitch(out SUIToggleSwitch toggleSwitch, out SUIText text)

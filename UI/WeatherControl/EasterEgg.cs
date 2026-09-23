@@ -53,7 +53,7 @@ public partial class WeatherAmbientElement
             return;
 
         SoundEngine.PlaySound(SoundID.Grass);
-        AddNotification(GetText("UI.WeatherGUI.EasterEgg"));
+        MyUtils.AddNotification(MyUtils.GetText("UI.WeatherGUI.EasterEgg"));
         _easterEggActivated = true;
         _easterCurrentTime = 0;
         FillSegments(out _easterTotalTime);

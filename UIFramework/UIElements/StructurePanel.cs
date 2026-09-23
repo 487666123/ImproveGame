@@ -129,7 +129,7 @@ namespace ImproveGame.UIFramework.UIElements
             };
             PathPanel.SetSize(new(Width.Pixels + RenameButton.Left.Pixels - 44f, 23f));
             Append(PathPanel);
-            PathText = new($"{GetText("ConstructGUI.Path")}{FilePath}", 0.7f)
+            PathText = new($"{MyUtils.GetText("ConstructGUI.Path")}{FilePath}", 0.7f)
             {
                 Left = StyleDimension.FromPixels(2f),
                 HAlign = 0f,
@@ -171,7 +171,7 @@ namespace ImproveGame.UIFramework.UIElements
 
             if (File.Exists(newPath) && Name != _inputName)
             {
-                AddNotification(GetText("ConstructGUI.RenameTip.Exists"));
+                MyUtils.AddNotification(MyUtils.GetText("ConstructGUI.RenameTip.Exists"));
                 NameText.SetText(Name);
                 return;
             }
@@ -277,11 +277,11 @@ namespace ImproveGame.UIFramework.UIElements
                 if (inputText.Length > 40)
                 {
                     inputText = inputText[..40];
-                    AddNotification(GetText("ConstructGUI.RenameTip.TooLong"));
+                    MyUtils.AddNotification(MyUtils.GetText("ConstructGUI.RenameTip.TooLong"));
                 }
                 if (inputText.Contains('\\') || inputText.Contains('/') || inputText.Contains(':') || inputText.Contains('*') || inputText.Contains('?') || inputText.Contains('\"') || inputText.Contains('\'') || inputText.Contains('<') || inputText.Contains('>') || inputText.Contains('|'))
                 {
-                    AddNotification(GetText("PathIllegal"));
+                    MyUtils.AddNotification(MyUtils.GetText("PathIllegal"));
                     return;
                 }
                 else
@@ -303,7 +303,7 @@ namespace ImproveGame.UIFramework.UIElements
 
         public void SetSizedText()
         {
-            string pathString = GetText("ConstructGUI.Path");
+            string pathString = MyUtils.GetText("ConstructGUI.Path");
             var innerDimensions = PathPanel.GetInnerDimensions();
             var font = FontAssets.MouseText.Value;
             float scale = 0.7f;

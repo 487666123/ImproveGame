@@ -29,7 +29,7 @@ public class BaseStatsCategory(Texture2D texture, string nameKey, bool isAddedFr
 
     public string NameKey { get; set; } = nameKey;
 
-    public string Name => IsAddedFromCall ? Language.GetTextValue(NameKey) : GetText(NameKey);
+    public string Name => IsAddedFromCall ? Language.GetTextValue(NameKey) : MyUtils.GetText(NameKey);
 
     /// <summary>
     /// 创建卡片

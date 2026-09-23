@@ -41,14 +41,14 @@ namespace ImproveGame.Content.Functions.Construction
                     bool isMaterialVaild;
                     if (tileObjectData is null || (tileObjectData.CoordinateFullWidth <= 18 && tileObjectData.CoordinateFullHeight <= 18))
                     {
-                        tileItemType = GetTileItem(tileType, tileData.TileFrameX, tileData.TileFrameY);
+                        tileItemType = MyUtils.GetTileItem(tileType, tileData.TileFrameX, tileData.TileFrameY);
                         isMaterialVaild = true;
                     }
                     else
                     {
                         int subX = (tileData.TileFrameX / tileObjectData.CoordinateFullWidth) * tileObjectData.CoordinateFullWidth;
                         int subY = (tileData.TileFrameY / tileObjectData.CoordinateFullHeight) * tileObjectData.CoordinateFullHeight;
-                        tileItemType = GetTileItem(tileType, subX, subY);
+                        tileItemType = MyUtils.GetTileItem(tileType, subX, subY);
 
                         subX = tileData.TileFrameX % tileObjectData.CoordinateFullWidth;
                         subY = tileData.TileFrameY % tileObjectData.CoordinateFullHeight;
@@ -60,7 +60,7 @@ namespace ImproveGame.Content.Functions.Construction
                         PlusMaterial(tileItemType);
                 }
 
-                int wallItemType = GetWallItem(structure.ParseWallType(tileData));
+                int wallItemType = MyUtils.GetWallItem(structure.ParseWallType(tileData));
                 if (wallItemType != -1)
                     PlusMaterial(wallItemType);
 

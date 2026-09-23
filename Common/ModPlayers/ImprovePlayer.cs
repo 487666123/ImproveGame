@@ -96,13 +96,13 @@ public class ImprovePlayer : ModPlayer
         {
             if (!Player.IsVoidVaultEnabled)
             {
-                Player.IsVoidVaultEnabled = InventoryHasItemFast(Player, ItemID.VoidVault);
+                Player.IsVoidVaultEnabled = MyUtils.InventoryHasItemFast(Player, ItemID.VoidVault);
             }
 
             // 激活猪猪钱罐的条件：猪猪钱罐，铅笔槽，眼骨
-            HasPiggyBank = InventoryHasItemFast(Player, ItemID.PiggyBank, ItemID.ChesterPetItem, ItemID.MoneyTrough);
-            HasSafe = InventoryHasItemFast(Player, ItemID.Safe);
-            HasDefendersForge = InventoryHasItemFast(Player, ItemID.DefendersForge);
+            HasPiggyBank = MyUtils.InventoryHasItemFast(Player, ItemID.PiggyBank, ItemID.ChesterPetItem, ItemID.MoneyTrough);
+            HasSafe = MyUtils.InventoryHasItemFast(Player, ItemID.Safe);
+            HasDefendersForge = MyUtils.InventoryHasItemFast(Player, ItemID.DefendersForge);
         }
 
         BannerChest = null;
@@ -162,7 +162,7 @@ public class ImprovePlayer : ModPlayer
                 0f, 100f) / 100f;
         if (timeShortened > 0f)
         {
-            int ct = CombatText.NewText(Player.getRect(), new(25, 255, 25), GetTextWith(
+            int ct = CombatText.NewText(Player.getRect(), new(25, 255, 25), MyUtils.GetTextWith(
                 "CombatText.Commonds.ResurrectionTimeShortened", new
                 {
                     Name = Player.name,
@@ -316,7 +316,7 @@ public class ImprovePlayer : ModPlayer
         if (Player.ItemAnimationActive) return;
 
         int itemType = ItemID.None;
-        var items = GetAllInventoryItemsList(Player);
+        var items = MyUtils.GetAllInventoryItemsList(Player);
         foreach (var item in items)
         {
             if (item.type == ItemID.RodOfHarmony)
@@ -333,7 +333,7 @@ public class ImprovePlayer : ModPlayer
             return;
 
         _oldItemSelected = Player.selectedItem;
-        UseItemByType(Player, itemType);
+        MyUtils.UseItemByType(Player, itemType);
     }
 
     private void PressExtremeStorageSearchKeybind()

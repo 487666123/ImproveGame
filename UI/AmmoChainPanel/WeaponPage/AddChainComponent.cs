@@ -22,7 +22,7 @@ public class AddChainComponent(WeaponPage parent) : ToolComponent(parent)
 
     private void Click()
     {
-        string name = GetText("UI.AmmoChain.FileName");
+        string name = MyUtils.GetText("UI.AmmoChain.FileName");
         AmmoChainUI.Instance.StartEditingChain(new AmmoChain(), true, name);
         SoundEngine.PlaySound(SoundID.Item37);
         AmmoChainUI.Instance.GenerateParticleAtMouse();

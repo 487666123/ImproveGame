@@ -53,33 +53,33 @@ public partial class AutofisherGUI : BaseBody, ISidedView
         basePanel.SetPos(panelLeft, panelTop).SetSize(panelWidth, panelHeight);
         Append(basePanel);
 
-        accessorySlot = CreateItemSlot(
+        accessorySlot = MyUtils.CreateItemSlot(
             100f, 0f,
-            canPlace: (i, item) => SlotPlace(i, item) || ModIntegrationsSystem.FishingStatLookup.ContainsKey(item.type),
+            canPlace: (i, item) => MyUtils.SlotPlace(i, item) || ModIntegrationsSystem.FishingStatLookup.ContainsKey(item.type),
             onItemChanged: ChangeAccessorySlot,
-            emptyText: () => GetText("UI.Autofisher.Accessory"),
+            emptyText: () => MyUtils.GetText("UI.Autofisher.Accessory"),
             parent: basePanel,
             folderName: "Autofisher",
             iconTextureName: "Slot_Accessory"
         );
         accessorySlot.AllowFavorite = false;
 
-        fishingPoleSlot = CreateItemSlot(
+        fishingPoleSlot = MyUtils.CreateItemSlot(
             150, 0f,
-            canPlace: (i, item) => SlotPlace(i, item) || item.fishingPole > 0,
+            canPlace: (i, item) => MyUtils.SlotPlace(i, item) || item.fishingPole > 0,
             onItemChanged: ChangeFishingPoleSlot,
-            emptyText: () => GetText("UI.Autofisher.FishingPole"),
+            emptyText: () => MyUtils.GetText("UI.Autofisher.FishingPole"),
             parent: basePanel,
             folderName: "Autofisher",
             iconTextureName: "Slot_FishingPole"
         );
         fishingPoleSlot.AllowFavorite = false;
 
-        baitSlot = CreateItemSlot(
+        baitSlot = MyUtils.CreateItemSlot(
             200f, 0f,
-            canPlace: (i, item) => SlotPlace(i, item) || item.bait > 0,
+            canPlace: (i, item) => MyUtils.SlotPlace(i, item) || item.bait > 0,
             onItemChanged: ChangeBaitSlot,
-            emptyText: () => GetText("UI.Autofisher.Bait"),
+            emptyText: () => MyUtils.GetText("UI.Autofisher.Bait"),
             parent: basePanel,
             folderName: "Autofisher",
             iconTextureName: "Slot_Bait"
@@ -117,8 +117,8 @@ public partial class AutofisherGUI : BaseBody, ISidedView
         };
         textPanel.Append(tipText);
 
-        selectPoolOff = GetTexture("UI/Autofisher/SelectPoolOff");
-        selectPoolOn = GetTexture("UI/Autofisher/SelectPoolOn");
+        selectPoolOff = MyUtils.GetTexture("UI/Autofisher/SelectPoolOff");
+        selectPoolOn = MyUtils.GetTexture("UI/Autofisher/SelectPoolOn");
         relocateButton = new UIImage(selectPoolOff);
         relocateButton.Left.Set(250f, 0f);
         relocateButton.Top.Set(0f, 0f);
@@ -198,7 +198,7 @@ public partial class AutofisherGUI : BaseBody, ISidedView
         {
             if (fish[i].IsAir || fish[i].favorited)
                 continue;
-            fish[i] = ItemStackToInventory(inventory, fish[i], false, 50);
+            fish[i] = MyUtils.ItemStackToInventory(inventory, fish[i], false, 50);
         }
         // 同步
         SyncFromTileEntity();
@@ -295,7 +295,7 @@ public partial class AutofisherGUI : BaseBody, ISidedView
     public void Open()
     {
         WandSystem.SelectPoolMode = false;
-        OperateInventory(true);
+        MyUtils.OperateInventory(true);
         // AutofishPlayer.LocalPlayer.SetAutofisher(point);
         RefreshItems();
     }

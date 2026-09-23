@@ -75,7 +75,7 @@ public class StorageCommunicator : ModItem, IItemOverrideHover, IItemMiddleClick
         if (index < 0)
             return;
 
-        GetMeterCoords(location.ToPoint(), out string compassText, out string depthText);
+        MyUtils.GetMeterCoords(location.ToPoint(), out string compassText, out string depthText);
         string text = isSet
             ? this.GetLocalization("SetTo").WithFormatArgs(compassText, depthText).Value
             : this.GetLocalizedValue("NotSet");

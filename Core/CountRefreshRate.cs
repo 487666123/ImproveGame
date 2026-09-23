@@ -24,6 +24,6 @@ public class CountRefreshRate : ModSystem
     {
         var c = new ILCursor(il);
 
-        c.EmitDelegate(() => { CurrentRefreshRateFactor = GetRefreshRateFactor(RefreshRateStopwatch); });
+        c.EmitDelegate(() => { CurrentRefreshRateFactor = MyUtils.GetRefreshRateFactor(RefreshRateStopwatch); });
     }
 }

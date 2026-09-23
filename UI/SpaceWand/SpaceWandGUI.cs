@@ -62,7 +62,7 @@ public class SpaceWandGUI : UIState
             Main.instance.LoadItem(itemType);
             MainPanel.Append(RoundButtons[i] = new(TextureAssets.Item[itemType])
             {
-                text = () => GetText($"SpaceWandGUI.{placeType}"),
+                text = () => MyUtils.GetText($"SpaceWandGUI.{placeType}"),
                 Selected = () => SpaceWand.PlaceType == placeType
             });
         }
@@ -82,7 +82,7 @@ public class SpaceWandGUI : UIState
                 // 悬浮文本
                 if (button.IsMouseHovering)
                 {
-                    DrawString(MouseScreenOffset(20), button.Text, Color.White, textColor, spread: 1f);
+                    MyUtils.DrawString(MyUtils.MouseScreenOffset(20), button.Text, Color.White, textColor, spread: 1f);
                     Main.LocalPlayer.cursorItemIconEnabled = false;
                 }
             }
@@ -148,7 +148,7 @@ public class SpaceWandGUI : UIState
         {
             BlockType blockType = BlockTypes[i];
             string path = $"UI/SpaceWand/{blockType}";
-            MainPanel.Append(RoundButtons[i] = new RoundButton(GetTexture(path))
+            MainPanel.Append(RoundButtons[i] = new RoundButton(MyUtils.GetTexture(path))
             {
                 text = () => "",
                 Selected = () => SpaceWand.BlockType == blockType
@@ -176,7 +176,7 @@ public class SpaceWandGUI : UIState
             Main.instance.LoadItem(itemType);
             MainPanel.Append(RoundButtons[i] = new(TextureAssets.Item[itemType])
             {
-                text = () => GetText($"SpaceWandGUI.{placeType}"),
+                text = () => MyUtils.GetText($"SpaceWandGUI.{placeType}"),
                 Selected = () => SpaceWand.PlaceType == placeType
             });
             RoundButtons[i].OnLeftMouseDown += (_, _) =>
@@ -199,7 +199,7 @@ public class SpaceWandGUI : UIState
         {
             ShapeType shapeType = ShapeTypes[i];
             string path = $"UI/SpaceWand/{shapeType}";
-            MainPanel.Append(RoundButtons[i] = new RoundButton(GetTexture(path))
+            MainPanel.Append(RoundButtons[i] = new RoundButton(MyUtils.GetTexture(path))
             {
                 text = () => "",
                 Selected = () => SpaceWand.ShapeType == shapeType,
@@ -253,7 +253,7 @@ public class SpaceWandGUI : UIState
         Visible = true;
         SoundEngine.PlaySound(SoundID.MenuOpen);
         timer.OpenAndResetTimer();
-        MainPanel.SetCenterPixels(MouseScreenUI).Recalculate();
+        MainPanel.SetCenterPixels(MyUtils.MouseScreenUI).Recalculate();
         UpdateButton();
     }
 

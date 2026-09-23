@@ -68,7 +68,7 @@ namespace ImproveGame.UI.ExtremeStorage
             };
             bannersSwitch.JoinParent(this);
 
-            var uiText = new UIText(GetText("UI.ExtremeStorage.BasicIntroduction"))
+            var uiText = new UIText(MyUtils.GetText("UI.ExtremeStorage.BasicIntroduction"))
             {
                 // IsWrapped = true, // 为了看着舒服，使用手动换行
                 TextOriginX = 0f,

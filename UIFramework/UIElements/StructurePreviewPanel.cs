@@ -51,7 +51,7 @@ namespace ImproveGame.UIFramework.UIElements
             {
                 // 转换回屏幕坐标
                 var mouseTiledInScreen = mouseInUITiles.ToVector2() * 16f * scale + leftTop;
-                DrawBorder(mouseTiledInScreen, 16f * scale, 16f * scale, Color.SkyBlue * 0.35f, Color.SkyBlue);
+                MyUtils.DrawBorder(mouseTiledInScreen, 16f * scale, 16f * scale, Color.SkyBlue * 0.35f, Color.SkyBlue);
 
                 if (!_oldMouseLeft && Main.mouseLeft) // 经典点击
                 {
@@ -60,12 +60,12 @@ namespace ImproveGame.UIFramework.UIElements
                     _cacheSetOrigin = true;
                 }
 
-                Main.instance.MouseText(GetText("ConstructGUI.Preview.CenterSet"));
+                Main.instance.MouseText(MyUtils.GetText("ConstructGUI.Preview.CenterSet"));
             }
 
             // 绘制Tag存储的OriginX, Y
             var originInScreen = new Vector2(OriginX, OriginY) * 16f * scale + leftTop;
-            DrawBorder(originInScreen, 16f * scale, 16f * scale, Color.Yellow * 0.35f, Color.Yellow);
+            MyUtils.DrawBorder(originInScreen, 16f * scale, 16f * scale, Color.Yellow * 0.35f, Color.Yellow);
 
             _oldMouseLeft = Main.mouseLeft; // 经典
         }

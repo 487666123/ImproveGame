@@ -15,7 +15,7 @@ public class BaseStat(BaseStatsCategory parent, string nameKey, Func<string> val
 
     public string NameKey { get; set; } = nameKey;
 
-    public string Name => IsAddedFromCall ? Language.GetTextValue(NameKey) : GetText(NameKey);
+    public string Name => IsAddedFromCall ? Language.GetTextValue(NameKey) : MyUtils.GetText(NameKey);
 
     public Func<string> Value { get; set; } = value;
 }

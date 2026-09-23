@@ -88,7 +88,7 @@ public class MasterControlManager : ModSystem
         {
             if (!ImproveConfigs.Instance.SuperVault)
             {
-                Main.NewText(GetText("MasterControl.NotEnabled"), Color.Pink);
+                Main.NewText(MyUtils.GetText("MasterControl.NotEnabled"), Color.Pink);
                 return;
             }
 
@@ -109,7 +109,7 @@ public class MasterControlManager : ModSystem
         {
             if (UIConfigs.Instance.PlyInfo is UIConfigs.PAPDisplayMode.NotDisplayed)
             {
-                Main.NewText(GetText("MasterControl.NotEnabled"), Color.Pink);
+                Main.NewText(MyUtils.GetText("MasterControl.NotEnabled"), Color.Pink);
                 return;
             }
 
@@ -119,7 +119,7 @@ public class MasterControlManager : ModSystem
                 body.RemoveChild(body.Window);
             else
             {
-                OperateInventory(true);
+                MyUtils.OperateInventory(true);
                 body.Append(body.Window);
             }
         };
@@ -221,13 +221,13 @@ public class MasterControlManager : ModSystem
         {
             if (!ImproveConfigs.Instance.WeatherControl)
             {
-                Main.NewText(GetText("MasterControl.NotEnabled"), Color.Pink);
+                Main.NewText(MyUtils.GetText("MasterControl.NotEnabled"), Color.Pink);
                 return;
             }
 
             if (!WeatherController.Unlocked)
             {
-                Main.NewText(GetText("UI.WeatherGUI.Locked"), Color.Pink);
+                Main.NewText(MyUtils.GetText("UI.WeatherGUI.Locked"), Color.Pink);
                 return;
             }
 
@@ -271,7 +271,7 @@ public class MasterControlManager : ModSystem
         {
             if (!ImproveConfigs.Instance.WorldFeaturePanel)
             {
-                Main.NewText(GetText("MasterControl.NotEnabled"), Color.Pink);
+                Main.NewText(MyUtils.GetText("MasterControl.NotEnabled"), Color.Pink);
                 return;
             }
 
@@ -319,13 +319,13 @@ public class MasterControlManager : ModSystem
             if (ui is null) return;
             if (!ImproveConfigs.Instance.QuickShimmer)
             {
-                Main.NewText(GetText("MasterControl.NotEnabled"), Color.Pink);
+                Main.NewText(MyUtils.GetText("MasterControl.NotEnabled"), Color.Pink);
                 return;
             }
 
             if (!QuickShimmerSystem.Unlocked)
             {
-                Main.NewText(GetText("UI.QuickShimmer.Locked"), Color.Pink);
+                Main.NewText(MyUtils.GetText("UI.QuickShimmer.Locked"), Color.Pink);
                 return;
             }
 
@@ -349,7 +349,7 @@ public class MasterControlManager : ModSystem
         {
             if (!ImproveConfigs.Instance.AmmoChain)
             {
-                Main.NewText(GetText("MasterControl.NotEnabled"), Color.Pink);
+                Main.NewText(MyUtils.GetText("MasterControl.NotEnabled"), Color.Pink);
                 return;
             }
 
