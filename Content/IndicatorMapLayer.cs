@@ -190,8 +190,7 @@ public class StructureDatas : ModSystem
                 return true;
 
             var tile = Main.tile[coords.ToPoint()];
-            return !tile.HasTile || tile.TileType is not TileID.PlanteraBulb ||
-                   tile.TileFrameX is not 18 || tile.TileFrameY is not 18;
+            return !tile.HasTile || tile.TileType is not TileID.PlanteraBulb;
         });
 
         if (Main.netMode is NetmodeID.Server && elementsRemoved > 0)

@@ -48,4 +48,15 @@ namespace ImproveGame.Packets.WorldFeatures
         public Point16 _position;
         public override void Receive() => StructureDatas.PlanteraPositions.Add(_position);
     }
+    [AutoSync]
+    public class RevealHivePacket : NetModule
+    {
+        public List<Point16> _allPosition;
+        public Point16 _position;
+        public override void Receive()
+        {
+            StructureDatas.AllHivePositions = _allPosition;
+            StructureDatas.HivePositions.Add(_position);
+        }
+    }
 }

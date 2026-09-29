@@ -87,13 +87,12 @@ public static class GlobeRevealer
         var playerPosition = player.position.ToTileCoordinates().ToVector2();
         Point16 position = Point16.Zero;
         float currentDistance = float.MaxValue;
-        for (int i = 10; i < Main.maxTilesX - 10; i++)
+        for (int i = 10; i < Main.maxTilesX - 10; i +=2)
         {
-            for (int j = 10; j < Main.maxTilesY - 10; j++)
+            for (int j = 10; j < Main.maxTilesY - 10; j += 2)
             {
                 var tile = Framing.GetTileSafely(i, j);
-                if (!tile.HasTile || tile.TileType is not TileID.PlanteraBulb ||
-                    tile.TileFrameX is not 18 || tile.TileFrameY is not 18)
+                if (!tile.HasTile || tile.TileType is not TileID.PlanteraBulb)
                     continue;
 
                 var tilePosition = new Vector2(i, j);
@@ -219,15 +218,56 @@ public static class GlobeRevealer
     {
         if (StructureDatas.AllHivePositions.Count <= StructureDatas.HivePositions.Count)//没有判定0的必要，因为如果是0一定满足这个
         {
-            if (!onlyJudging)
+            if (StructureDatas.AllHivePositions.Count == 0)
             {
-                if (!StructureDatas.QotEanbledInWorldGeneration)
-                    NoDataNotification(dummyItem, projectile.owner);
-                else
-                    NotFoundNotification(dummyItem, projectile.owner);
+                if (Main.netMode is NetmodeID.MultiplayerClient) //此时由服务器进行查找
+                    return true;
+
+                var player = Main.player[projectile.owner];
+                Point16 position = Point16.Zero;
+                List<Point16> allPos = [];
+                for (int i = 10; i < Main.maxTilesX - 10; i += 3)
+                {
+                    for (int j = 10; j < Main.maxTilesY - 10; j += 3)
+                    {
+                        var tile = Framing.GetTileSafely(i, j);
+                        if (!tile.HasTile || tile.TileType is not TileID.Larva)
+                            continue;
+
+                        var tilePosition = new Vector2(i, j);
+                        allPos.Add(tilePosition.ToPoint16());
+                    }
+                }
+
+                position = allPos.Except(StructureDatas.HivePositions).MinBy(position => projectile.Center.Distance(position.ToVector2() * 16));
+
+                if (onlyJudging)
+                    return position != Point16.Zero;
+
+                if (position == Point16.Zero)
+                {
+                    SyncNotificationKey.Send(dummyItem.GetLocalizationKey("NotFound"), Globe.hintTextColor, player.whoAmI);
+                    return false;
+                }
+
+                StructureDatas.AllHivePositions = allPos;
+                var module = NetModuleLoader.Get<RevealHivePacket>();
+                module._allPosition = StructureDatas.AllHivePositions;
+                module._position = position;
+                module.Send(runLocally: true);
+                RevealBroadcast(dummyItem, player.name, player.whoAmI);
+                return true;
             }
-            return false;
+            else
+            {
+                if (onlyJudging)
+                    return false;
+
+                NotFoundNotification(dummyItem, projectile.owner);
+                return false;
+            }
         }
+
         if (onlyJudging)
             return true;
 
