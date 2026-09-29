@@ -137,6 +137,8 @@ partial class MyUtils
                     return frameX / 54 + 36;
                 else
                     return frameX / 54 + 72;
+            case TileID.ExposedGems:
+                return frameX / 18;
         }
         return 0;
     }

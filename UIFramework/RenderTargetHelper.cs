@@ -6,9 +6,10 @@ public static class RenderTargetHelper
     {
         if (original is null || original.Length == 0)
         {
+            var prevUsage = device.PresentationParameters.RenderTargetUsage;
             device.PresentationParameters.RenderTargetUsage = RenderTargetUsage.PreserveContents;
             device.SetRenderTarget(null);
-            device.PresentationParameters.RenderTargetUsage = RenderTargetUsage.DiscardContents;
+            device.PresentationParameters.RenderTargetUsage = prevUsage;
         }
         else
         {
