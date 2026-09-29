@@ -13,6 +13,7 @@ using ImproveGame.UI.MasterControl;
 using ImproveGame.UI.OpenBag;
 using ImproveGame.UI.QuickShimmer;
 using ImproveGame.UIFramework;
+using ImproveGame.UserInterfaces.AutoTrash;
 using ImproveGame.UserInterfaces.BigBag;
 using SilkyUIFramework;
 using Terraria.DataStructures;
@@ -303,7 +304,7 @@ public class ImprovePlayer : ModPlayer
 
     private void PressAutoTrashKeybind()
     {
-        InventoryTrashGUI.Hidden = !InventoryTrashGUI.Hidden;
+        InventoryTrashBarUI.IsVisible = !InventoryTrashBarUI.IsVisible;
     }
 
     private void PressMasterControlKeybind()
