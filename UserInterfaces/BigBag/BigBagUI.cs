@@ -6,6 +6,7 @@ using SilkyUIFramework.Attributes;
 using SilkyUIFramework.Common.Tweening;
 using SilkyUIFramework.Elements;
 using SilkyUIFramework.Extensions;
+using Terraria.ModLoader.UI;
 
 namespace ImproveGame.UserInterfaces.BigBag;
 
@@ -16,7 +17,7 @@ public partial class BigBagUI : BaseBody
 
     private Tween Tween { get; set; } = new();
 
-    public override bool IsInteractable => !Tween.IsPlaying;
+    public override bool IsInteractable => (!Tween?.IsPlaying) ?? true;
 
     public override bool Enabled
     {
@@ -25,6 +26,7 @@ public partial class BigBagUI : BaseBody
             if (!Main.playerInventory || !ImproveConfigs.Instance.SuperVault)
             {
                 field = false;
+                Close();
                 return false;
             }
 
@@ -50,6 +52,7 @@ public partial class BigBagUI : BaseBody
         InitializeInventoryActions();
         RefreshInventory();
         RestorePosition();
+
         PlayerBigBagSettingPacket.SendMyPlayer();
     }
 
@@ -60,19 +63,25 @@ public partial class BigBagUI : BaseBody
     {
         base.UpdateStatus(gameTime);
 
-        RefreshLabels();
-        RefreshInventory();
-    }
+        foreach (var (view, text) in _localizedLabels)
+            view.Text = text.Value;
 
-    public override void HandleDraw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        base.HandleDraw(gameTime, spriteBatch);
+        RefreshInventory();
     }
 
     protected override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        DrawButtonTooltip();
+
+        foreach (var (view, text) in _buttonTooltips)
+        {
+            if (view.IsMouseHovering)
+            {
+                UICommon.TooltipMouseText(text.Value);
+                return;
+            }
+        }
+
         UIPlayer.HugeInventoryUIPosition = WindowPosition;
     }
 

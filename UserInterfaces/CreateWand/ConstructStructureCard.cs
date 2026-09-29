@@ -16,10 +16,10 @@ public class ConstructStructureCard : UIElementGroup
             TextAlign = new(0, 0.5f)
         }.Join(this);
 
-        StyleSheet.SetStyle(UIElementState.Normal, new StyleDefinition()
+        StyleSheet.SetStyle(new StyleDefinition()
             .Set(nameof(BackgroundColor), Color.Black * 0.2f));
 
-        StyleSheet.SetStyle(UIElementState.Hover, new StyleDefinition()
+        StyleSheet.SetStyle(StyleMarkers.Hover, new StyleDefinition()
             .Set(nameof(BackgroundColor), Color.Black * 0.3f));
     }
 

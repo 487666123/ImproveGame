@@ -36,13 +36,13 @@ public class MiniImageButton : SUIImage
             .BorderColor(SUIColor.Warn)
             .Background(SUIColor.Warn * 0.25f);
 
-        StyleSheet.SetStyle(UIElementState.Normal, StyleNormal);
-        StyleSheet.SetStyle(UIElementState.Hover, StyleHover);
+        StyleSheet.SetStyle(StyleNormal);
+        StyleSheet.SetStyle(StyleMarkers.Hover, StyleHover);
     }
 
     public void SetWarnStyle()
     {
-        StyleSheet.SetStyle(UIElementState.Hover, StyleHoverWarn);
+        StyleSheet.SetStyle(StyleMarkers.Hover, StyleHoverWarn);
     }
 }
 
@@ -106,10 +106,10 @@ public partial class CreateWandController : BaseBody
 
         foreach (var item in new Span<UIView>([MaterialButton, BuildingDataListButton, StructDataListButton]))
         {
-            item.StyleSheet.SetStyle(UIElementState.Normal, new StyleDefinition()
+            item.StyleSheet.SetStyle(new StyleDefinition()
                 .Set(nameof(BackgroundColor), Color.Transparent));
 
-            item.StyleSheet.SetStyle(UIElementState.Hover, new StyleDefinition()
+            item.StyleSheet.SetStyle(StyleMarkers.Hover, new StyleDefinition()
                 .Set(nameof(BackgroundColor), Color.Black * 0.25f));
         }
 

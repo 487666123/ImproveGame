@@ -8,8 +8,8 @@ namespace ImproveGame.UserInterfaces.BigBag;
 [XmlElementMapping("BigBagItemGrid")]
 public class BigBagItemGrid : SUIScrollView
 {
-    public static int Columns => 10;
-    public static float VisibleRows => 6f;
+    public static int Columns => 8;
+    public static int VisibleRows => 6;
     public static float SlotSize => 52f;
 
     public Item[] Items

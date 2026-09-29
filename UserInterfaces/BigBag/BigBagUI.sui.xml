@@ -26,8 +26,8 @@
 	<!-- 内容区：侧栏与物品区等高，设置按钮通过弹性留白固定在侧栏底部。 -->
 	<ElementGroup s:Name="MainContent" FitWidth="true" FitHeight="true" FlexDirection="Row" CrossAlignment="Stretch">
 
-		<ElementGroup s:Name="Sidebar" FitWidth="true" FlexShrink="0" Padding="8" Gap="8"
-					  BackgroundColor="rgba(0,0,0,0.25)"
+		<ElementGroup s:Name="Sidebar" FitWidth="true" FitHeight="true" FlexShrink="0" Padding="8" Gap="8"
+					  BackgroundColor="rgba(0,0,0,0.1)"
                       FlexDirection="Column" CrossAlignment="Center">
 
 			<s:Style s:Name="ActionButton" Width="40px" Height="40px" FlexShrink="0"
@@ -66,25 +66,25 @@
 		<ElementGroup FitWidth="true" FlexGrow="1" FlexShrink="1" FitHeight="true"
                       Padding="0" FlexDirection="Column" CrossAlignment="Stretch">
 			<BigBagItemGrid s:Name="ItemGrid" Padding="8" FitWidth="true" />
-
-			<HR BackgroundColor="rgba(0,0,0,0.75)"/>
-
-			<ElementGroup FitWidth="true" Height="40px" FlexDirection="Row"
-						  BackgroundColor="rgba(0,0,0,0.25)">
-
-				<ElementGroup FlexGrow="1" FitHeight="true">
-				</ElementGroup>
-
-				<ElementGroup FlexGrow="1" FitHeight="true">
-				</ElementGroup>
-
-				<ElementGroup FlexGrow="1" FitHeight="true">
-				</ElementGroup>
-
-			</ElementGroup>
 		</ElementGroup>
 
 	</ElementGroup>
+
+	<!-- <HR BackgroundColor="rgba(0,0,0,0.75)"/>
+
+	<ElementGroup FitWidth="true" Height="40px" FlexDirection="Row"
+					BackgroundColor="rgba(0,0,0,0.25)">
+
+		<ElementGroup FlexGrow="1" FitHeight="true">
+		</ElementGroup>
+
+		<ElementGroup FlexGrow="1" FitHeight="true">
+		</ElementGroup>
+
+		<ElementGroup FlexGrow="1" FitHeight="true">
+		</ElementGroup>
+
+	</ElementGroup> -->
 
 	<!--
         遮罩只覆盖大背包内部，脱离布局流，不挤占物品区域。

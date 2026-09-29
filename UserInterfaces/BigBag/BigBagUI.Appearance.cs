@@ -52,25 +52,8 @@ public partial class BigBagUI
             (SettingsButton, Language.GetText("LegacyMenu.14"))
         ];
 
-        RefreshLabels();
-    }
-
-    private void RefreshLabels()
-    {
         foreach (var (view, text) in _localizedLabels)
             view.Text = text.Value;
-    }
-
-    private void DrawButtonTooltip()
-    {
-        foreach (var (view, text) in _buttonTooltips)
-        {
-            if (view.IsMouseHovering)
-            {
-                UICommon.TooltipMouseText(text.Value);
-                return;
-            }
-        }
     }
 
     private static void SetIcon(SUIImage image, Asset<Texture2D> texture, float sizeLimit)
@@ -83,13 +66,13 @@ public partial class BigBagUI
     {
         SetIcon(icon, texture, 24f);
 
-        button.StyleSheet.SetStyle(UIElementState.Normal,
+        button.StyleSheet.SetStyle(
             new StyleDefinition()
                 .BorderColor(SUIColor.Border)
                 .Background(SUIColor.Background * 0.75f)
         );
 
-        button.StyleSheet.SetStyle(UIElementState.Hover,
+        button.StyleSheet.SetStyle(StyleMarkers.Hover,
             new StyleDefinition()
                 .BorderColor(SUIColor.Highlight)
                 .Background(SUIColor.Highlight * 0.25f)
