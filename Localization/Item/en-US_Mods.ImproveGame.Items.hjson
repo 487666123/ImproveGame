@@ -1,4 +1,4 @@
-MagickWand: {
+﻿MagickWand: {
 	DisplayName: Wand of Blasts
 	Tooltip:
 		'''
@@ -184,7 +184,7 @@ GlobeBase: {
 		Marks the closest {0} on the map.
 		You can hide the marker in [c/CC88AA:Personal Config]
 		'''
-	AlreadyRevealed: "{0} has already been marked"
+	AlreadyRevealed: "{0} has already been marked."
 	Reveal: "{1} marked up {0} on the map."
 	NotFound: Data of {0} is not present, it's likely that newest QoT was not enabled during world creation.
 }
@@ -215,17 +215,17 @@ EnchantedSwordGlobe: {
 # NotFound在大理石洞全部标记完了的情况下显示，花岗岩洞和蜂巢的文本亦是如此
 MarbleCaveGlobe: {
 	BiomeName: Marble Cave
-	NotFound: Couldn't find more Marble Cave
+	NotFound: Couldn't find more Marble Caves
 }
 
 GraniteCaveGlobe: {
 	BiomeName: Granite Cave
-	NotFound: Couldn't find more Granite Cave
+	NotFound: Couldn't find more Granite Caves
 }
 
 HiveGlobe: {
-	BiomeName: 蜂巢
-	NotFound: 未能找到更多的蜂巢
+	BiomeName: Hive
+	NotFound: Couldn't find more Hives
 }
 
 # NotFound在世界上没有足够的微光液体的情况下显示

@@ -1,4 +1,4 @@
-ModName: Quality of Terraria
+﻿ModName: Quality of Terraria
 Search: Search...
 PathIllegal: File name must not include following characterts: \, /, :, *, ?, ", <, > or |
 FolderNameEmpty: Folder name cannot be empty
@@ -69,8 +69,8 @@ QuickHome: {
 Tips: {
 	AmmoChainDisabled: Ammo Chain disabled
 	AmmoChain: "[centeritem:ImproveGame/AmmoChainItem]Ammo Chain: "
-	AmmoInfo: "弹药类型为 [i:{0}] {1}"
-	UseAmmoInfo: "使用弹药类型为 [i:{0}] {1}"
+	AmmoInfo: "Counts as [i:{0}] {1}"
+	UseAmmoInfo: "Uses [i:{0}] {1}"
 	ShimmerInto: "Can be shimmered into "
 	ShimmerIntoWithStack: "Every {0} can be shimmered into "
 	ShimmerIntoWithCoinLuck: Can be shimmered into {0} 'coin luck'
@@ -180,34 +180,33 @@ Tips: {
 			'''
 		CreateWand:
 			'''
-			You can import Building style by Datamap or Structure file of ConstructWand in the CreateWand Controller
-			Files in [c/88CCEE:"Document/My Games/Terraria/tModLoader]
-			[c/88CCEE:/Mods/ImproveGame/CreateWand"]
+			You can import Building style by Datamap or Structure file of
+			Wand of Construction in the Wand of Architecture's controller
+			Files in [c/88CCEE:"Document/My Games/Terraria/tModLoader/Mods/ImproveGame/CreateWand"]
 			will import automatically
-
 			In Datamap:
-			B channel of FF means there's wall, 00 means no wall.
+			B channel of FF means there's wall, 00 means no wall
 			A channel of FF means Left Direction, 7F means Right Direction
 			RG channel's tile table as followed:
 			| Color |    Hex   |        Tile        |
-			| ------- | ---------- | ------------------- |
+			| ---- | ----- | ---------- |
 			|   [c/000000:■]   |   0000  |      Empty       |
 			|   [c/003F00:■]   |   003F  |     SolidTile     |
 			|   [c/007F00:■]   |   007F  |     Platform     |
-			|   [c/00BF00:■]   |   00BF  |    Workbench  |
-			|   [c/00FF00:■]   |   00FF  |      Table        |
-			|   [c/3F0000:■]   |   3F00  |      Chair        |
-			|   [c/3F3F00:■]   |   3F3F  |       Door       |
-			|   [c/3F7F00:■]   |   3F7F  |      Chest       |
-			|   [c/3FBF00:■]   |   3FBF  |       Bed         |
-			|   [c/3FFF00:■]   |   3FFF  |    Bookcase    |
-			|   [c/7F0000:■]   |   7F00  |     Bathtub      |
+			|   [c/00BF00:■]   |   00BF  |    Workbench   |
+			|   [c/00FF00:■]   |   00FF  |       Table       |
+			|   [c/3F0000:■]   |   3F00  |       Chair       |
+			|   [c/3F3F00:■]   |   3F3F  |        Door       |
+			|   [c/3F7F00:■]   |   3F7F  |       Chest       |
+			|   [c/3FBF00:■]   |   3FBF  |       Bed       |
+			|   [c/3FFF00:■]   |   3FFF  |    Bookcase     |
+			|   [c/7F0000:■]   |   7F00  |     Bathtub     |
 			|   [c/7F3F00:■]   |   7F3F  |   Candelabra   |
-			|   [c/7F7F00:■]   |   7F7F  |     Candle       |
-			|   [c/7FBF00:■]   |   7FBF  |    Chandler     |
-			|   [c/7FFF00:■]   |   7FFF  |      Clock        |
-			|   [c/BF0000:■]   |   BF00  |     Dresser      |
-			|   [c/BF3F00:■]   |   BF3F  |      Lamp        |
+			|   [c/7F7F00:■]   |   7F7F  |      Candle      |
+			|   [c/7FBF00:■]   |   7FBF  |     Chandler    |
+			|   [c/7FFF00:■]   |   7FFF  |       Clock       |
+			|   [c/BF0000:■]   |   BF00  |      Dresser     |
+			|   [c/BF3F00:■]   |   BF3F  |       Lamp       |
 			|   [c/BF7F00:■]   |   BF7F  |     Lantern      |
 			|   [c/BFBF00:■]   |   BFBF  |      Piano       |
 			|   [c/BFFF00:■]   |   BFFF  |      Sink         |

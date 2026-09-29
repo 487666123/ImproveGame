@@ -1,4 +1,4 @@
-ModName: Quality of Terraria
+﻿ModName: Quality of Terraria
 Search: Поиск...
 PathIllegal: Имя файла не должно включать следующих знаков: \, /, :, *, ?, ", <, > или |
 FolderNameEmpty: Имя папки не может быть пустым
@@ -12,7 +12,7 @@ Tiles: {
 
 ItemDropRule: {
 	DropWhenEnabled: Выпадает, если настройка «{0}» включена
-	DropCoinOne: Выпадает, если значение настройки «Мультипликатор выпадающих из врагов монет» стоит на максимуме и настройка «{Mods.ImproveGame.Conditions.AvailableCoinOne}» включена
+	DropCoinOne: Выпадает, если значение настройки «Множитель выпадающих из врагов монет» стоит на максимуме и настройка «{Mods.ImproveGame.Conditions.AvailableCoinOne}» включена
 	WandDrop: Не выпадает, если игрок уже держит один в инвентаре
 }
 
@@ -69,8 +69,8 @@ QuickHome: {
 Tips: {
 	AmmoChainDisabled: Цепочка боеприпасов отключена
 	AmmoChain: "[centeritem:ImproveGame/AmmoChainItem]Цепочка боеприпасов: "
-	AmmoInfo: "弹药类型为 [i:{0}] {1}"
-	UseAmmoInfo: "使用弹药类型为 [i:{0}] {1}"
+	AmmoInfo: "Считается за [i:{0}] {1}"
+	UseAmmoInfo: "Использует: [i:{0}] {1}"
 	ShimmerInto: "Можно превратить с помощью мерцания в "
 	ShimmerIntoWithStack: "Каждые {0} можно превратить с помощью мерцания в "
 	ShimmerIntoWithCoinLuck: Можно превратить с помощью мерцания в {0} 'удачи монет'
@@ -83,8 +83,8 @@ Tips: {
 	Refresh: Обновить магазин
 	SummonSlot: Занятые слоты призыва: [c/22CC22:{Current}/{Total}]
 	SummonSlotFull: Занятые слоты призыва: [c/CC2222:{Current}/{Total} (Заполнены!)]
-	BuffTrackerOn: <left>, чтобы открыть трекер баффов
-	BuffTrackerOff: <left>, чтобы закрыть трекер баффов
+	BuffTrackerOn: Нажмите <left>, чтобы открыть трекер эффектов
+	BuffTrackerOff: Нажмите <left>, чтобы закрыть трекер эффектов
 	HideMyBuffs: Чтобы скрыть, переключите эту настройку в «Личных конфигурациях»
 	BankEnableOn: Нажмите {KeybindName}, чтобы открыть личное хранилище
 	BankEnableOff: Нажмите {KeybindName}, чтобы закрыть личное хранилище
@@ -108,23 +108,23 @@ Tips: {
 	Tag.ShiftEnable: "[Удерживайте [c/88CCEE:Shift], чтобы узнать больше]"
 
 	TagDetailed: {
-		OwnedInfineBuff: "[Бесконечный бафф получен {Count}/{Threshold}]"
-		NotOwnedInfineBuff: "[Бесконечный бафф можно {Count}/{Threshold}]"
+		OwnedInfineBuff: "[Бесконечный эффект получен {Count}/{Threshold}]"
+		NotOwnedInfineBuff: "[Бесконечный эффект можно получить {Count}/{Threshold}]"
 		RedPotion: "[Красное зелье]"
 		GardenGnome: "[Садовый гном]"
 		Enabled: "[Включён]"
 		Disabled: "[Выключен]"
-		Hided: "[Иконки баффов скрыты]"
-		NonHided: "[Иконки баффов показаны]"
-		CombinedBuff: "[Доступна комбинация баффов]"
+		Hided: "[Иконки эффектов скрыты]"
+		NonHided: "[Иконки эффектов показаны]"
+		CombinedBuff: "[Доступна комбинация эффектов]"
 		AutoCollect: "[Авто-сбор]"
-		// CreateWand: "[Customize]"
+		CreateWand: "[Изменить]"
 	}
 
 	TagDetailedTip: {
 		RedPotion:
 			'''
-			Включено «Бесконечное красное зелье», даёт следующие бесконечные баффы:
+			Включено «Бесконечное красное зелье», даёт следующие бесконечные эффекты:
 			{$BuffName.ObsidianSkin}, {$BuffName.Regeneration}, {$BuffName.Swiftness}, {$BuffName.Ironskin},
 			{$BuffName.ManaRegeneration}, {$BuffName.MagicPower}, {$BuffName.Featherfall}, {$BuffName.Spelunker},
 			{$BuffName.Archery}, {$BuffName.Heartreach}, {$BuffName.Hunter}, {$BuffName.Endurance}, {$BuffName.Lifeforce}, {$BuffName.Inferno},
@@ -133,31 +133,31 @@ Tips: {
 		GardenGnome:
 			'''
 			Вы получаете бонус к удаче от садового гнома
-			Вы не можете отключить данный бонус, т.к. это не «бафф»
+			Вы не можете отключить данный бонус, т.к. это не эффект зелья
 			'''
 		Enabled:
 			'''
-			Бафф [c/88CCEE:[{BuffName}][c/88CCEE:]] уже активен.
-			Если вы хотите отключить данный бафф,
-			нажмите {KeybindName}, наведя курсор на предмет, либо ЛКМ по иконке баффа,
-			чтобы открыть трекер, и отключите бафф.
+			Эффект [c/88CCEE:[«{BuffName}»][c/88CCEE:]] уже активен.
+			Если вы хотите отключить данный эффект,
+			нажмите {KeybindName}, наведя курсор на предмет, либо ЛКМ по иконке эффекта,
+			чтобы открыть трекер, и отключите эффект.
 			'''
 		Disabled:
 			'''
-			Бафф [c/88CCEE:[{BuffName}][c/88CCEE:]] неактивен
+			Эффект [c/88CCEE:[«{BuffName}»][c/88CCEE:]] неактивен
 			в связи с соотв. настройками.
-			Нажмите {KeybindName}, наведя курсор на предмет, либо ЛКМ по иконке баффа,
-			чтобы открыть трекер, и включите бафф.
+			Нажмите {KeybindName}, наведя курсор на предмет, либо ЛКМ по иконке эффекта,
+			чтобы открыть трекер, и включите эффект.
 			'''
 		Hided:
 			'''
-			Иконки баффов были скрыты. Чтобы они показывались,
+			Иконки эффектов были скрыты. Чтобы они показывались,
 			настройте это в [c/CC88AA:персональных настройках].
 			'''
 		NonHided:
 			'''
 			Измените [c/CC88AA:персональные настройки] мода,
-			если хотите скрыть иконки баффов.
+			если хотите скрыть иконки эффектов.
 			'''
 		AutoCollect:
 			'''
@@ -168,55 +168,54 @@ Tips: {
 			перемещаться в свинью-копилку.
 			Это можно переключить в левой верхней
 			части инвентаря.
-			Монеты, нужные для Торговца,
+			Монеты, нужные для торговца,
 			будут считаться и из свиньи-копилки.
 			'''
 		CombinedBuff.Battle:
 			'''
-			[c/88CCEE:Комбинация баффов: ][i:CalmingPotion][i:Sunflower][i:PeaceCandle][i:WaterCandle][i:BattlePotion]
-			Когда у вас есть бесконечные баффы предметов
-			выше, справа от трекера баффов появится
+			[c/88CCEE:Комбинация эффектов: ][i:CalmingPotion][i:Sunflower][i:PeaceCandle][i:WaterCandle][i:BattlePotion]
+			Когда у вас есть бесконечные жффекиы предметов
+			выше, справа от трекера эффектов появится
 			слайдер скорости появления мобов, позволяя
 			увеличивать множитель скорости от x0 до x{MaxSpawn}
 			'''
-		/* CreateWand:
+		CreateWand:
 			'''
-			You can import Building style by Datamap or Structure file of ConstructWand in the CreateWand Controller
-			Files in [c/88CCEE:"Document/My Games/Terraria/tModLoader]
-			[c/88CCEE:/Mods/ImproveGame/CreateWand"]
-			will import automatically
-
-			In Datamap:
-			B channel of FF means there's wall, 00 means no wall.
-			A channel of FF means Left Direction, 7F means Right Direction
-			RG channel's tile table as followed:
-			| Color |    Hex   |        Tile        |
-			| ------- | ---------- | ------------------- |
-			|   [c/000000:■]   |   0000  |      Empty       |
-			|   [c/003F00:■]   |   003F  |     SolidTile     |
-			|   [c/007F00:■]   |   007F  |     Platform     |
-			|   [c/00BF00:■]   |   00BF  |    Workbench  |
-			|   [c/00FF00:■]   |   00FF  |      Table        |
-			|   [c/3F0000:■]   |   3F00  |      Chair        |
-			|   [c/3F3F00:■]   |   3F3F  |       Door       |
-			|   [c/3F7F00:■]   |   3F7F  |      Chest       |
-			|   [c/3FBF00:■]   |   3FBF  |       Bed         |
-			|   [c/3FFF00:■]   |   3FFF  |    Bookcase    |
-			|   [c/7F0000:■]   |   7F00  |     Bathtub      |
-			|   [c/7F3F00:■]   |   7F3F  |   Candelabra   |
-			|   [c/7F7F00:■]   |   7F7F  |     Candle       |
-			|   [c/7FBF00:■]   |   7FBF  |    Chandler     |
-			|   [c/7FFF00:■]   |   7FFF  |      Clock        |
-			|   [c/BF0000:■]   |   BF00  |     Dresser      |
-			|   [c/BF3F00:■]   |   BF3F  |      Lamp        |
-			|   [c/BF7F00:■]   |   BF7F  |     Lantern      |
-			|   [c/BFBF00:■]   |   BFBF  |      Piano       |
-			|   [c/BFFF00:■]   |   BFFF  |      Sink         |
-			|   [c/FF0000:■]   |   FF00  |      Sofa         |
-			|   [c/FF3F00:■]   |   FF3F  |      Toilet        |
-			|   [c/FF7F00:■]   |   FF7F  |      Torch       |
-			|   [c/FFBF00:■]   |   FFBF  |    Campfire     |
-			''' */
+			Вы можете импортировать постройки в виде карты данных или файлов структур из
+			жезла строительства в контроллер жезла архитектуры
+			Файлы по пути [c/88CCEE:"Документы/My Games/Terraria/tModLoader/Mods/ImproveGame/CreateWand"]
+			будут импортироваться автоматически
+			В карте данных:
+			Значение FF канала B означает, что есть стена, 00 означает её отсутствие
+			Значение FF канала A означает направление влево, 7F означает вправо
+			Таблица блоков в каналах RG:
+			| Цвет |    Hex   |       Блок        |
+			| ---- | ----- | ----------- |
+			|   [c/000000:■]   |   0000  |      Пустой       |
+			|   [c/003F00:■]   |   003F  |     ТвёрдБлок   |
+			|   [c/007F00:■]   |   007F  |     Платформа   |
+			|   [c/00BF00:■]   |   00BF  |     Верстак      |
+			|   [c/00FF00:■]   |   00FF  |       Стол        |
+			|   [c/3F0000:■]   |   3F00  |       Стул        |
+			|   [c/3F3F00:■]   |   3F3F  |       Дверь       |
+			|   [c/3F7F00:■]   |   3F7F  |      Сундук        |
+			|   [c/3FBF00:■]   |   3FBF  |      Кровать     |
+			|   [c/3FFF00:■]   |   3FFF  |    КнижШкаф     |
+			|   [c/7F0000:■]   |   7F00  |        Ванна       |
+			|   [c/7F3F00:■]   |   7F3F  |     Канделябр     |
+			|   [c/7F7F00:■]   |   7F7F  |        Свеча       |
+			|   [c/7FBF00:■]   |   7FBF  |       Люстра     |
+			|   [c/7FFF00:■]   |   7FFF  |       НапЧасы     |
+			|   [c/BF0000:■]   |   BF00  |       Комод       |
+			|   [c/BF3F00:■]   |   BF3F  |      Лампа        |
+			|   [c/BF7F00:■]   |   BF7F  |     Светильн      |
+			|   [c/BFBF00:■]   |   BFBF  |      Пианино      |
+			|   [c/BFFF00:■]   |   BFFF  |      Раковина     |
+			|   [c/FF0000:■]   |   FF00  |      Диван         |
+			|   [c/FF3F00:■]   |   FF3F  |      Туалет        |
+			|   [c/FF7F00:■]   |   FF7F  |        Факел        |
+			|   [c/FFBF00:■]   |   FFBF  |       Костёр       |
+			'''
 	}
 }
 
@@ -317,7 +316,7 @@ ConstructGUI: {
 				'''
 				Главная панель показывает список файлов структур на вашем компьютере, включая имя и путь файла
 				    
-				Если вы случайно удалили структуру на системе Windows, вы можете восстановить его из Корзины
+				Если вы случайно удалили структуру на системе Windows, вы можете восстановить его из корзины
 
 				Нажмите кнопку «{$tModLoader.ModsMoreInfo}» в правой стороне, чтобы посмотреть детали и предпросмотр. Центр размещения структуры можно изменить на предпросмотре
 				'''
@@ -330,7 +329,7 @@ ConstructGUI: {
 
 		Preview: {
 			Title: "{$Mods.ImproveGame.ConstructGUI.Preview.Title}"
-			Text: Предпросмотр структуры также показывает центр размещения (жёлтый 'блок'). Именно с этой точки будет ставиться структура.
+			Text: Предпросмотр структуры также показывает центр размещения (жёлтый «блок»). Именно с этой точки будет ставиться структура.
 		}
 	}
 }
@@ -347,31 +346,31 @@ MoveChest.Heavy: Вес сундука мешает вам в передвиже
 
 BuffController: {
 	LeftClick: {
-		Enable: "[c/CC88AA:<left>], чтобы включить этот бафф"
-		Disable: "[c/CC88AA:<left>], чтобы отключить этот бафф"
+		Enable: "Нажмите [c/CC88AA:<left>], чтобы включить этот эффект"
+		Disable: "Нажмите [c/CC88AA:<left>], чтобы отключить этот эффект"
 	}
 
 	RightClick: {
-		Enable: "[c/CC88AA:<right>], чтобы пометить как избранное"
-		Disable: "[c/CC88AA:<right>], чтобы убрать из избранного"
+		Enable: "Нажмите [c/CC88AA:<right>], чтобы пометить как избранное"
+		Disable: "Нажмите [c/CC88AA:<right>], чтобы убрать из избранного"
 	}
 }
 
 BuffTracker: {
-	Title: Трекер юаффов
-	NoInfBuff: На данный момент нет бесконечных баффов
+	Title: Трекер эффектов
+	NoInfBuff: На данный момент нет бесконечных эффектов
 	NoInfBuffAlt: Включите «Бесконечные зелья» в конфигурации мода
 	NPCSpawnRatePanel: Панель управления скоростью появления мобов
 }
 
 LifeAnalyzer: {
 	Priority: "Приоритет: "
-	Tip: <left>, чтобы контролировать обнаружение
+	Tip: Нажмите <left>, чтобы контролировать обнаружение
 }
 
 Architecture: {
 	Materials: Материалы для дома
-	StoredMaterials: (All: {MaterialCountTotal}, Stored: {MaterialCountWand}, Inventory: {MaterialCountInventory})
+	StoredMaterials: (Все: {MaterialCountTotal}, хранится: {MaterialCountWand}, инвентарь: {MaterialCountInventory})
 	MaterialsRequired: "Нужные материалы: "
 	Block: Блоки
 	Platform: Платформы
@@ -382,21 +381,21 @@ Architecture: {
 	Wall: Стены
 	Bed: Кровати
 	Door: Двери
-	// Chest: Chest
-	// Bookcase: Bookcase
-	// Bathtub: Bathtub
-	// Candelabra: Candelabra
-	// Candle: Candle
-	// Chandelier: Chandelier
-	// Clock: Clock
-	// Dresser: Dresser
-	// Lamp: Lamp
-	// Lantern: Lantern
-	// Piano: Piano
-	// Sink: Sink
-	// Sofa: Sofa
-	// Toilet: Toilet
-	// Campfire: Campfire
+	Chest: Сундук
+	Bookcase: Книжный шкаф
+	Bathtub: Ванна
+	Candelabra: Канделябр
+	Candle: Свеча
+	Chandelier: Люстра
+	Clock: Напольные часы
+	Dresser: Комод
+	Lamp: Лампа
+	Lantern: Светильник
+	Piano: Пианино
+	Sink: Раковина
+	Sofa: Диван
+	Toilet: Туалет
+	Campfire: Костёр
 }
 
 PaintWandGUI: {
@@ -418,7 +417,7 @@ SpaceWandGUI: {
 }
 
 PackageGUI: {
-	AutoStorage: Авто-сбор
+	AutoStorage: Авто-подбор
 	AutoSort: Авто-сортировка
 	Synthesis: Использовать в создании
 	Incompatible: Данный предмет не может храниться в данном хранилище.
@@ -436,8 +435,8 @@ RecipeGroup: {
 	AnyCopperBar: Любой медный слиток
 	AnyGoldBar: Любой золотой слиток
 	AnySilverBar: Любой серебряный слиток
-	AnyDemoniteBar: Любой демонитовый слиток
-	AnyShadowScale: Любой кусочек тени
+	AnyDemoniteBar: Любой слиток мирового зла
+	AnyShadowScale: Любой материал мирового зла
 	AnyCobaltBar: Любой кобальтовый слиток
 	AnyMythrilBar: Любой мифриловый слиток
 	AnyAdamantiteBar: Любой адамантитовый слиток
@@ -451,8 +450,8 @@ Keybinds: {
 	}
 
 	BuffTracker: {
-		DisplayName: Трекер баффов
-		Tip: Если назначена клавиша, нажатие по иконке баффа больше не будет открывать трекер
+		DisplayName: Трекер эффектов
+		Tip: Если назначена клавиша, нажатие по иконке эффекта больше не будет открывать трекер
 	}
 
 	GrabBagLoot: {

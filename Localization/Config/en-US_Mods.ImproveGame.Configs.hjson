@@ -1,4 +1,4 @@
-ImproveConfigs: {
+﻿ImproveConfigs: {
 	DisplayName: Main Config
 
 	ILoveBalance: {
@@ -218,11 +218,11 @@ ImproveConfigs: {
 	}
 
 	LavalessLavaSlime: {
-		Label: "[centeritem:LavaSlimeBanner] 熔岩史莱姆/地狱蝙蝠不生成熔岩"
+		Label: "[centeritem:LavaSlimeBanner] Lavaless Lava Slimes/Hellbats"
 		Tooltip:
 			'''
-			Killing Lava Slime no longer spawns lava in Expert or Master modes
-			在GFB种子里，地狱蝙蝠和熔岩蝙蝠被击杀时不再会生成熔岩
+			Killing Lava Slime no longer spawns lava in Expert mode or above
+			The same applies for Hellbats in Get fixed boi
 			'''
 	}
 
@@ -401,7 +401,7 @@ ImproveConfigs: {
 		Unaccepted: Cannot save changes: You are not the host!
 		Tips:
 			'''
-			"Only The Host Can Change The Mod Configs" is enabled
+			'Only The Host Can Change The Mod Configs' is enabled
 			Only the host (IP: 127.0.0.1) can change the mod configs
 			'''
 	}
@@ -411,20 +411,20 @@ ImproveConfigs: {
 		Tooltip:
 			'''
 			Does nothing in singleplayer mode, reloading is required. After enabled, only the verified player(s) can change the mod configs
-			While starting the server, a random 8-digit password will be sent in the server console. The server console can query the password by typing qotpassword.
+			While starting the server, a random 8-digit password will be sent in the server console. The server console can query the password by typing qotpassword
 			Players can type /qotpassword <password> to verify themselves. If the password is correct, the player will be able to change mod configs
 			Effective to servers with port forwarding, as the IP verification does not work
 			'''
 		Unaccepted: You have not passed the verification!
-		Tips: '''"Only The Verified Player(s) Can Change The Mod Configs" is enabled'''
-		Registered: You can change the mod configs already
-		Correct: Correct password, you can change the mod configs
+		Tips: "'Only The Verified Player(s) Can Change The Mod Configs' is enabled."
+		Registered: You can change the mod configs already.
+		Correct: Correct password, you can change the mod configs.
 		Incorrect: Incorrect password!
-		ServerPassword: "[Quality of Terraria] Password for config verification: {Password}"
-		ServerPasswordLog: Password for config verification: {Password}
-		CommandDescription: To verify the client, ask for permission to change the mod configs
-		NotOn: Password verification option is not enabled
-		Format: The password should have 4 letters (not case-sensitive)
+		ServerPassword: "[Quality of Terraria] Password for config verification: {Password}."
+		ServerPasswordLog: Password for config verification: {Password}.
+		CommandDescription: To verify the client, ask for permission to change the mod configs.
+		NotOn: Password verification option is not enabled.
+		Format: The password should have 4 letters (not case-sensitive).
 	}
 
 	SpawnRateMaxValue: {
@@ -455,8 +455,8 @@ ImproveConfigs: {
 		Label: "[centeritem:ImproveGame/ExtremeStorage] Storage Manager Chest Detection Range"
 		Tooltip:
 			'''
-			Changes how far the Storage Manager searches for chests.
-			In multiplayer, the more chests managed, the higher network load is.
+			Changes how far the Storage Manager searches for chests
+			In multiplayer, the more chests managed, the higher network load is
 			'''
 	}
 
@@ -464,8 +464,8 @@ ImproveConfigs: {
 		Label: "[centeritem:GoodieBag] Grab Bag Details Show Hidden Drop Rules"
 		Tooltip:
 			'''
-			When disabled, the drop rule code determines whether to hide.
-			When enabled, hidden rules are always displayed.
+			When disabled, the drop rule code determines whether to hide
+			When enabled, hidden rules are always displayed
 			'''
 	}
 
@@ -479,33 +479,33 @@ ImproveConfigs: {
 		Tooltip:
 			'''
 			If a Fishing Machine runs out of bait, a message will be displayed: 
-			“\"The Fishing Machine at [horizontal position, depth] has no bait\"
+			'The Fishing Machine at [horizontal position, depth] has no bait'
 			'''
 	}
 
 	OtherFunctions: {
 		Label: Non-configurable Functions
 		ExpandTip: Click to expand
-		Subtitle: The following are non-configurable features of this mod.
+		Subtitle: The following are non-configurable features of this mod
 		Tooltip:
 			'''
-			Displaying detailed item drop of a grab bag while clicking the "Display grab bag loot" keybind.
-			A hotkey to swap the hotbar with the second row of inventory.
-			A filter panel which opens when the icon of Lifeform Analyzer is clicked.
-			Chest items inspection when the cursor is hovered on it and Alt is pressed.
-			Tooltip simplification ('favorite' tooltip removal, detailed tooltip in vanity slots).
-			Increased using speed of and enabled auto-use for Life Crystal, Mana Crystal and Life Fruit.
-			Middle clicking mount items will toggle the mounts.
-			All hair styles can be chosen upon character creation.
-			Teleportation rod hotkey. Uses Rod of Discord or Rod of Harmony in any inventory, prioritize RoH.
-			Home-returning hotkey. Uses any infinite home-returning item in any inventory, prioritize Potion of Return.
+			Displaying detailed item drop of a grab bag while clicking the 'Display grab bag loot' keybind
+			A hotkey to swap the hotbar with the second row of inventory
+			A filter panel which opens when the icon of Lifeform Analyzer is clicked
+			Chest items inspection when the cursor is hovered on it and Alt is pressed
+			Tooltip simplification ('favorite' tooltip removal, detailed tooltip in vanity slots)
+			Increased using speed of and enabled auto-use for Life Crystal, Mana Crystal and Life Fruit
+			Middle clicking mount items will toggle the mounts
+			All hair styles can be chosen upon character creation
+			Teleportation rod hotkey. Uses Rod of Discord or Rod of Harmony in any inventory, prioritize RoH
+			Home-returning hotkey. Uses any infinite home-returning item in any inventory, prioritize Potion of Return
 			Ammo can be used from the Big Backpack
 			'''
 	}
 
 	ExtraToolSpeed: {
 		Label: "[centeritem:4056] Tool Speed Multiplier"
-		Tooltip: Setting it to 0 disables the config. The higher the value, the faster the speed. This will not affect the attack speed or dps.
+		Tooltip: Setting it to 0 disables the config. The higher the value, the faster the speed. This will not affect the attack speed or dps
 	}
 
 	MostTreeMin: {
@@ -553,15 +553,15 @@ ImproveConfigs: {
 
 	OpenConfig: {
 		Label: Open Configuration File
-		Tooltip: Any config will only appear in the file after being modified.
+		Tooltip: Any config will only appear in the file after being modified
 	}
 
 	TownNPCHome: {
 		Label: "[centeritem:MusicBoxTownDay] Teleport NPCs Home"
 		Tooltip:
 			'''
-			Right-clicking the "Housing" button will teleport all town NPCs home.
-			Once a town NPC's home is changed, it will be teleported to it immediately.
+			Right-clicking the 'Housing' button will teleport all town NPCs home
+			Once a town NPC's home is changed, it will be teleported to it immediately
 			'''
 		HoverText: (<right> to teleport town NPCs home)
 	}
@@ -570,9 +570,9 @@ ImproveConfigs: {
 		Label: "[centeritem:FishingPotion] No Pool Size Penalty"
 		Tooltip:
 			'''
-			All fishing pools will be deemed as full.
+			All fishing pools will be deemed as full
 			This disables fishing power reduction due to pool size for fishing in small pools 
-			You can even fish with 2 blocks of water.
+			You can even fish with 2 blocks of water
 			'''
 	}
 
@@ -580,10 +580,10 @@ ImproveConfigs: {
 		Label: "[centeritem:RedPotion] Red Potion Extension"
 		Tooltip:
 			'''
-			If in a "Get fixed boi" or "For the worthy" world,
-			you may use all potion ingredients to craft the Red Potion.
-			Inifite Red Potion will provide all its buffs.
-			However, it cannot be put into the Potion Bag.
+			If in a 'Get fixed boi' or 'For the worthy' world,
+			you may use all potion ingredients to craft the Red Potion
+			Inifite Red Potion will provide all its buffs
+			However, it cannot be put into the Potion Bag
 			'''
 		Condition: Red Potion Extension enabled
 	}
@@ -593,7 +593,7 @@ ImproveConfigs: {
 		Tooltip:
 			'''
 			Unlocks the Red Potion Extension for all kinds of worlds
-			instead of only "Get fixed boi" and "For the worthy".
+			instead of only 'Get fixed boi' and 'For the worthy'
 			'''
 		Condition: Unlimited Red Potion Extension enabled/{$Conditions.WorldForTheWorthy}
 	}
@@ -602,8 +602,8 @@ ImproveConfigs: {
 		Label: "[centeritem:RedPotion] Infinite Red Potion Requirement"
 		Tooltip:
 			'''
-			Requires the Red Potion Extension to be enabled.
-			Sets the stack requirement of Infinite Potion specifically for the Red Potion.
+			Requires the Red Potion Extension to be enabled
+			Sets the stack requirement of Infinite Potion specifically for the Red Potion
 			'''
 	}
 
@@ -611,8 +611,8 @@ ImproveConfigs: {
 		Label: "[centeritem:DemonHeart] Expert Debuff Duration"
 		Tooltip:
 			'''
-			Toggles longer debuff duration in Expert/Master mode.
-			Classic mode duration will be used if this is off.
+			Toggles longer debuff duration in Expert/Master mode
+			Classic mode duration will be used if this is off
 			'''
 	}
 
@@ -650,14 +650,14 @@ ImproveConfigs: {
 
 	BedEverywhere: {
 		Label: "[centeritem:Bed] Unlimited Bed Respawn"
-		Tooltip: Beds can set respawn points in any condition, regardless of housing requirements.
+		Tooltip: Beds can set respawn points in any condition, regardless of housing requirements
 	}
 
 	MinimapMark: {
 		Tooltip:
 			'''
 			Allows the use of 'Locators' to mark following structures on map:
-			The Aether, Dungeon, Jungle Temple, Floating Islands, Pyramid, Plantera's Bulb and Enchanted Sword Shrines.
+			The Aether, Dungeon, Jungle Temple, Floating Islands, Pyramid, Plantera's Bulb and Enchanted Sword Shrines
 			'''
 		Label: "[centeritem:WorldGlobe] Structure Markers"
 	}
@@ -671,7 +671,7 @@ ImproveConfigs: {
 		Label: "[centeritem:LifeCrystal] NPC Price Modifier (%)"
 		Tooltip:
 			'''
-			The smaller the value set, the 'happier' NPCs are, the cheaper it is to buy items from NPCs, and the higher the price of items sold to NPCs.
+			The smaller the value set, the 'happier' NPCs are, the cheaper it is to buy items from NPCs, and the higher the price of items sold to NPCs
 			NPCs always sell pylon when the value is at or below 90
 			'''
 	}
@@ -683,19 +683,19 @@ ImproveConfigs: {
 
 	BedTimeRate: {
 		Label: "[centeritem:Bed] Sleeping Time Rate"
-		Tooltip: Allows you to change how fast time goes while sleeping, 5 times by default.
+		Tooltip: Allows you to change how fast time goes while sleeping, 5 times by default
 	}
 
 	BedOnlyOne: {
 		Label: "[centeritem:Bed] One Sleeps For All"
-		Tooltip: One sleeping player is enough to accelerate time in multiplayer.
+		Tooltip: One sleeping player is enough to accelerate time in multiplayer
 	}
 
 	WandMaterialNoConsume: {
 		Tooltip:
 			'''
-			Tiles and walls in stack over 999 will not be consumed if placed by Wand of Space/Technology/Construction.
-			Workbenches, tables, beds, etc. will not be consumed in stack over 99.
+			Tiles and walls in stack over 999 will not be consumed if placed by Wand of Space/Technology/Construction
+			Workbenches, tables, beds, etc. will not be consumed in stack over 99
 			'''
 		Label: "[centeritem:ImproveGame/SpaceWand] Infinite Wand Placeables"
 	}
@@ -703,15 +703,15 @@ ImproveConfigs: {
 	DummyCustomAIStyleAllowed: {
 		Tooltip:
 			'''
-			When enabled, in multiplayer, anyone can customize Dummy to mimic NPC behavior.
-			Given the potential for dummies to become server-crashing or cheating tools, please consider this option carefully.
+			When enabled, in multiplayer, anyone can customize Dummy to mimic NPC behavior
+			Given the potential for dummies to become server-crashing or cheating tools, please consider this option carefully
 			'''
 		Label: "[centeritem:ImproveGame/Dummy] {$Mods.ImproveGame.UI.DummyConfiguration.DummyConfigLabel}"
 	}
 
 	QuestFishStack: {
 		Label: "[centeritem:Clownfish] Stackable Quest Fishes"
-		Tooltip: Quest fishes will be stackable, and can be fished or picked up even if the same fish is in the inventory.
+		Tooltip: Quest fishes will be stackable, and can be fished or picked up even if the same fish is in the inventory
 	}
 
 	QuickRespawn: {
@@ -765,10 +765,10 @@ ImproveConfigs: {
 		Label: "[centeritem:IronPickaxe] Simple Vein Mining"
 		Tooltip:
 			'''
-			Basic vein mining function. Simply mine with a pickaxe to use.
-			Does not have blacklist/whitelist functions and does not support further adjustments.
-			If you have such needs, it is recommended to use Ore Excavator or Basic Automated Mining.
-			If one of the above two mods is loaded, this function will take no effect.
+			Basic vein mining function. Simply mine with a pickaxe to use
+			Does not have blacklist/whitelist functions and does not support further adjustments
+			If you have such needs, it is recommended to use Ore Excavator or Basic Automated Mining
+			If one of the above two mods is loaded, this function will take no effect
 			'''
 		PopupTip: Vein Mining can be disabled via QoT Config if you don't want it
 	}
@@ -817,13 +817,13 @@ ImproveConfigs: {
 AvailableModItemConfigs: {
 	AvailablityHint:
 		'''
-		It is currently unusable. 
-		Please modify the option in Mod Item Config.
+		It is currently unusable 
+		Please modify the option in Mod Item Config
 		'''
 	AvailablityDetailedHint:
 		'''
-		It is currently unusable. 
-		Please modify the option {0} in Main Config.
+		It is currently unusable 
+		Please modify the option {0} in Main Config
 		'''
 	DisplayName: Mod Item Config
 	Available: " Usable"
@@ -974,14 +974,14 @@ UIConfigs: {
 		Label: "[centeritem:348] Auto Trash"
 		Tooltip:
 			'''
-			An automatic trash bin.
-			Items will be moved to this bin if their type is inside.
-			Reserves the last 6 trashed items.
-			Shift+Ctrl+Left-click an item to move it to bin.
+			An automatic trash bin
+			Items will be moved to this bin if their type is inside
+			Reserves the last 6 trashed items
+			Shift+Ctrl+Left-click an item to move it to bin
 			'''
 	}
 
-	FontOffsetPreviewText: Adjust the offset value to make the text fits the line.
+	FontOffsetPreviewText: Adjust the offset value to make the text fits the line
 	BigFontOffsetPreviewText: The quick brown fox...
 
 	OpenConfig: {
@@ -993,14 +993,14 @@ UIConfigs: {
 		Label: "[centeritem:TVHeadMask] Keep Game Running When Focus Is Lost"
 		Tooltip:
 			'''
-			The game will continue to run even if focus is lost (aka. in background)
-			instead of being paused in single player.
+			The game will continue to run even if focus is lost (aka in background)
+			instead of being paused in single player
 			'''
 	}
 
 	ExplosionEffect: {
 		Label: "[centeritem:TNTBarrel] Wand Explosion Effects"
-		Tooltip: Toggles the explosion effects of this mod's wands.
+		Tooltip: Toggles the explosion effects of this mod's wands
 	}
 
 	Headers: {
@@ -1055,8 +1055,8 @@ UIConfigs: {
 	}
 
 	MarkHive: {
-		Label: "[centeritem:ImproveGame/GraniteCaveGlobe] 蜂巢图标大小"
-		Tooltip: 在地图上显示的已标记的蜂巢的图标的大小，设为0以隐藏图标
+		Label: "[centeritem:ImproveGame/GraniteCaveGlobe] Hive Icon Size"
+		Tooltip: Size of map icons of marked Hives, set to 0 to hide
 	}
 
 	MarkEmptyAutofisher: {
@@ -1066,12 +1066,12 @@ UIConfigs: {
 
 	SuicideButton: {
 		Label: Kill The Player
-		Tooltip: Your character will die after hitting this button, [c/FF4444:think twice before pressing it].
+		Tooltip: Your character will die after hitting this button, [c/FF4444:think twice before pressing it]
 	}
 
 	MagicMirrorInstantTp: {
 		Label: "[centeritem:MagicMirror] Instant Home-Returning Items"
-		Tooltip: Home-returning items such as Magic Mirror are instant, delay before teleportation is removed.
+		Tooltip: Home-returning items such as Magic Mirror are instant, delay before teleportation is removed
 	}
 
 	HideNoConsumeBuffs: {
@@ -1085,27 +1085,27 @@ UIConfigs: {
 
 	InfernoTransparency: {
 		Label: "[centeritem:InfernoPotion] Inferno Ring Alpha"
-		Tooltip: Alpha of Inferno rings in your perspective, 1 is solid and 0 is transparent.
+		Tooltip: Alpha of Inferno rings in your perspective, 1 is solid and 0 is transparent
 	}
 
 	InvisibleTransparency: {
 		Label: "[centeritem:InvisibilityPotion] Invisibility Alpha"
-		Tooltip: Alpha of your character in your perspective while invisible, 1 is solid and 0 is transparent.
+		Tooltip: Alpha of your character in your perspective while invisible, 1 is solid and 0 is transparent
 	}
 
 	ThemeType: {
-		Tooltip: Quality of Terraria's UI color scheme.
+		Tooltip: Quality of Terraria's UI color scheme
 		Label: "[qotglyph:12] UI Color Scheme"
 	}
 
 	ShowShimmerInfo: {
 		Label: "[centeritem:BottomlessShimmerBucket] Show Shimmer Info"
-		Tooltip: Show what items an item can be shimmered into in the tooltip.
+		Tooltip: Show what items an item can be shimmered into in the tooltip
 	}
 
 	ShowAmmoInfo: {
-		Label: "[centeritem:1302] 显示使用弹药类型"
-		Tooltip: 显示某个物品的所使用或所属弹药类型（如果有）
+		Label: "[centeritem:1302] Show Ammo Type"
+		Tooltip: Displays the ammunition type a weapon uses in its description
 	}
 
 	ResetUIPositionsButton: {
@@ -1118,15 +1118,19 @@ UIConfigs: {
 		Tooltip:
 			'''
 			Provides a blur effect to QoT UI
-			Not under Retro lighting
-			Tip: Larger "scale denominator" works better on high-resolution screens,
+			Does not work with Retro and Trippy lighting
+			Tip: Larger 'scale denominator' works better on high-resolution screens,
 			which is set by another config option
 			'''
 	}
 
 	SingleBlur: {
 		Label: "[centeritem:MulticoloredStainedGlass] Individual UI Blur (performance-heavy)"
-		Tooltip: Individually blurs each UI window, which is prettier, but might pose compatibility issues（如：滤镜消失、发送消息头顶文本偏移等）
+		Tooltip: 
+			'''
+			Individually blurs each UI window, which is prettier,
+			but might pose compatibility issues (like filters disappearing or text moving around)
+			'''
 	}
 
 	BlurZoomMultiplierDenominator: {
@@ -1168,7 +1172,7 @@ UIConfigs: {
 		Tooltip:
 			'''
 			Summons last used minion after respawn
-			Disabled if the mod "Summoners' Association" is loaded
+			Disabled if the mod 'Summoners' Association' is loaded
 			Summoners' Association powers finer summon control!
 			'''
 	}
@@ -1194,8 +1198,8 @@ UIConfigs: {
 	}
 
 	SpelunkerColor: {
-		Label: "[centeritem:296] 调整洞穴探险药水高亮"
-		Tooltip: 可以随意调节被高亮矿物的颜色
+		Label: "[centeritem:296] Spelunker Highlight Color"
+		Tooltip: Allows to change the color of the spelunker potion's treasure highlight color
 	}
 
 	GlobeEffect: {
@@ -1205,7 +1209,7 @@ UIConfigs: {
 
 	FckKeybindPopup: {
 		Label: Block Keybind Popup
-		Tooltip: Stop telling me I have to bind a key I don't want it.
+		Tooltip: Stop telling me I have to bind a key, I don't want it
 	}
 }
 

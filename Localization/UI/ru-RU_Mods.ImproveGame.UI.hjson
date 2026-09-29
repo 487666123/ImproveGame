@@ -1,4 +1,4 @@
-DummyControl.Name: Функции пугала
+﻿DummyControl.Name: Функции пугала
 GrabBagInfo.Title: Детали о выпадающих предметах
 RecipeSearchUI.Tips:
 	'''
@@ -7,18 +7,18 @@ RecipeSearchUI.Tips:
 	'''
 
 CreateWandController: {
-	// Title: CreateWand Controller
-	// BuildingMaterial: Building Materials
-	// StructureSelection: Building Selection
-	// ImportFromStructureFile: Import - ConstructWand
-	// ImportFromDatamap: Import - Datamap
-	// BackToBuildingDataList: Back to List
+	Title: Панель жезла архитектуры
+	BuildingMaterial: Материалы для строительства
+	StructureSelection: Выбрать постройку
+	ImportFromStructureFile: Импорт — жезл строительства
+	ImportFromDatamap: Импорт — карта данных
+	BackToBuildingDataList: Вернуться к списку
 }
 
 InfiniteBUFFController: {
-	// DisplayName: BUFF Controller
-	// Placeholder: Please enter the name
-	// EnemySpawnRate: Enemy spawn rate
+	DisplayName: Панель эффектов
+	Placeholder: Введите имя
+	EnemySpawnRate: Скорость появления врагов
 }
 
 LiquidWandUI: {
@@ -41,7 +41,7 @@ MasterControl: {
 		Если вы закрепили панель управления, для появления меню надо будет нажать,
 		а не зажимать клавишу
 		'''
-	PopupTitle: Отсутствует горячая клавиша
+	PopupTitle: Не назначена клавиша
 	PopupText: Вы не назначили горячую клавишу для панели управления Quality of Terraria. Назначьте горячую клавишу для панели управления, чтобы иметь быстрый доступ к функциям модификации. Данное сообщение пропадёт сразу после того, как вы сделаете это.
 	PopupPanelWidth: "290"
 	PopupPanelHeight: "200"
@@ -135,19 +135,19 @@ PlayerStats: {
 	LifeRegen: Регенерация
 	ArmorPenetration: Проб. брони
 	# 魔力恢复，因为归在大类“魔法”下所以用Regen代替
-	Regen: Реген. маны
+	Regen: Восст. маны
 	# 魔力消耗，因为归在大类“魔法”下所以用Cost代替
 	Cost: Трата маны
 	MaxMinions: Миньоны
 	MaxTurrets: Стражники
 	Endurance: Сопр. урону
 	Luck: Удача
-	Aggro: Аггро
+	Aggro: Агро
 	BulletDamage: Урон пуль
 	ArrowDamage: Урон стрел
 	SpecialistDamage: Особый урон
 	Damage: Урон
-	Crit: Шанс крита
+	Crit: Крит. шанс
 	# 攻击速度
 	Speed: Скор. атаки
 	SummonMeleeSpeed: Скор. хлыстов
@@ -190,7 +190,7 @@ ExtremeStorage: {
 		Label: Бесконечные зелья
 		Tooltip:
 			'''
-			Определяет, будут ли зелья и станции баффов в категории [c/CC88AA:«{$Mods.ImproveGame.UI.ExtremeStorage.ItemGroup.Alchemy}»] давать [c/CC88AA:бесконечные баффы]
+			Определяет, будут ли зелья и станции-усилители в категории [c/CC88AA:«{$Mods.ImproveGame.UI.ExtremeStorage.ItemGroup.Alchemy}»] давать [c/CC88AA:бесконечные эффекты]
 			Чтобы это работало, нужно будет включить настройку «Бесконечные зелья»
 			'''
 	}
@@ -331,44 +331,44 @@ WorldFeature: {
 	Drunk:
 		'''
 		«Пьяный» мир
-		Сиды: 05162020 | 5162020
+		Зёрна: 05162020 | 5162020
 		'''
 	Bees:
 		'''
 		«Только не пчёлы»
-		Сиды: not the bees | not the bees! | notthebees
+		Зёрна: not the bees | not the bees! | notthebees
 		'''
 	Ftw:
 		'''
 		For the worthy («Для достойных»)
-		Сиды: for the worthy | fortheworthy
+		Зёрна: for the worthy | fortheworthy
 		'''
 	Anniversary:
 		'''
 		Celebrationmk10 («Празднование»)
-		Сиды: celebrationmk10 | 05162011 | 5162011 | 05162021 | 5162021
+		Зёрна: celebrationmk10 | 05162011 | 5162011 | 05162021 | 5162021
 		'''
 	DontStarve:
 		'''
 		«Постоянство»
-		Сиды: constant | theconstant | the constant | eye4aneye | eyeforaneye
+		Зёрна: constant | theconstant | the constant | eye4aneye | eyeforaneye
 		'''
 	Traps:
 		'''
 		«Без ловушек»
-		Сиды: no traps | notraps
+		Зёрна: no traps | notraps
 		P.S. Ничего не делает, если включено в мире
 		'''
 	Remix:
 		'''
-		Don't dig up («Не копай вверх»)
-		Сиды: don't dig up | dont dig up | dontdigup
+		Don't dig up («Ремикс»)
+		Зёрна: don't dig up | dont dig up | dontdigup
 		'''
 	Zenith:
 		'''
-		Get fixed boi
-		Сиды: get fixed boi | getfixedboi
-		P.S. Get fixed boi будет работать только если включены все остальные функции сидов
+		Get fixed boi («Зенит»)
+		Зёрна: get fixed boi | getfixedboi
+		P.S. Get fixed boi будет работать только если включены все остальные функции зёрен
 		'''
 	OpenWiki: <right>, чтобы открыть страницу на вики
 	NotPermitted: У вас нет прав вносить изменения в мир
@@ -419,8 +419,8 @@ OpenBag: {
 		Name: Вы уверены?
 		Tooltip:
 			'''
-			<left>, чтобы продать
-			<right>, чтобы отменить
+			Нажмите <left>, чтобы продать
+			Нажмите <right>, чтобы отменить
 			'''
 	}
 }
@@ -464,7 +464,7 @@ DummyConfiguration: {
 		Scale: Размер
 		ShowBox: Показывать хитбокс
 		ShowDamageData: Показывать хар-ки урона
-		ShowNameOnHover: Показывать имя НИПа
+		ShowNameOnHover: Показывать имя сущ-ва
 		Immortal: Не числиться как цель
 		NoGravity: Игнорировать гравитацию
 		NoTileCollide: Игнорировать блоки
@@ -526,8 +526,8 @@ Autofisher: {
 MapLayer: {
 	TheAether: Эфир
 	Pyramid: Пирамида
-	FloatingIsland: Парящий остров
-	FloatingLake: Парящее озеро
+	FloatingIsland: Небесный остров
+	FloatingLake: Небесное озеро
 	EmptyAutofisher: Рыболовная машина (без наживки!)
 }
 

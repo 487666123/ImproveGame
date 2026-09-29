@@ -1,4 +1,4 @@
-DummyControl.Name: Dummy Control
+﻿DummyControl.Name: Dummy Control
 GrabBagInfo.Title: Detailed Item Drop
 RecipeSearchUI.Tips:
 	'''
@@ -7,10 +7,10 @@ RecipeSearchUI.Tips:
 	'''
 
 CreateWandController: {
-	Title: CreateWand Controller
+	Title: Controller
 	BuildingMaterial: Building Materials
 	StructureSelection: Building Selection
-	ImportFromStructureFile: Import - ConstructWand
+	ImportFromStructureFile: Import - Wand of Construction
 	ImportFromDatamap: Import - Datamap
 	BackToBuildingDataList: Back to List
 }

@@ -1,8 +1,8 @@
-NotEnabled: Нужно включить эту функцию в конфигурации мода
+﻿NotEnabled: Нужно включить эту функцию в конфигурации мода
 
 SuperVault: {
 	DisplayName: Большой рюкзак
-	Description: Открывает рюкзак на 100 слотов инвентаря
+	Description: Открывает рюкзак на 100 ячеек инвентаря
 }
 
 PlayerStats: {
@@ -17,7 +17,7 @@ Spectating: {
 
 WeatherControl: {
 	DisplayName: "{$Mods.ImproveGame.UI.WeatherGUI.Title}"
-	Description: Открывать меню для изменения времени, фазы луны, направления ветра и дождя
+	Description: Открывает меню для изменения времени, фазы луны, направления ветра и дождя
 }
 
 ItemSearcher: {
@@ -31,7 +31,7 @@ BagOpener: {
 }
 
 WorldFeature: {
-	Description: Активация праздников или функций секретных сидов
+	Description: Активация праздников или функций секретных зёрен
 	DisplayName: "{$Mods.ImproveGame.UI.WorldFeature.Title}"
 }
 
@@ -46,7 +46,7 @@ BannerChest: {
 }
 
 ModConfig: {
-	DisplayName: Открывает конфигурации мода
+	DisplayName: Конфигурации мода
 	Description: Быстрый доступ к избранным конфигурациям
 }
 
@@ -57,5 +57,5 @@ AmmoChain: {
 
 QuickShimmer: {
 	DisplayName: Быстрое мерцание
-	Description: Трансмутации вне Эфира!
+	Description: Трансмутации вне эфира!
 }
