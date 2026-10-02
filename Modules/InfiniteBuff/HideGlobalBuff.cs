@@ -190,18 +190,7 @@ class HideGlobalBuff : GlobalBuff
         // 回到 add 之前
         c.Index -= 4;
         c.EmitLdloc(buffIndex);
-        c.EmitDelegate<Func<int, int, int>>(static (add, index) =>
-        {
-            var player = Main.LocalPlayer;
-            var type = player.buffType[index];
-
-            if (player.TryGetModPlayer<InfiniteBuffModPlayer>(out var infinitePlayer) && infinitePlayer.ActivationFlags[type])
-            {
-                return 0;
-            }
-
-            return add;
-        });
+        c.EmitDelegate<Func<int, int, int>>(static (add, index) => IsHiddenInfiniteBuff(index) ? 0 : add);
     }
 
     private static bool CompatibleWithInfiniteBuff(On_Main.orig_TryGetBuffTime orig, int buffSlotOnPlayer, out int buffTimeValue)

@@ -444,6 +444,8 @@ public class MinorPatches : ModSystem
                 i => i.MatchStloc(out _)))
         {
             c.Index--;
+            // 让三元表达式两个分支都经过委托
+            c.MoveAfterLabels();
             c.EmitDelegate<Func<int, int>>(maxValue2 =>
             {
                 return (ImproveConfigs.Instance.LifeFruitGrowsFaster ? 1 : maxValue2);
