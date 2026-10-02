@@ -83,40 +83,35 @@ class HideGlobalBuff : GlobalBuff
         });
     }
 
-    private static int _count;
+    private static bool IsHiddenInfiniteBuff(int buffIndex)
+    {
+        var player = Main.LocalPlayer;
+        return UIConfigs.Instance.HideNoConsumeBuffs &&
+               player.TryGetModPlayer<InfiniteBuffModPlayer>(out var infinitePlayer) &&
+               infinitePlayer.ActivationFlags[player.buffType[buffIndex]];
+    }
+
     private static void IL_Main_DrawInterface_Resources_Buffs(ILContext il)
     {
         var c = new ILCursor(il);
 
-        c.EmitDelegate<Action>(() => _count = 0);
-
-        // loc.3 是 i
-
-        // int x = 32 + i * 38;
-        if (!c.TryGotoNext(MoveType.After,
-            i => i.MatchLdcI4(32),
-            i => i.MatchLdloc(2)
-            ))
-        {
-            MyUtils.ILMatchLog(nameof(IL_Main_DrawInterface_Resources_Buffs), il);
-            return;
-        }
-
+        //int num3 = 0;
         //for (int i = 0; i < Player.maxBuffs; i++)
         //{
         //    if (player[myPlayer].buffType[i] > 0)
         //    {
         //        _ = player[myPlayer].buffType[i];
-        //        int x = 32 + i * 38; << 这里的 i
-        //        int num3 = 76;
-        //        int num4 = i; << 这里的 i，同时根据是否是无限 Buff 决定是否 count++
-        //        while (num4 >= num2)
+        //        int x = 32 + num3 * 38;
+        //        int num4 = 76;
+        //        int num5 = num3;
+        //        while (num5 >= num2)
         //        {
-        //            num4 -= num2;
-        //            x = 32 + num4 * 38;
-        //            num3 += 50;
+        //            num5 -= num2;
+        //            x = 32 + num5 * 38;
+        //            num4 += 50;
         //        }
-        //        num = DrawBuffIcon(num, i, x, num3);
+        //        num = DrawBuffIcon(num, i, x, num4);
+        //        num3++; << 1.4.5 起原版用独立计数定位，这里让被隐藏的无限 Buff 不 +1
         //    }
         //    else
         //    {
@@ -124,28 +119,26 @@ class HideGlobalBuff : GlobalBuff
         //    }
         //}
 
-        c.EmitDelegate<Func<int, int>>(static (i) => _count);
-
-        // int num4 = i;
+        int buffIndex = -1;
         if (!c.TryGotoNext(MoveType.After,
-            i => i.MatchLdloc(2)
+            i => i.MatchLdloc(out _),
+            i => i.MatchLdloc(out buffIndex),
+            i => i.MatchLdloc(out _),
+            i => i.MatchLdloc(out _),
+            i => i.MatchCall<Main>("DrawBuffIcon"),
+            i => i.MatchStloc(out _),
+            i => i.MatchLdloc(out _),
+            i => i.MatchLdcI4(1),
+            i => i.MatchAdd()
             ))
         {
             MyUtils.ILMatchLog(nameof(IL_Main_DrawInterface_Resources_Buffs), il);
             return;
         }
 
-        c.EmitDelegate<Func<int, int>>(static (i) =>
-        {
-            var player = Main.LocalPlayer;
-            if (UIConfigs.Instance.HideNoConsumeBuffs &&
-                player.TryGetModPlayer<InfiniteBuffModPlayer>(out var infinitePlayer) && infinitePlayer.ActivationFlags[player.buffType[i]])
-            {
-                return _count;
-            }
-
-            return _count++;
-        });
+        c.Index--;
+        c.EmitLdloc(buffIndex);
+        c.EmitDelegate<Func<int, int, int>>(static (add, index) => IsHiddenInfiniteBuff(index) ? 0 : add);
     }
 
     private static void IL_Main_DrawInventory(ILContext il)
@@ -161,12 +154,16 @@ class HideGlobalBuff : GlobalBuff
         }
 
         // 这个循环结束，进入下个循环前，会 +1，现在让无限 Buff 不 +1
+        // 不写死局部变量序号，计数和索引都从上下文取
+        int buffIndex = -1;
         if (!c.TryGotoNext(MoveType.After,
             i => i.MatchCall<UILinkPointNavigator>("SetPosition"),
-            i => i.MatchLdloc(49),
+            i => i.MatchLdloc(out _),
             i => i.MatchLdcI4(1),
             i => i.MatchAdd(),
-            i => i.MatchStloc(49)
+            i => i.MatchStloc(out _),
+            i => i.MatchLdsfld<Main>(nameof(Main.buffAlpha)),
+            i => i.MatchLdloc(out buffIndex)
             ))
         {
             MyUtils.ILMatchLog(nameof(IL_Main_DrawInventory), il);
@@ -190,21 +187,21 @@ class HideGlobalBuff : GlobalBuff
         //    }
         //}
 
-        c.EmitLdloc(62);
-        c.EmitLdloc(49);
-        c.EmitDelegate<Func<int, int, int>>(static (index, count) =>
+        // 回到 add 之前
+        c.Index -= 4;
+        c.EmitLdloc(buffIndex);
+        c.EmitDelegate<Func<int, int, int>>(static (add, index) =>
         {
             var player = Main.LocalPlayer;
             var type = player.buffType[index];
 
             if (player.TryGetModPlayer<InfiniteBuffModPlayer>(out var infinitePlayer) && infinitePlayer.ActivationFlags[type])
             {
-                return count - 1;
+                return 0;
             }
 
-            return count;
+            return add;
         });
-        c.EmitStloc(49);
     }
 
     private static bool CompatibleWithInfiniteBuff(On_Main.orig_TryGetBuffTime orig, int buffSlotOnPlayer, out int buffTimeValue)
