@@ -436,8 +436,16 @@ public class MinorPatches : ModSystem
     {
         var c = new ILCursor(il);
 
-        if (c.TryGotoNext(MoveType.Before, i => i.MatchStloc(14)))
+        // int maxValue2 = Main.expertMode ? 30 : 40; 不写死局部变量序号（1.4.5.8 中由 14 变为 15）
+        if (c.TryGotoNext(MoveType.After,
+                i => i.MatchLdcI4(40),
+                i => i.MatchBr(out _),
+                i => i.MatchLdcI4(30),
+                i => i.MatchStloc(out _)))
         {
+            c.Index--;
+            // 让三元表达式两个分支都经过委托
+            c.MoveAfterLabels();
             c.EmitDelegate<Func<int, int>>(maxValue2 =>
             {
                 return (ImproveConfigs.Instance.LifeFruitGrowsFaster ? 1 : maxValue2);
@@ -448,8 +456,12 @@ public class MinorPatches : ModSystem
             MyUtils.ILMatchLog(nameof(IL_WorldGen_UpdateWorld_GrassGrowth), il);
         }
 
-        if (c.TryGotoNext(MoveType.Before, i => i.MatchStloc(20)))
+        // int num7 = 60; 不写死局部变量序号（1.4.5.8 中由 20 变为 21）
+        if (c.TryGotoNext(MoveType.After,
+                i => i.MatchLdcI4(60),
+                i => i.MatchStloc(out _)))
         {
+            c.Index--;
             c.EmitDelegate<Func<int, int>>((num7) =>
             {
                 int limit = ImproveConfigs.Instance.LifeFruitLimit;
@@ -1070,15 +1082,18 @@ public class MinorPatches : ModSystem
     private void TweakDrawCountInventory(ILContext il)
     {
         // 计算剩余平台
+        // 匹配 int num11 = -1; if (context == 13)，不写死局部变量序号（1.4.5.8 中由 48 变为 53）
         var c = new ILCursor(il);
         if (!c.TryGotoNext(MoveType.After,
                 i => i.MatchLdcI4(-1),
-                i => i.MatchStloc(48)))
+                i => i.MatchStloc(out _),
+                i => i.MatchLdarg2(),
+                i => i.MatchLdcI4(13)))
         {
             MyUtils.ILMatchLog(nameof(TweakDrawCountInventory), il);
             return;
         }
-        c.Index--;
+        c.Index -= 3;
         c.Emit(OpCodes.Ldarg_1); // 玩家物品槽
         c.Emit(OpCodes.Ldarg_2); // content
         c.Emit(OpCodes.Ldarg_3); // 物品在物品槽的位置
