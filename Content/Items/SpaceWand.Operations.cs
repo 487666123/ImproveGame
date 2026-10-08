@@ -50,7 +50,17 @@ public partial class SpaceWand
 
         if (GrassSeeds.Contains(item.createTile))
         {
-            if (WorldGen.PlaceTile(x, y, item.createTile, true, false, player.whoAmI, item.placeStyle))
+            var prevtileType = Main.tile[x, y].TileType;
+            // 放置草药需要先手动清理下杂草草
+            if (item.createTile == TileID.ImmatureHerbs && Main.tile[x,y].TileType is TileID.Plants or TileID.Plants2) 
+            {
+                WorldGen.KillTile(x, y);
+                if (!Main.tile[x, y].active() && Main.netMode == NetmodeID.MultiplayerClient)
+                    NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, x, y);
+            }
+            if (WorldGen.PlaceTile(x, y, item.createTile, true, false, player.whoAmI, item.placeStyle)
+                && Main.tile[x, y].TileType == item.createTile
+                && prevtileType != item.createTile)
             {
                 playSound = true;
                 // PickItemInInventory(player, GetConditions(placeType), false, out int index);
