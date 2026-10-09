@@ -108,6 +108,8 @@ WeatherGUI: {
 	EasterEgg: 蘑菇！
 	Locked: 使用 [i:ImproveGame/WeatherBook] 以解锁气候控制
 	TimeUnlockCondition: 肉后解锁时间控制
+	ModdedSlotLocked: 已锁定，右键解锁
+	ModdedSlotUnlocked: 右键以锁定状态
 }
 
 PlayerStats: {

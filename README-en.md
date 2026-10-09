@@ -438,3 +438,164 @@ Add new house for Wand of Architecture
 | Cyan        | 00FFFF   | NoWall       |
 | Green       | 00FF00   | Door         |
 | Transparent |          | Wall         |
+
+### RegisterWeatherControl
+
+Register a control item into the Weather Control panel. Items without a group go into the default "modded" grid on the panel
+It is recommended to copy [ImproveGame_WeatherControlCrossModHelper.cs](ImproveGame_WeatherControlCrossModHelper.cs) into your mod and use the strongly-typed wrappers instead of raw `Mod.Call`
+
+#### Parameters
+
+- `Mod` The source mod instance, used as the ModName of the control
+- `string` Internal name of the control, combined with ModName as the unique id `ModName:Name`
+- `Texture2D` Slot icon, anything larger than 32x32 will be scaled down to fit
+- `Func<string>/LocalizedText/string` Display name provider, shown as the first line of the hover tooltip
+- `Func<string>/LocalizedText/string` Hover description, may be `null`
+- `string[]/IReadOnlyList<string>` Stage name array with at least 2 entries. The index order is the stage order. Names are internal keys only and not displayed
+- `Func<int>` Returns the current stage index, `-1` if unknown
+- `Action<int>` Applies a stage locally, no networking required
+- `bool` Optional, whether the item supports locking, default `false`
+- `Func<bool>` Optional, returns the current locked state
+- `Action<bool>` Optional, applies the locked state locally
+- `Func<bool>` Optional, decides whether the item is currently available. Unavailable items are hidden from the panel
+- `int` Optional, sort priority, higher first, default `0`
+- `string` Optional, id of the group this item belongs to. Leave empty to fall into the default modded grid
+
+#### Return Value
+
+- `bool` Whether the registration succeeded. Returns `false` if stages are insufficient or required arguments are missing
+
+#### Notes
+
+- `setStage` and `setLocked` only need to write the local state. Network sync is handled by `SetWeatherControlStage` / `SetWeatherControlLocked`, which dispatch even in single player
+- Registering twice with the same `(ModName, Name)` overwrites the previous entry
+
+### UnregisterWeatherControl
+
+Remove a registered weather control item
+
+#### Parameters
+
+- `Mod` The source mod instance
+- `string` Internal name of the control
+
+### RegisterWeatherControlGroup
+
+Register a custom content group. A group lets your mod attach its own UI view to the Weather Control panel instead of dropping every item into the default modded grid
+
+#### Parameters
+
+- `Mod` The source mod instance
+- `string` Internal name of the group
+- `Func<string>/LocalizedText/string` Display name provider
+- `int` Sort priority, higher first
+- `Func<UIElement>` Builds the group view, invoked once each time the Weather Control panel opens
+- `Func<bool>` Optional, decides whether the group is currently available
+
+### UnregisterWeatherControlGroup
+
+Remove a registered group
+
+#### Parameters
+
+- `Mod` The source mod instance
+- `string` Internal name of the group
+
+### QueryWeatherControlStage
+
+Read the current stage index of a control. Works on builtin items too
+
+#### Parameters
+
+- `string` Full id of the control, formatted as `ModName:Name`
+
+#### Return Value
+
+- `int` Current stage index, `-1` when the control does not exist
+
+### SetWeatherControlStage
+
+Dispatch a stage change. All clients apply the update
+
+#### Parameters
+
+- `string` Full id of the control
+- `int` Target stage index
+
+### IsWeatherControlLocked
+
+Read whether a control is currently locked
+
+#### Parameters
+
+- `string` Full id of the control
+
+#### Return Value
+
+- `bool` Whether the control is locked. Returns `false` when the control does not exist or does not support locking
+
+### SetWeatherControlLocked
+
+Dispatch a locked state change. Returns `false` if the target control does not support locking
+
+#### Parameters
+
+- `string` Full id of the control
+- `bool` Target locked state
+
+### Built-in Weather Control Ids
+
+| Id | Item | Stages |
+| --- | --- | --- |
+| `ImproveGame:Time` | Time of day | `Dawn` / `Noon` / `Dusk` / `Midnight` |
+| `ImproveGame:MoonPhase` | Moon phase | `Phase0` ~ `Phase7` |
+| `ImproveGame:Rain` | Rain | `Off` / `On` |
+| `ImproveGame:Sandstorm` | Sandstorm | `Off` / `On` |
+| `ImproveGame:Wind` | Wind direction | `West` / `No` / `East` |
+
+### Example
+
+The snippet below registers a custom weather state from another mod through the helper (copy [ImproveGame_WeatherControlCrossModHelper.cs](ImproveGame_WeatherControlCrossModHelper.cs) into your project first):
+
+```CSharp
+public override void PostSetupContent()
+{
+    if (!ModLoader.TryGetMod("ImproveGame", out var qot)) return;
+
+    ImproveGame_WeatherControlCrossModHelper.RegisterWeatherControl(
+        qot: qot,
+        source: this,
+        name: "ScorchingDay",
+        icon: TextureAssets.Item[ItemID.LivingFireBlock].Value,
+        displayName: () => Language.GetTextValue("Mods.MyMod.ScorchingDay.Name"),
+        tooltip:     () => Language.GetTextValue("Mods.MyMod.ScorchingDay.Tooltip"),
+        stages: ["Inactive", "Active"],
+        getStage: () => MySystem.Active ? 1 : 0,
+        setStage: MySystem.ApplyStage,
+        supportsLock: true,
+        getLocked: () => MySystem.Locked,
+        setLocked: locked => MySystem.Locked = locked,
+        priority: 100);
+}
+
+public override void Unload()
+{
+    // Drop the registration so the Registry does not keep callbacks pointing into an unloaded assembly
+    if (ModLoader.TryGetMod("ImproveGame", out var qot))
+        ImproveGame_WeatherControlCrossModHelper.UnregisterWeatherControl(qot, this, "ScorchingDay");
+}
+```
+
+Stage transitions go through `SetWeatherControlStage`, which works on builtin items as well:
+
+```CSharp
+if (ModLoader.TryGetMod("ImproveGame", out var qot))
+{
+    // Start raining across all clients
+    ImproveGame_WeatherControlCrossModHelper.SetWeatherControlStage(
+        qot, ImproveGame_WeatherControlCrossModHelper.RainId, 1);
+
+    int now = ImproveGame_WeatherControlCrossModHelper.QueryWeatherControlStage(
+        qot, ImproveGame_WeatherControlCrossModHelper.RainId);
+}
+```

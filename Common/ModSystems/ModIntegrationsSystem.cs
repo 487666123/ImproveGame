@@ -759,6 +759,30 @@ public class ModIntegrationsSystem : ModSystem
                         }
                         return false;
                     }
+                    // 注册一个气候控制项
+                    case "RegisterWeatherControl":
+                        return Content.Functions.WeatherControl.WeatherControlCrossMod.RegisterControl(args);
+                    // 移除一个气候控制项
+                    case "UnregisterWeatherControl":
+                        return Content.Functions.WeatherControl.WeatherControlCrossMod.UnregisterControl(args);
+                    // 注册一个自定义内容栏
+                    case "RegisterWeatherControlGroup":
+                        return Content.Functions.WeatherControl.WeatherControlCrossMod.RegisterGroup(args);
+                    // 移除一个自定义内容栏
+                    case "UnregisterWeatherControlGroup":
+                        return Content.Functions.WeatherControl.WeatherControlCrossMod.UnregisterGroup(args);
+                    // 查询某控制项的当前档位，未知返回 -1
+                    case "QueryWeatherControlStage":
+                        return Content.Functions.WeatherControl.WeatherControlCrossMod.QueryStage(args[1] as string);
+                    // 派发档位变更
+                    case "SetWeatherControlStage":
+                        return Content.Functions.WeatherControl.WeatherControlCrossMod.DispatchStage(args[1] as string, Convert.ToInt32(args[2]));
+                    // 查询某控制项是否锁定
+                    case "IsWeatherControlLocked":
+                        return Content.Functions.WeatherControl.WeatherControlCrossMod.QueryLocked(args[1] as string);
+                    // 派发锁定状态变更
+                    case "SetWeatherControlLocked":
+                        return Content.Functions.WeatherControl.WeatherControlCrossMod.DispatchLocked(args[1] as string, Convert.ToBoolean(args[2]));
                     default:
                         ImproveGame.Instance.Logger.Error($"Replacement type \"{msg}\" not found.");
                         return false;

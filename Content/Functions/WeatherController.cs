@@ -129,7 +129,7 @@ public sealed class WeatherController : ModSystem
     {
         if (Unlocked) tag.Add("unlocked", true);
         if (RainLocked) tag.Add("rainLocked", true);
-        if (SandstormLocked) tag.Add("sandstorm", true);
+        if (SandstormLocked) tag.Add("sandstormLocked", true);
         if (MoonPhaseLocked) tag.Add("moonPhaseLocked", true);
         if (WindLocked) tag.Add("windLocked", true);
     }
@@ -138,7 +138,9 @@ public sealed class WeatherController : ModSystem
     {
         if (tag.ContainsKey("unlocked")) Unlocked = tag.GetBool("unlocked");
         if (tag.ContainsKey("rainLocked")) RainLocked = tag.GetBool("rainLocked");
+        // 旧版本写入的键名是 sandstorm，这里兼容一下
         if (tag.ContainsKey("sandstormLocked")) SandstormLocked = tag.GetBool("sandstormLocked");
+        else if (tag.ContainsKey("sandstorm")) SandstormLocked = tag.GetBool("sandstorm");
         if (tag.ContainsKey("moonPhaseLocked")) MoonPhaseLocked = tag.GetBool("moonPhaseLocked");
         if (tag.ContainsKey("windLocked")) WindLocked = tag.GetBool("windLocked");
     }

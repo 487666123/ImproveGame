@@ -108,6 +108,8 @@ WeatherGUI: {
 	EasterEgg: Mushroom!
 	Locked: Use [i:ImproveGame/WeatherBook] to unlock weather control
 	TimeUnlockCondition: Defeat the Wall of Flesh to control time
+	ModdedSlotLocked: Locked, <right> to unlock
+	ModdedSlotUnlocked: <right> to lock the current state
 }
 
 PlayerStats: {

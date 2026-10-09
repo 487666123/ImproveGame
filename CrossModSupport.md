@@ -389,3 +389,164 @@ public class MyMod : Mod
     //这里可以偷懒不卸载委托，因为模组在重新加载时本身会自动卸载清理所有的委托
 }
 ```
+
+### RegisterWeatherControl
+
+往气候控制面板注册一个控制项，未指定栏目的项会落到面板里的“模组项”栏
+建议把本项目根目录的 [ImproveGame_WeatherControlCrossModHelper.cs](ImproveGame_WeatherControlCrossModHelper.cs) 复制到你自己的模组里，直接用强类型 API 调用，省去手动凑 `Mod.Call` 参数
+
+#### 参数
+
+- `Mod` 注册源模组的实例，会被用作控制项的 ModName
+- `string` 控制项的内部名，与 ModName 共同构成唯一标识 `ModName:Name`
+- `Texture2D` 槽位图标，建议 32x32 以内，超过会自动按比例缩到 28x28
+- `Func<string>/LocalizedText/string` 显示名提供器，悬停 tooltip 的顶行
+- `Func<string>/LocalizedText/string` 悬停说明，可传 `null`
+- `string[]/IReadOnlyList<string>` 档位名数组，长度至少 2，索引顺序就是档位顺序，名字仅用作内部键不会直接显示
+- `Func<int>` 取当前档位下标的回调，未知时返回 `-1`
+- `Action<int>` 应用指定档位到本地的回调，只负责落地状态不负责发包
+- `bool` 可选，是否支持锁定，默认 `false`
+- `Func<bool>` 可选，取当前锁定状态的回调
+- `Action<bool>` 可选，应用锁定状态到本地的回调
+- `Func<bool>` 可选，判断该项当前是否可用，不可用时槽位不会出现在面板上
+- `int` 可选，排序优先级，越高越靠前，默认 `0`
+- `string` 可选，所属内容栏的 Id，为空则放进默认的“模组项”栏
+
+#### 返回值
+
+- `bool` 注册是否成功，stages 数量不足或必填项缺失时返回 `false`
+
+#### 说明
+
+- `setStage` 与 `setLocked` 只在本地写入状态，跨客户端同步由 `SetWeatherControlStage` / `SetWeatherControlLocked` 统一派发，单机也走派发
+- 同模组同名重复注册会覆盖旧条目
+
+### UnregisterWeatherControl
+
+移除一个气候控制项
+
+#### 参数
+
+- `Mod` 注册源模组的实例
+- `string` 控制项的内部名
+
+### RegisterWeatherControlGroup
+
+注册一个自定义内容栏，模组可以把自己的 UI 视图挂到气候控制面板里，而不是只往“模组项”格子里塞图标
+
+#### 参数
+
+- `Mod` 注册源模组的实例
+- `string` 内容栏的内部名
+- `Func<string>/LocalizedText/string` 显示名
+- `int` 排序优先级，越高越靠前
+- `Func<UIElement>` 创建该栏视图的回调，气候控制面板每次打开会调一次
+- `Func<bool>` 可选，判断该栏当前是否可用
+
+### UnregisterWeatherControlGroup
+
+移除一个自定义内容栏
+
+#### 参数
+
+- `Mod` 注册源模组的实例
+- `string` 内容栏的内部名
+
+### QueryWeatherControlStage
+
+查询某个控制项的当前档位下标，可以用来读取内置项的状态
+
+#### 参数
+
+- `string` 控制项的完整 Id，格式 `ModName:Name`
+
+#### 返回值
+
+- `int` 当前档位下标，控制项不存在时返回 `-1`
+
+### SetWeatherControlStage
+
+派发档位变更，所有客户端会同步应用
+
+#### 参数
+
+- `string` 控制项的完整 Id
+- `int` 目标档位下标
+
+### IsWeatherControlLocked
+
+查询某个控制项是否处于锁定状态
+
+#### 参数
+
+- `string` 控制项的完整 Id
+
+#### 返回值
+
+- `bool` 当前是否锁定，控制项不存在或不支持锁定时返回 `false`
+
+### SetWeatherControlLocked
+
+派发锁定状态变更，所有客户端会同步应用，控制项不支持锁定时返回 `false`
+
+#### 参数
+
+- `string` 控制项的完整 Id
+- `bool` 目标锁定状态
+
+### 内置气候控制项 Id 速查
+
+| Id | 项目 | 档位 |
+| --- | --- | --- |
+| `ImproveGame:Time` | 时间 | `Dawn` / `Noon` / `Dusk` / `Midnight` |
+| `ImproveGame:MoonPhase` | 月相 | `Phase0` ~ `Phase7` |
+| `ImproveGame:Rain` | 降雨 | `Off` / `On` |
+| `ImproveGame:Sandstorm` | 沙暴 | `Off` / `On` |
+| `ImproveGame:Wind` | 风向 | `West` / `No` / `East` |
+
+### 使用例
+
+下面这段演示一个外部模组怎么用 `Mod.Call`（这里用了 [ImproveGame_WeatherControlCrossModHelper.cs](ImproveGame_WeatherControlCrossModHelper.cs) 提供的强类型封装）注册一个自己的气候控制项：
+
+```CSharp
+public override void PostSetupContent()
+{
+    if (!ModLoader.TryGetMod("ImproveGame", out var qot)) return;
+
+    ImproveGame_WeatherControlCrossModHelper.RegisterWeatherControl(
+        qot: qot,
+        source: this,
+        name: "ScorchingDay",
+        icon: TextureAssets.Item[ItemID.LivingFireBlock].Value,
+        displayName: () => Language.GetTextValue("Mods.MyMod.ScorchingDay.Name"),
+        tooltip:     () => Language.GetTextValue("Mods.MyMod.ScorchingDay.Tooltip"),
+        stages: ["Inactive", "Active"],
+        getStage: () => MySystem.Active ? 1 : 0,
+        setStage: MySystem.ApplyStage,
+        supportsLock: true,
+        getLocked: () => MySystem.Locked,
+        setLocked: locked => MySystem.Locked = locked,
+        priority: 100);
+}
+
+public override void Unload()
+{
+    // 卸载时撤掉注册，免得 Registry 留着指向已经卸载程序集的回调
+    if (ModLoader.TryGetMod("ImproveGame", out var qot))
+        ImproveGame_WeatherControlCrossModHelper.UnregisterWeatherControl(qot, this, "ScorchingDay");
+}
+```
+
+档位切换通过 `SetWeatherControlStage` 统一派发，下面这段是改造原版降雨、再读回当前档位的最小演示：
+
+```CSharp
+if (ModLoader.TryGetMod("ImproveGame", out var qot))
+{
+    // 让世界开始下雨
+    ImproveGame_WeatherControlCrossModHelper.SetWeatherControlStage(
+        qot, ImproveGame_WeatherControlCrossModHelper.RainId, 1);
+
+    int now = ImproveGame_WeatherControlCrossModHelper.QueryWeatherControlStage(
+        qot, ImproveGame_WeatherControlCrossModHelper.RainId);
+}
+```
