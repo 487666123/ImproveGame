@@ -15,20 +15,10 @@ public class Dummy : ModItem
 
     public override bool? UseItem(Player player)
     {
-        return base.UseItem(player);
-    }
-    public override bool AltFunctionUse(Player player)
-    {
-        return true;
-    }
-    public override bool CanUseItem(Player player)
-    {
-        /*if (Main.netMode == NetmodeID.MultiplayerClient)
-        {
-            AddNotification(GetText("Items.Dummy.CannotUse"), Color.PaleVioletRed * 1.4f);
-            return false;
-        }*/
-        if (Main.myPlayer != player.whoAmI) return false;
+        if (Main.myPlayer != player.whoAmI
+            || player.itemAnimation != player.itemAnimationMax
+            || KeybindSystem.ItemInteractKeybind.JustPressed)
+            return base.UseItem(player);
         if (player.altFunctionUse == 2)
         {
             foreach (var npc in Main.npc)
@@ -62,7 +52,15 @@ public class Dummy : ModItem
             }
             SyncDummyModule.Get(spawnPosition, player.whoAmI, DummyNPC.LocalConfig).Send(runLocally: true);
         }
-
+        return null;
+    }
+    public override bool AltFunctionUse(Player player)
+    {
+        return true;
+    }
+    public override bool CanUseItem(Player player)
+    {
+        if (Main.myPlayer != player.whoAmI) return false;
         return true;
     }
     public override void HoldStyle(Player player, Rectangle heldItemFrame)
