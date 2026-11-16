@@ -282,6 +282,7 @@ public class ModIntegrationsSystem : ModSystem
             return;
 
         AddBuffIntegration(redemption, "SoulCandle", true, "SoulboundBuff");
+        
     }
 
     private static void DoDialogueTweakIntegration()
