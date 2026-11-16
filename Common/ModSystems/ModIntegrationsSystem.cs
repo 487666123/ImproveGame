@@ -281,7 +281,6 @@ public class ModIntegrationsSystem : ModSystem
         if (!ModLoader.TryGetMod("Redemption", out Mod redemption))
             return;
 
-        // 灵魂蜡烛：带在身上就持续获得 Soulbound，等同于永久
         AddBuffIntegration(redemption, "SoulCandle", true, "SoulboundBuff");
     }
 
