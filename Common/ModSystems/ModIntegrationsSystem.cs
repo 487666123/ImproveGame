@@ -101,6 +101,7 @@ public class ModIntegrationsSystem : ModSystem
         DoThoriumModIntegration();
         DoFargowiltasIntegration();
         DoGensokyoIntegration();
+        DoRedemptionIntegration();
         DoRecipeBrowserIntegration();
         DoLuiafkRebornIntegration();
         DoDialogueTweakIntegration();
@@ -273,6 +274,15 @@ public class ModIntegrationsSystem : ModSystem
         AddBuffConflicts(gensokyo, "Buff_DangoPower4", "Buff_DangoPower3", "Buff_DangoPower2", "Buff_DangoPower1");
         AddBuffConflicts(gensokyo, "Buff_DangoPower3", "Buff_DangoPower2", "Buff_DangoPower1");
         AddBuffConflicts(gensokyo, "Buff_DangoPower2", "Buff_DangoPower1");
+    }
+
+    private static void DoRedemptionIntegration()
+    {
+        if (!ModLoader.TryGetMod("Redemption", out Mod redemption))
+            return;
+
+        AddBuffIntegration(redemption, "SoulCandle", true, "SoulboundBuff");
+        
     }
 
     private static void DoDialogueTweakIntegration()
