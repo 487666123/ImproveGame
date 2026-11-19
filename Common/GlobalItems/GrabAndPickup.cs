@@ -30,8 +30,14 @@ public class GrabAndPickup : GlobalItem
     {
         if (ImproveConfigs.Instance.GrabDistance > 0)
         {
-            var dir = Vector2.Normalize(player.Center - item.Center) * 25f;
-            item.velocity = (item.velocity * 9 + dir) / 10;
+            var toPlayer = player.Center - item.Center;
+
+            // 物品与玩家中心重合时为零向量，直接归一化会产生 NaN，保留原速度等待拾取
+            if (toPlayer != Vector2.Zero)
+            {
+                var dir = Vector2.Normalize(toPlayer) * 25f;
+                item.velocity = (item.velocity * 9 + dir) / 10;
+            }
         }
 
         return false;
