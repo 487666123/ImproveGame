@@ -1,4 +1,6 @@
-﻿using ImproveGame.UIFramework;
+﻿using ImproveGame.Content.Functions.WeatherControl;
+using ImproveGame.UI.WeatherControl.Components;
+using ImproveGame.UIFramework;
 using ImproveGame.UIFramework.BaseViews;
 using ImproveGame.UIFramework.Common;
 using ImproveGame.UIFramework.SUIElements;
@@ -28,6 +30,12 @@ public class WeatherGUI : BaseBody
 
     // 天气环境
     private WeatherAmbientElement WeatherAmbient;
+
+    // 外部模组项默认网格栏
+    private ModdedWeatherItemsView ModdedItemsView;
+
+    // 注册的外部内容栏
+    private readonly List<UIElement> _customGroupViews = [];
 
     public override void OnInitialize()
     {
@@ -100,7 +108,37 @@ public class WeatherGUI : BaseBody
         };
         WeatherAmbient.JoinParent(bottomArea);
 
+        // 把模组项浮窗直接挂到艺术画面里，让外部图标融入场景
+        ModdedItemsView = new ModdedWeatherItemsView();
+        ModdedItemsView.JoinParent(bottomArea);
+
+        BuildCustomGroupViews();
+
         Recalculate();
+    }
+
+    private void BuildCustomGroupViews()
+    {
+        foreach (var view in _customGroupViews)
+            MainPanel.RemoveChild(view);
+        _customGroupViews.Clear();
+
+        var registry = WeatherControlRegistry.Instance;
+        if (registry is null) return;
+
+        foreach (var group in registry.SortedGroups())
+        {
+            if (!group.IsAvailable) continue;
+            var controls = registry.ControlsInGroup(group.Id).ToList();
+            var view = group.CreateView(controls);
+            if (view is null) continue;
+
+            if (view is View v) v.RelativeMode = RelativeMode.Vertical;
+            view.Recalculate();
+
+            MainPanel.Append(view);
+            _customGroupViews.Add(view);
+        }
     }
 
     public override void Update(GameTime gameTime)
@@ -118,6 +156,8 @@ public class WeatherGUI : BaseBody
     {
         SoundEngine.PlaySound(SoundID.MenuOpen);
         Visible = true;
+        BuildCustomGroupViews();
+        Recalculate();
         StartTimer.Open();
     }
 

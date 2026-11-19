@@ -472,7 +472,7 @@ public partial class WeatherAmbientElement : View
         {
             Main.spriteBatch.Draw(pinHighlight, pinPosition, color);
             _hoverText = GetText("UI.WeatherGUI.Wind") + "\n" +
-                         GetText($"UI.WeatherGUI.WindLock{WeatherController.MoonPhaseLocked}");
+                         GetText($"UI.WeatherGUI.WindLock{WeatherController.WindLocked}");
         }
 
         Main.spriteBatch.Draw(wheelTexture, center, null, color, _pinWheelRotation,
