@@ -1,69 +1,48 @@
 ﻿using ImproveGame.Common.Configs;
 using ImproveGame.Content.Items;
+using MonoMod.Cil;
 
 namespace ImproveGame.Common.ModPlayers;
 
 internal class TilePlaceBoostHandler : ModPlayer
 {
-    internal class MonoModHooksLoader : ILoadable
+    public override void Load()
     {
-        void ILoadable.Load(Mod mod)
+        IL_Player.PlaceThing_Tiles_PlaceIt += BoostPlacementItemTime;
+        IL_Player.PlaceThing_Walls += BoostPlacementItemTime;
+        IL_Player.PlaceThing_TryReplacingWalls += BoostPlacementItemTime;
+        IL_Player.PlaceThing_PaintScrapper_TryScrapping += BoostPlacementItemTime;
+        IL_Player.ApplyPaint += BoostPlacementItemTime;
+        IL_Player.ApplyCoating += BoostPlacementItemTime;
+    }
+
+    private static void BoostPlacementItemTime(ILContext il)
+    {
+        var cursor = new ILCursor(il);
+        while (cursor.TryGotoNext(MoveType.After, instruction =>
+            instruction.MatchLdfld<Player>(nameof(Player.tileSpeed)) || instruction.MatchLdfld<Player>(nameof(Player.wallSpeed))))
         {
-            // 动画速度不变
-            On_Player.ApplyItemAnimation_Item += FixSuperFastAnimation;
-        }
-
-        private void FixSuperFastAnimation(On_Player.orig_ApplyItemAnimation_Item orig, Player player, Item sItem)
-        {
-            if (!ShouldItemAcceptSpeedBoost(sItem) || !player.TryGetModPlayer<TilePlaceBoostHandler>(out var modPlayer))
-            {
-                orig.Invoke(player, sItem);
-                return;
-            }
-
-            float oldTileSpeed = player.tileSpeed;
-            float oldWallSpeed = player.wallSpeed;
-            player.tileSpeed = modPlayer.OriginalTileSpeed;
-            player.wallSpeed = modPlayer.OriginalWallSpeed;
-
-            orig.Invoke(player, sItem);
-
-            player.tileSpeed = oldTileSpeed;
-            player.wallSpeed = oldWallSpeed;
-        }
-
-        void ILoadable.Unload()
-        {
+            cursor.EmitLdarg0();
+            cursor.EmitDelegate(static (float multiplier, Player player) =>
+                player.whoAmI == Main.myPlayer && ShouldItemAcceptSpeedBoost(player.HeldItem)
+                    ? Math.Min(multiplier, 1f / 3f)
+                    : multiplier);
         }
     }
 
-    internal float OriginalTileSpeed;
-    internal float OriginalWallSpeed;
-
     /// <summary>
-    /// 设置玩家的放置范围和放置速度
+    /// 设置玩家的放置范围
     /// </summary>
     public override void UpdateEquips()
     {
-        if (Player.whoAmI == Main.myPlayer)
-        {
-            // 设置放置范围
-            Player.tileRangeX += ImproveConfigs.Instance.ModifyPlayerTileRange;
-            Player.tileRangeY += ImproveConfigs.Instance.ModifyPlayerTileRange;
+        if (Player.whoAmI != Main.myPlayer)
+            return;
 
-            if (!ShouldItemAcceptSpeedBoost(Player.HeldItem))
-                return;
-
-            // 物块和墙放置速度
-            OriginalTileSpeed = Player.tileSpeed;
-            OriginalWallSpeed = Player.wallSpeed;
-
-            Player.tileSpeed = Math.Max(3f, Player.tileSpeed);
-            Player.wallSpeed = Math.Max(3f, Player.wallSpeed);
-        }
+        Player.tileRangeX += ImproveConfigs.Instance.ModifyPlayerTileRange;
+        Player.tileRangeY += ImproveConfigs.Instance.ModifyPlayerTileRange;
     }
 
-    internal static bool ShouldItemAcceptSpeedBoost(Item item)
+    private static bool ShouldItemAcceptSpeedBoost(Item item)
     {
         if (item.IsAir || !ImproveConfigs.Instance.ModifyPlayerPlaceSpeed)
             return false;
