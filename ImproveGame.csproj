@@ -1,10 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <AssemblyName>ImproveGame</AssemblyName>
         <LangVersion>preview</LangVersion>
         <TargetFramework>net10.0</TargetFramework>
-        <DebugMod>DragonLens</DebugMod>
+        <DebugMod>;</DebugMod>
     </PropertyGroup>
 
     <ItemGroup>

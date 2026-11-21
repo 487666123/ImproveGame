@@ -1,5 +1,4 @@
-﻿using ImproveGame.Common.Configs;
-using ImproveGame.Common.ModPlayers;
+using ImproveGame.Common.Configs;
 using ImproveGame.Common.ModSystems;
 using ImproveGame.Core;
 using ImproveGame.UI;
@@ -58,7 +57,6 @@ public class UIPlayer : ModPlayer
 
         ShouldShowUI = true;
         UISystem uiSystem = UISystem.Instance;
-        DataPlayer dataPlayer = Main.LocalPlayer.GetModPlayer<DataPlayer>();
 
         // 遍历继承了 BodyView 类的类型
         foreach (Type baseBodyType in UISystem.Instance.AutoCreateBodyTypes)
@@ -79,9 +77,8 @@ public class UIPlayer : ModPlayer
         PlayerStatsGUI.Instance.ControllerSwitch.SetPos(PlayerInfoTogglePosition).Recalculate();
         PlayerStatsGUI.Instance.LoadAndSetupFavorites();
 
-        BigBagGUI.Instance.ItemGrid.SetInventory(dataPlayer.SuperVault);
+        // 大背包已迁移至 SilkyUI，物品刷新和位置恢复由 BigBagUI 负责。
         CheckPositionValid(ref HugeInventoryUIPosition, HugeInventoryDefPosition);
-        BigBagGUI.Instance.MainPanel.SetPos(HugeInventoryUIPosition).Recalculate();
 
         // 增益追踪器
         //uiSystem.BuffTrackerGUI = new BuffTrackerGUI();

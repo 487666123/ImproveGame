@@ -1,4 +1,5 @@
-﻿using ImproveGame.Common.Configs;
+#if false
+using ImproveGame.Common.Configs;
 using ImproveGame.Packets;
 using ImproveGame.UIFramework;
 using ImproveGame.UIFramework.BaseViews;
@@ -396,3 +397,4 @@ public class BigBagGUI : BaseBody
     public override Vector2 RenderTarget2DPosition => MainPanel.GetDimensionsCenter();
     public override Vector2 RenderTarget2DScale => new Vector2(0.95f + StartTimer.Lerp(0, 0.05f));
 }
+#endif

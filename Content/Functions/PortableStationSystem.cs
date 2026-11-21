@@ -1,4 +1,4 @@
-﻿using ImproveGame.Common.Configs;
+using ImproveGame.Common.Configs;
 using ImproveGame.Common.ModSystems;
 using ImproveGame.Content.Tiles;
 using ImproveGame.UI.ExtremeStorage;
@@ -181,17 +181,17 @@ internal class PortableStationSystem : ModSystem
 
             if (item.type is ItemID.WaterBucket or ItemID.BottomlessBucket)
             {
-                Main.LocalPlayer.adjWaterSource = true;
+                Main.LocalPlayer.adjLiquid[LiquidID.Water] = true;
             }
 
             if (item.type is ItemID.LavaBucket or ItemID.BottomlessLavaBucket)
             {
-                Main.LocalPlayer.adjLava = true;
+                Main.LocalPlayer.adjLiquid[LiquidID.Lava] = true;
             }
 
             if (item.type is ItemID.HoneyBucket /*or ItemID.BottomlessHoneyBucket*/)
             {
-                Main.LocalPlayer.adjHoney = true;
+                Main.LocalPlayer.adjLiquid[LiquidID.Honey] = true;
             }
         }
     }
@@ -200,19 +200,11 @@ internal class PortableStationSystem : ModSystem
     private static void CheckChainedStations(int tileType, Player player)
     {
         player.adjTile[tileType] = true;
-        if (TileID.Sets.CountsAsWaterForCrafting[tileType])
+        var liquidSources = TileID.Sets.CountsAsLiquidSourceForCrafting[tileType];
+        var adjacentLiquids = player.adjLiquid;
+        for (int liquidType = 0; liquidType < liquidSources.Length; liquidType++)
         {
-            player.adjWaterSource = true;
-        }
-
-        if (TileID.Sets.CountsAsLavaForCrafting[tileType])
-        {
-            player.adjLava = true;
-        }
-
-        if (TileID.Sets.CountsAsHoneyForCrafting[tileType])
-        {
-            player.adjHoney = true;
+            adjacentLiquids[liquidType] |= liquidSources[liquidType];
         }
 
         switch (tileType)
