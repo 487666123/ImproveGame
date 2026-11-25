@@ -291,8 +291,8 @@ public class ModIntegrationsSystem : ModSystem
         if (!ModLoader.TryGetMod("SOTS", out Mod sots))
             return;
 
-        // 数码显示屏：带在身上就持续获得赛博强化
         AddBuffIntegration(sots, "DigitalDisplay", true, "CyberneticEnhancements");
+        
     }
 
     private static void DoDialogueTweakIntegration()
