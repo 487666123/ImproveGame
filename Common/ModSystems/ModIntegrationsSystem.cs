@@ -102,6 +102,7 @@ public class ModIntegrationsSystem : ModSystem
         DoFargowiltasIntegration();
         DoGensokyoIntegration();
         DoRedemptionIntegration();
+        DoSOTSIntegration();
         DoRecipeBrowserIntegration();
         DoLuiafkRebornIntegration();
         DoDialogueTweakIntegration();
@@ -282,6 +283,15 @@ public class ModIntegrationsSystem : ModSystem
             return;
 
         AddBuffIntegration(redemption, "SoulCandle", true, "SoulboundBuff");
+        
+    }
+
+    private static void DoSOTSIntegration()
+    {
+        if (!ModLoader.TryGetMod("SOTS", out Mod sots))
+            return;
+
+        AddBuffIntegration(sots, "DigitalDisplay", true, "CyberneticEnhancements");
         
     }
 
