@@ -19,7 +19,6 @@ public class ShellShipInBottle : ModItem, IConditionItem
     {
         Item.maxStack = Item.CommonMaxStack;
         Item.rare = ItemRarityID.Blue;
-        Item.Size = new Vector2(42, 20);
         Item.value = Item.sellPrice(silver: 20);
     }
 
@@ -40,7 +39,6 @@ public class ShellShipInBottle_Shimmered : ModItem
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.CombatBook);
-        Item.Size = new Vector2(42, 20);
         Item.useStyle = ItemUseStyleID.RaiseLamp; // 用4的话物品会错位不在手上
         Item.value = Item.sellPrice(silver: 25);
     }

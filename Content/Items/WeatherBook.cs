@@ -13,7 +13,6 @@ public sealed class WeatherBook : ModItem, IConditionItem
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.CombatBook);
-        Item.Size = new Vector2(60);
         Item.useStyle = ItemUseStyleID.RaiseLamp; // 用4的话物品会错位不在手上
         Item.value = Item.sellPrice(gold: 5);
     }
